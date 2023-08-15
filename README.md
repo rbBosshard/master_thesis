@@ -15,6 +15,12 @@ ___
 - Goto [ml.ipynb](ml/ml.ipynb) for running the pipeline (jupyter notebook)
 - Goto [config_ml.yaml](config/config_ml.yaml) for customizing ML pipeline behaviour
 
+### Run streamlit
+```bash
+streamlit run src/app.py --server.address="localhost"
+```
+
+
 
 
 
