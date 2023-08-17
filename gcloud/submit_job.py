@@ -1,38 +1,52 @@
 import os
 import time
 
-from gcloud.helper import create_new_instances, delete_all_instances, get_current_instances, \
+from gcloud.helper import create_new_instances, delete_instances, get_current_instances, \
     check_gcloud_sdk_availability, start_gcloud_instances, get_script_commands, run_script_commands, \
-    stop_gcloud_instances, PROJECT_ID, ZONE, run_pipeline
+    stop_gcloud_instances, run_pipeline, git_commit_instances
 
-REBUILD = 0
-INSTANCES_TOTAL = 2
+BUILD = 1
+INSTANCES_TOTAL = 20
+KEEP = 0
+STOP = 0
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # close all open ssh-browser/console windows
+# gcloud compute os-login ssh-keys add --key-file="C:\Users\bossh\.ssh\gcloud.pub" --project=project-2-396114
 
 
 def main():
     check_gcloud_sdk_availability()
     gcloud_instances = get_current_instances()
-
+    commands = []
     try:
-        if REBUILD:
-            delete_all_instances(gcloud_instances)
-            gcloud_instances = create_new_instances(INSTANCES_TOTAL)
+        if STOP:
+            raise Exception("STOP")
+        if BUILD:
+            delete_instances(gcloud_instances[KEEP:])
+            new_instances = create_new_instances(INSTANCES_TOTAL)
+            time.sleep(15)
+
+            gcloud_instances += new_instances
             script_path = os.path.join(ROOT_DIR, 'startup_script.sh')
             commands = get_script_commands(script_path)
+            run_script_commands(new_instances, commands)
 
-        else:
-            start_gcloud_instances(gcloud_instances)
-            script_path = os.path.join(ROOT_DIR, 'update_script.sh')
-            commands = get_script_commands(script_path)
+        start_gcloud_instances(gcloud_instances)
+        time.sleep(5)
 
-        time.sleep(10)
-        run_script_commands(PROJECT_ID, gcloud_instances, commands)
-        time.sleep(2)
-        run_pipeline(PROJECT_ID, gcloud_instances)
+        script_path = os.path.join(ROOT_DIR, 'update_script.sh')
+        commands = get_script_commands(script_path)
+        run_script_commands(gcloud_instances, commands)
+
+        time.sleep(1)
+
+        run_pipeline(gcloud_instances)
+        time.sleep(1)
+        git_commit_instances(gcloud_instances)
+        time.sleep(1)
+
         stop_gcloud_instances(gcloud_instances)
         print("Finished")
         exit(0)
