@@ -1,0 +1,42 @@
+# Don't forget to import all the classifiers
+# and transformers you want to use
+classifiers:
+  # - name: SVC
+  #   steps:
+  #     - name: SVC
+
+  # - name: KNeighborsClassifier
+  #   steps:
+  #     - name: PCA # hamming distance
+  #     - name: KNeighborsClassifier
+
+  # - name:  GaussianNB
+  #   steps:
+  #     - name: PCA
+  #     - name: GaussianNB
+
+  # - name: AdaBoostClassifier
+  #   steps:
+  #     # - name: PCA
+  #     - name: AdaBoostClassifier
+
+  # - name: MLPClassifier
+  #   steps:
+  #     - name: PCA
+  #       args:
+  #         n_components: [0.95]
+  #     - name: MLPClassifier
+
+  # - name: RandomForestClassifier
+  #   steps:
+  #     # - name: PCA
+  #     - name: RandomForestClassifier
+  #       args:
+  #         n_estimators: [100, 150] # default = 100
+
+  - name: XGBClassifier
+    steps:
+      # - name: VarianceThreshold
+      - name: XGBClassifier
+        args:
+          n_estimators: [500] # default = 100

@@ -1,12 +1,12 @@
 from ml.src.ml_helper import load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, predict_and_report, \
-    get_label_counts, report_exception
+    get_label_counts, report_exception, save_model, load_model
 
 from datetime import datetime
 
 
 # Get ML configuration
-CONFIG, LOGGER = load_config()
+CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER = load_config()
 
 # Get assay data
 assay_df = get_assay_df()
@@ -30,17 +30,21 @@ X_train, y_train = handle_oversampling(X_train, y_train)
 get_label_counts(y, y_train, y_val, y_test)
 
 # Build for each classifier a pipeline according to the configurations in the config file
-total_time_start = datetime.now()
-
-for classifier in CONFIG['classifiers']:
+for classifier in CONFIG_CLASSIFIERS['classifiers']:
     try:
         start_time = datetime.now()
 
         # Build the pipeline for the current classifier with the specified parameter grid
-        pipeline = build_pipeline(classifier['steps'])
+        pipeline = build_pipeline(classifier)
 
         # Perform grid search (Note: CV on TRAINING set with RepeatedStratifiedKFold)
         grid_search = grid_search_cv(X_train, y_train, classifier, pipeline)
+
+        # Save best estimator (estimator with best performing parameters from grid search)
+        save_model(grid_search)
+
+        # Load model from path
+        load_model("best_estimator")
 
         # Predict on the validation set with the best estimator (X_val, y_val is unseen)
         predict_and_report(X_val, y_val, classifier, grid_search.best_estimator_)
@@ -51,6 +55,11 @@ for classifier in CONFIG['classifiers']:
     except Exception as e:
         report_exception(e, classifier)
 
-elapsed = round((datetime.now() - total_time_start).total_seconds(), 2)
-LOGGER.info(f"Finished: Total time >> {elapsed} seconds.\n")
+# Calculate the elapsed time
+elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
+hours, remainder = divmod(elapsed_seconds, 3600)
+minutes, seconds = divmod(remainder, 60)
+elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+
+LOGGER.info(f"Finished: Total time >> {elapsed_formatted}\n")
 

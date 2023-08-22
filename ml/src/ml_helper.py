@@ -3,6 +3,7 @@ import os
 import sys
 from datetime import datetime
 
+import joblib
 import numpy as np
 import pandas as pd
 import yaml
@@ -13,31 +14,47 @@ from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import Pipeline
 
-from ml.src.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, INPUT_DIR_PATH, OUTPUT_DIR_PATH
+from ml.src.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, INPUT_DIR_PATH, OUTPUT_DIR_PATH, \
+    CONFIG_CLASSIFIERS_PATH
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from xgboost import XGBClassifier
 
 CONFIG = {}
+CONFIG_CLASSIFIERS = {}
 START_TIME = datetime.now()
 LOGGER = logging.getLogger(__name__)
+LOG_PATH = ""
+AEID = 0
+CLASSIFIER_NAME = ""
 
 
 def load_config():
-    global CONFIG
+    global CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOG_PATH
     with open(CONFIG_PATH, 'r') as file:
         config = yaml.safe_load(file)
         if config["ignore_warnings"]:
             import warnings
             warnings.filterwarnings("ignore")
 
+    with open(CONFIG_CLASSIFIERS_PATH, 'r') as file:
+        config_classifiers = yaml.safe_load(file)
+
     CONFIG = config
+    CONFIG_CLASSIFIERS = config_classifiers
+    START_TIME = datetime.now()
+    AEID = CONFIG['aeid']
     LOGGER = init_logger()
 
-    path = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}_config.yaml")
-
-    with open(path, 'w') as file:
+    log_config_path = os.path.join(LOG_PATH, "config.yaml")
+    with open(log_config_path, 'w') as file:
         yaml.dump(CONFIG, file)
+    log_config_classifiers_path = os.path.join(LOG_PATH, "config_classifiers.yaml")
+    with open(log_config_classifiers_path, 'w') as file:
+        yaml.dump(CONFIG_CLASSIFIERS, file)
+    LOGGER.info(f"Config files dumped to '{LOG_PATH}'\n")
 
-    LOGGER.info(f"Config file dumped to '{path}'")
-    return CONFIG, LOGGER
+    return CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER
 
 
 def get_assay_df():
@@ -114,18 +131,21 @@ def print_label_count(y, title):
           f"({counts[1]/sum(counts)*100:.2f}%)\n")
 
 
-def handle_oversampling(X_train, y_train):
+def handle_oversampling(X, y):
     # If smote configured: Oversample the minority class in the training set
     if CONFIG['apply']['smote']:
         oversampler = SMOTE(random_state=CONFIG['random_state'])
-        X_train, y_train = oversampler.fit_resample(X_train, y_train)
-        print_label_count(y_train, "TRAIN (after oversampling)")
-    return X_train, y_train
+        X, y = oversampler.fit_resample(X, y)
+        print_label_count(y, "TRAIN (after oversampling)")
+    return X, y
 
 
-def build_pipeline(steps):
+def build_pipeline(classifier):
+    global CLASSIFIER_NAME
+    CLASSIFIER_NAME = classifier['name']
+    os.makedirs(os.path.join(LOG_PATH, CLASSIFIER_NAME))
     pipeline_steps = []
-    for step in steps:
+    for step in classifier['steps']:
         step_name = step['name']
         step_args = step.get('args', {})  # get the hyperparameters for the step, if any
         step_instance = globals()[step_name](**step_args)  # dynmically create an instance of the step
@@ -160,7 +180,6 @@ def grid_search_cv(X, y, classifier, pipeline):
 
     LOGGER.info(f"{classifier['name']}: GridSearchCV Results:")
     best_params = grid_search.best_params_ if grid_search.best_params_ else "default"
-
     LOGGER.info(f"Best params:\n{best_params} with mean cross-validated {scorer} score: {grid_search.best_score_}\n")
 
     return grid_search
@@ -207,7 +226,7 @@ def find_optimal_threshold(X, y, best_estimator):
     plt.grid()
     plt.tight_layout()
 
-    path = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}_roc_curve.png")
+    path = os.path.join(LOG_PATH, CLASSIFIER_NAME, f"roc_curve.png")
     plt.savefig(path, dpi=300)
     LOGGER.info(f"Optimal threshold saved as png")
     return optimal_threshold
@@ -240,7 +259,7 @@ def predict_and_report(X, y, classifier, best_estimator):
     cm_display.plot()
 
     plt.title(f"Confusion Matrix for {classifier['name']}")
-    path = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}_confusion_matrix.png")
+    path = os.path.join(LOG_PATH, CLASSIFIER_NAME, f"confusion_matrix.png")
     plt.savefig(path)
     plt.close()
 
@@ -272,10 +291,11 @@ def create_empty_log_file(filename):
 
 
 def init_logger():
-    global LOGGER, START_TIME
-    START_TIME = datetime.now()
-    log_filename = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}.log")
-    error_filename = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}.error")
+    global LOGGER, LOG_PATH
+    LOG_PATH = os.path.join(LOG_DIR_PATH, f"{AEID}", f"{get_timestamp(START_TIME)}")
+    os.makedirs(LOG_PATH, )
+    log_filename = os.path.join(LOG_PATH, "ml_pipeline.log")
+    error_filename = os.path.join(LOG_PATH, "ml_pipeline.error")
     create_empty_log_file(log_filename)
     create_empty_log_file(error_filename)
 
@@ -296,8 +316,30 @@ def get_timestamp(time_point):
 
 
 def report_exception(exception, classifier):
-    error_file_path = os.path.join(LOG_DIR_PATH, f"{get_timestamp(START_TIME)}.error")
+    error_file_path = os.path.join(LOG_PATH, f"error.error")
     with open(error_file_path, "a") as f:
         err_msg = f"{classifier} failed: {exception}"
         LOGGER.error(err_msg)
         print(err_msg, file=f)
+
+
+def load_model(ok):
+    classifier_log_folder = os.path.join(LOG_PATH, CLASSIFIER_NAME)
+    best_estimator_path = os.path.join(classifier_log_folder, f"best_estimator.joblib")
+    model = joblib.load(best_estimator_path)
+    LOGGER.info(f"Loaded model from {best_estimator_path}")
+    return model
+
+
+def save_model(grid_search):
+    best_estimator = grid_search.best_estimator_
+    best_params = grid_search.best_params_
+
+    classifier_log_folder = os.path.join(LOG_PATH, CLASSIFIER_NAME)
+    best_estimator_path = os.path.join(classifier_log_folder, f"best_estimator.joblib")
+    best_params_path = os.path.join(classifier_log_folder, f"best_params.joblib")
+
+    joblib.dump(best_estimator, best_estimator_path, compress=3)
+    joblib.dump(best_params,best_params_path, compress=3)
+
+    LOGGER.info(f"Saved model in {classifier_log_folder}")

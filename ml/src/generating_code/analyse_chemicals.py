@@ -2,7 +2,7 @@ import os
 from ml.src.constants import OUTPUT_DIR_PATH, REMOTE_DIR_PATH, INPUT_DIR_PATH
 from ml.src.ml_helper import load_config
 
-CONFIG, LOGGER = load_config()
+CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER = load_config()
 
 with open(os.path.join(INPUT_DIR_PATH, f"{CONFIG['fingerprint_file']}_chemicals.out"), 'r') as f:
     chemicals_with_fingerprint = set(line.strip() for line in f)

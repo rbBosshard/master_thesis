@@ -5,7 +5,7 @@ import time
 from ml.src.ml_helper import load_config
 from ml.src.constants import INPUT_DIR_PATH
 
-CONFIG, LOGGER = load_config()
+CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER = load_config()
 
 csv_file_path = os.path.join(INPUT_DIR_PATH, f"{CONFIG['fingerprint_file']}.csv")
 parquet_file_path = os.path.join(INPUT_DIR_PATH, f"{CONFIG['fingerprint_file']}{CONFIG['file_format']}")

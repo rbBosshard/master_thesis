@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.
 from ml.src.ml_helper import load_config
 from ml.src.constants import CSV_DIR_PATH
 
-CONFIG, LOGGER = load_config()
+CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER = load_config()
 
 start_time = time.time()
 print(f"Start analyzing aeid chid matrix..")
