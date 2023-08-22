@@ -1,16 +1,14 @@
 import os
 import time
 
-from gcloud.helper import create_new_instances, delete_instances, get_current_instances, \
+from gcloud.constants import ROOT_DIR
+from gcloud.submit_helper import create_new_instances, delete_instances, get_current_instances, \
     check_gcloud_sdk_availability, start_gcloud_instances, get_script_commands, run_script_commands, \
     stop_gcloud_instances, run_pipeline, git_commit_instances
 
-BUILD = 1
+BUILD = 0
 INSTANCES_TOTAL = 4
-KEEP = 0
 STOP = 0
-
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # close all open ssh-browser/console windows
 # gcloud compute os-login ssh-keys add --key-file="C:\Users\bossh\.ssh\gcloud.pub" --project=project-2-396114
