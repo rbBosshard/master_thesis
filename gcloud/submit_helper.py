@@ -205,3 +205,19 @@ def git_commit(instance, instance_id):
 def git_commit_instances(instances):
     for i, instance in enumerate(instances):
         git_commit(instance, i)
+
+
+def wrap_up(instance):
+    cmd = [f"sudo python3 pytcpl/src/pipeline_wrapup.py"]
+    print(f"{instance}: {cmd}")
+    ssh_command = (
+        f'gcloud compute ssh {instance} '
+        f'--project={get_project(instance)} '
+        f'--zone={get_zone(instance)} '
+        f'--command="{cmd}"'
+    )
+    subprocess.run(
+        ssh_command, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE
+    )
+    print("Pipeline wrapup done on: ", instance)
+

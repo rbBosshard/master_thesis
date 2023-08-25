@@ -4,7 +4,7 @@ import time
 from gcloud.constants import ROOT_DIR
 from gcloud.submit_helper import create_new_instances, delete_instances, get_current_instances, \
     check_gcloud_sdk_availability, start_gcloud_instances, get_script_commands, run_script_commands, \
-    stop_gcloud_instances, run_pipeline, git_commit_instances
+    stop_gcloud_instances, run_pipeline, git_commit_instances, wrap_up
 
 BUILD = 0
 INSTANCES_TOTAL = 4
@@ -31,6 +31,7 @@ def main():
             run_script_commands(new_instances, commands)
 
         start_gcloud_instances(gcloud_instances)
+
         time.sleep(5)
 
         script_path = os.path.join(ROOT_DIR, 'update_script.sh')
@@ -40,11 +41,20 @@ def main():
         time.sleep(1)
 
         run_pipeline(gcloud_instances)
-        time.sleep(1)
-        git_commit_instances(gcloud_instances)
+
         time.sleep(1)
 
-        stop_gcloud_instances(gcloud_instances)
+        git_commit_instances(gcloud_instances)
+
+        time.sleep(1)
+
+        wrap_up(gcloud_instances[0])
+        if len(gcloud_instances) > 1:
+            stop_gcloud_instances(gcloud_instances[1:])
+
+        time.sleep(1)
+
+        stop_gcloud_instances(gcloud_instances[0])
         print("Finished")
         exit(0)
 
