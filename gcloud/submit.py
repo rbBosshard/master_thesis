@@ -19,7 +19,7 @@ def main():
     gcloud_instances = get_current_instances()
     try:
         if STOP:
-            raise Exception("STOP")
+            raise Exception("STOPPING all instances..")
         if BUILD:
             delete_instances(gcloud_instances)
             new_instances = create_new_instances(INSTANCES_TOTAL)
@@ -32,7 +32,7 @@ def main():
 
         start_gcloud_instances(gcloud_instances)
 
-        time.sleep(5)
+        time.sleep(15)
 
         script_path = os.path.join(ROOT_DIR, 'update_script.sh')
         commands = get_script_commands(script_path)
