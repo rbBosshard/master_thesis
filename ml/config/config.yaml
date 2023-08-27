@@ -2,7 +2,7 @@
 ignore_warnings: True
 fingerprint_file: ToxCast_CSIfps_10k
 file_format: .parquet.gzip
-remote_data_dir: ../../../pytcpl/data/custom_output/
+remote_data_dir: ../../../pytcpl/data/output/
 
 aeid: 806 # Assay id
 

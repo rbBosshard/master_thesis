@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStra
 from sklearn.pipeline import Pipeline
 
 from ml.src.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, INPUT_DIR_PATH, OUTPUT_DIR_PATH, \
-    CONFIG_CLASSIFIERS_PATH
+    CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from xgboost import XGBClassifier
@@ -29,13 +29,17 @@ AEID = 0
 CLASSIFIER_NAME = ""
 
 
-def load_config():
+def load_config(only_load=0):
     global CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOG_PATH
+
     with open(CONFIG_PATH, 'r') as file:
         config = yaml.safe_load(file)
         if config["ignore_warnings"]:
             import warnings
             warnings.filterwarnings("ignore")
+
+    if only_load:
+        return config
 
     with open(CONFIG_CLASSIFIERS_PATH, 'r') as file:
         config_classifiers = yaml.safe_load(file)
@@ -61,27 +65,15 @@ def get_assay_df():
     LOGGER.info(f"Running ML pipeline for assay ID: {CONFIG['aeid']}\n")
     assay_file_path = os.path.join(ROOT_DIR, CONFIG['remote_data_dir'], f"{CONFIG['aeid']}{CONFIG['file_format']}")
     assay_df = pd.read_parquet(assay_file_path)
+    assay_df = assay_df[['dsstox_substance_id', 'hitcall']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
 
 
 def get_fingerprint_df():
-    fps_file_path = os.path.join(INPUT_DIR_PATH, f"{CONFIG['fingerprint_file']}{CONFIG['file_format']}")
-    # Skip the first 3 columns (relativeIndex, absoluteIndex, index) and transpose the dataframe
+    fps_file_path = os.path.join(METADATA_DIR_PATH, 'fps', f"{CONFIG['fingerprint_file']}{CONFIG['file_format']}")
     fps_df = pd.read_parquet(fps_file_path)
-    fps_df = fps_df.iloc[:, 3:].T
-    data = fps_df.iloc[1:].values.astype(int)
-    index = fps_df.index[1:]
-    columns = fps_df.iloc[0]
-    fps_df = pd.DataFrame(data=data, index=index, columns=columns).reset_index()
-    fps_df = fps_df.rename(columns={"index": "dsstox_substance_id"})
-    unique_chemicals = fps_df['dsstox_substance_id'].unique()
-    assert fps_df.shape[0] == len(unique_chemicals)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
-
-    with open(os.path.join(INPUT_DIR_PATH, f"{CONFIG['fingerprint_file']}_chemicals.out"), 'w') as f:
-        f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))
-
     return fps_df
 
 
