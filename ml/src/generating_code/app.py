@@ -49,8 +49,8 @@ def validation_set_coverage():
     
         tabs = st.tabs([df_wrapped[0] for df_wrapped in dfs_wrapped])
 
-        colorscale= [[0, 'white'], [0.5, 'lightgrey'], [1, 'azure']]
-        value_labels = {0: "Absent", 1: "Present in assay endpoint", 2: ".. and in subset"}
+        colorscale= [[0, 'white'], [0.5, 'lightgrey'], [1, 'purple']]
+        value_labels = {0: "Absent", 1: "Present in assay endpoint", 2: ".. and present in validation set"}
         tickvals = list(value_labels.keys())
         ticktext = list(value_labels.values())
 
@@ -73,7 +73,7 @@ def validation_set_coverage():
 
                 df_coverage_info = df_coverage_info.sort_values(by=['relative_coverage'], ascending=False)
                 fig = px.scatter(df_coverage_info, x=df_coverage_info.index, y=df_coverage_info['relative_coverage'], labels={'x': 'Assay endpoints', 'y': 'Relative coverage'})
-                fig.update_layout(title_text=f'{df_name} relative coverage (100% = all compounds in validation subset tested in assay endpoints)')
+                fig.update_layout(title_text=f'Relative coverage, 100% = all compounds from validation set are also present in assay endpoint')
                 fig.update_xaxes(type='category')
                 fig.update_traces(marker=dict(size=3))
                 fig.update_traces(marker_symbol='circle-open')
@@ -88,7 +88,7 @@ def validation_set_coverage():
 
                 df_coverage_info = df_coverage_info.sort_values(by=['overlap'], ascending=False)
                 fig = px.scatter(df_coverage_info, x=df_coverage_info.index, y=df_coverage_info['overlap'], labels={'x': 'Assay endpoints', 'y': 'Overlap'})
-                fig.update_layout(title_text=f'{df_name} overlap')
+                fig.update_layout(title_text=f'overlap')
                 fig.update_xaxes(type='category')
                 fig.update_traces(marker=dict(size=3))
                 fig.update_traces(marker_symbol='circle-open')
@@ -97,7 +97,7 @@ def validation_set_coverage():
                 fig.update_yaxes(range=[0, df_coverage_info['overlap'].max()])
                 # fig.update_layout(yaxis_tickformat='.0%')
                 # fig.update_xaxes(showticklabels=False)
-                st.plotly_chart(fig)
+                # st.plotly_chart(fig)
     
 
 # Create a function for the about page
@@ -124,7 +124,7 @@ def assay_endpoint_coverage_page():
                 num_assay_endpoints = df.shape[1]
                 df = df.sum(axis=1).sort_values(ascending=False) / num_assay_endpoints
                 fig = px.scatter(df, x=df.index, y=df.values, labels={'x': 'Compounds', 'y': 'Assay endpoints coverage'})
-                fig.update_layout(title_text=f'{df_name} coverage (100% = {num_assay_endpoints} assay endpoints)')
+                fig.update_layout(title_text=f'{df_name} coverage, 100% = {num_assay_endpoints} assay endpoints')
                 fig.update_xaxes(type='category')
                 fig.update_traces(marker=dict(size=3))
                 fig.update_traces(marker_symbol='circle-open')
@@ -138,7 +138,7 @@ def assay_endpoint_coverage_page():
                 # st.write(selected_points)
       
 # Page setup
-st.set_page_config(page_title="Data inspector", layout="wide")
+# st.set_page_config(page_title="Data inspector", layout="wide")
 
 # Create navigation
 nav_options = ["Assay endpoint coverage by compounds","Massbank validation set coverage"]
