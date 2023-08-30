@@ -89,12 +89,12 @@ backend=biber
 %% Document information
 %% ====================
 
-\title{Title of Thesis}
-\author{S. Tudent}
+\title{Relating compound toxicity to molecular structure using machine learning}
+\author{Robin Bosshard}
 \thesistype{Master Thesis}
-\advisors{Advisors: Prof.\ Dr.\ A. D. Visor, Dr.\ P. Ostdoc}
+\advisors{Advisors: Dr.\ Eliza Harris, Dr.\ K. Arturi, Lilian Gasser}
 \department{Department of Computer Science}
-\date{January 19, 2038}
+\date{October 16, 2023}
 
 \begin{document}
 
@@ -110,7 +110,7 @@ backend=biber
 \end{titlingpage}
 
 %% The abstract of your thesis.  Edit the file as needed.
-\input{abstract}
+\input{chapters/abstract}
 
 %% TOC with the proper setup, do not change.
 \cleartorecto
@@ -118,10 +118,14 @@ backend=biber
 \mainmatter
 
 %% Your real content!
-\input{introduction}
-\input{rules}
-\input{typography}
-\input{sections}
+\input{chapters/introduction}
+\input{chapters/literature}
+\input{chapters/data_methods}
+\input{chapters/results_discussion}
+\input{chapters/conclusion}
+% \input{rules}
+% \input{typography}
+% \input{sections}
 
 % \backmatter  % Template v2 fixes: this just breaks things
 
@@ -129,7 +133,7 @@ backend=biber
 \printbibliography
 
 \appendix
-\input{appendix}
+\input{chapters/appendix}
 
 \includepdf[pages={-}]{eth-template/declaration-originality.pdf}
 
