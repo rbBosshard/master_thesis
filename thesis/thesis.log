@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  1 SEP 2023 10:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  1 SEP 2023 23:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1348,30 +1348,25 @@ File: uesvect.fd
 <figures/presence_matrix_all.png, id=141, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
-Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 15.
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 14.
 (pdftex.def)             Requested size: 369.0pt x 177.1442pt.
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 16.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 15.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 16.
+(Font)              scaled to size 9.37807pt on input line 15.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 16.
+(Font)              scaled to size 7.29405pt on input line 15.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 16.
+(Font)              scaled to size 5.21004pt on input line 15.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 16.
+(Font)              scaled to size 9.37807pt on input line 15.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 16.
+(Font)              scaled to size 7.29405pt on input line 15.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 16.
+(Font)              scaled to size 5.21004pt on input line 15.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (0.45651pt too wide) in paragraph at lines 22--27
-\OT1/pplx/m/n/10.95 (-20) where $\OML/zplm/m/it/10.95 k$ $conc[]$ \OT1/pplx/m/n/10.95 (-20) val-ues are not nec-es-sar-ily unique. The quan-tity of concentration-
- []
 
 [3
 
@@ -1381,20 +1376,38 @@ File: figures/concentration_response_series_2.png Graphic file (type png)
 <use figures/concentration_response_series_2.png>
 Package pdftex.def Info: figures/concentration_response_series_2.png  used on input line 30.
 (pdftex.def)             Requested size: 369.0pt x 123.79471pt.
- [4 <./figures/presence_matrix_all.png> <./figures/concentration_response_series_2.png>]
+LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 38.
+ (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
+File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
+) [4 <./figures/presence_matrix_all.png>]
+<figures/concentration_metrics.png, id=167, 764.8575pt x 681.14474pt>
+File: figures/concentration_metrics.png Graphic file (type png)
+<use figures/concentration_metrics.png>
+Package pdftex.def Info: figures/concentration_metrics.png  used on input line 49.
+(pdftex.def)             Requested size: 369.0pt x 328.6087pt.
+<figures/presence_matrix_subset.png, id=169, 8198.63pt x 3936.7075pt>
+File: figures/presence_matrix_subset.png Graphic file (type png)
+<use figures/presence_matrix_subset.png>
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 62.
+(pdftex.def)             Requested size: 369.0pt x 177.1442pt.
 
-LaTeX Warning: Reference `fig:ml_pipeline' on page 5 undefined on input line 55.
 
-[5]) (./chapters/results_discussion.tex [6]) (./chapters/conclusion.tex [7
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5 <./figures/concentration_response_series_2.png>] [6 <./figures/concentration_metrics.png>]
+
+LaTeX Warning: Reference `fig:ml_pipeline' on page 7 undefined on input line 85.
+
+[7 <./figures/presence_matrix_subset.png>]) (./chapters/results_discussion.tex [8]) (./chapters/conclusion.tex [9
 
 ])
 
 LaTeX Warning: Empty bibliography on input line 136.
 
-(./chapters/appendix.tex [8
+(./chapters/appendix.tex [10
 
 ])
-<eth-template/declaration-originality.pdf, id=188, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=207, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
@@ -1403,7 +1416,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=191, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=210, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
@@ -1412,7 +1425,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [9
+ [11
 
 ]
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
@@ -1427,7 +1440,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [10 <./eth-template/declaration-originality.pdf>]
+ [12 <./eth-template/declaration-originality.pdf>]
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
@@ -1444,24 +1457,24 @@ L3 programming layer <2023-08-03>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8F47C5C708DE5B8BEBDCD0B341411F2C;2578.
+(rerunfilecheck)             Checksum: 9B34ABE472E375F64080B566EBB86636;2568.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34658 strings out of 475188
- 642816 string characters out of 5767805
- 1929248 words of memory out of 5000000
- 55191 multiletter control sequences out of 15000+600000
- 605756 words of font info for 289 fonts, out of 8000000 for 9000
+ 34775 strings out of 475188
+ 644609 string characters out of 5767805
+ 1930248 words of memory out of 5000000
+ 55234 multiletter control sequences out of 15000+600000
+ 609702 words of font info for 334 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,125p,1467b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (13 pages, 673089 bytes).
+Output written on thesis.pdf (15 pages, 1014579 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 240 compressed objects within 3 object streams
- 36 named destinations out of 1000 (max. 500000)
- 89292 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 320 PDF objects out of 1000 (max. 8388607)
+ 256 compressed objects within 3 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 93398 words of extra memory for PDF output out of 106986 (max. 10000000)
 

@@ -1,11 +1,10 @@
 \chapter{Material and Methods}
 \section{Invitrodb}
-The most recent release of the Toxicity Forecaster database, referred to as \href{https://cfpub.epa.gov/si/si_public_record_Report.cfm?dirEntryId=355484&Lab=CCTE}{ToxCast's invitroDBv3.5}, represents an extensive collection of high-throughput screening (HTS) targeted bioactivity data. This database encompasses information on a total of 9541 compounds, selectively screened across 2205 assay endpoints. The establishment of this resource owes its origins to the collaborative endeavors of two prominent institutions: the United States Environmental Protection Agency (\href{https://www.epa.gov/chemical-research/exploring-toxcast-data}{EPA}) through its ToxCast program and the National Institutes of Health (\href{https://ntp.niehs.nih.gov/whatwestudy/tox21}{NIH}) via the Tox21 initiative. Incorporating data collected from diverse research laboratories, this relational database is openly accessible to the public and can be downloaded directly from the official ToxCast website.
+The most recent release of the ToxCast's (Toxicity Forecaster) database, referred to as \href{https://cfpub.epa.gov/si/si_public_record_Report.cfm?dirEntryId=355484&Lab=CCTE}{invitroDBv3.5}, serves as a source of an extensive collection of high-throughput screening (HTS) targeted bioactivity data. This database encompasses information on a total of 9541 compounds, selectively screened across 2205 assay endpoints. The establishment of this resource owes its origins to the collaborative endeavors of two prominent institutions: the United States Environmental Protection Agency (\href{https://www.epa.gov/chemical-research/exploring-toxcast-data}{EPA}) through its ToxCast program and the National Institutes of Health (\href{https://ntp.niehs.nih.gov/whatwestudy/tox21}{NIH}) via the Tox21 initiative. Incorporating data collected from diverse research laboratories, this relational database is openly accessible to the public and can be downloaded directly from the official ToxCast website.
 
 
-
-
-\subsection{Presence matrix}
+\subsection{Data Overview}
+\subsubsection{Presence Matrix}
 Consider a collection of $m$ assay endpoints, denoted by $A = \{a_1, a_2, \dots, a_m\}$ and a set of $n$ compounds represented as $C = \{c_1, c_2, \dots, c_n\}$.
 To facilitate data comprehension, we introduce a \emph{presence matrix} $P \in {\{0, 1\}}^{m \times n}$. Rows, indexed by $i$, represent assay endpoints $a_i$, while columns, indexed by $j$, denote presence (1) or absence (0) of compound $c_j$ in those endpoints. Matrix $P$ is sparse due to the selective testing of compounds across different assay endpoints. A compound is considered present in an assay endpoint if it has undergone testing and a corresponding concentration-response series is available.
 See Figure~\ref{fig:presence_matrix_all} for a visual of the \emph{presence matrix} $P$ covering all assay endpoints and compounds in \textit{invitroDBv3.5}. 
@@ -13,15 +12,16 @@ See Figure~\ref{fig:presence_matrix_all} for a visual of the \emph{presence matr
 \begin{figure}[h]  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
     \includegraphics[width=1.0\textwidth]{figures/presence_matrix_all.png}  
-    \caption{The \emph{presence matrix} $P$ covering all assay endpoints and compounds available in \textit{invitroDBv3.5} with $m = \num{2205}$ assay endpoints and $n = \num{9541}$ compounds. The count, where $P_{ij} = 1$, indicates the availability of \num{3342377} concentration-response series for downstream analysis.}
+    \caption{The \emph{presence matrix} $P$ covering all assay endpoints and compounds available in \textit{invitroDBv3.5} with $m = \num{2205}$ assay endpoints and $n = \num{9541}$ compounds. The presence matrix is organized by sorting it based on the number of compounds present in each assay endpoint and the compounds are arranged in descending order of their presence frequency. The total count, where $P_{ij} = 1$, indicates the availability of \num{3342377} concentration-response series for downstream analysis.}
 ~\label{fig:presence_matrix_all} 
 \end{figure}
 
 
+\subsubsection{Concentration-Response Series}
 A \textit{concentration-response series} is represented as a set of $k$ concentration-response pairs: 
 \[ S = \{(conc_1, resp_1), (conc_2, resp_2), \dots, (conc_k, resp_k)\} \]
-where $k$ $conc_i$ values are not necessarily unique. The quantity of concentration-response pairs exhibits considerable variability among different compounds tested across various assay endpoints.
-In practice, concentrations are often subjected to multiple testing iterations, resulting in the formation of $n_{conc}$ distinct concentration groups. Within each concentration group, the number of replicates is indicated by $n_{rep}$.
+where $conc_i$ values are not necessarily unique. The quantity of concentration-response pairs exhibits considerable variability among different compounds tested across various assay endpoints.
+The concentration-response pairs for a given compound in a given assay endpoint are obtained by joining tables mc0, mc1, mc3 from invitroDBv3.5,collecting required sample information like well-type, row and column index from the the assay well-plate.
 Concentrations are transformed to the logarithmic scale using the unit $\mu M$ (micromolar), while the responses are normalized to either fold-induction or percent-of-control units.
 Figure~\ref{fig:concentration_response_series} showcases a concentration-response series for a compound tested within a single assay endpoint.
 
@@ -32,7 +32,37 @@ Figure~\ref{fig:concentration_response_series} showcases a concentration-respons
 ~\label{fig:concentration_response_series} 
 \end{figure}
 
+In practice, concentrations are often subjected to multiple testing iterations, resulting in the formation of distinct concentration groups. Within each concentration group, the number of replicates is indicated by $n_{rep}$.
+We introduce the following quantities to facilitate data comprehension:
+\begin{itemize}
+    \item $n_{conc}$: the number of distinct concentrations tested for a compound in a given assay endpoint.
+    \item $n_{rep}$: the number of replicates for each concentration tested for a compound in a given assay endpoint.
+    \item $n_{points}$: the total number of concentration-response pairs for a compound in a given assay endpoint.
+\end{itemize}
 
+
+In the following plots we visualize the distribution of these quantities across all compounds and assay endpoints in \textit{invitroDBv3.5}.
+Figure~\ref{fig:concentration_metrics}
+Overall we can aggregate this information to obtain the following quantities:
+\begin{figure}[htbp]  % Placement options: h (here), t (top), b (bottom), p (page)
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/concentration_metrics.png}  
+    \caption{A concentration-response series for the compound \textit{Estropipate} in the assay endpoint \textit{TOX21\_ERa\_LUC\_VM7\_Agonist}. The series has a total of $k = 45$ concentration-response pairs and is composed of $n_{conc} = 15$ concentration groups, each with $n_{rep} = 3$ replicates.}
+~\label{fig:concentration_metrics} 
+\end{figure}
+
+Show plots 
+\subsubsection{Subsetting data}
+We subset dat for the following reasons:
+We only consider assay endpoints that have been tested with at least $\num{2000}$ compounds. This is to ensure that we have enough data to train a machine learning model.
+See Figure~\ref{fig:presence_matrix_subset} for a visual of the \emph{presence matrix} $P$ covering only the resulting subset of all assay endpoints \textit{invitroDBv3.5}.
+
+\begin{figure}[h]  % Placement options: h (here), t (top), b (bottom), p (page)
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/presence_matrix_subset.png}  
+    \caption{The \emph{presence matrix} $P$ covering only the subset of all of assay endpoints available in \textit{invitroDBv3.5}, considered for this thesis. For this subset we have $m = \num{271}$ assay endpoints and assay endpoints and $n = \num{9456}$ compounds. The presence matrix is organized by sorting it based on the number of compounds present in each assay endpoint and the compounds are arranged in descending order of their presence frequency. The total count, where $P_{ij} = 1$, indicates the availability of \num{1372225} concentration-response series for downstream analysis.}
+~\label{fig:presence_matrix_subset} 
+\end{figure}
 
 \section{Pytcpl}
 We introduce \href{https://github.com/rbBosshard/pytcpl}{pytcpl}, a streamlined Python package inspired by the R package \href{https://github.com/USEPA/CompTox-ToxCast-tcpl}{tcpl}, designed for processing high-throughput screening data. The package primarily focuses on providing essential features such as concentration-response curve fitting and allows for continuous hit-calling for compound bioactivity across diverse assay endpoints, akin to \href{https://github.com/USEPA/CompTox-ToxCast-tcplFit2}{tcplfit2}. \href{https://cfpub.epa.gov/si/si_public_record_Report.cfm?dirEntryId=355484&Lab=CCTE}{Invitrodb version 3.5 release} can optionally serve as backend database if desired. The package optimizes data storage and provides compressed raw data and metadata from \emph{invitroDB} in Parquet files. This efficient strategy reduces storage needs, resulting in just 4 GB within the repository—compared to the original 80 GB database. This obviates the need for a cumbersome, large-scale database installation, rendering downstream analysis more accessible and efficient. Our package is crafted to accomodate cusomizable processing steps and facilitate interactive data visualization with \href{https://pytcpl.streamlit.app/}{curve surfer} and empowers Python-oriented researchers to seamlessly engage in data analysis and exploration.

@@ -7,17 +7,20 @@
 \contentsline {section}{\numberline {2.2}Context}{2}{section.2.2}%
 \contentsline {chapter}{\chapternumberline {3}Material and Methods}{3}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Invitrodb}{3}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Presence matrix}{3}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.1}Data Overview}{3}{subsection.3.1.1}%
+\contentsline {subsubsection}{Presence Matrix}{3}{section*.2}%
+\contentsline {subsubsection}{Concentration-Response Series}{4}{section*.3}%
+\contentsline {subsubsection}{Subsetting data}{5}{section*.4}%
 \contentsline {section}{\numberline {3.2}Pytcpl}{5}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Preprocessing}{5}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Curve Fitting}{5}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Hit Calling}{5}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Curve Surfer}{5}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Machine Learning Pipeline}{5}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Preprocessing}{5}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Binary Classification}{6}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Regression}{6}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Massbank Validation}{6}{subsection.3.3.4}%
-\contentsline {chapter}{\chapternumberline {4}Results and Discussion}{7}{chapter.4}%
-\contentsline {chapter}{\chapternumberline {5}Conclusion}{8}{chapter.5}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{9}{appendix.A}%
+\contentsline {subsection}{\numberline {3.2.1}Preprocessing}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Curve Fitting}{7}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Hit Calling}{7}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Curve Surfer}{7}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Machine Learning Pipeline}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Preprocessing}{7}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Binary Classification}{8}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Regression}{8}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Massbank Validation}{8}{subsection.3.3.4}%
+\contentsline {chapter}{\chapternumberline {4}Results and Discussion}{9}{chapter.4}%
+\contentsline {chapter}{\chapternumberline {5}Conclusion}{10}{chapter.5}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{11}{appendix.A}%
