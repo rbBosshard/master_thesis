@@ -14,11 +14,7 @@ from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import Pipeline
 
-from ml.src.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, INPUT_DIR_PATH, OUTPUT_DIR_PATH, \
-    CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH
-from sklearn.neural_network import MLPClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from xgboost import XGBClassifier
+from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH
 
 CONFIG = {}
 CONFIG_CLASSIFIERS = {}

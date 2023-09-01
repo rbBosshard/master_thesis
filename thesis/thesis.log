@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  30 AUG 2023 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  1 SEP 2023 10:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -573,16 +573,49 @@ File: pppdftex.def 2022/12/19 v0.5x Pdfpages driver for pdfTeX (AM)
 \AM@lof@heading=\toks59
 \c@AM@survey=\count335
 \AM@templatesizebox=\box59
-) (./eth-template/extrapackages.tex (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
+) (c:/texlive/2023/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2023-08-03 v3.3.2 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count336
+\l__siunitx_number_exponent_fixed_int=\count337
+\l__siunitx_number_min_decimal_int=\count338
+\l__siunitx_number_min_integer_int=\count339
+\l__siunitx_number_round_precision_int=\count340
+\l__siunitx_number_lower_threshold_int=\count341
+\l__siunitx_number_upper_threshold_int=\count342
+\l__siunitx_number_group_first_int=\count343
+\l__siunitx_number_group_size_int=\count344
+\l__siunitx_number_group_minimum_int=\count345
+\l__siunitx_angle_tmp_dim=\dimen277
+\l__siunitx_angle_marker_box=\box60
+\l__siunitx_angle_unit_box=\box61
+\l__siunitx_compound_count_int=\count346
+ (c:/texlive/2023/texmf-dist/tex/latex/translations/translations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages (CN)
+ (c:/texlive/2023/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
  (c:/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-) (c:/texlive/2023/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-) (c:/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+))
+\l__siunitx_table_tmp_box=\box62
+\l__siunitx_table_tmp_dim=\dimen278
+\l__siunitx_table_column_width_dim=\dimen279
+\l__siunitx_table_integer_box=\box63
+\l__siunitx_table_decimal_box=\box64
+\l__siunitx_table_uncert_box=\box65
+\l__siunitx_table_before_box=\box66
+\l__siunitx_table_after_box=\box67
+\l__siunitx_table_before_dim=\dimen280
+\l__siunitx_table_carry_dim=\dimen281
+\l__siunitx_unit_tmp_int=\count347
+\l__siunitx_unit_position_int=\count348
+\l__siunitx_unit_total_int=\count349
+) (./eth-template/extrapackages.tex (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
+ (c:/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ) (c:/texlive/2023/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
@@ -608,11 +641,11 @@ Package nameref Warning: The definition of \label has changed!
 (nameref)                Check your packages! 
 (nameref)                Replacing it with the kernel definition on input line 145.
 
-\c@section@level=\count336
+\c@section@level=\count350
 )
-\@linkdim=\dimen277
-\Hy@linkcounter=\count337
-\Hy@pagecounter=\count338
+\@linkdim=\dimen282
+\Hy@linkcounter=\count351
+\Hy@pagecounter=\count352
  (c:/texlive/2023/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -620,7 +653,7 @@ Now handling font encoding PD1 ...
 ) (c:/texlive/2023/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count339
+\Hy@SavedSpaceFactor=\count353
  (c:/texlive/2023/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -634,21 +667,21 @@ Package hyperref Info: Plain pages OFF on input line 4182.
 Package hyperref Info: Backreferencing OFF on input line 4187.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4434.
-\c@Hy@tempcnt=\count340
+\c@Hy@tempcnt=\count354
  (c:/texlive/2023/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4772.
-\XeTeXLinkMargin=\dimen278
+\XeTeXLinkMargin=\dimen283
  (c:/texlive/2023/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (c:/texlive/2023/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count341
-\Field@Width=\dimen279
-\Fld@charsize=\dimen280
+\Fld@menulength=\count355
+\Field@Width=\dimen284
+\Fld@charsize=\dimen285
 Package hyperref Info: Hyper figures OFF on input line 6051.
 Package hyperref Info: Link nesting OFF on input line 6056.
 Package hyperref Info: Hyper index ON on input line 6059.
@@ -660,9 +693,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6081.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count342
-\c@Item=\count343
-\c@Hfootnote=\count344
+\Hy@abspage=\count356
+\c@Item=\count357
+\c@Hfootnote=\count358
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -671,8 +704,8 @@ File: hpdftex.def 2023-07-08 v7.01b Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count345
-\c@bookmark@seq@number=\count346
+\Fld@listcount=\count359
+\c@bookmark@seq@number=\count360
  (c:/texlive/2023/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
  (c:/texlive/2023/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -687,8 +720,8 @@ Package: memhfixc 2022/11/17 v1.20 nameref/hyperref package fixes for memoir cla
 Redoing nameref's sectioning
 Redoing nameref's label
 LaTeX Info: Redefining \nameref on input line 106.
-\c@memhycontfloat=\count347
-\c@Hpagenote=\count348
+\c@memhycontfloat=\count361
+\c@Hpagenote=\count362
 ) (c:/texlive/2023/texmf-dist/tex/latex/cleveref/cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 LaTeX Info: Redefining \Cref on input line 925.
@@ -708,12 +741,12 @@ Package cleveref Info: always capitalise cross-reference names on input line 782
 Package cleveref Info: always capitalise cross-reference names on input line 7852.
 ) (c:/texlive/2023/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
-\csq@reset=\count349
-\csq@gtype=\count350
-\csq@glevel=\count351
-\csq@qlevel=\count352
-\csq@maxlvl=\count353
-\csq@tshold=\count354
+\csq@reset=\count363
+\csq@gtype=\count364
+\csq@glevel=\count365
+\csq@qlevel=\count366
+\csq@maxlvl=\count367
+\csq@tshold=\count368
 \csq@ltx@everypar=\toks60
  (c:/texlive/2023/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
@@ -734,45 +767,45 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 \XKV@toks=\toks61
 \XKV@tempa@toks=\toks62
 )
-\XKV@depth=\count355
+\XKV@depth=\count369
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fcprefix.sty
 Package: fcprefix 2012/09/28
  (c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fcnumparser.sty
 Package: fcnumparser 2017/06/15
-\fc@digit@counter=\count356
+\fc@digit@counter=\count370
 ))
-\c@padzeroesN=\count357
-\fc@tmpcatcode=\count358
+\c@padzeroesN=\count371
+\fc@tmpcatcode=\count372
  (c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2016/01/12
 )
-\@DT@modctr=\count359
-\@ordinalctr=\count360
-\@orgargctr=\count361
-\@strctr=\count362
-\@tmpstrctr=\count363
-\@DT@loopN=\count364
-\@DT@X=\count365
+\@DT@modctr=\count373
+\@ordinalctr=\count374
+\@orgargctr=\count375
+\@strctr=\count376
+\@tmpstrctr=\count377
+\@DT@loopN=\count378
+\@DT@X=\count379
 ) (c:/texlive/2023/texmf-dist/tex/latex/datetime/datetime-defaults.sty
 Package: datetime-defaults 2013/09/10
 )
-\@day=\count366
-\@month=\count367
-\@year=\count368
-\c@HOUR=\count369
-\c@HOURXII=\count370
-\c@MINUTE=\count371
-\c@TOHOUR=\count372
-\c@TOMINUTE=\count373
-\c@SECOND=\count374
-\currenthour=\count375
-\currentminute=\count376
-\currentsecond=\count377
+\@day=\count380
+\@month=\count381
+\@year=\count382
+\c@HOUR=\count383
+\c@HOURXII=\count384
+\c@MINUTE=\count385
+\c@TOHOUR=\count386
+\c@TOMINUTE=\count387
+\c@SECOND=\count388
+\currenthour=\count389
+\currentminute=\count390
+\currentsecond=\count391
 Package datetime Info: No datetime.cfg file found, using default settings on input line 308.
-\@dtctr=\count378
-\dayofyear=\count379
-\dayofweek=\count380
+\@dtctr=\count392
+\dayofyear=\count393
+\dayofweek=\count394
 LaTeX Info: Redefining \today on input line 736.
 \dt@a=\toks63
 \dt@b=\toks64
@@ -781,39 +814,39 @@ Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
  (c:/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count381
-\l_MT_multwidth_dim=\dimen281
+\g_MT_multlinerow_int=\count395
+\l_MT_multwidth_dim=\dimen286
 \origjot=\skip263
-\l_MT_shortvdotswithinadjustabove_dim=\dimen282
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen283
-\l_MT_above_intertext_sep=\dimen284
-\l_MT_below_intertext_sep=\dimen285
-\l_MT_above_shortintertext_sep=\dimen286
-\l_MT_below_shortintertext_sep=\dimen287
-\xmathstrut@box=\box60
-\xmathstrut@dim=\dimen288
+\l_MT_shortvdotswithinadjustabove_dim=\dimen287
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen288
+\l_MT_above_intertext_sep=\dimen289
+\l_MT_below_intertext_sep=\dimen290
+\l_MT_above_shortintertext_sep=\dimen291
+\l_MT_below_shortintertext_sep=\dimen292
+\xmathstrut@box=\box68
+\xmathstrut@dim=\dimen293
 ) (c:/texlive/2023/texmf-dist/tex/latex/esvect/esvect.sty
 Package: esvect 
 \symesvector=\mathgroup8
 LaTeX Font Info:    Redeclaring math symbol \fldr on input line 38.
 ) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count382
-\lst@gtempboxa=\box61
+\lst@mode=\count396
+\lst@gtempboxa=\box69
 \lst@token=\toks65
-\lst@length=\count383
-\lst@currlwidth=\dimen289
-\lst@column=\count384
-\lst@pos=\count385
-\lst@lostspace=\dimen290
-\lst@width=\dimen291
-\lst@newlines=\count386
-\lst@lineno=\count387
-\lst@maxwidth=\dimen292
+\lst@length=\count397
+\lst@currlwidth=\dimen294
+\lst@column=\count398
+\lst@pos=\count399
+\lst@lostspace=\dimen295
+\lst@width=\dimen296
+\lst@newlines=\count400
+\lst@lineno=\count401
+\lst@maxwidth=\dimen297
  (c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count388
-\lst@skipnumbers=\count389
-\lst@framebox=\box62
+\c@lstnumber=\count402
+\lst@skipnumbers=\count403
+\lst@framebox=\box70
 ) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
@@ -841,16 +874,16 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 ) (c:/texlive/2023/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2023/03/13 v3.1a Micro-typographical refinements (RS)
 \MT@toks=\toks66
-\MT@tempbox=\box63
-\MT@count=\count390
+\MT@tempbox=\box71
+\MT@count=\count404
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1059.
 LaTeX Info: Redefining \leftprotrusion on input line 1060.
 \MT@prot@toks=\toks67
 LaTeX Info: Redefining \rightprotrusion on input line 1078.
 LaTeX Info: Redefining \textls on input line 1368.
-\MT@outer@kern=\dimen293
+\MT@outer@kern=\dimen298
 LaTeX Info: Redefining \textmicrotypecontext on input line 1988.
-\MT@listname@count=\count391
+\MT@listname@count=\count405
  (c:/texlive/2023/texmf-dist/tex/latex/microtype/microtype-pdftex.def
 File: microtype-pdftex.def 2023/03/13 v3.1a Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 902.
@@ -884,76 +917,76 @@ Sidefootvsep and sidefootheight: 13.6pt and 594.32022pt
 ******************************************************
 
 ) (./eth-template/theoremsetup.tex
-\c@currtheoremctr=\count392
-\c@endtheoremctr=\count393
-\c@theorem=\count394
-\c@currexamplectr=\count395
-\c@endexamplectr=\count396
-\c@currremarkctr=\count397
-\c@endremarkctr=\count398
-\c@currcorollaryctr=\count399
-\c@endcorollaryctr=\count400
-\c@currdefinitionctr=\count401
-\c@enddefinitionctr=\count402
-\c@currlemmactr=\count403
-\c@endlemmactr=\count404
-\c@currpropositionctr=\count405
-\c@endpropositionctr=\count406
-\c@currproofctr=\count407
-\c@endproofctr=\count408
+\c@currtheoremctr=\count406
+\c@endtheoremctr=\count407
+\c@theorem=\count408
+\c@currexamplectr=\count409
+\c@endexamplectr=\count410
+\c@currremarkctr=\count411
+\c@endremarkctr=\count412
+\c@currcorollaryctr=\count413
+\c@endcorollaryctr=\count414
+\c@currdefinitionctr=\count415
+\c@enddefinitionctr=\count416
+\c@currlemmactr=\count417
+\c@endlemmactr=\count418
+\c@currpropositionctr=\count419
+\c@endpropositionctr=\count420
+\c@currproofctr=\count421
+\c@endproofctr=\count422
 )
-\c@proof=\count409
+\c@proof=\count423
  (./eth-template/macrosetup.tex) (c:/texlive/2023/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (c:/texlive/2023/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count410
+\lrq@indent=\count424
  (c:/texlive/2023/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count411
-\c@listtotal=\count412
-\c@listcount=\count413
-\c@liststart=\count414
-\c@liststop=\count415
-\c@citecount=\count416
-\c@citetotal=\count417
-\c@multicitecount=\count418
-\c@multicitetotal=\count419
-\c@instcount=\count420
-\c@maxnames=\count421
-\c@minnames=\count422
-\c@maxitems=\count423
-\c@minitems=\count424
-\c@citecounter=\count425
-\c@maxcitecounter=\count426
-\c@savedcitecounter=\count427
-\c@uniquelist=\count428
-\c@uniquename=\count429
-\c@refsection=\count430
-\c@refsegment=\count431
-\c@maxextratitle=\count432
-\c@maxextratitleyear=\count433
-\c@maxextraname=\count434
-\c@maxextradate=\count435
-\c@maxextraalpha=\count436
-\c@abbrvpenalty=\count437
-\c@highnamepenalty=\count438
-\c@lownamepenalty=\count439
-\c@maxparens=\count440
-\c@parenlevel=\count441
-\blx@tempcnta=\count442
-\blx@tempcntb=\count443
-\blx@tempcntc=\count444
-\c@blx@maxsection=\count445
-\blx@maxsegment@0=\count446
-\blx@notetype=\count447
-\blx@parenlevel@text=\count448
-\blx@parenlevel@foot=\count449
-\blx@sectionciteorder@0=\count450
-\blx@sectionciteorderinternal@0=\count451
-\blx@entrysetcounter=\count452
-\blx@biblioinstance=\count453
+\c@tabx@nest=\count425
+\c@listtotal=\count426
+\c@listcount=\count427
+\c@liststart=\count428
+\c@liststop=\count429
+\c@citecount=\count430
+\c@citetotal=\count431
+\c@multicitecount=\count432
+\c@multicitetotal=\count433
+\c@instcount=\count434
+\c@maxnames=\count435
+\c@minnames=\count436
+\c@maxitems=\count437
+\c@minitems=\count438
+\c@citecounter=\count439
+\c@maxcitecounter=\count440
+\c@savedcitecounter=\count441
+\c@uniquelist=\count442
+\c@uniquename=\count443
+\c@refsection=\count444
+\c@refsegment=\count445
+\c@maxextratitle=\count446
+\c@maxextratitleyear=\count447
+\c@maxextraname=\count448
+\c@maxextradate=\count449
+\c@maxextraalpha=\count450
+\c@abbrvpenalty=\count451
+\c@highnamepenalty=\count452
+\c@lownamepenalty=\count453
+\c@maxparens=\count454
+\c@parenlevel=\count455
+\blx@tempcnta=\count456
+\blx@tempcntb=\count457
+\blx@tempcntc=\count458
+\c@blx@maxsection=\count459
+\blx@maxsegment@0=\count460
+\blx@notetype=\count461
+\blx@parenlevel@text=\count462
+\blx@parenlevel@foot=\count463
+\blx@sectionciteorder@0=\count464
+\blx@sectionciteorderinternal@0=\count465
+\blx@entrysetcounter=\count466
+\blx@biblioinstance=\count467
 \labelnumberwidth=\skip265
 \labelalphawidth=\skip266
 \biblabelsep=\skip267
@@ -964,9 +997,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read4
 \blx@bcfout=\write4
 \blx@langwohyphens=\language88
-\c@mincomprange=\count454
-\c@maxcomprange=\count455
-\c@mincompwidth=\count456
+\c@mincomprange=\count468
+\c@maxcomprange=\count469
+\c@mincompwidth=\count470
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (c:/texlive/2023/texmf-dist/tex/latex/biblatex/blx-dm.def
@@ -978,74 +1011,74 @@ Package biblatex Info: Trying to load biblatex bibstyle data model...
 Package biblatex Info: ... file 'ieee.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count457
-\c@savedafterword=\count458
-\c@annotator=\count459
-\c@savedannotator=\count460
-\c@author=\count461
-\c@savedauthor=\count462
-\c@bookauthor=\count463
-\c@savedbookauthor=\count464
-\c@commentator=\count465
-\c@savedcommentator=\count466
-\c@editor=\count467
-\c@savededitor=\count468
-\c@editora=\count469
-\c@savededitora=\count470
-\c@editorb=\count471
-\c@savededitorb=\count472
-\c@editorc=\count473
-\c@savededitorc=\count474
-\c@foreword=\count475
-\c@savedforeword=\count476
-\c@holder=\count477
-\c@savedholder=\count478
-\c@introduction=\count479
-\c@savedintroduction=\count480
-\c@namea=\count481
-\c@savednamea=\count482
-\c@nameb=\count483
-\c@savednameb=\count484
-\c@namec=\count485
-\c@savednamec=\count486
-\c@translator=\count487
-\c@savedtranslator=\count488
-\c@shortauthor=\count489
-\c@savedshortauthor=\count490
-\c@shorteditor=\count491
-\c@savedshorteditor=\count492
-\c@labelname=\count493
-\c@savedlabelname=\count494
-\c@institution=\count495
-\c@savedinstitution=\count496
-\c@lista=\count497
-\c@savedlista=\count498
-\c@listb=\count499
-\c@savedlistb=\count500
-\c@listc=\count501
-\c@savedlistc=\count502
-\c@listd=\count503
-\c@savedlistd=\count504
-\c@liste=\count505
-\c@savedliste=\count506
-\c@listf=\count507
-\c@savedlistf=\count508
-\c@location=\count509
-\c@savedlocation=\count510
-\c@organization=\count511
-\c@savedorganization=\count512
-\c@origlocation=\count513
-\c@savedoriglocation=\count514
-\c@origpublisher=\count515
-\c@savedorigpublisher=\count516
-\c@publisher=\count517
-\c@savedpublisher=\count518
-\c@language=\count519
-\c@savedlanguage=\count520
-\c@origlanguage=\count521
-\c@savedoriglanguage=\count522
-\c@pageref=\count523
-\c@savedpageref=\count524
+\c@afterword=\count471
+\c@savedafterword=\count472
+\c@annotator=\count473
+\c@savedannotator=\count474
+\c@author=\count475
+\c@savedauthor=\count476
+\c@bookauthor=\count477
+\c@savedbookauthor=\count478
+\c@commentator=\count479
+\c@savedcommentator=\count480
+\c@editor=\count481
+\c@savededitor=\count482
+\c@editora=\count483
+\c@savededitora=\count484
+\c@editorb=\count485
+\c@savededitorb=\count486
+\c@editorc=\count487
+\c@savededitorc=\count488
+\c@foreword=\count489
+\c@savedforeword=\count490
+\c@holder=\count491
+\c@savedholder=\count492
+\c@introduction=\count493
+\c@savedintroduction=\count494
+\c@namea=\count495
+\c@savednamea=\count496
+\c@nameb=\count497
+\c@savednameb=\count498
+\c@namec=\count499
+\c@savednamec=\count500
+\c@translator=\count501
+\c@savedtranslator=\count502
+\c@shortauthor=\count503
+\c@savedshortauthor=\count504
+\c@shorteditor=\count505
+\c@savedshorteditor=\count506
+\c@labelname=\count507
+\c@savedlabelname=\count508
+\c@institution=\count509
+\c@savedinstitution=\count510
+\c@lista=\count511
+\c@savedlista=\count512
+\c@listb=\count513
+\c@savedlistb=\count514
+\c@listc=\count515
+\c@savedlistc=\count516
+\c@listd=\count517
+\c@savedlistd=\count518
+\c@liste=\count519
+\c@savedliste=\count520
+\c@listf=\count521
+\c@savedlistf=\count522
+\c@location=\count523
+\c@savedlocation=\count524
+\c@organization=\count525
+\c@savedorganization=\count526
+\c@origlocation=\count527
+\c@savedoriglocation=\count528
+\c@origpublisher=\count529
+\c@savedorigpublisher=\count530
+\c@publisher=\count531
+\c@savedpublisher=\count532
+\c@language=\count533
+\c@savedlanguage=\count534
+\c@origlanguage=\count535
+\c@savedoriglanguage=\count536
+\c@pageref=\count537
+\c@savedpageref=\count538
 \shorthandwidth=\skip272
 \shortjournalwidth=\skip273
 \shortserieswidth=\skip274
@@ -1069,19 +1102,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (c:/texlive/2023/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count525
-\c@textcitetotal=\count526
-\c@textcitemaxnames=\count527
-\c@biburlbigbreakpenalty=\count528
-\c@biburlbreakpenalty=\count529
-\c@biburlnumpenalty=\count530
-\c@biburlucpenalty=\count531
-\c@biburllcpenalty=\count532
+\c@textcitecount=\count539
+\c@textcitetotal=\count540
+\c@textcitemaxnames=\count541
+\c@biburlbigbreakpenalty=\count542
+\c@biburlbreakpenalty=\count543
+\c@biburlnumpenalty=\count544
+\c@biburlucpenalty=\count545
+\c@biburllcpenalty=\count546
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count533
+\c@smartand=\count547
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
@@ -1099,8 +1132,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (c:/texlive/2023/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count534
-\c@bbx:relatedtotal=\count535
+\c@bbx:relatedcount=\count548
+\c@bbx:relatedtotal=\count549
 ))))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -1129,8 +1162,8 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2023-08-03 L3 programming layer (loader) 
  (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count536
-\l__pdf_internal_box=\box64
+\l__color_backend_stack_int=\count550
+\l__pdf_internal_box=\box72
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2023-08-03 L3 programming layer (loader) 
@@ -1145,42 +1178,42 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 99.
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 102.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 99.
-LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 102.
+LaTeX Font Info:    ... okay on input line 102.
  (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count537
-\scratchdimen=\dimen294
-\scratchbox=\box65
-\nofMPsegments=\count538
-\nofMParguments=\count539
+\scratchcounter=\count551
+\scratchdimen=\dimen299
+\scratchbox=\box73
+\nofMPsegments=\count552
+\nofMParguments=\count553
 \everyMPshowfont=\toks68
-\MPscratchCnt=\count540
-\MPscratchDim=\dimen295
-\MPnumerator=\count541
-\makeMPintoPDFobject=\count542
+\MPscratchCnt=\count554
+\MPscratchDim=\dimen300
+\MPnumerator=\count555
+\makeMPintoPDFobject=\count556
 \everyMPtoPDFconversion=\toks69
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1195,26 +1228,29 @@ Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-))
-Package hyperref Info: Link coloring ON on input line 99.
+)) (c:/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 102.
+Package hyperref Info: Link coloring ON on input line 102.
  (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
 
-\c@lstlisting=\count543
-LaTeX Info: Redefining \microtypecontext on input line 99.
-Package microtype Info: Applying patch `item' on input line 99.
-Package microtype Info: Applying patch `toc' on input line 99.
-Package microtype Info: Applying patch `eqnum' on input line 99.
-Package microtype Info: Applying patch `footnote' on input line 99.
-Package microtype Info: Applying patch `verbatim' on input line 99.
+\c@lstlisting=\count557
+LaTeX Info: Redefining \microtypecontext on input line 102.
+Package microtype Info: Applying patch `item' on input line 102.
+Package microtype Info: Applying patch `toc' on input line 102.
+Package microtype Info: Applying patch `eqnum' on input line 102.
+Package microtype Info: Applying patch `footnote' on input line 102.
+Package microtype Info: Applying patch `verbatim' on input line 102.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 99.
+LaTeX Info: Redefining \showhyphens on input line 102.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1234,12 +1270,12 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 99.
-Package biblatex Info: Reference segment=0 on input line 99.
-<eth-template/ETHlogo.pdf, id=52, 179.67125pt x 45.16875pt>
+Package biblatex Info: Reference section=0 on input line 102.
+Package biblatex Info: Reference segment=0 on input line 102.
+<eth-template/ETHlogo.pdf, id=88, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
-Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 109.
+Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 112.
 (pdftex.def)             Requested size: 179.67079pt x 45.16862pt.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -1252,7 +1288,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.116 \cleartorecto
+l.119 \cleartorecto
                     [1
 
 {c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./thesis.toc
@@ -1309,76 +1345,89 @@ File: uesvect.fd
 ]) (./chapters/data_methods.tex [2
 
 ]
-<figures/presence_matrix_aeid_chid.png, id=93, 1110.0672pt x 544.9158pt>
-File: figures/presence_matrix_aeid_chid.png Graphic file (type png)
-<use figures/presence_matrix_aeid_chid.png>
-Package pdftex.def Info: figures/presence_matrix_aeid_chid.png  used on input line 9.
-(pdftex.def)             Requested size: 258.29887pt x 126.79138pt.
+<figures/presence_matrix_all.png, id=141, 8198.63pt x 3936.7075pt>
+File: figures/presence_matrix_all.png Graphic file (type png)
+<use figures/presence_matrix_all.png>
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 15.
+(pdftex.def)             Requested size: 369.0pt x 177.1442pt.
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 10.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 16.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 10.
+(Font)              scaled to size 9.37807pt on input line 16.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 10.
+(Font)              scaled to size 7.29405pt on input line 16.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 10.
+(Font)              scaled to size 5.21004pt on input line 16.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 10.
+(Font)              scaled to size 9.37807pt on input line 16.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 10.
+(Font)              scaled to size 7.29405pt on input line 16.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 10.
- [3
+(Font)              scaled to size 5.21004pt on input line 16.
 
- <./figures/presence_matrix_aeid_chid.png>]
-<figures/concentration_response_series_2.png, id=107, 2154.0475pt x 722.7pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (0.45651pt too wide) in paragraph at lines 22--27
+\OT1/pplx/m/n/10.95 (-20) where $\OML/zplm/m/it/10.95 k$ $conc[]$ \OT1/pplx/m/n/10.95 (-20) val-ues are not nec-es-sar-ily unique. The quan-tity of concentration-
+ []
+
+[3
+
+]
+<figures/concentration_response_series_2.png, id=153, 2154.0475pt x 722.7pt>
 File: figures/concentration_response_series_2.png Graphic file (type png)
 <use figures/concentration_response_series_2.png>
-Package pdftex.def Info: figures/concentration_response_series_2.png  used on input line 24.
+Package pdftex.def Info: figures/concentration_response_series_2.png  used on input line 30.
 (pdftex.def)             Requested size: 369.0pt x 123.79471pt.
- [4 <./figures/concentration_response_series_2.png>]) (./chapters/results_discussion.tex [5]) (./chapters/conclusion.tex [6
+ [4 <./figures/presence_matrix_all.png> <./figures/concentration_response_series_2.png>]
+
+LaTeX Warning: Reference `fig:ml_pipeline' on page 5 undefined on input line 55.
+
+[5]) (./chapters/results_discussion.tex [6]) (./chapters/conclusion.tex [7
 
 ])
 
-LaTeX Warning: Empty bibliography on input line 133.
+LaTeX Warning: Empty bibliography on input line 136.
 
-(./chapters/appendix.tex [7
+(./chapters/appendix.tex [8
 
 ])
-<eth-template/declaration-originality.pdf, id=134, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=188, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
-Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
-Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=137, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=191, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [8
+ [9
 
 ]
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 138.
+Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [9 <./eth-template/declaration-originality.pdf>]
+ [10 <./eth-template/declaration-originality.pdf>]
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
@@ -1390,25 +1439,29 @@ Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used o
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 1101B5D507C632AE0C6F54B75AB03D36;1357.
+(rerunfilecheck)             Checksum: 8F47C5C708DE5B8BEBDCD0B341411F2C;2578.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 30979 strings out of 475188
- 527575 string characters out of 5767805
- 1927248 words of memory out of 5000000
- 51548 multiletter control sequences out of 15000+600000
- 603906 words of font info for 279 fonts, out of 8000000 for 9000
+ 34658 strings out of 475188
+ 642816 string characters out of 5767805
+ 1929248 words of memory out of 5000000
+ 55191 multiletter control sequences out of 15000+600000
+ 605756 words of font info for 289 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,17n,125p,1456b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,17n,125p,1467b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (12 pages, 417819 bytes).
+Output written on thesis.pdf (13 pages, 673089 bytes).
 PDF statistics:
- 242 PDF objects out of 1000 (max. 8388607)
- 186 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 83076 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 240 compressed objects within 3 object streams
+ 36 named destinations out of 1000 (max. 500000)
+ 89292 words of extra memory for PDF output out of 106986 (max. 10000000)
 

@@ -1,4 +1,4 @@
-from ml.src.ml_helper import load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, split_data, \
+from ml.src.pipeline.ml_helper import load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, predict_and_report, \
     get_label_counts, report_exception, save_model, load_model
 

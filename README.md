@@ -12,7 +12,7 @@ ___
   - `pip install -r requirements.txt`
 
 ### Run ML for assay endpoint (single aeid)
-- Goto [ml.ipynb](ml/src/ml.ipynb) for running the pipeline (jupyter notebook)
+- Goto [ml.ipynb](ml/src/pipeline/ml.ipynb) for running the pipeline (jupyter notebook)
 - Goto [config_ml.yaml](config/config_ml.yaml) for customizing ML pipeline behaviour
 
 ### Run streamlit
