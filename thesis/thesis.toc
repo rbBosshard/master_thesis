@@ -9,15 +9,16 @@
 \contentsline {section}{\numberline {3.1}Invitrodb}{3}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Data Overview}{3}{subsection.3.1.1}%
 \contentsline {subsubsection}{Presence Matrix}{3}{section*.2}%
-\contentsline {subsubsection}{Concentration-Response Series}{4}{section*.3}%
-\contentsline {subsubsection}{Subsetting data}{5}{section*.4}%
-\contentsline {section}{\numberline {3.2}Pytcpl}{5}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Preprocessing}{6}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Curve Fitting}{7}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Hit Calling}{7}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Curve Surfer}{7}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Machine Learning Pipeline}{7}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Preprocessing}{7}{subsection.3.3.1}%
+\contentsline {subsubsection}{Subsetting data}{4}{section*.3}%
+\contentsline {subsubsection}{Concentration-Response Series}{4}{section*.4}%
+\contentsline {section}{\numberline {3.2}Pytcpl}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Pipeline}{6}{subsection.3.2.1}%
+\contentsline {subsubsection}{Data Collection}{7}{section*.5}%
+\contentsline {subsubsection}{Curve Fitting}{7}{section*.6}%
+\contentsline {subsubsection}{Hit Calling}{7}{section*.7}%
+\contentsline {subsection}{\numberline {3.2.2}Curve Surfer}{8}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Machine Learning Pipeline}{8}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Preprocessing}{8}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Binary Classification}{8}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Regression}{8}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Massbank Validation}{8}{subsection.3.3.4}%

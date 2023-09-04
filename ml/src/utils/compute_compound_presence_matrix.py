@@ -55,9 +55,6 @@ if ALL:
     print(f"Total time taken: {(time.time() - start_time):.2f} seconds")
 
 if SUBSET:
-    print("Compute presence matrix for: subset of assay endpoints")
-    start_time = time.time()
-    print(f"Loading data..")
     aeid_compound_presence_matrix_path = os.path.join(METADATA_DIR_PATH, f"aeid_compound_presence_matrix{FILE_FORMAT}")
     presence_matrix = pd.read_parquet(aeid_compound_presence_matrix_path)
     aeids = get_subset_aeids()['aeid'].tolist()
@@ -84,5 +81,3 @@ if SUBSET:
     with open(os.path.join(METADATA_SUBSET_DIR_PATH, 'compounds_absent.out'), 'w') as f:
         for compound in compounds_with_zero_count:
             f.write(str(compound) + '\n')
-
-    print(f"Total time taken: {(time.time() - start_time):.2f} seconds")

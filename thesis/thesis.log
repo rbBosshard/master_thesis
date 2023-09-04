@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  1 SEP 2023 23:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  4 SEP 2023 10:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1272,7 +1272,7 @@ Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
 Package biblatex Info: Reference section=0 on input line 102.
 Package biblatex Info: Reference segment=0 on input line 102.
-<eth-template/ETHlogo.pdf, id=88, 179.67125pt x 45.16875pt>
+<eth-template/ETHlogo.pdf, id=80, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
 Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 112.
@@ -1345,7 +1345,7 @@ File: uesvect.fd
 ]) (./chapters/data_methods.tex [2
 
 ]
-<figures/presence_matrix_all.png, id=141, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_all.png, id=131, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
 Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 14.
@@ -1371,34 +1371,36 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [3
 
 ]
-<figures/concentration_response_series_2.png, id=153, 2154.0475pt x 722.7pt>
-File: figures/concentration_response_series_2.png Graphic file (type png)
-<use figures/concentration_response_series_2.png>
-Package pdftex.def Info: figures/concentration_response_series_2.png  used on input line 30.
-(pdftex.def)             Requested size: 369.0pt x 123.79471pt.
-LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 38.
- (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
-File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
-) [4 <./figures/presence_matrix_all.png>]
-<figures/concentration_metrics.png, id=167, 764.8575pt x 681.14474pt>
-File: figures/concentration_metrics.png Graphic file (type png)
-<use figures/concentration_metrics.png>
-Package pdftex.def Info: figures/concentration_metrics.png  used on input line 49.
-(pdftex.def)             Requested size: 369.0pt x 328.6087pt.
-<figures/presence_matrix_subset.png, id=169, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_subset.png, id=143, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
-Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 62.
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 25.
 (pdftex.def)             Requested size: 369.0pt x 177.1442pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5 <./figures/concentration_response_series_2.png>] [6 <./figures/concentration_metrics.png>]
+[4 <./figures/presence_matrix_all.png>]
+<figures/concentration_response_series.png, id=157, 1168.365pt x 380.622pt>
+File: figures/concentration_response_series.png Graphic file (type png)
+<use figures/concentration_response_series.png>
+Package pdftex.def Info: figures/concentration_response_series.png  used on input line 41.
+(pdftex.def)             Requested size: 369.0pt x 120.21017pt.
+ [5 <./figures/presence_matrix_subset.png> <./figures/concentration_response_series.png>]
+LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 49.
+ (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
+File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
+)
+<figures/concentration_metrics.png, id=168, 1842.885pt x 1455.93938pt>
+File: figures/concentration_metrics.png Graphic file (type png)
+<use figures/concentration_metrics.png>
+Package pdftex.def Info: figures/concentration_metrics.png  used on input line 63.
+(pdftex.def)             Requested size: 369.0pt x 291.51596pt.
+ [6] [7 <./figures/concentration_metrics.png>]
 
-LaTeX Warning: Reference `fig:ml_pipeline' on page 7 undefined on input line 85.
+LaTeX Warning: Reference `fig:ml_pipeline' on page 8 undefined on input line 91.
 
-[7 <./figures/presence_matrix_subset.png>]) (./chapters/results_discussion.tex [8]) (./chapters/conclusion.tex [9
+) (./chapters/results_discussion.tex [8]) (./chapters/conclusion.tex [9
 
 ])
 
@@ -1407,7 +1409,7 @@ LaTeX Warning: Empty bibliography on input line 136.
 (./chapters/appendix.tex [10
 
 ])
-<eth-template/declaration-originality.pdf, id=207, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=205, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
@@ -1416,7 +1418,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 141.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=210, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=208, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 141.
@@ -1457,24 +1459,24 @@ L3 programming layer <2023-08-03>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 9B34ABE472E375F64080B566EBB86636;2568.
+(rerunfilecheck)             Checksum: 40A552817295D42BE66279636A17CBC2;2293.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34775 strings out of 475188
- 644609 string characters out of 5767805
+ 34810 strings out of 475188
+ 644867 string characters out of 5767805
  1930248 words of memory out of 5000000
- 55234 multiletter control sequences out of 15000+600000
- 609702 words of font info for 334 fonts, out of 8000000 for 9000
+ 55235 multiletter control sequences out of 15000+600000
+ 613580 words of font info for 357 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,17n,125p,1467b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (15 pages, 1014579 bytes).
+ 80i,17n,125p,1477b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on thesis.pdf (15 pages, 1022875 bytes).
 PDF statistics:
- 320 PDF objects out of 1000 (max. 8388607)
+ 322 PDF objects out of 1000 (max. 8388607)
  256 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 500000)
- 93398 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 48 named destinations out of 1000 (max. 500000)
+ 97478 words of extra memory for PDF output out of 106986 (max. 10000000)
 

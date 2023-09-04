@@ -2,12 +2,12 @@ import pandas as pd
 import streamlit as st
 from plotly import graph_objs as go
 import os
+import plotly.graph_objects as go
+import io
 
 
 from ml.src.pipeline.constants import MASS_BANK_DIR_PATH, FILE_FORMAT, \
     METADATA_SUBSET_DIR_PATH, METADATA_DIR_PATH
-
-VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage_plots')
 
 BY_ASSAY = 0
 EXPORT = 0
@@ -66,6 +66,7 @@ with st.spinner(f"Loading.."):
                 )
 
             st.plotly_chart(fig, use_container_width=False, dpi=1)
+
 
 
             print("ok")

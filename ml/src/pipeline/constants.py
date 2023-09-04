@@ -21,3 +21,5 @@ REMOTE_METADATA_DIR_PATH = os.path.join(REMOTE_DATA_DIR_PATH, 'metadata/')
 REMOTE_METADATA_SUBSET_DIR_PATH = os.path.join(REMOTE_METADATA_DIR_PATH, 'subset/')
 
 FILE_FORMAT = '.parquet.gzip'
+VALIDATION_COVERAGE_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage')
+VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage_plots')
