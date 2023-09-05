@@ -14,7 +14,8 @@ from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import Pipeline
 
-from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH
+from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
+    INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT
 
 CONFIG = {}
 CONFIG_CLASSIFIERS = {}
@@ -67,7 +68,7 @@ def get_assay_df():
 
 
 def get_fingerprint_df():
-    fps_file_path = os.path.join(METADATA_DIR_PATH, 'fps', f"{CONFIG['fingerprint_file']}{CONFIG['file_format']}")
+    fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
     fps_df = pd.read_parquet(fps_file_path)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
     return fps_df

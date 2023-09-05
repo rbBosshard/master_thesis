@@ -12,14 +12,24 @@ CSV_DIR_PATH = os.path.join(EXPORT_DIR_PATH, 'csv')
 INPUT_DIR_PATH = os.path.join(DATA_DIR_PATH, 'input')
 OUTPUT_DIR_PATH = os.path.join(DATA_DIR_PATH, 'output')
 METADATA_DIR_PATH = os.path.join(DATA_DIR_PATH, 'metadata')
-METADATA_SUBSET_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'subset')
-MASS_BANK_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'validation', 'massbank')
 
+INPUT_ML_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'ml')
+INPUT_VALIDATION_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'validation')
+INPUT_FINGERPRINTS_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'fingerprints_from_structure')
+
+COMPOUNDS_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'compounds')
+METADATA_SUBSET_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'subset')
+METADATA_ALL_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'all')
+CONC_DIR_PATH = os.path.join(METADATA_SUBSET_DIR_PATH, 'conc')
+MASS_BANK_DIR_PATH = os.path.join(METADATA_SUBSET_DIR_PATH, 'validation', 'massbank')
+VALIDATION_COVERAGE_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage')
+VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage_plots')
 
 REMOTE_DATA_DIR_PATH = os.path.join(ROOT_DIR, '../../../../pytcpl/data/')
 REMOTE_METADATA_DIR_PATH = os.path.join(REMOTE_DATA_DIR_PATH, 'metadata/')
 REMOTE_METADATA_SUBSET_DIR_PATH = os.path.join(REMOTE_METADATA_DIR_PATH, 'subset/')
 
+
+
 FILE_FORMAT = '.parquet.gzip'
-VALIDATION_COVERAGE_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage')
-VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage_plots')
+FINGERPRINT_FILE = "ToxCast_CSIfps_10k"
