@@ -1,11 +1,12 @@
 import os
 
+import numpy as np
 import pandas as pd
 
 from ml.src.pipeline.constants import REMOTE_METADATA_DIR_PATH, MASS_BANK_DIR_PATH, FILE_FORMAT, INPUT_DIR_PATH, \
     OUTPUT_DIR_PATH, INPUT_FINGERPRINTS_DIR_PATH, METADATA_DIR_PATH, METADATA_ALL_DIR_PATH, METADATA_SUBSET_DIR_PATH, \
     VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, CONC_DIR_PATH, INPUT_VALIDATION_DIR_PATH, \
-    INPUT_ML_DIR_PATH
+    INPUT_ML_DIR_PATH, COMPOUNDS_DIR_PATH, FINGERPRINT_FILE
 
 
 def get_subset_aeids():
@@ -46,3 +47,68 @@ def init_directories():
     os.makedirs(VALIDATION_COVERAGE_DIR_PATH, exist_ok=True)
     os.makedirs(VALIDATION_COVERAGE_PLOTS_DIR_PATH, exist_ok=True)
     os.makedirs(CONC_DIR_PATH, exist_ok=True)
+
+
+def compute_compounds_intersection(directory, compounds, compounds_with_zero_count, compounds_with_fingerprint):
+    compounds = set(compounds)
+    compounds_path = os.path.join(directory, f"compounds_tested{FILE_FORMAT}")
+    pd.DataFrame(compounds, columns=['dsstox_substance_id']).to_parquet(compounds_path, compression='gzip')
+
+    with open(os.path.join(directory, 'compounds_tested.out'), 'w') as f:
+        for compound in compounds:
+            f.write(str(compound) + '\n')
+
+    with open(os.path.join(directory, 'compounds_absent.out'), 'w') as f:
+        for compound in compounds_with_zero_count:
+            f.write(str(compound) + '\n')
+
+    intersection = compounds_with_fingerprint.intersection(compounds)
+    compounds_not_tested = compounds_with_fingerprint.difference(compounds)
+    compounds_without_fingerprint = compounds.difference(compounds_with_fingerprint)
+
+    with open(os.path.join(directory, 'compounds_count.out'), 'w') as f:
+        f.write(f"Number of compounds tested: {len(compounds)} \n")
+        f.write(f"Number of compounds with fingerprint available: {len(compounds_with_fingerprint)} \n")
+        f.write(f"Number of compounds tested and fingerprint available: {len(intersection)} \n")
+        f.write(f"Number of compounds tested and no fingerprint available: {len(compounds_without_fingerprint)} \n")
+        f.write(f"Number of compounds not tested but fingerprint available: {len(compounds_not_tested)} \n")
+
+    dest_path = os.path.join(directory, f'compounds_tested_with_fingerprint{FILE_FORMAT}')
+    pd.DataFrame({'dsstox_substance_id': list(intersection)}).to_parquet(dest_path, compression='gzip')
+    with open(os.path.join(directory, f'compounds_tested_with_fingerprint.out'), 'w') as f:
+        for compound in intersection:
+            f.write(compound + '\n')
+
+    dest_path = os.path.join(directory, f'compounds_not_tested{FILE_FORMAT}')
+    pd.DataFrame({'dsstox_substance_id': list(compounds_not_tested)}).to_parquet(dest_path, compression='gzip')
+    with open(os.path.join(directory, f'compounds_not_tested.out'), 'w') as f:
+        for compound in compounds_not_tested:
+            f.write(compound + '\n')
+
+    dest_path = os.path.join(directory, f'compounds_without_fingerprint{FILE_FORMAT}')
+    pd.DataFrame({'dsstox_substance_id': list(compounds_without_fingerprint)}).to_parquet(dest_path, compression='gzip')
+    with open(os.path.join(directory, f'compounds_without_fingerprint.out'), 'w') as f:
+        for compound in compounds_without_fingerprint:
+            f.write(compound + '\n')
+
+    return compounds_without_fingerprint
+
+
+def csv_to_parquet_converter():
+    print("Preprocess fingerprint from structure input file")
+    src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}.csv")
+    dest_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
+
+    df = pd.read_csv(src_path)
+    # Skip the first 3 columns (relativeIndex, absoluteIndex, index) and transpose the dataframe
+    df = df.iloc[:, 3:].T
+    data = df.iloc[1:].values.astype(int)
+    index = df.index[1:]
+    columns = df.iloc[0]
+    df = pd.DataFrame(data=data, index=index, columns=columns).reset_index()
+    df = df.rename(columns={"index": "dsstox_substance_id"})
+    df.to_parquet(dest_path, compression='gzip')
+
+    unique_chemicals = df['dsstox_substance_id'].unique()
+    with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'w') as f:
+        f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))

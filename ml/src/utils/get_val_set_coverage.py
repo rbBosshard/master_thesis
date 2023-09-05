@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
 from ml.src.pipeline.constants import INPUT_DIR_PATH, FILE_FORMAT, \
-    METADATA_SUBSET_DIR_PATH, VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH
+    METADATA_SUBSET_DIR_PATH, VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, \
+    INPUT_VALIDATION_DIR_PATH, MASS_BANK_DIR_PATH
 
 
 def get_val_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1):
@@ -26,7 +27,7 @@ def get_val_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT
         os.makedirs(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, subset_ids_list_name), exist_ok=True)
 
     # Get set of all compounds tested
-    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested{FILE_FORMAT}")
+    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_with_fingerprints{FILE_FORMAT}")
     all_compounds = pd.read_parquet(compounds_path)['dsstox_substance_id']
 
     if COLLECT_STATS:
@@ -165,3 +166,52 @@ def get_val_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT
             # save_path = os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"presence_matrix{FILE_FORMAT}")
             # presence_matrix = pd.DataFrame(presence_matrix, index=[aeid for aeid, df in data_dict.items()], columns=all_compounds)
             # presence_matrix.to_parquet(save_path, compression='gzip')
+
+
+def prepare_validation_set():
+    print("Prepare validation set (massbank)")
+    massbank_dtxsid_with_records_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records.csv")
+    massbank_dtxsid_with_records_sirius_training_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records_sirius_training.csv")
+
+    massbank_dtxsid_with_records_df = pd.read_csv(massbank_dtxsid_with_records_path)
+    massbank_dtxsid_with_records_sirius_training_df = pd.read_csv(massbank_dtxsid_with_records_sirius_training_path)
+
+    massbank_dtxsid_with_records = massbank_dtxsid_with_records_df['dtxsid']
+    massbank_dtxsid_with_records_sirius_training = massbank_dtxsid_with_records_sirius_training_df['dtxsid']
+
+    massbank_dtxsid_with_records = set(massbank_dtxsid_with_records)
+    massbank_dtxsid_with_records_sirius_training = set(massbank_dtxsid_with_records_sirius_training)
+
+    compounds_intersection = massbank_dtxsid_with_records.intersection(massbank_dtxsid_with_records_sirius_training)
+    compounds_safe_for_validation = massbank_dtxsid_with_records.difference(massbank_dtxsid_with_records_sirius_training)
+    compounds_unsafe_for_validation = massbank_dtxsid_with_records_sirius_training
+
+    with open(os.path.join(MASS_BANK_DIR_PATH, 'compounds_count.out'), 'w') as f:
+        f.write(f"massbank_dtxsid_with_records: {len(massbank_dtxsid_with_records)} \n")
+        f.write(f"massbank_dtxsid_with_records_sirius_training: {len(massbank_dtxsid_with_records_sirius_training)} \n")
+        f.write("\n")
+        f.write(f"intersection: {len(compounds_intersection)} \n")
+        f.write("\n")
+        f.write(f"validation_compounds_safe: {len(compounds_safe_for_validation)} \n")
+        f.write(f"validation_compounds_unsafe: {len(compounds_unsafe_for_validation)} \n")
+
+    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
+    df = pd.DataFrame({'dsstox_substance_id': list(compounds_safe_for_validation)})
+    df.to_parquet(path, compression='gzip')
+    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_safe.out'), 'w') as f:
+        for compound in compounds_safe_for_validation:
+            f.write(compound + '\n')
+
+    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_unsafe{FILE_FORMAT}")
+    df = pd.DataFrame({'dsstox_substance_id': list(compounds_unsafe_for_validation)})
+    df.to_parquet(path, compression='gzip')
+    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_unsafe.out'), 'w') as f:
+        for compound in compounds_unsafe_for_validation:
+            f.write(compound + '\n')
+
+    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_safe_and_unsafe{FILE_FORMAT}")
+    df = pd.DataFrame({'dsstox_substance_id': list(massbank_dtxsid_with_records)})
+    df.to_parquet(path, compression='gzip')
+    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_safe_and_unsafe.out'), 'w') as f:
+        for compound in massbank_dtxsid_with_records:
+            f.write(compound + '\n')

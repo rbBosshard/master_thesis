@@ -12,8 +12,8 @@ VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validatio
 st.header("Massbank validation set coverage")
 
 with st.spinner(f"Loading.."):
-    subset_ids_list_names = ["compounds_safe_and_unsafe_for_validation", "compounds_safe_for_validation",
-                                "compounds_unsafe_for_validation"]
+    subset_ids_list_names = ["validation_compounds_safe_and_unsafe", "validation_compounds_safe", "validation_compounds_unsafe"]
+
     dfs_wrapped = []
     for subset_ids_list_name in subset_ids_list_names:
         path = os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, subset_ids_list_name, f"coverage_info{FILE_FORMAT}")

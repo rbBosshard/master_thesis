@@ -51,6 +51,7 @@ fig = make_subplots(rows=5, cols=2,
 colors = px.colors.qualitative.Vivid
 template = 'plotly'  # plotly, simple_white
 
+
 def plot_metrics(metrics, metric, group_by_name, row, col):
     metrics_sorted = metrics.sort_values(by=metric, ascending=False)
 
@@ -93,4 +94,4 @@ fig.update_layout(
     template=template
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, theme=None, use_container_width=True)
