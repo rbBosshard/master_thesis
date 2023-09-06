@@ -15,12 +15,12 @@ from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, FILE_FORMAT, MET
     FINGERPRINT_FILE, INPUT_FINGERPRINTS_DIR_PATH
 
 
-def compute_compound_presence_matrix(ALL=1, SUBSET=1):
+def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
     print("Get intersection: compounds with fingerprint from structure & compounds tested in assay endpoints")
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'r') as f:
         compounds_with_fingerprint = set(line.strip() for line in f)
 
-    print("Compute assay endpoint - compound presence matrix (can take a while)")
+    print("Compute assay endpoint-compound presence matrix (might take a while)")
     if ALL:
         aeid_compound_mapping_path = os.path.join(METADATA_ALL_DIR_PATH, f"aeid_compound_mapping{FILE_FORMAT}")
 

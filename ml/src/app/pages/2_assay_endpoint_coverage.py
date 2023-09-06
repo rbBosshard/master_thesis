@@ -2,16 +2,10 @@ import pandas as pd
 import streamlit as st
 import os
 import plotly.graph_objects as go
-import io
-import plotly.express as px
 
+from ml.src.pipeline.constants import FILE_FORMAT, METADATA_SUBSET_DIR_PATH, METADATA_ALL_DIR_PATH
 
-from ml.src.pipeline.constants import MASS_BANK_DIR_PATH, FILE_FORMAT, \
-    METADATA_SUBSET_DIR_PATH, METADATA_DIR_PATH, METADATA_ALL_DIR_PATH
-
-BY_ASSAY = 0
 EXPORT = 0
-
 
 st.header('Assay endpoint coverage by compounds')
 with st.spinner(f"Loading.."):
@@ -55,24 +49,26 @@ with st.spinner(f"Loading.."):
             fig = go.Figure(go.Heatmap(z=df.values, colorscale=colorscale, showscale=showscale,
                                        colorbar=dict(tickvals=[0, 1], ticktext=["Absent", "Present"])))
 
-            fig.update_layout(yaxis=dict(autorange="reversed"))
+            fig.update_layout(
+                yaxis=dict(autorange="reversed", tickfont=dict(size=60)),  # Adjust label font size
+                xaxis=dict(tickfont=dict(size=60)),  # Hide x-axis tick labels
+            )
 
             if not EXPORT:
                 fig.update_layout(
                     title=f"Presence matrix",
                     xaxis_title="Compound Index",
                     yaxis_title="Assay Endpoint Index",
+
                 )
 
             st.plotly_chart(fig, use_container_width=True)
-
-            print("ok")
 
             df = df.T
             num_compounds = df.shape[0]
             num_assay_endpoints = df.shape[1]
             df = df.sum(axis=1).sort_values(ascending=False) / num_assay_endpoints
-            fig = go.Figure(go.Scatter(x=df.index, y=df.values, labels={'x': 'Compounds', 'y': 'Assay endpoints coverage'}))
+            fig = go.Figure(go.Scatter(x=df.index, y=df.values))
             fig.update_layout(title_text=f'Assay endpoint coverage, 100% = {num_assay_endpoints} assay endpoints')
             fig.update_xaxes(type='category')
             fig.update_traces(marker=dict(size=3))
@@ -86,5 +82,3 @@ with st.spinner(f"Loading.."):
             )
             # fig.update_xaxes(showticklabels=False)
             st.plotly_chart(fig)
-            # selected_points = plotly_events(fig)
-            # st.write(selected_points)

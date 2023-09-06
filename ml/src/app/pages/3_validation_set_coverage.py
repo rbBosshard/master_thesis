@@ -40,7 +40,7 @@ with st.spinner(f"Loading.."):
                                             hoverinfo='text', showscale=True))
 
             fig.update_layout(
-                title=f"Presence matrix {df_name}",
+                title=f"Presence matrix",
                 xaxis_title="Assay Endpoint Index",
                 yaxis_title="Compound Index"
             )
@@ -51,7 +51,7 @@ with st.spinner(f"Loading.."):
             fig = px.scatter(df_coverage_info, x=df_coverage_info.index, y=df_coverage_info['relative_coverage'],
                                 labels={'x': 'Assay endpoints', 'y': 'Relative coverage'})
             fig.update_layout(
-                title_text=f'Relative coverage, 100% = all compounds from validation set are also present in assay endpoint')
+                title_text=f'Relative coverage')
             fig.update_xaxes(type='category')
             fig.update_traces(marker=dict(size=3))
             fig.update_traces(marker_symbol='circle-open')
@@ -61,8 +61,10 @@ with st.spinner(f"Loading.."):
             fig.update_layout(yaxis_tickformat='.0%')
             # fig.update_xaxes(showticklabels=False)
             st.plotly_chart(fig)
+            st.caption('100% = all compounds from validation set are present in assay endpoint and correpsonding fingerprint from structure exists')
             # selected_points = plotly_events(fig)
             # st.write(selected_points)
+
 
             df_coverage_info = df_coverage_info.sort_values(by=['overlap'], ascending=False)
             fig = px.scatter(df_coverage_info, x=df_coverage_info.index, y=df_coverage_info['overlap'],
@@ -76,4 +78,4 @@ with st.spinner(f"Loading.."):
             fig.update_yaxes(range=[0, df_coverage_info['overlap'].max()])
             # fig.update_layout(yaxis_tickformat='.0%')
             # fig.update_xaxes(showticklabels=False)
-            # st.plotly_chart(fig)
+            st.plotly_chart(fig)

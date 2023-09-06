@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber thesis"] 1693816293 "thesis.bcf" "thesis.bbl" "thesis" 1693816469 0
+["biber thesis"] 1694008622 "thesis.bcf" "thesis.bbl" "thesis" 1694008775 0
   "./refs.bib" 1691253600 1148 813262a7e64e39eef75254d46ba2bb44 ""
-  "thesis.bcf" 1693816468 106946 e59ed345982fab85ef628db6584f4d20 "pdflatex"
+  "thesis.bcf" 1694008775 106946 e59ed345982fab85ef628db6584f4d20 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1693816463 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1693816469 0
+["pdflatex"] 1694008769 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1694008775 0
   "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1693518763 4366 8413907ba9a4a6ac5f1aae68dd92af86 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -28,6 +28,7 @@
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1691264284 1316 b636689f1933f24d1294acdf6041daaa ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss12.tfm" 1691264284 1324 37b971caf729d7edd9cbb9f9b0ea76eb ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss17.tfm" 1691264284 1320 ed93d62c5f2c16343826001f03341dbc ""
+  "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss8.tfm" 1691264284 1296 d77f431d10d47c8ea2cc18cf45346274 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmss9.tfm" 1691264284 1320 49357c421c0d469f88b867dd0c3d10e8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm" 1691264284 1272 e2d13f0df30bf3ad990bb9d028e37f34 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmssi9.tfm" 1691264284 1524 db4bb1dddb7b51420776d94a5c70c2a5 ""
@@ -51,6 +52,7 @@
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1691263385 35752 024fb6c41858982481f6968b5fc26508 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb" 1691263385 24457 5cbb7bdf209d5d1ce9892a9b80a307cc ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb" 1691263385 24393 3b7eb51a67a0a62aec5849271bdb9c2e ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb" 1691263385 24420 52dbb8e8aa0069a1b987309557f8d303 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb" 1691263385 24373 a91d375736817a75026663adcb2190c1 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb" 1691263385 28902 2f5c04fd2884d1878057baa5aad22765 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb" 1691263385 25029 6f2cec9646ca278302ed7d604e506e3e ""
@@ -210,7 +212,7 @@
   "chapters/abstract.tex" 1691253600 57 980b2dfb1d6d8c112e6249bb4e7625ad ""
   "chapters/appendix.tex" 1693347203 26 9534a9b6154674d08f31aa40ab082df1 ""
   "chapters/conclusion.tex" 1693348971 22 dbf604a680aa1192b3965f0ae024a5d0 ""
-  "chapters/data_methods.tex" 1693816462 11073 c37c4dfd5429b12ee09c5caaa3703173 ""
+  "chapters/data_methods.tex" 1694008758 11181 2275cde8811d02af0df968c013608d79 ""
   "chapters/introduction.tex" 1693349060 123 2d57496ca8df2ac36dba9396cea346ee ""
   "chapters/literature.tex" 1693349112 90 777224ee32a79355ecd36bb29b3286b7 ""
   "chapters/results_discussion.tex" 1693348786 155 c4fa097b06829336cbdf038a8aee5296 ""
@@ -221,16 +223,17 @@
   "eth-template/layoutsetup.tex" 1691253600 3153 a0cd03ba655da2a1c83cb98de1593485 ""
   "eth-template/macrosetup.tex" 1691253600 738 a1ddf6e00786b21534f8312de88c4feb ""
   "eth-template/theoremsetup.tex" 1691253600 1000 26f7d8ce3897fd4b39189a2363dadee4 ""
-  "figures/concentration_metrics.png" 1693693862 215690 f151bdbfbe4bda042443adb0e7091130 ""
+  "figures/concentration_metric_distributions.png" 1694007125 133681 108a0659842950968653e672eab9ee79 ""
   "figures/concentration_response_series.png" 1693814003 51230 6c1abbfdcbbca44c617425a7655ff177 ""
   "figures/presence_matrix_all.png" 1693517692 1231217 ff363d71a0821b60ba3859282cb0fa8f ""
   "figures/presence_matrix_subset.png" 1693517765 1034005 b31aff38784e237aba0e8abf3e503c4b ""
-  "thesis.aux" 1693816468 11110 bba21a7276f70e557b92e4be7c0f368f "pdflatex"
-  "thesis.bbl" 1693816295 486 ee04f40f768daeed26442158e95aba61 "biber thesis"
-  "thesis.out" 1693816468 2293 40a552817295d42be66279636a17cbc2 "pdflatex"
-  "thesis.run.xml" 1693816468 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "rules.tex" 1691253600 11120 8a613e6aa28d65e9d24e80bba5a1eff6 ""
+  "thesis.aux" 1694008775 11447 c925faf1992e1dc4d0489c88dc88c92d "pdflatex"
+  "thesis.bbl" 1694008624 0 d41d8cd98f00b204e9800998ecf8427e "biber thesis"
+  "thesis.out" 1694008775 2293 40a552817295d42be66279636a17cbc2 "pdflatex"
+  "thesis.run.xml" 1694008775 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
   "thesis.tex" 1693518763 4366 8413907ba9a4a6ac5f1aae68dd92af86 ""
-  "thesis.toc" 1693816468 1901 53b47983bf4550cf5a7e1ac35c899c1f "pdflatex"
+  "thesis.toc" 1694008775 1901 c75b4f114531d905d4b5e582477878f8 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

@@ -13,9 +13,11 @@ from sklearn import metrics
 from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import Pipeline
+from xgboost import XGBClassifier
+from xgboost import plot_importance
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
-    INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT
+    INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH
 
 CONFIG = {}
 CONFIG_CLASSIFIERS = {}
@@ -26,8 +28,8 @@ AEID = 0
 CLASSIFIER_NAME = ""
 
 
-def load_config(only_load=0):
-    global CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOG_PATH
+def load_config():
+    global CONFIG, CONFIG_CLASSIFIERS, START_TIME, LOG_PATH
 
     with open(CONFIG_PATH, 'r') as file:
         config = yaml.safe_load(file)
@@ -35,32 +37,34 @@ def load_config(only_load=0):
             import warnings
             warnings.filterwarnings("ignore")
 
-    if only_load:
-        return config
-
     with open(CONFIG_CLASSIFIERS_PATH, 'r') as file:
         config_classifiers = yaml.safe_load(file)
 
     CONFIG = config
     CONFIG_CLASSIFIERS = config_classifiers
     START_TIME = datetime.now()
-    AEID = CONFIG['aeid']
     LOGGER = init_logger()
 
-    log_config_path = os.path.join(LOG_PATH, "config.yaml")
+    log_config_path = os.path.join(LOG_PATH, '.log', "config.yaml")
     with open(log_config_path, 'w') as file:
         yaml.dump(CONFIG, file)
-    log_config_classifiers_path = os.path.join(LOG_PATH, "config_classifiers.yaml")
+    log_config_classifiers_path = os.path.join(LOG_PATH, '.log', "config_classifiers.yaml")
     with open(log_config_classifiers_path, 'w') as file:
         yaml.dump(CONFIG_CLASSIFIERS, file)
-    LOGGER.info(f"Config files dumped to '{LOG_PATH}'\n")
+    LOGGER.info(f"Config files dumped to '{os.path.join(LOG_PATH, '.log')}'")
 
-    return CONFIG, CONFIG_CLASSIFIERS, START_TIME, AEID, LOGGER
+    return CONFIG, CONFIG_CLASSIFIERS, START_TIME, LOGGER
 
 
-def get_assay_df():
-    LOGGER.info(f"Running ML pipeline for assay ID: {CONFIG['aeid']}\n")
-    assay_file_path = os.path.join(ROOT_DIR, CONFIG['remote_data_dir'], f"{CONFIG['aeid']}{CONFIG['file_format']}")
+def set_aeid(aeid):
+    global AEID
+    AEID = aeid
+
+
+def get_assay_df(aeid):
+    set_aeid(aeid)
+    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
+    assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
     assay_df = assay_df[['dsstox_substance_id', 'hitcall']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
@@ -78,7 +82,7 @@ def merge_assay_and_fingerprint_df(assay_df, fps_df):
     # Get intersection and merge the assay and fingerprint dataframes
     df = pd.merge(assay_df, fps_df, on="dsstox_substance_id").reset_index(drop=True)
     assert df.shape[0] == df['dsstox_substance_id'].nunique()
-    LOGGER.info(f"\nMerged dataframe for this ML pipeline: {df.shape[0]} datapoints (chemical fingerprint/hitcall)")
+    LOGGER.info(f"Merged aeid output and fps: {df.shape[0]} datapoints (chemical fingerprint/hitcall)")
     return df
 
 
@@ -132,7 +136,7 @@ def handle_oversampling(X, y):
 def build_pipeline(classifier):
     global CLASSIFIER_NAME
     CLASSIFIER_NAME = classifier['name']
-    os.makedirs(os.path.join(LOG_PATH, CLASSIFIER_NAME))
+    os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME), exist_ok=True)
     pipeline_steps = []
     for step in classifier['steps']:
         step_name = step['name']
@@ -215,7 +219,7 @@ def find_optimal_threshold(X, y, best_estimator):
     plt.grid()
     plt.tight_layout()
 
-    path = os.path.join(LOG_PATH, CLASSIFIER_NAME, f"roc_curve.png")
+    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, f"roc_curve.png")
     plt.savefig(path, dpi=300)
     LOGGER.info(f"Optimal threshold saved as png")
     return optimal_threshold
@@ -248,7 +252,7 @@ def predict_and_report(X, y, classifier, best_estimator):
     cm_display.plot()
 
     plt.title(f"Confusion Matrix for {classifier['name']}")
-    path = os.path.join(LOG_PATH, CLASSIFIER_NAME, f"confusion_matrix.png")
+    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, f"confusion_matrix.png")
     plt.savefig(path)
     plt.close()
 
@@ -281,10 +285,11 @@ def create_empty_log_file(filename):
 
 def init_logger():
     global LOGGER, LOG_PATH
-    LOG_PATH = os.path.join(LOG_DIR_PATH, f"{AEID}", f"{get_timestamp(START_TIME)}")
-    os.makedirs(LOG_PATH, )
-    log_filename = os.path.join(LOG_PATH, "ml_pipeline.log")
-    error_filename = os.path.join(LOG_PATH, "ml_pipeline.error")
+    LOG_PATH = os.path.join(LOG_DIR_PATH, "runs", f"{get_timestamp(START_TIME)}")
+    os.makedirs(LOG_PATH, exist_ok=True)
+    os.makedirs(os.path.join(LOG_PATH, '.log'), exist_ok=True)
+    log_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.log")
+    error_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.error")
     create_empty_log_file(log_filename)
     create_empty_log_file(error_filename)
 
@@ -304,16 +309,18 @@ def get_timestamp(time_point):
     return time_point.strftime('%Y-%m-%d_%H-%M-%S')
 
 
-def report_exception(exception, classifier):
-    error_file_path = os.path.join(LOG_PATH, f"error.error")
+def report_exception(exception, traceback_info, classifier):
+    error_file_path = os.path.join(LOG_PATH, '.log', f"error.error")
     with open(error_file_path, "a") as f:
         err_msg = f"{classifier} failed: {exception}"
         LOGGER.error(err_msg)
+        LOGGER.error(traceback_info)
         print(err_msg, file=f)
+        print(traceback_info, file=f)
 
 
-def load_model(ok):
-    classifier_log_folder = os.path.join(LOG_PATH, CLASSIFIER_NAME)
+def load_model(path):
+    classifier_log_folder = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME)
     best_estimator_path = os.path.join(classifier_log_folder, f"best_estimator.joblib")
     model = joblib.load(best_estimator_path)
     LOGGER.info(f"Loaded model from {best_estimator_path}")
@@ -324,7 +331,7 @@ def save_model(grid_search):
     best_estimator = grid_search.best_estimator_
     best_params = grid_search.best_params_
 
-    classifier_log_folder = os.path.join(LOG_PATH, CLASSIFIER_NAME)
+    classifier_log_folder = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME)
     best_estimator_path = os.path.join(classifier_log_folder, f"best_estimator.joblib")
     best_params_path = os.path.join(classifier_log_folder, f"best_params.joblib")
 

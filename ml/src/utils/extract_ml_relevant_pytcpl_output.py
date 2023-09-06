@@ -6,7 +6,7 @@ from ml.src.pipeline.constants import REMOTE_DATA_DIR_PATH, INPUT_DIR_PATH, FILE
     INPUT_ML_DIR_PATH
 
 
-def extract_pytcpl_output():
+def extract_ml_relevant_pytcpl_output():
     print("Get output of pytcpl pipeline")
     src_path = os.path.join(REMOTE_DATA_DIR_PATH, 'merged', 'output', f"0{FILE_FORMAT}")
     df = pd.read_parquet(src_path)[['aeid', 'dsstox_substance_id', 'hitcall']]
@@ -15,8 +15,8 @@ def extract_pytcpl_output():
     df.to_parquet(dest_path, compression='gzip')
 
     # Get set of all compounds tested
-    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_without_fingerprints{FILE_FORMAT}")
-    compounds_tested_without_fingerprints = pd.read_parquet(compounds_path)['dsstox_substance_id']
+    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_without_fingerprint{FILE_FORMAT}")
+    compounds_tested_without_fingerprint = pd.read_parquet(compounds_path)['dsstox_substance_id']
 
     aeids = get_subset_aeids()['aeid']
     hitcall_infos = {}
@@ -24,7 +24,7 @@ def extract_pytcpl_output():
     for aeid in aeids:
         df_aeid = df[df['aeid'] == aeid]
         df_aeid = df_aeid[['dsstox_substance_id', 'hitcall']]
-        df_aeid = df_aeid[~df_aeid['dsstox_substance_id'].isin(compounds_tested_without_fingerprints)]
+        df_aeid = df_aeid[~df_aeid['dsstox_substance_id'].isin(compounds_tested_without_fingerprint)]
 
         dest_path = os.path.join(INPUT_ML_DIR_PATH, f"{aeid}{FILE_FORMAT}")
         df_aeid.to_parquet(dest_path, compression='gzip')

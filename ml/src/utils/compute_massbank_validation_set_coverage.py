@@ -6,17 +6,17 @@ from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
 
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
-from ml.src.pipeline.constants import INPUT_DIR_PATH, FILE_FORMAT, \
+from ml.src.pipeline.constants import FILE_FORMAT, \
     METADATA_SUBSET_DIR_PATH, VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, \
-    INPUT_VALIDATION_DIR_PATH, MASS_BANK_DIR_PATH
+    INPUT_VALIDATION_DIR_PATH, MASS_BANK_DIR_PATH, INPUT_ML_DIR_PATH
 
 
-def get_val_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1):
+def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1):
     print("Compute massbank validation set coverage")
     data_dict = {}
     aeids = get_subset_aeids()['aeid']
     for aeid in aeids:
-        src_path = os.path.join(INPUT_DIR_PATH, f"{aeid}{FILE_FORMAT}")
+        src_path = os.path.join(INPUT_ML_DIR_PATH, f"{aeid}{FILE_FORMAT}")
         data_dict[aeid] = pd.read_parquet(src_path)
 
     validation_compounds_safe_and_unsafe, validation_compounds_safe, validation_compounds_unsafe = get_validation_compounds()
@@ -27,7 +27,7 @@ def get_val_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT
         os.makedirs(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, subset_ids_list_name), exist_ok=True)
 
     # Get set of all compounds tested
-    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_with_fingerprints{FILE_FORMAT}")
+    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_with_fingerprint{FILE_FORMAT}")
     all_compounds = pd.read_parquet(compounds_path)['dsstox_substance_id']
 
     if COLLECT_STATS:
@@ -176,6 +176,11 @@ def prepare_validation_set():
     massbank_dtxsid_with_records_df = pd.read_csv(massbank_dtxsid_with_records_path)
     massbank_dtxsid_with_records_sirius_training_df = pd.read_csv(massbank_dtxsid_with_records_sirius_training_path)
 
+    # Fitler compounds that have fingerprint from structure
+    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_without_fingerprint{FILE_FORMAT}")
+    compounds_tested_without_fingerprint = pd.read_parquet(compounds_path)['dsstox_substance_id']
+    massbank_dtxsid_with_records_df = massbank_dtxsid_with_records_df[~massbank_dtxsid_with_records_df['dtxsid'].isin(compounds_tested_without_fingerprint)]
+
     massbank_dtxsid_with_records = massbank_dtxsid_with_records_df['dtxsid']
     massbank_dtxsid_with_records_sirius_training = massbank_dtxsid_with_records_sirius_training_df['dtxsid']
 
@@ -215,3 +220,9 @@ def prepare_validation_set():
     with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_safe_and_unsafe.out'), 'w') as f:
         for compound in massbank_dtxsid_with_records:
             f.write(compound + '\n')
+
+
+
+if __name__ == '__main__':
+    prepare_validation_set()
+    compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1)

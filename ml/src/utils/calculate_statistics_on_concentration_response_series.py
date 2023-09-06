@@ -8,7 +8,7 @@ from ml.src.pipeline.constants import REMOTE_DATA_DIR_PATH, FILE_FORMAT, METADAT
 from ml.src.utils.helper import get_subset_aeids
 
 
-def get_concentrations():
+def calculate_statistics_on_tested_concentrations():
     print("Calculate statistics on tested concentrations of all concentration-response series across compounds and assay endpoints")
     dest_path = os.path.join(CONC_DIR_PATH, f"{0}{FILE_FORMAT}")
     metrics_to_plot = ['num_points', 'num_groups', 'num_replicates', 'range_min', 'range_max']

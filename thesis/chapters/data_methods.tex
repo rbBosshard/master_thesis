@@ -34,7 +34,7 @@ A \textit{concentration-response series} is represented as a set of $k$ concentr
 For each entry in the presence matrix $P$ with $P_{ij} = 1$, we collect the corresponding concentration-response series $S_{ij}$ for the compound $c_j$ in the assay endpoint $a_i$. We analyse in total $\sum_{i,j} P_{ij} = \num{1372225}$ concentration-response series, comprising a sum of $\sum_{i,j} |S_{ij}| = \num{48861036}$ concentration-response pairs across all compounds and assay endpoints.
 We get the concentration-response pairs by combining tables mc0, mc1, and mc3 from invitroDBv3.5. We also gather necessary sample information such as well type, row, and column index from the assay well-plate.
 The concentrations are transformed to the logarithmic scale using the unit $\mu M$ (micromolar), while the responses are normalized to either fold-induction or percent-of-control units.
-Figure~\ref{fig:concentration_response_series} showcases a single concentration-response series for some compound tested within a assay endpoint.
+Figure~\ref{fig:concentration_response_series} showcases a single concentration-response series for some compound tested within an assay endpoint.
 
 \begin{figure}[htbp]  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
@@ -46,7 +46,7 @@ Figure~\ref{fig:concentration_response_series} showcases a single concentration-
 In this section, we demonstrate the significance of variations in concentration-response pairs among different compounds and assay endpoints. In practice, concentrations are often subjected to multiple testing iterations, resulting in the formation of distinct concentration groups. Within each concentration group, the number of replicates is indicated by $n_{rep}$.
 We introduce the following quantities corresponding to a concentration-response series for a compound $c_i$ in a given assay endpoint $a_i$:
 \begin{itemize}
-    \item $n_{\text{datapoints}_{i,j}}$: the total number of concentration-response pairs
+    \item $n_{\text{datapoints}_{i,j}}$: the total number of concentration-response pairs ($|S|$)
     \item $n_{\text{groups}_{i,j}}$: the number of distinct concentrations tested
     \item $n_{\text{replicates}_{i,j}}$: the number of replicates for each concentration group
     \item $min_{\text{conc}_{i,j}}$: the lowest concentration tested
@@ -54,15 +54,16 @@ We introduce the following quantities corresponding to a concentration-response 
 \end{itemize}
 
 
-For an overview of these quantities across the entire set of considered concentration-response series, please refer to Figure~\ref{fig:concentration_metrics}. This figure illustrates the above metrics aggregated by their means, grouped by assay endpoints and compounds.
+For an overview of these quantities across the entire set of considered concentration-response series, please refer to Figure~\ref{fig:concentration_metric_distributions}. This figure illustrates the above metrics aggregated by their means, grouped by assay endpoints and compounds.
 
 
 
 \begin{figure}[htbp]  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/concentration_metrics.png}  
-    \caption{Concentration metrics aggregated by their means, grouped by compounds in the first column and assay endpoints in the second column. The first row shows the total number of concentration-response pairs, the second row shows the number of distinct concentrations tested and the third row shows the number of replicates (log-scale) for each concentration group. The fourth and fifth row show the lowest and highest concentration (log-scale) tested, respectively.}
-~\label{fig:concentration_metrics} 
+    \includegraphics[width=1.0\textwidth]{figures/concentration_metric_distributions.png}  
+    \caption{Concentration metrics averaged across all concentration-response series aggregated by assay endpoint (blue) and compound (orange). E.g., the first chart shows the distribution on the average number of datapoints across all assay enpoint $a_i \in A$ with $\frac{1}{|C|} \sum_{j} n_{\text{datapoints}_{i,j}}$ and across all compounds $c_j \in C$ with $\frac{1}{|A|} \sum_{i} n_{\text{datapoints}_{i,j}}$. The same is done for the other metrics: $n_{\text{groups}_{i,j}}$, $n_{\text{replicates}_{i,j}}$, $min_{\text{conc}_{i,j}}$, and $max_{\text{conc}_{i,j}}$.
+    }
+~\label{fig:concentration_metric_distributions} 
 \end{figure}
 
 
