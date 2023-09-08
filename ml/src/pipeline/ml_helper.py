@@ -17,7 +17,7 @@ from xgboost import XGBClassifier
 from xgboost import plot_importance
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
-    INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH
+    INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH
 
 CONFIG = {}
 CONFIG_CLASSIFIERS = {}
@@ -75,6 +75,7 @@ def get_fingerprint_df():
     fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
     fps_df = pd.read_parquet(fps_file_path)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
+    LOGGER.info("#" * 80)
     return fps_df
 
 
@@ -107,14 +108,26 @@ def split_data(X, y):
 
 
 def partition_data(df):
-    # Partition the data into features (X) and labels (y)
-    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitc)
-    X = df.iloc[:, 2:]
     # Select the hitcall as the label based on the activity threshold
     t = CONFIG['activity_threshold']
     LOGGER.info(f"Activity threshold: (hitcall >= {t} is active)\n")
-    y = (df['hitcall'] >= t).astype(int)
-    return X, y
+
+    # Split off the massbank validation set
+    validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
+    validation_compounds = pd.read_parquet(validation_compounds_path)["dsstox_substance_id"]
+    validation_filter_condition = df['dsstox_substance_id'].isin(validation_compounds)
+    training_df, validation_df = df[~validation_filter_condition], df[validation_filter_condition]
+
+    # Partition the data into features (X) and labels (y)
+    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitc)
+    X = training_df.iloc[:, 2:]
+    y = (training_df['hitcall'] >= t).astype(int)
+
+    X_massbank_val_from_structure = validation_df.iloc[:, 2:]
+    X_massbank_val_from_sirius = validation_df.iloc[:, 2:]  # Todo: replace with predicted fingerprints
+    y_massbank_val = (validation_df['hitcall'] >= t).astype(int)
+
+    return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
 def print_label_count(y, title):
@@ -178,7 +191,7 @@ def grid_search_cv(X, y, classifier, pipeline):
     return grid_search
 
 
-def find_optimal_threshold(X, y, best_estimator):
+def find_optimal_threshold(X, y, best_estimator, input_set):
     # Predict the probabilities (using validation set)
     y_pred_proba = best_estimator.predict_proba(X)[:, 1]
 
@@ -219,21 +232,22 @@ def find_optimal_threshold(X, y, best_estimator):
     plt.grid()
     plt.tight_layout()
 
-    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, f"roc_curve.png")
+    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"roc_curve.png")
     plt.savefig(path, dpi=300)
     LOGGER.info(f"Optimal threshold saved as png")
     return optimal_threshold
 
 
-def predict_and_report(X, y, classifier, best_estimator):
-    LOGGER.info(f"Predict..")
+def predict_and_report(X, y, classifier, best_estimator, input_set):
+    os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set), exist_ok=True)
+    LOGGER.info(f"Predict ({input_set})")
 
     if not CONFIG['threshold_moving']:
         # ROC curve for finding the optimal threshold, we want to minimize the false negatives
         y_pred = best_estimator.predict(X)
     else:
         # Adjust predictions based on the optimal threshold
-        optimal_threshold = find_optimal_threshold(X, y, best_estimator)
+        optimal_threshold = find_optimal_threshold(X, y, best_estimator, input_set)
         LOGGER.info(f"Optimal threshold: {optimal_threshold}")
         y_pred_proba = best_estimator.predict_proba(X)[:, 1]
         y_pred = np.where(y_pred_proba > optimal_threshold, 1, 0)
@@ -252,7 +266,7 @@ def predict_and_report(X, y, classifier, best_estimator):
     cm_display.plot()
 
     plt.title(f"Confusion Matrix for {classifier['name']}")
-    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, f"confusion_matrix.png")
+    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"confusion_matrix.png")
     plt.savefig(path)
     plt.close()
 

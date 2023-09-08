@@ -39,4 +39,6 @@ classifiers:
       # - name: VarianceThreshold
       - name: XGBClassifier
         args:
-          n_estimators: [5] # default = 100
+          n_estimators: [20] # default = 100
+          tree_method: ['gpu_hist']
+          predictor: ['gpu_predictor']

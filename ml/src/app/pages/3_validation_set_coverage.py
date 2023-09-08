@@ -4,9 +4,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from plotly import graph_objs as go
-from ml.src.pipeline.constants import MASS_BANK_DIR_PATH, FILE_FORMAT
+from ml.src.pipeline.constants import MASSBANK_DIR_PATH, FILE_FORMAT
 
-VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASS_BANK_DIR_PATH, 'validation_coverage_plots')
+VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASSBANK_DIR_PATH, 'validation_coverage_plots')
 
 
 st.header("Massbank validation set coverage")

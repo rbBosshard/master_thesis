@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
 from ml.src.pipeline.constants import FILE_FORMAT, \
     METADATA_SUBSET_DIR_PATH, VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, \
-    INPUT_VALIDATION_DIR_PATH, MASS_BANK_DIR_PATH, INPUT_ML_DIR_PATH
+    INPUT_VALIDATION_DIR_PATH, MASSBANK_DIR_PATH, INPUT_ML_DIR_PATH
 
 
 def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1):
@@ -138,6 +138,7 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             plt.grid(True)
             plt.legend()
             plt.show()
+            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hit_ratio_scatter_plot{FILE_FORMAT}"))
 
             def custom_sum(row):
                 return row.apply(lambda x: 0 if x < 0 else 1).sum()
@@ -159,6 +160,7 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             plt.yticks(range(len(heatmap_df.index)), heatmap_df.index)
             plt.colorbar()
             plt.show()
+            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hitcall_matrix{FILE_FORMAT}"))
 
             # for i, (aeid, presence_row) in enumerate(results):
             #     presence_matrix[i, :] = presence_row
@@ -191,7 +193,7 @@ def prepare_validation_set():
     compounds_safe_for_validation = massbank_dtxsid_with_records.difference(massbank_dtxsid_with_records_sirius_training)
     compounds_unsafe_for_validation = massbank_dtxsid_with_records_sirius_training
 
-    with open(os.path.join(MASS_BANK_DIR_PATH, 'compounds_count.out'), 'w') as f:
+    with open(os.path.join(MASSBANK_DIR_PATH, 'compounds_count.out'), 'w') as f:
         f.write(f"massbank_dtxsid_with_records: {len(massbank_dtxsid_with_records)} \n")
         f.write(f"massbank_dtxsid_with_records_sirius_training: {len(massbank_dtxsid_with_records_sirius_training)} \n")
         f.write("\n")
@@ -200,24 +202,24 @@ def prepare_validation_set():
         f.write(f"validation_compounds_safe: {len(compounds_safe_for_validation)} \n")
         f.write(f"validation_compounds_unsafe: {len(compounds_unsafe_for_validation)} \n")
 
-    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
+    path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
     df = pd.DataFrame({'dsstox_substance_id': list(compounds_safe_for_validation)})
     df.to_parquet(path, compression='gzip')
-    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_safe.out'), 'w') as f:
+    with open(os.path.join(MASSBANK_DIR_PATH, 'validation_compounds_safe.out'), 'w') as f:
         for compound in compounds_safe_for_validation:
             f.write(compound + '\n')
 
-    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_unsafe{FILE_FORMAT}")
+    path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_unsafe{FILE_FORMAT}")
     df = pd.DataFrame({'dsstox_substance_id': list(compounds_unsafe_for_validation)})
     df.to_parquet(path, compression='gzip')
-    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_unsafe.out'), 'w') as f:
+    with open(os.path.join(MASSBANK_DIR_PATH, 'validation_compounds_unsafe.out'), 'w') as f:
         for compound in compounds_unsafe_for_validation:
             f.write(compound + '\n')
 
-    path = os.path.join(MASS_BANK_DIR_PATH, f"validation_compounds_safe_and_unsafe{FILE_FORMAT}")
+    path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe_and_unsafe{FILE_FORMAT}")
     df = pd.DataFrame({'dsstox_substance_id': list(massbank_dtxsid_with_records)})
     df.to_parquet(path, compression='gzip')
-    with open(os.path.join(MASS_BANK_DIR_PATH, 'validation_compounds_safe_and_unsafe.out'), 'w') as f:
+    with open(os.path.join(MASSBANK_DIR_PATH, 'validation_compounds_safe_and_unsafe.out'), 'w') as f:
         for compound in massbank_dtxsid_with_records:
             f.write(compound + '\n')
 

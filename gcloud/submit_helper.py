@@ -7,7 +7,7 @@ import joblib
 import numpy as np
 import concurrent.futures
 
-from gcloud.constants import MACHINE_TYPE, ZONES, PROJECTS, SSH_FILE_PATH
+from constants import MACHINE_TYPE, ZONES, PROJECTS, SSH_FILE_PATH
 
 LOG_FOLDER = os.path.join('logs')
 LOG_FILE = ""
@@ -42,7 +42,6 @@ def get_instances_for_project(project):
         completed_process = subprocess.run(list_instances_command, shell=True, capture_output=True, text=True)
         print(completed_process.stdout)
         print(completed_process.stderr)
-
         instances = completed_process.stdout.strip().split('\n')
     except subprocess.TimeoutExpired:
         print(f"Timeout expired for project: {project}")
@@ -182,12 +181,7 @@ def run_pipeline_on_instance(instance, cmd):
         f'--zone={get_zone(instance)} '
         f'--command="{cmd}"'
     )
-    process = subprocess.run(command, shell=True, capture_output=True, text=True)
-    for line in process.stdout:
-        print(line, end='')
-    for line in process.stderr:
-        print(line, end='')
-
+    subprocess.run(command, shell=True)
     print("Pipeline done on: ", instance)
     return instance
 
@@ -212,7 +206,7 @@ def run_pipeline(instances):
 
 
 def git_commit(instance, instance_id):
-    commit_msg = f"'{instance} i={instance_id} @ {datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}'"
+    commit_msg = f"'{instance} i={instance_id} @ {datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}'"
     command = (f'gcloud compute ssh {instance} '
                f'--project={get_project(instance)} '
                f'--zone={get_zone(instance)} '
@@ -230,7 +224,8 @@ def git_commit_instances(instances):
 
 
 def wrap_up(instance):
-    cmd = f"sudo python3 pytcpl/src/pipeline/pipeline_wrapup.py"
+    cmd = f"sudo git -C pytcpl/ pull origin main --rebase && " \
+          f"sudo python3 pytcpl/src/pipeline/pipeline_wrapup.py"
     print(f"{instance}: {cmd}")
     command = (
         f'gcloud compute ssh {instance} '
@@ -244,16 +239,8 @@ def wrap_up(instance):
 
 
 def submit_command(command):
-    with open(LOG_FILE, 'a', encoding="utf-8") as f:
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                   universal_newlines=True)
-        for line in process.stdout:
-            encoded_line = line.encode("utf-8")  # Encode line as UTF-8
-            f.write(encoded_line.decode("utf-8"))  # Decode and write line
-        for line in process.stderr:
-            encoded_line = line.encode("utf-8")  # Encode line as UTF-8
-            f.write(encoded_line.decode("utf-8"))  # Decode and write line
-        process.wait()
+    process = subprocess.Popen(command, shell=True)
+    process.wait()
 
 
 def init_log_file():

@@ -1,14 +1,14 @@
 import os
 import time
 
-from gcloud.constants import ROOT_DIR
-from gcloud.submit_helper import create_new_instances, delete_instances, get_current_instances, \
+from constants import ROOT_DIR
+from submit_helper import create_new_instances, delete_instances, get_current_instances, \
     check_gcloud_sdk_availability, start_gcloud_instances, get_script_commands, run_script_commands, \
     stop_gcloud_instances, run_pipeline, git_commit_instances, wrap_up, init_log_file
 
 BUILD = 0
 INSTANCES_TOTAL = 4
-STOP = 1
+STOP = 0
 
 # close all open ssh-browser/console windows
 # gcloud compute os-login ssh-keys add --key-file="C:\Users\bossh\.ssh\gcloud.pub" --project=project-2-396114
@@ -36,15 +36,15 @@ def main():
 
         script_path = os.path.join(ROOT_DIR, 'update_script.sh')
         commands = get_script_commands(script_path)
-        run_script_commands(gcloud_instances, commands)
+        # run_script_commands(gcloud_instances, commands)
 
         time.sleep(1)
 
-        run_pipeline(gcloud_instances)
+        # run_pipeline(gcloud_instances)
 
         time.sleep(1)
 
-        git_commit_instances(gcloud_instances)
+        # git_commit_instances(gcloud_instances)
 
         time.sleep(1)
 

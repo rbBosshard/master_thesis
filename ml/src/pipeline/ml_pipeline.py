@@ -13,12 +13,10 @@ CONFIG, CONFIG_CLASSIFIERS, START_TIME, LOGGER = load_config()
 # Get fingerprint data
 fps_df = get_fingerprint_df()
 
-LOGGER.info("#" * 80)
-
 # Get assay endpoint ids from subset considered for ML
 aeids = get_subset_aeids()['aeid']
 
-for aeid in aeids[:2]:
+for aeid in aeids[:1]:
 
     # Get assay data
     assay_df = get_assay_df(aeid)
@@ -26,8 +24,8 @@ for aeid in aeids[:2]:
     # Merge chemical ids in both dataframes
     df = merge_assay_and_fingerprint_df(assay_df, fps_df)
 
-    # Partition data into X and y
-    X, y = partition_data(df)
+    # Partition data into X and y and respective massbank validation
+    X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
     # Split ML data into train, validation and test set
     X_train, X_val, y_train, y_val, X_test, y_test = split_data(X, y)
@@ -57,7 +55,11 @@ for aeid in aeids[:2]:
             # best_estimator = load_model("best_estimator")
 
             # Predict on the validation set with the best estimator (X_val, y_val is unseen)
-            predict_and_report(X_val, y_val, classifier, best_estimator)
+            predict_and_report(X_val, y_val, classifier, best_estimator, "validation")
+
+            # Predict on the Massbank validation set with the best estimator (X_val, y_val is unseen)
+            predict_and_report(X_massbank_val_from_structure, y_massbank_val, classifier, best_estimator, "massbank_validation_from_structure")
+            predict_and_report(X_massbank_val_from_sirius, y_massbank_val, classifier, best_estimator, "massbank_validation_from_sirius")
 
             elapsed = round((datetime.now() - start_time).total_seconds(), 2)
             LOGGER.info(f"Done {classifier['name']} >> {elapsed} seconds.\n{'_' * 75}\n\n")
