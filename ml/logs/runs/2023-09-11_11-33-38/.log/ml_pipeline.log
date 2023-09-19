@@ -1,0 +1,80 @@
+[00:00:00:00] Config files dumped to 'C:\Users\bossh\Documents\GitHub\master_thesis\ml\src\pipeline\../../logs\runs\2023-09-11_11-33-38\.log'
+[00:00:00:27] Fingerprint dataframe: 9476 chemicals, 2362 binary features
+[00:00:00:27] ################################################################################
+[00:00:00:27] Start ML pipeline for assay ID: 2369
+
+[00:00:00:33] Assay dataframe: 7872 chemical/hitcall datapoints
+[00:00:00:43] Merged aeid output and fps: 7551 datapoints (chemical fingerprint/hitcall)
+[00:00:00:43] Activity threshold: (hitcall >= 0.5 is active)
+
+[00:00:00:56] Label Count TOTAL: 7102 datapoints
+ with 5610 inactive, 1492 active (21.01%)
+
+[00:00:00:57] Label Count TRAIN: 5751 datapoints
+ with 4542 inactive, 1209 active (21.02%)
+
+[00:00:00:57] Label Count VALIDATION: 640 datapoints
+ with 506 inactive, 134 active (20.94%)
+
+[00:00:00:57] Label Count TEST: 711 datapoints
+ with 562 inactive, 149 active (20.96%)
+
+[00:00:25:75] XGBClassifier: GridSearchCV Results:
+[00:00:25:75] Best params:
+{'XGBClassifier__n_estimators': 200, 'XGBClassifier__tree_method': 'gpu_hist'} with mean cross-validated make_scorer(fbeta_score, beta=1) score: 0.5837164451159603
+
+[00:00:25:77] Saved model in C:\Users\bossh\Documents\GitHub\master_thesis\ml\src\pipeline\../../logs\runs\2023-09-11_11-33-38\2369\XGBClassifier
+[00:00:25:77] Predict (validation)
+[00:00:26:34] Optimal threshold saved as png
+[00:00:26:34] Optimal threshold: 0.06077398732304573
+[00:00:26:39] Classification Report XGBClassifier:
+[00:00:26:39]               precision    recall  f1-score   support
+
+        True       0.45      0.87      0.60       134
+       False       0.96      0.72      0.82       506
+
+    accuracy                           0.75       640
+   macro avg       0.70      0.80      0.71       640
+weighted avg       0.85      0.75      0.77       640
+
+[00:00:26:40] Total: 640 datapoints
+[00:00:26:40] Ground truth: 134 positive, 506 negative
+[00:00:26:40] Prediction: 259 positive, 381 negative
+[00:00:26:63] Predict (massbank_validation_from_structure)
+[00:00:27:06] Optimal threshold saved as png
+[00:00:27:06] Optimal threshold: 0.18692119419574738
+[00:00:27:10] Classification Report XGBClassifier:
+[00:00:27:11]               precision    recall  f1-score   support
+
+        True       0.68      0.71      0.69       161
+       False       0.84      0.81      0.82       288
+
+    accuracy                           0.78       449
+   macro avg       0.76      0.76      0.76       449
+weighted avg       0.78      0.78      0.78       449
+
+[00:00:27:11] Total: 449 datapoints
+[00:00:27:11] Ground truth: 161 positive, 288 negative
+[00:00:27:11] Prediction: 170 positive, 279 negative
+[00:00:27:37] Predict (massbank_validation_from_sirius)
+[00:00:27:81] Optimal threshold saved as png
+[00:00:27:81] Optimal threshold: 0.18692119419574738
+[00:00:27:85] Classification Report XGBClassifier:
+[00:00:27:86]               precision    recall  f1-score   support
+
+        True       0.68      0.71      0.69       161
+       False       0.84      0.81      0.82       288
+
+    accuracy                           0.78       449
+   macro avg       0.76      0.76      0.76       449
+weighted avg       0.78      0.78      0.78       449
+
+[00:00:27:86] Total: 449 datapoints
+[00:00:27:86] Ground truth: 161 positive, 288 negative
+[00:00:27:86] Prediction: 170 positive, 279 negative
+[00:00:28:10] Done XGBClassifier >> 27.54 seconds.
+___________________________________________________________________________
+
+
+[00:00:28:10] Finished: Total time >> 00:00:28
+

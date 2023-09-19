@@ -1,0 +1,9 @@
+classifiers:
+- name: XGBClassifier
+  steps:
+  - args:
+      n_estimators:
+      - 150
+      tree_method:
+      - gpu_hist
+    name: XGBClassifier

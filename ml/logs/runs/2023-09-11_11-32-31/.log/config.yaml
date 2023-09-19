@@ -1,0 +1,19 @@
+activity_threshold: 0.5
+aeid: 806
+apply:
+  smote: 0
+file_format: .parquet.gzip
+fingerprint_file: ToxCast_CSIfps_10k
+grid_search_cv:
+  beta: 1
+  n_jobs: -1
+  n_repeats: 2
+  n_splits: 2
+  scoring: f_beta
+  verbose: 1
+ignore_warnings: true
+random_state: 0
+remote_data_dir: ../../../pytcpl/data/output/
+threshold_moving: 1
+train_test_split_ratio: 0.1
+train_val_split_ratio: 0.2
