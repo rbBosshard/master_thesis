@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
 from ml.src.pipeline.constants import FILE_FORMAT, \
@@ -126,19 +127,22 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
 
             plt.figure(figsize=(8, 6))
             plt.scatter(merged_df['hit_ratio_df1'], merged_df['hit_ratio_df2'], marker='o', alpha=0.5)
-            plt.xlabel('hit_ratio_df1')
-            plt.ylabel('hit_ratio_df2')
-            plt.title('Scatter Plot of hit_ratio from df1 vs. df2')
-
             # Add the equation line y = x
             max_value = max(merged_df['hit_ratio_df1'].max(), merged_df['hit_ratio_df2'].max())
-            plt.plot([0, max_value], [0, max_value], linestyle='--', color='gray', label='y=x')
-            plt.plot([0, max_value / 2], [0, max_value], linestyle='--', color='blue', label='y=2x')
+            plt.plot([0, max_value], [0, max_value], linestyle='solid', color='blue', label='Equal distribution of active compounds')
+            # plt.plot([0, max_value / 2], [0, max_value], linestyle='dashed', color='blue', label=' Doubled active compounds')
+            plt.ylabel('Active compounds in %: Massbank Validation Set')
+            plt.xlabel('Active compounds in %: Assay Endpoint')
+            plt.gca().xaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
+            plt.gca().yaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
 
+            plt.title('Active Compounds in % per Assay Endpoint vs. Massbank Validation Set')
+            # plt.title('Representativeness of Validation Set')
+            # plt.suptitle('Active Compounds in %')
             plt.grid(True)
             plt.legend()
-            plt.show()
-            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hit_ratio_scatter_plot{FILE_FORMAT}"))
+            # plt.show()
+            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hit_ratio_scatter_plot.svg"))
 
             def custom_sum(row):
                 return row.apply(lambda x: 0 if x < 0 else 1).sum()
@@ -159,8 +163,8 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             plt.xticks(range(len(heatmap_df.columns)), heatmap_df.columns, rotation=90)
             plt.yticks(range(len(heatmap_df.index)), heatmap_df.index)
             plt.colorbar()
-            plt.show()
-            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hitcall_matrix{FILE_FORMAT}"))
+            # plt.show() # , dpi=300
+            plt.savefig(os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, compound_list_name, f"hitcall_matrix.svg"))
 
             # for i, (aeid, presence_row) in enumerate(results):
             #     presence_matrix[i, :] = presence_row

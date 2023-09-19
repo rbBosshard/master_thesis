@@ -6,7 +6,7 @@ from submit_helper import create_new_instances, delete_instances, get_current_in
     check_gcloud_sdk_availability, start_gcloud_instances, get_script_commands, run_script_commands, \
     stop_gcloud_instances, run_pipeline, git_commit_instances, wrap_up, init_log_file
 
-BUILD = 0
+BUILD = 1
 INSTANCES_TOTAL = 4
 STOP = 0
 
@@ -36,25 +36,31 @@ def main():
 
         script_path = os.path.join(ROOT_DIR, 'update_script.sh')
         commands = get_script_commands(script_path)
-        # run_script_commands(gcloud_instances, commands)
+        run_script_commands(gcloud_instances, commands)
 
         time.sleep(1)
 
-        # run_pipeline(gcloud_instances)
+        run_pipeline(gcloud_instances)
 
         time.sleep(1)
 
-        # git_commit_instances(gcloud_instances)
+        git_commit_instances(gcloud_instances)
 
         time.sleep(1)
 
-        wrap_up(gcloud_instances[0])
-        if len(gcloud_instances) > 1:
-            stop_gcloud_instances(gcloud_instances[1:])
+        stop_gcloud_instances(gcloud_instances)
 
-        time.sleep(1)
+        # Wrap up not working yet: no space left on device
+        # if len(gcloud_instances) > 1:
+        #     stop_gcloud_instances(gcloud_instances[1:])
 
-        stop_gcloud_instances(gcloud_instances[0])
+        # wrap_up(gcloud_instances[0])
+        # time.sleep(1)
+        # git_commit_instances([gcloud_instances[0]])
+
+        # time.sleep(1)
+
+        # stop_gcloud_instances([gcloud_instances[0]])
         print("Finished")
         exit(0)
 

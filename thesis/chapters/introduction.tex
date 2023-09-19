@@ -3,3 +3,45 @@
 
 \chapter{Introduction}\label{chap:introduction}
 intro
+
+\section{The Challenge of Environmental Pollution}
+
+Over the past few decades, the surge in environmental pollution by chemical compounds has been driven by industrial processes, agricultural practices, mobility sector, households, and various other factors, leading to significant ecological and health concerns.
+While these chemicals can enhance our high living standards and comfort of modern society, they can also pose risks and negatively affect chronicaly or acutely both our health and the environment. Toxic substances threaten wildlife but also makes our air, soil, drinking water and food supply less safe. 
+The EU currently maintains comprehensive chemical regulations, however, it is anticipated that global chemicals production will double by 2030. Moreover, the widespread utilization of chemicals, including their inclusion in consumer goods, is expected to expand further.
+Even though there are over 275 million known chemical compounds registered by the Chemical Abstracts Service (CAS), merely a tiny fraction of them undergo close scrutiny using conventional methods and even less is known about their toxicity profiles and adverse health effects on our organsims.
+
+Building upon the European Green Deal, the 8th Environment Action Programme, guiding European environmental policy until 2030, reinforces the EU's goal of sustainable living within planetary limits, with a vision extending to 2050. One of its key 2030 objectives is a zero-pollution commitment, covering air, water, and soil, prioritizing the well-being of EU citizens. Notably, the European Commission published a sustainability-focused chemicals strategy ~\cite{arturi}, aligning with the EU's zero-pollution ambition to minimize and substituting concerning substances wherever feasible. 
+Consequently, the urgent need to monitor and effectively assess the hazards associated with the daily entering of thousands of poorly understood chemicals into our environment becomes increasingly evident.
+
+\section{The Imperative for Prioritization and Toxicity Assessment}
+
+Modern analytical techniques, notably nontarget high-resolution mass spectrometry (NTS HRMS/MS), have undeniably transformed our capacity to detect and quantify environmental pollutants. HRMS/MS can detect a variety of human-made pollutants and environmental contaminants within samples taken from the environment, often with uncertain toxicity profiles. These compounds are assessed based on factors such as abundance and fragmentation data (MS1 and MS2). However, the endeavor to identify compounds and characterize their toxicity remains a resource-intensive and time-consuming process. This challenge is further compounded by the scarcity of reference standards, hindering comprehensive elucidation. Traditionally, the prioritization of unidentified compounds rely on signal intensity as a guiding metric. Unfortunately, this approach falls short in delivering an accurate assessment of environmental exposures, as it tends to overlook the crucial toxicological dimension. Consequently, substances with the potential for severe ecological consequences, such as endocrine-disrupting compounds, frequently evade detection due to their low abundance, despite their high toxicity. Therefore, there is an urgent need for prioritization strategies that incorporate the toxicity and ecological impact more effectively.
+
+\section{The Promise of Machine Learning in Toxicity Prediction}
+
+In the past few years, machine learning has emerged as a transformative force in the field of toxicology, particularly in the realm of high-throughput toxicity prediction. High-throughput screening (HTS) has revolutionized the way we assess toxicity by allowing thousands of in vitro bioassays to be conducted rapidly. This high-throughput approach, coupled with advancements in robotics and automated analysis, has generated vast volumes of toxicity data, paving the way for more comprehensive assessments of chemical compounds.
+Together with the advent of machine learning, this has enabled the development of predictive models that can accurately predict the toxicity of compounds based on their chemical structure. These models can be trained on large datasets of compounds with known toxicity profiles, allowing them to learn the underlying patterns and relationships between chemical structure and toxicity. Once trained, these models can be used to predict the toxicity of new compounds, even if they have not been tested in the lab. This approach has the potential to significantly reduce the time and cost of toxicity assessment and plays an important role in the prioritization of compounds for further testing.
+
+\section{MLinvitroTox: A Novel Approach}
+
+In response to the pressing need for a more efficient and comprehensive assessment of environmental contaminants, MLinvitroTox~\cite{arturi}, an innovative machine learning framework was introduced. MLinvitroTox leverages molecular fingerprints extracted from fragmentation spectra (MS2), signifying a fundamental shift in how we forecast the toxicity of the myriad unidentified HRMS/MS features. The framework leverages streamlined machine learning techniques to predict the compounds bioactivity in numerous toxicity endpoints. The toxicity database encompasses nearly 300 target-specific and 90 cytotoxic endpoints sourced from ToxCast/Tox21 data.
+
+\section{Objectives and Significance}
+
+The primary objective of this research is to enhance the prediction of compound toxicity, particularly in aquatic environments. Our aim is to provide a more accurate and streamlined method for identifying potential environmental hazards, ultimately contributing to the preservation of aquatic ecosystems. By employing customized molecular fingerprints and robust models, we have achieved significant advancements in the prediction of toxic endpoints, making it possible to foresee potential harm with sensitivities exceeding 0.95. Notably, our use of SIRIUS molecular fingerprints and xboost (Extreme Gradient Boosting) models, complemented by the Synthetic Minority Oversampling Technique (SMOTE) for data imbalance, has yielded consistently successful results. Furthermore, we have validated the effectiveness of MLinvitroTox by applying it to MassBank spectra, demonstrating an average balanced accuracy of 0.75 in predicting toxicity.
+
+\section{Thesis Structure}
+
+This thesis is structured to provide a comprehensive understanding of the development, validation, and application of MLinvitroTox. In the following chapters, we will delve into the technical intricacies, showcase the framework's efficacy through validation on real-world data, and present the practical implications of our research in mapping toxicologically relevant pollution in aquatic environments.
+
+\section{The Relevance of the Special Issue}
+
+Our research is part of the special issue titled "Data Science for Advancing Environmental Science, Engineering, and Technology." This special issue emphasizes the critical role of data science in addressing environmental challenges, aligning perfectly with our mission to enhance environmental monitoring through innovative machine learning techniques.
+
+\section{A Glimpse into the Future}
+
+In the subsequent sections, we will explore the intricacies of our groundbreaking MLinvitroTox framework, aiming to provide a solution to the complex issue of identifying and assessing environmental contaminants swiftly and accurately. Our journey begins with a comprehensive overview of the methodology and development process, setting the stage for a deeper exploration of its capabilities and implications in subsequent chapters.
+
+Let us now embark on this exciting journey into the world of MLinvitroTox and its potential to revolutionize our understanding of environmental toxicity, while harnessing the power of high-throughput toxicity prediction through machine learning.
+

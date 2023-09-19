@@ -1,6 +1,5 @@
 import sys
 import os
-print(sys.path)
 
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 sys.path.append(parent_dir)
@@ -23,7 +22,7 @@ fps_df = get_fingerprint_df()
 # Get assay endpoint ids from subset considered for ML
 aeids = get_subset_aeids()['aeid']
 
-for aeid in aeids[:1]:
+for aeid in aeids[10:11]:
 
     # Get assay data
     assay_df = get_assay_df(aeid)

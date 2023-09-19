@@ -89,6 +89,7 @@ def create_instance(instance):
     command = [
         "gcloud", "compute", "instances", "create", instance,
         "--project", get_project(instance), "--zone", get_zone(instance), "--machine-type", MACHINE_TYPE,
+        "--create-disk", "size=10GB",
         f'--metadata-from-file=ssh-keys={SSH_FILE_PATH}'
     ]
     submit_command(command)

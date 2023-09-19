@@ -15,6 +15,8 @@ from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStra
 from sklearn.pipeline import Pipeline
 from xgboost import XGBClassifier
 from xgboost import plot_importance
+from sklearn.decomposition import NMF
+from sklearn.decomposition import PCA
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
     INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH

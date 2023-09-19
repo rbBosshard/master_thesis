@@ -3,7 +3,7 @@ import streamlit as st
 import os
 import plotly.graph_objects as go
 
-from ml.src.pipeline.constants import FILE_FORMAT, METADATA_SUBSET_DIR_PATH, METADATA_ALL_DIR_PATH
+from ml.src.pipeline.constants import FILE_FORMAT, INPUT_ML_DIR_PATH, METADATA_SUBSET_DIR_PATH, METADATA_ALL_DIR_PATH
 
 EXPORT = 0
 
@@ -13,8 +13,27 @@ with st.spinner(f"Loading.."):
     df_all = pd.read_parquet(aeid_chid_presence_matrix_path)
 
     aeid_chid_presence_matrix_path = os.path.join(METADATA_SUBSET_DIR_PATH,
-                                                  f"aeid_compound_presence_matrix_with_fingerprint{FILE_FORMAT}")
+                                                  f"pivot_table{FILE_FORMAT}")
     df_subset = pd.read_parquet(aeid_chid_presence_matrix_path)
+
+    # df_all_merged = pd.DataFrame(0, index=df_all.index, columns=df_all.columns)
+    # df_subset_merged = pd.DataFrame(0, index=df_subset.index, columns=df_subset.columns)
+    # path = os.path.join(INPUT_ML_DIR_PATH, f"{0}{FILE_FORMAT}")
+    # df_merged = pd.read_parquet(path)
+
+    # # Fill the result_matrix with hitcall values from filtered_data
+    # for index, row in df_all.iterrows():
+    #     assay_endpoint = row['assay_endpoint']
+    #     compound = row['compound']
+    #     hitcall = row['hitcall']
+    #     df_all_merged.at[assay_endpoint, compound] = hitcall
+    
+    # for index, row in df_subset.iterrows():
+    #     assay_endpoint = row['assay_endpoint']
+    #     compound = row['compound']
+    #     hitcall = row['hitcall']
+    #     df_subset_merged.at[assay_endpoint, compound] = hitcall
+    
 
     dfs_wrapped = [("All assay endpoints", df_all), ("Subset of all assay endpoints", df_subset)]
     tabs = st.tabs([df_wrapped[0] for df_wrapped in dfs_wrapped])
@@ -25,6 +44,7 @@ with st.spinner(f"Loading.."):
 
     for i, (df_name, df) in enumerate(dfs_wrapped):
         print(i, df_name)
+
         with tabs[i]:
             shape = df.shape
             st.write(f"Number of assay endpoints: {shape[0]}")
@@ -46,21 +66,26 @@ with st.spinner(f"Loading.."):
 
             showscale = not EXPORT
 
-            fig = go.Figure(go.Heatmap(z=df.values, colorscale=colorscale, showscale=showscale,
-                                       colorbar=dict(tickvals=[0, 1], ticktext=["Absent", "Present"])))
+            fig = go.Figure(go.Heatmap(z=df.values, 
+                                    #    colorscale=colorscale,
+                                        showscale=showscale,
+                                       colorbar=dict(tickvals=[0, 1], ticktext=["Absent   ", "Present   "])))
 
-            fig.update_layout(
-                yaxis=dict(autorange="reversed", tickfont=dict(size=60)),  # Adjust label font size
-                xaxis=dict(tickfont=dict(size=60)),  # Hide x-axis tick labels
-            )
-
+            font_size = 60  # Good for 33% zoom in browser (laptop resolution)
             if not EXPORT:
                 fig.update_layout(
                     title=f"Presence matrix",
-                    xaxis_title="Compound Index",
-                    yaxis_title="Assay Endpoint Index",
-
+                    font=dict(size=font_size),
+                    title_font=dict(size=font_size)
                 )
+
+            fig.update_layout(
+                yaxis=dict(autorange="reversed", tickfont=dict(size=font_size//2)),  # Adjust label font size
+                xaxis=dict(tickfont=dict(size=font_size//2)),  # Hide x-axis tick labels
+            )
+
+            fig.update_xaxes(title_text="Compound Index", title_font=dict(size=font_size))
+            fig.update_yaxes(title_text="Assay Endpoint Index", title_font=dict(size=font_size))
 
             st.plotly_chart(fig, use_container_width=True)
 
