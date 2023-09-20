@@ -233,6 +233,32 @@
       \verb https://doi.org/10.1021/acs.est.3c00304
       \endverb
     \endentry
+    \entry{tDistribution}{article}{}
+      \list{publisher}{1}{%
+        {[American Statistical Association, Taylor & Francis, Ltd.]}%
+      }
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{issn}{01621459}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{408}
+      \field{title}{Robust Statistical Modeling Using the t Distribution}
+      \field{urlday}{20}
+      \field{urlmonth}{9}
+      \field{urlyear}{2023}
+      \field{volume}{84}
+      \field{year}{1989}
+      \field{urldateera}{ce}
+      \field{pages}{881\bibrangedash 896}
+      \range{pages}{16}
+      \verb{urlraw}
+      \verb http://www.jstor.org/stable/2290063
+      \endverb
+      \verb{url}
+      \verb http://www.jstor.org/stable/2290063
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
