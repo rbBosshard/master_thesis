@@ -19,6 +19,175 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{chemicaloutlook}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=77e735bae2840b83aacd3c4ad7e795a0}{%
+           family={Programme},
+           familyi={P\bibinitperiod},
+           given={United\bibnamedelimb Nations\bibnamedelima Environment},
+           giveni={U\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{fullhash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{bibnamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authorbibnamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authornamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authorfullhash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Global Chemicals Outlook II - From Legacies to Innovative Solutions: Implementing the 2030 Agenda for Sustainable Development - Synthesis Report}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://wedocs.unep.org/20.500.11822/27651
+      \endverb
+      \verb{url}
+      \verb https://wedocs.unep.org/20.500.11822/27651
+      \endverb
+    \endentry
+    \entry{CAS}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b8ce532dfd4432b279775aeeaab4d317}{%
+           family={Service},
+           familyi={S\bibinitperiod},
+           given={Chemical\bibnamedelima Abstracts},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{fullhash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{bibnamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authorbibnamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authornamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authorfullhash}{b8ce532dfd4432b279775aeeaab4d317}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Source of chemical information located in Columbus, Ohio, United States}
+      \field{note}{https://www.cas.org/support/documentation/cas-databases}
+      \field{title}{Chemical Abstracts Service (CAS) is a division of the American Chemical Society}
+      \field{year}{2023}
+    \endentry
+    \entry{greendeal}{book}{}
+      \name{author}{3}{}{%
+        {{hash=a9bee3ff64e0ef4f06532e455eb1658f}{%
+           family={Commission},
+           familyi={C\bibinitperiod},
+           given={European},
+           giveni={E\bibinitperiod}}}%
+        {{hash=896b581273e82993943cdd2cbbd4d75a}{%
+           family={Research},
+           familyi={R\bibinitperiod},
+           given={Directorate-General},
+           giveni={D\bibinithyphendelim G\bibinitperiod},
+           prefix={for},
+           prefixi={f\bibinitperiod}}}%
+        {{hash=32f28a2c732e178e43a0ceeffa08ab08}{%
+           family={Innovation},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Publications Office of the European Union}%
+      }
+      \strng{namehash}{11f28c4a6dd3649662f693d97138104b}
+      \strng{fullhash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{bibnamehash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{authorbibnamehash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{authornamehash}{11f28c4a6dd3649662f693d97138104b}
+      \strng{authorfullhash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{European Green Deal - Research \& innovation call}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.2777/33415
+      \endverb
+    \endentry
+    \entry{EUChemicalsStrategy}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a9bee3ff64e0ef4f06532e455eb1658f}{%
+           family={Commission},
+           familyi={C\bibinitperiod},
+           given={European},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{fullhash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{bibnamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authorbibnamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authornamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authorfullhash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Communication from the Commission to the European Parliament, the Council, the European Economic and Social Committee and the Committee of the Regions - Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
+      \field{title}{EU Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
+      \endverb
+      \verb{url}
+      \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
+      \endverb
+    \endentry
+    \entry{hollender}{article}{}
+      \name{author}{4}{}{%
+        {{hash=329dc2dcf5e0c1f7c14a16c4f5005590}{%
+           family={Hollender},
+           familyi={H\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42df89dbe4a4b73eb793b6ba0d83cbdc}{%
+           family={Schymanski},
+           familyi={S\bibinitperiod},
+           given={Emma\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=a6348ef06e7107d8fb35f8f01d8a9174}{%
+           family={Singer},
+           familyi={S\bibinitperiod},
+           given={Heinz\bibnamedelima P.},
+           giveni={H\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=09d858c1d5eb938ca2446c824c7c9159}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={P.\bibnamedelimi Lee},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{fullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{bibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authorbibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authornamehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{authorfullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Environmental Science \& Technology}
+      \field{note}{PMID: 28877430}
+      \field{number}{20}
+      \field{title}{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}
+      \field{volume}{51}
+      \field{year}{2017}
+      \field{pages}{11505\bibrangedash 11512}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1021/acs.est.7b02184
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+    \endentry
     \entry{arturi}{article}{}
       \name{author}{2}{}{%
         {{hash=d9486e589741f2285ac45394d29a1118}{%
@@ -38,8 +207,8 @@
       \strng{authorbibnamehash}{ed69dd28badad7e9139f789ebf66f4a6}
       \strng{authornamehash}{ed69dd28badad7e9139f789ebf66f4a6}
       \strng{authorfullhash}{ed69dd28badad7e9139f789ebf66f4a6}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Nontarget high-resolution mass spectrometry screening (NTS HRMS/MS) can detect thousands of organic substances in environmental samples. However, new strategies are needed to focus time-intensive identification efforts on features with the highest potential to cause adverse effects instead of the most abundant ones. To address this challenge, we developed MLinvitroTox, a machine learning framework that uses molecular fingerprints derived from fragmentation spectra (MS2) for a rapid classification of thousands of unidentified HRMS/MS features as toxic/nontoxic based on nearly 400 target-specific and over 100 cytotoxic endpoints from ToxCast/Tox21. Model development results demonstrated that using customized molecular fingerprints and models, over a quarter of toxic endpoints and the majority of the associated mechanistic targets could be accurately predicted with sensitivities exceeding 0.95. Notably, SIRIUS molecular fingerprints and xboost (Extreme Gradient Boosting) models with SMOTE (Synthetic Minority Oversampling Technique) for handling data imbalance were a universally successful and robust modeling configuration. Validation of MLinvitroTox on MassBank spectra showed that toxicity could be predicted from molecular fingerprints derived from MS2 with an average balanced accuracy of 0.75. By applying MLinvitroTox to environmental HRMS/MS data, we confirmed the experimental results obtained with target analysis and narrowed the analytical focus from tens of thousands of detected signals to 783 features linked to potential toxicity, including 109 spectral matches and 30 compounds with confirmed toxic activity.}
