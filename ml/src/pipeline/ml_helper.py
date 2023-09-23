@@ -17,6 +17,8 @@ from xgboost import XGBClassifier
 from xgboost import plot_importance
 from sklearn.decomposition import NMF
 from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
     INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH
@@ -45,7 +47,7 @@ def load_config():
     CONFIG = config
     CONFIG_CLASSIFIERS = config_classifiers
     START_TIME = datetime.now()
-    LOGGER = init_logger()
+    LOGGER = init_logger(CONFIG)
 
     log_config_path = os.path.join(LOG_PATH, '.log', "config.yaml")
     with open(log_config_path, 'w') as file:
@@ -68,7 +70,10 @@ def get_assay_df(aeid):
     LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
     assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
-    assay_df = assay_df[['dsstox_substance_id', 'hitcall']]
+    # omit_compound_mask = assay_df['omit_flag'] == "PASS"
+    # assay_df = assay_df[omit_compound_mask]
+    # LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
+    assay_df = assay_df[['dsstox_substance_id', 'hitcall', 'ac50']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
 
@@ -90,7 +95,7 @@ def merge_assay_and_fingerprint_df(assay_df, fps_df):
 
 
 def split_data(X, y):
-    # Split the data into train and test sets before oversampling to avoid data leakage
+    # Split the data into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(X,
                                                         y,
                                                         test_size=CONFIG['train_test_split_ratio'],
@@ -111,8 +116,6 @@ def split_data(X, y):
 
 def partition_data(df):
     # Select the hitcall as the label based on the activity threshold
-    t = CONFIG['activity_threshold']
-    LOGGER.info(f"Activity threshold: (hitcall >= {t} is active)\n")
 
     # Split off the massbank validation set
     validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
@@ -121,13 +124,22 @@ def partition_data(df):
     training_df, validation_df = df[~validation_filter_condition], df[validation_filter_condition]
 
     # Partition the data into features (X) and labels (y)
-    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitc)
-    X = training_df.iloc[:, 2:]
-    y = (training_df['hitcall'] >= t).astype(int)
+    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
+    X = training_df.iloc[:, 3:]
+    X_massbank_val_from_structure = validation_df.iloc[:, 3:]
+    X_massbank_val_from_sirius = validation_df.iloc[:, 3:]  # Todo: replace with predicted fingerprints
 
-    X_massbank_val_from_structure = validation_df.iloc[:, 2:]
-    X_massbank_val_from_sirius = validation_df.iloc[:, 2:]  # Todo: replace with predicted fingerprints
-    y_massbank_val = (validation_df['hitcall'] >= t).astype(int)
+    if CONFIG['ml_algorithm'] == 'binary_classification':
+        t = CONFIG['activity_threshold']
+        LOGGER.info(f"Activity threshold: (hitcall >= {t} is active)\n")
+        y = (training_df['hitcall'] >= t).astype(int)
+        y_massbank_val = (validation_df['hitcall'] >= t).astype(int)
+    elif CONFIG['ml_algorithm'] == 'hitcall_regression':
+        y = training_df['hitcall']
+        y_massbank_val = validation_df['hitcall']
+    elif CONFIG['ml_algorithm'] == 'ac50_regression':
+        y = training_df['ac50']
+        y_massbank_val = validation_df['ac50']
 
     return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
@@ -135,8 +147,8 @@ def partition_data(df):
 def print_label_count(y, title):
     counts = y.value_counts().values
     LOGGER.info(f"Label Count {title}: {len(y)} datapoints\n"
-          f" with {counts[0]} inactive, {counts[1]} active "
-          f"({counts[1]/sum(counts)*100:.2f}%)\n")
+                f" with {counts[0]} inactive, {counts[1]} active "
+                f"({counts[1] / sum(counts) * 100:.2f}%)\n")
 
 
 def handle_oversampling(X, y):
@@ -175,22 +187,24 @@ def grid_search_cv(X, y, classifier, pipeline):
     # Define the scoring function using F-beta score if specified in the config file
     scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
 
-    grid_search = GridSearchCV(pipeline,
+    grid_search_cv = GridSearchCV(pipeline,
                                param_grid=build_param_grid(classifier['steps']),
                                # outer grid: cross-validation, repeated stratified k-fold
                                cv=RepeatedStratifiedKFold(n_splits=CONFIG['grid_search_cv']['n_splits'],
                                                           n_repeats=CONFIG['grid_search_cv']['n_repeats'],
                                                           random_state=CONFIG['random_state']),
-                               scoring=scorer,
+                               scoring=scorer, # Todo: do not specify and compare with default, estimator scoring
                                n_jobs=CONFIG["grid_search_cv"]["n_jobs"],
                                verbose=CONFIG["grid_search_cv"]["verbose"],
-                               ).fit(X, y)
+                               )
+
+    grid_search_cv_fitted = grid_search_cv.fit(X, y)
 
     LOGGER.info(f"{classifier['name']}: GridSearchCV Results:")
-    best_params = grid_search.best_params_ if grid_search.best_params_ else "default"
-    LOGGER.info(f"Best params:\n{best_params} with mean cross-validated {scorer} score: {grid_search.best_score_}\n")
+    best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
+    LOGGER.info(f"Best params:\n{best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}\n")
 
-    return grid_search
+    return grid_search_cv_fitted
 
 
 def find_optimal_threshold(X, y, best_estimator, input_set):
@@ -256,7 +270,11 @@ def predict_and_report(X, y, classifier, best_estimator, input_set):
 
     labels = [True, False]
     LOGGER.info(f"Classification Report {classifier['name']}:")
-    LOGGER.info(classification_report(y, y_pred, labels=labels))
+    report = classification_report(y, y_pred, labels=labels, output_dict=True)
+    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"report.csv")
+    report_df = pd.DataFrame(report).transpose()
+    report_df.to_csv(path)
+    LOGGER.info(report)
 
     cm = confusion_matrix(y, y_pred, labels=labels)
     tn, fp, fn, tp = cm.ravel()  # Extract values from confusion matrix
@@ -299,9 +317,9 @@ def create_empty_log_file(filename):
         pass
 
 
-def init_logger():
+def init_logger(CONFIG):
     global LOGGER, LOG_PATH
-    LOG_PATH = os.path.join(LOG_DIR_PATH, "runs", f"{get_timestamp(START_TIME)}")
+    LOG_PATH = os.path.join(LOG_DIR_PATH, f"runs_{CONFIG['ml_algorithm']}", f"{get_timestamp(START_TIME)}")
     os.makedirs(LOG_PATH, exist_ok=True)
     os.makedirs(os.path.join(LOG_PATH, '.log'), exist_ok=True)
     log_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.log")
@@ -352,6 +370,6 @@ def save_model(grid_search):
     best_params_path = os.path.join(classifier_log_folder, f"best_params.joblib")
 
     joblib.dump(best_estimator, best_estimator_path, compress=3)
-    joblib.dump(best_params,best_params_path, compress=3)
+    joblib.dump(best_params, best_params_path, compress=3)
 
     LOGGER.info(f"Saved model in {classifier_log_folder}")

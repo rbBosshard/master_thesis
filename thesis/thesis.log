@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  21 SEP 2023 13:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  22 SEP 2023 10:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1208,7 +1208,14 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 104.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
-) (./thesis.aux)
+) (./thesis.aux
+
+LaTeX Warning: Label `sec:molecular_fingerprints' multiply defined.
+
+
+LaTeX Warning: Label `sec:molecular_fingerprints@cref' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
@@ -1303,7 +1310,7 @@ Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
 Package biblatex Info: Reference section=0 on input line 104.
 Package biblatex Info: Reference segment=0 on input line 104.
-<eth-template/ETHlogo.pdf, id=132, 179.67125pt x 45.16875pt>
+<eth-template/ETHlogo.pdf, id=136, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
 Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 114.
@@ -1378,7 +1385,7 @@ Overfull \hbox (0.80743pt too wide) in paragraph at lines 16--17
 \OT1/pplx/m/n/10.95 (-20) (HRM-S/MS), are be-com-ing in-creas-ingly im-por-tant in fields like metabolomics,
  []
 
-<figures/non_target_high_resolution_mass_spectrometry_1.png, id=206, 1392.402pt x 609.477pt>
+<figures/non_target_high_resolution_mass_spectrometry_1.png, id=211, 1392.402pt x 609.477pt>
 File: figures/non_target_high_resolution_mass_spectrometry_1.png Graphic file (type png)
 <use figures/non_target_high_resolution_mass_spectrometry_1.png>
 Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry_1.png  used on input line 20.
@@ -1407,20 +1414,20 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/tcpl.png, id=258, 668.4975pt x 648.021pt>
+<figures/tcpl.png, id=265, 668.4975pt x 648.021pt>
 File: figures/tcpl.png Graphic file (type png)
 <use figures/tcpl.png>
-Package pdftex.def Info: figures/tcpl.png  used on input line 55.
+Package pdftex.def Info: figures/tcpl.png  used on input line 58.
 (pdftex.def)             Requested size: 147.59775pt x 143.06934pt.
-<figures/cnst_hill_gnls.png, id=259, 1210.02063pt x 553.06625pt>
+<figures/cnst_hill_gnls.png, id=266, 1210.02063pt x 553.06625pt>
 File: figures/cnst_hill_gnls.png Graphic file (type png)
 <use figures/cnst_hill_gnls.png>
-Package pdftex.def Info: figures/cnst_hill_gnls.png  used on input line 62.
+Package pdftex.def Info: figures/cnst_hill_gnls.png  used on input line 65.
 (pdftex.def)             Requested size: 202.95113pt x 92.76259pt.
 ) (./chapters/related_work.tex [7] [8 <./figures/tcpl.png> <./figures/cnst_hill_gnls.png>]) (./chapters/material_and_methods.tex [9
 
 ] [10]
-<figures/presence_matrix_all.png, id=290, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_all.png, id=297, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
 Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 11.
@@ -1431,7 +1438,7 @@ LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/presence_matrix_subset.png, id=292, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_subset.png, id=299, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
 Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 22.
@@ -1442,7 +1449,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [11
 
 ]
-<figures/concentration_response_series.png, id=304, 1136.44576pt x 476.37975pt>
+<figures/concentration_response_series.png, id=311, 1136.44576pt x 476.37975pt>
 File: figures/concentration_response_series.png Graphic file (type png)
 <use figures/concentration_response_series.png>
 Package pdftex.def Info: figures/concentration_response_series.png  used on input line 38.
@@ -1451,7 +1458,7 @@ LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 4
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 ) [12 <./figures/presence_matrix_all.png>]
-<figures/concentration_metric_distributions.png, id=315, 1813.77625pt x 453.695pt>
+<figures/concentration_metric_distributions.png, id=322, 1813.77625pt x 453.695pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 60.
@@ -1471,7 +1478,7 @@ Package microtype Info: Character `013' is missing
  [19
 
 ] (./chapters/appendix.tex [20])
-<eth-template/declaration-originality.pdf, id=384, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=391, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 147.
@@ -1480,7 +1487,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 147.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=387, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=394, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 147.
@@ -1520,25 +1527,28 @@ L3 programming layer <2023-08-03>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: E05574DD14660DC60A4E833D5B41C02E;4662.
+(rerunfilecheck)             Checksum: 0A1AF3A97C23A48AC7ADAFC3C828213F;4777.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36770 strings out of 475188
- 682714 string characters out of 5767805
- 1934248 words of memory out of 5000000
- 56964 multiletter control sequences out of 15000+600000
- 626618 words of font info for 481 fonts, out of 8000000 for 9000
+ 36777 strings out of 475188
+ 682788 string characters out of 5767805
+ 1935248 words of memory out of 5000000
+ 56965 multiletter control sequences out of 15000+600000
+ 626812 words of font info for 484 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,125p,1969b,2790s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (27 pages, 3802338 bytes).
+Output written on thesis.pdf (27 pages, 3802952 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 434 compressed objects within 5 object streams
- 92 named destinations out of 1000 (max. 500000)
- 123197 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 538 PDF objects out of 1000 (max. 8388607)
+ 441 compressed objects within 5 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 123205 words of extra memory for PDF output out of 128383 (max. 10000000)
 

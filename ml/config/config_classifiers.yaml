@@ -46,5 +46,17 @@ classifiers:
 #          solver: ['mu']
       - name: XGBClassifier
         args:
-          n_estimators: [100, 150, 200] # default = 100
+          n_estimators: [100] # [100, 150, 200] # default = 100
           tree_method: ['gpu_hist']
+
+#-   name: KNeighborsClassifier
+#    steps:
+##      - name: PCA
+#      # - name: VarianceThreshold
+##      - name: NMF
+##        args:
+##          n_components: [50]
+###          init: ['nndsvd']
+##          beta_loss: ['frobenius', 0.1, 0.8]
+##          solver: ['mu']
+#      - name: KNeighborsClassifier
