@@ -259,6 +259,195 @@
       \verb http://www.jstor.org/stable/2290063
       \endverb
     \endentry
+    \entry{judson2016}{article}{}
+      \name{author}{21}{}{%
+        {{hash=512bc1314e210daba15f3919632611f4}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=af079a909b8a5bc8d37ef705dc9a1ceb}{%
+           family={Houck},
+           familyi={H\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=eafebeabf78884b3477edfeb47686870}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+        {{hash=28a0c8700cb4607630ea9c7e3d88352d}{%
+           family={Richard},
+           familyi={R\bibinitperiod},
+           given={Ann\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=93d9924f7b77779a732d5408e4b8a871}{%
+           family={Knudsen},
+           familyi={K\bibinitperiod},
+           given={Thomas\bibnamedelima B.},
+           giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=c9fab90148bf15a9952a59dc9560e6a4}{%
+           family={Shah},
+           familyi={S\bibinitperiod},
+           given={Imran},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3af329fc1d47ce70f4b5522280bf1c21}{%
+           family={Little},
+           familyi={L\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=83b45107bdc84b7d7640540d6213b7cb}{%
+           family={Wambaugh},
+           familyi={W\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7455d8693e9df2d66cf081f53f35f478}{%
+           family={Woodrow\bibnamedelima Setzer},
+           familyi={W\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=249e6f90fe9bfaf665034a3e4b67b832}{%
+           family={Kothya},
+           familyi={K\bibinitperiod},
+           given={Parth},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e76b2943d04da7128437b1e90de034fc}{%
+           family={Phuong},
+           familyi={P\bibinitperiod},
+           given={Jimmy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5d72eac88a7eeef719253bf8501ca6ac}{%
+           family={Filer},
+           familyi={F\bibinitperiod},
+           given={Dayne},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ac5565dfa3e1fae9cdb66bc4451ffecd}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Doris},
+           giveni={D\bibinitperiod}}}%
+        {{hash=db7743db1f6cab0180c930160992d4d0}{%
+           family={Reif},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a49116f12455817a10a330409a8d2890}{%
+           family={Rotroff},
+           familyi={R\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a2d66295ae9350a8f2f15a815193a6e4}{%
+           family={Kleinstreuer},
+           familyi={K\bibinitperiod},
+           given={Nicole},
+           giveni={N\bibinitperiod}}}%
+        {{hash=bfcb234b18e62296cd6ffa51bbebab2a}{%
+           family={Sipes},
+           familyi={S\bibinitperiod},
+           given={Nisha},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a40fd3e41223df334f82de907c3da843}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Menghang},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6104380e69df48738cbd1195932babee}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Ruili},
+           giveni={R\bibinitperiod}}}%
+        {{hash=22ade563ada0dbcbec1e73b0332156d9}{%
+           family={Crofton},
+           familyi={C\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=53df06686f67f8569c478d2e89005c6d}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={Russell\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9019395a978ebc29580134e3335170f7}
+      \strng{fullhash}{741cca7b33aeed824a9ba1cc1186c197}
+      \strng{bibnamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authorbibnamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authornamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authorfullhash}{741cca7b33aeed824a9ba1cc1186c197}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1096-6080}
+      \field{journaltitle}{Toxicological Sciences}
+      \field{month}{05}
+      \field{number}{2}
+      \field{title}{{Editor's Highlight: Analysis of the Effects of Cell Stress and Cytotoxicity on In Vitro Assay Activity Across a Diverse Chemical and Assay Space}}
+      \field{volume}{152}
+      \field{year}{2016}
+      \field{pages}{323\bibrangedash 339}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1093/toxsci/kfw092
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/toxsci/article-pdf/152/2/323/26290632/kfw092.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/toxsci/kfw092
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/toxsci/kfw092
+      \endverb
+    \endentry
+    \entry{escher2021}{book}{}
+      \name{author}{3}{}{%
+        {{hash=48cb1d8f3ac222a08714604cf83bfc73}{%
+           family={Escher},
+           familyi={E\bibinitperiod},
+           given={Beate},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b5d0e925a96c0522fdd7b0afb5306d87}{%
+           family={Neale},
+           familyi={N\bibinitperiod},
+           given={Peta},
+           giveni={P\bibinitperiod}}}%
+        {{hash=6f87f4b83ee8cc349e65346e2a56ca11}{%
+           family={Leusch},
+           familyi={L\bibinitperiod},
+           given={Frederic},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IWA Publishing}%
+      }
+      \strng{namehash}{586418a1191078ea0ee4d49d5ad037db}
+      \strng{fullhash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{bibnamehash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{authorbibnamehash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{authornamehash}{586418a1191078ea0ee4d49d5ad037db}
+      \strng{authorfullhash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{{The first edition of Bioanalytical Tools in Water Quality Assessment was released in 2012. The field has exploded since and the second edition updates and reviews the application of bioanalytical tools for water quality assessment including surveillance monitoring. The book focuses on applications to water quality assessment ranging from wastewater to drinking water, including recycled water, as well as treatment processes and advanced water treatment. Emerging applications for other environmental matrices are also included. Bioanalytical Tools in Water Quality Assessment, Second Edition, not only demonstrates applications but also fills in the background knowledge in toxicology/ecotoxicology needed to appreciate these applications. Each chapter summarises fundamental material in a targeted way so that information can be applied to better understand the use of bioanalytical tools in water quality assessment.The book can be used by lecturers teaching academic and professional courses and also by risk assessors, regulators, experts, consultants, researchers and managers working in the water sector. It can also be a reference manual for environmental engineers, analytical chemists and toxicologists.Detailed descriptions of dose-response assessment, data reporting, mixture modelling and quality assurance/quality control are complemented by a series of online resources and tools to apply some of the principles and data methods explained in this book. This supplementary information is available at www.ufz.de/bioanalytical-tools.ISBN: 9781789061970 (Paperback)ISBN: 9781789061987 (eBook)}}
+      \field{isbn}{9781789061987}
+      \field{month}{06}
+      \field{title}{{Bioanalytical Tools in Water Quality Assessment}}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.2166/9781789061987
+      \endverb
+      \verb{eprint}
+      \verb https://iwaponline.com/book-pdf/899726/wio9781789061987.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2166/9781789061987
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2166/9781789061987
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
