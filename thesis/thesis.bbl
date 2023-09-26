@@ -233,12 +233,98 @@
       \verb https://doi.org/10.1021/acs.est.3c00304
       \endverb
     \endentry
+    \entry{janela2022}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8480dc318eb7a1533921ef3ee4284a4c}{%
+           family={Janela},
+           familyi={J\bibinitperiod},
+           given={Tiago},
+           giveni={T\bibinitperiod}}}%
+        {{hash=23e45a45159d20c1819d388d4e4df888}{%
+           family={Takeuchi},
+           familyi={T\bibinitperiod},
+           given={Kosuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=47a4bbea95808ce55fc26d9535990987}{%
+           family={Bajorath},
+           familyi={B\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{be17359043bbe2aeec2b15ba377d04a9}
+      \strng{fullhash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{bibnamehash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{authorbibnamehash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{authornamehash}{be17359043bbe2aeec2b15ba377d04a9}
+      \strng{authorfullhash}{018301985c8e5cc60fd72663e45463a8}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1420-3049}
+      \field{journaltitle}{Molecules}
+      \field{number}{7}
+      \field{title}{Introducing a Chemically Intuitive Core-Substituent Fingerprint Designed to Explore Structural Requirements for Effective Similarity Searching and Machine Learning}
+      \field{volume}{27}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3390/molecules27072331
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/1420-3049/27/7/2331
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/1420-3049/27/7/2331
+      \endverb
+    \endentry
+    \entry{ankley2018}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f5672d8250a2ad304d682fe2e05978be}{%
+           family={Ankley},
+           familyi={A\bibinitperiod},
+           given={Gerald\bibnamedelima T.},
+           giveni={G\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=a175907c4d30922f0a6eabae13d8f279}{%
+           family={Edwards},
+           familyi={E\bibinitperiod},
+           given={Stephen\bibnamedelima W.},
+           giveni={S\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{fullhash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{bibnamehash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{authorbibnamehash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{authornamehash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{authorfullhash}{b54270c03ed7e2555428f3565060a7bd}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2468-2020}
+      \field{journaltitle}{Current Opinion in Toxicology}
+      \field{note}{Risk assessment in Toxicology}
+      \field{title}{The adverse outcome pathway: A multifaceted framework supporting 21st century toxicology}
+      \field{volume}{9}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cotox.2018.03.004
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2468202017301420
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2468202017301420
+      \endverb
+      \keyw{Adverse outcome pathway,Chemical assessment,Human health,Environment}
+    \endentry
     \entry{tDistribution}{article}{}
       \list{publisher}{1}{%
         {[American Statistical Association, Taylor & Francis, Ltd.]}%
       }
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{issn}{01621459}
       \field{journaltitle}{Journal of the American Statistical Association}
@@ -373,8 +459,8 @@
       \strng{authorbibnamehash}{9019395a978ebc29580134e3335170f7}
       \strng{authornamehash}{9019395a978ebc29580134e3335170f7}
       \strng{authorfullhash}{741cca7b33aeed824a9ba1cc1186c197}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{1096-6080}

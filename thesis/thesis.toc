@@ -10,33 +10,33 @@
 \contentsline {section}{\numberline {1.6}Thesis Structure}{4}{section.1.6}%
 \contentsline {chapter}{\chapternumberline {2}Background}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}The Evolution of Toxicity Testing}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}InvitroDB v4.1}{6}{section.2.2}%
-\contentsline {section}{\numberline {2.3}tcpl v3.0}{6}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Tcplfit2}{7}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Chemical Target Toxicity vs. Cytotoxicity}{8}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Challenges of HTS data}{9}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Molecular Fingerprints}{9}{section.2.6}%
-\contentsline {chapter}{\chapternumberline {3}Related work}{11}{chapter.3}%
-\contentsline {chapter}{\chapternumberline {4}Material and Methods}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Data Overview}{13}{section.4.1}%
-\contentsline {subsubsection}{Presence Matrix}{13}{section*.6}%
-\contentsline {subsubsection}{Subsetting data}{13}{section*.8}%
-\contentsline {subsubsection}{Concentration-Response Series}{13}{section*.10}%
-\contentsline {section}{\numberline {4.2}Pytcpl}{16}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Pipeline}{16}{subsection.4.2.1}%
-\contentsline {subsubsection}{Data Collection}{17}{section*.13}%
-\contentsline {subsubsection}{Curve Fitting}{17}{section*.14}%
-\contentsline {subsubsection}{Hit Calling}{17}{section*.15}%
-\contentsline {subsection}{\numberline {4.2.2}Curve Surfer}{17}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{17}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{17}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{17}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Regression}{18}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{18}{subsection.4.3.4}%
-\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{19}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Results}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Evaluation}{19}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Discussion}{19}{section.5.3}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion}{20}{chapter.6}%
-\contentsline {chapter}{Bibliography}{21}{section*.17}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{23}{appendix.A}%
+\contentsline {section}{\numberline {2.2}InvitroDB v4.1}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}tcpl v3.0}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Tcplfit2}{8}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Chemical Target Toxicity vs. Cytotoxicity}{11}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Challenges of HTS data}{12}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Molecular Fingerprints}{12}{section.2.6}%
+\contentsline {chapter}{\chapternumberline {3}Related work}{13}{chapter.3}%
+\contentsline {chapter}{\chapternumberline {4}Material and Methods}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Data Overview}{15}{section.4.1}%
+\contentsline {subsubsection}{Presence Matrix}{15}{section*.9}%
+\contentsline {subsubsection}{Subsetting data}{15}{section*.11}%
+\contentsline {subsubsection}{Concentration-Response Series}{15}{section*.13}%
+\contentsline {section}{\numberline {4.2}Pytcpl}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Pipeline}{18}{subsection.4.2.1}%
+\contentsline {subsubsection}{Data Collection}{19}{section*.16}%
+\contentsline {subsubsection}{Curve Fitting}{19}{section*.17}%
+\contentsline {subsubsection}{Hit Calling}{19}{section*.20}%
+\contentsline {subsection}{\numberline {4.2.2}Curve Surfer}{19}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{19}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{19}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{20}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Regression}{20}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{20}{subsection.4.3.4}%
+\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Results}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Discussion}{21}{section.5.3}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{22}{chapter.6}%
+\contentsline {chapter}{Bibliography}{23}{section*.22}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{25}{appendix.A}%
