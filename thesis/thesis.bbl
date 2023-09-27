@@ -534,6 +534,65 @@
       \verb https://doi.org/10.2166/9781789061987
       \endverb
     \endentry
+    \entry{schwarzenbach2006}{article}{}
+      \name{author}{7}{}{%
+        {{hash=544316fcd720d22be33058990af9cc27}{%
+           family={Schwarzenbach},
+           familyi={S\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod}}}%
+        {{hash=abf0d037a7d99ba2b4d49a0750d217ae}{%
+           family={Escher},
+           familyi={E\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bc1e51811458d660d00f99bfbadde009}{%
+           family={Fenner},
+           familyi={F\bibinitperiod},
+           given={Kathrin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6af5644992b5e107c5eacf396b543e51}{%
+           family={Hofstetter},
+           familyi={H\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3ab34db904b7dbbd29c0c325a354a5ab}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={C},
+           giveni={C\bibinitperiod}}}%
+        {{hash=e9ae36598de7df6ed14ff44bb6d4a88d}{%
+           family={Gunten},
+           familyi={G\bibinitperiod},
+           given={Urs},
+           giveni={U\bibinitperiod}}}%
+        {{hash=290674860dee0b88c20e55863c32c1c4}{%
+           family={Wehrli},
+           familyi={W\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{fullhash}{cb90c179d14ea786aef8cb09225299b2}
+      \strng{bibnamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authorbibnamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authornamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authorfullhash}{cb90c179d14ea786aef8cb09225299b2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science (New York, N.Y.)}
+      \field{month}{09}
+      \field{title}{The Challenge of Micropollutants in Aquatic Systems}
+      \field{volume}{313}
+      \field{year}{2006}
+      \field{pages}{1072\bibrangedash 7}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1126/science.1127291
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

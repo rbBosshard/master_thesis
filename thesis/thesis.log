@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  27 SEP 2023 01:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  27 SEP 2023 02:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1419,7 +1419,7 @@ Overfull \hbox (0.80743pt too wide) in paragraph at lines 16--17
 \OT1/pplx/m/n/10.95 (-20) (HRM-S/MS), are be-com-ing in-creas-ingly im-por-tant in fields like metabolomics,
  []
 
-<figures/non_target_high_resolution_mass_spectrometry_1.png, id=216, 1392.402pt x 609.477pt>
+<figures/non_target_high_resolution_mass_spectrometry_1.png, id=218, 1392.402pt x 609.477pt>
 File: figures/non_target_high_resolution_mass_spectrometry_1.png Graphic file (type png)
 <use figures/non_target_high_resolution_mass_spectrometry_1.png>
 Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry_1.png  used on input line 20.
@@ -1438,7 +1438,7 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 32.
  [3]) (./chapters/background.tex [4]
-<figures/fingerprint_schema.png, id=242, 2337.48282pt x 1336.24219pt>
+<figures/fingerprint_schema.png, id=244, 2337.48282pt x 1336.24219pt>
 File: figures/fingerprint_schema.png Graphic file (type png)
 <use figures/fingerprint_schema.png>
 Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 14.
@@ -1446,7 +1446,7 @@ Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 14.
  [5
 
 ]
-<figures/aop.png, id=249, 385.44pt x 204.2832pt>
+<figures/aop.png, id=251, 385.44pt x 204.2832pt>
 File: figures/aop.png Graphic file (type png)
 <use figures/aop.png>
 Package pdftex.def Info: figures/aop.png  used on input line 23.
@@ -1471,18 +1471,18 @@ Overfull \hbox (10.37231pt too wide) in paragraph at lines 77--79
  []
 
 [9]
-<figures/tcpl.png, id=303, 668.4975pt x 648.021pt>
+<figures/tcpl.png, id=305, 668.4975pt x 648.021pt>
 File: figures/tcpl.png Graphic file (type png)
 <use figures/tcpl.png>
 Package pdftex.def Info: figures/tcpl.png  used on input line 110.
 (pdftex.def)             Requested size: 147.59775pt x 143.06934pt.
-<figures/fit_models.png, id=304, 829.59938pt x 594.22pt>
+<figures/fit_models.png, id=306, 829.59938pt x 594.22pt>
 File: figures/fit_models.png Graphic file (type png)
 <use figures/fit_models.png>
 Package pdftex.def Info: figures/fit_models.png  used on input line 117.
 (pdftex.def)             Requested size: 202.95113pt x 145.36302pt.
  [10] [11 <./figures/tcpl.png> <./figures/fit_models.png>]
-<figures/cytotoxicity.png, id=326, 908.39375pt x 623.32875pt>
+<figures/cytotoxicity.png, id=328, 908.39375pt x 623.32875pt>
 File: figures/cytotoxicity.png Graphic file (type png)
 <use figures/cytotoxicity.png>
 Package pdftex.def Info: figures/cytotoxicity.png  used on input line 144.
@@ -1490,7 +1490,7 @@ Package pdftex.def Info: figures/cytotoxicity.png  used on input line 144.
 ) (./chapters/related_work.tex [12 <./figures/cytotoxicity.png>]) (./chapters/material_and_methods.tex [13
 
 ] [14]
-<figures/presence_matrix_all.png, id=347, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_all.png, id=349, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
 Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 11.
@@ -1501,7 +1501,7 @@ LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/presence_matrix_subset.png, id=349, 8198.63pt x 3936.7075pt>
+<figures/presence_matrix_subset.png, id=351, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
 Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 22.
@@ -1512,7 +1512,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [15
 
 ]
-<figures/concentration_response_series.png, id=360, 1136.44576pt x 476.37975pt>
+<figures/concentration_response_series.png, id=362, 1136.44576pt x 476.37975pt>
 File: figures/concentration_response_series.png Graphic file (type png)
 <use figures/concentration_response_series.png>
 Package pdftex.def Info: figures/concentration_response_series.png  used on input line 38.
@@ -1521,7 +1521,7 @@ LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 4
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 ) [16 <./figures/presence_matrix_all.png>]
-<figures/concentration_metric_distributions.png, id=369, 1813.77625pt x 453.695pt>
+<figures/concentration_metric_distributions.png, id=371, 1813.77625pt x 453.695pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 60.
@@ -1549,8 +1549,244 @@ Overfull \hbox (14.68506pt too wide) in paragraph at lines 6--38
  [] 
  []
 
+
+Overfull \hbox (4.40828pt too wide) in paragraph at lines 47--47
+[]|\OT1/pplx/m/n/10.95 (-20) Origin/Usage| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
+[]|\OT1/pplx/m/n/10.95 (+20) Industrial
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+[]|\OT1/pplx/m/n/10.95 (+20) Drinking-water con-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
+[]|\OT1/pplx/m/n/10.95 (+20) Inter-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\OT1/pplx/m/n/10.95 (+20) Petro-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]|\OT1/pplx/m/n/10.95 (+20) BTEX (ben-zene,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
+[]|\OT1/pplx/m/n/10.95 (+20) Industrial
+ []
+
+
+Overfull \hbox (2.37727pt too wide) in paragraph at lines 53--53
+[]|\OT1/pplx/m/n/10.95 (-20) Lubricants| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--53
+[]|\OT1/pplx/m/n/10.95 (+20) PCBs (poly-chlo-ri-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--54
+[]|\OT1/pplx/m/n/10.95 (+20) Polybrominated
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]|\OT1/pplx/m/n/10.95 (+20) Consumer
+ []
+
+
+Overfull \hbox (3.22232pt too wide) in paragraph at lines 55--55
+[]|\OT1/pplx/m/n/10.95 (-20) Detergents| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]|\OT1/pplx/m/n/10.95 (+20) Nonylphenol
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
+\OT1/pplx/m/n/10.95 (+20) for-ma-tion prod-uct
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
+[]|\OT1/pplx/m/n/10.95 (+20) Pharma-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
+[]|\OT1/pplx/m/n/10.95 (+20) Bacterial re-sis-tance,
+ []
+
+
+Overfull \hbox (2.11269pt too wide) in paragraph at lines 57--57
+[]|\OT1/pplx/m/n/10.95 (-20) Hormones| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
+[]|\OT1/pplx/m/n/10.95 (+20) Non-
+ []
+
+
+Overfull \hbox (7.37788pt too wide) in paragraph at lines 59--59
+\OT1/pplx/m/n/10.95 (-20) agricultural
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+[]|\OT1/pplx/m/n/10.95 (+20) Geogenic/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+\OT1/pplx/m/n/10.95 (+20) Nat-u-ral
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+[]|\OT1/pplx/m/n/10.95 (+20) Heavy
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+[]|\OT1/pplx/m/n/10.95 (+20) Lead, cad-mium,
+ []
+
+
+Overfull \hbox (1.4732pt too wide) in paragraph at lines 61--61
+[]|\OT1/pplx/m/n/10.95 (-20) Inorganics| 
+ []
+
+
+Underfull \hbox (badness 5756) in paragraph at lines 61--61
+[]|\OT1/pplx/m/n/10.95 (+20) Arsenic, se-le-nium,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--63
+[]|\OT1/pplx/m/n/10.95 (+20) Risks for hu-man
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--63
+\OT1/pplx/m/n/10.95 (+20) health, Drinking-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 63--63
+[]|\OT1/pplx/m/n/10.95 (+20) Geosmin,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--64
+[]|\OT1/pplx/m/n/10.95 (+20) Human
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--64
+\OT1/pplx/m/n/10.95 (+20) Hor-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\OT1/pplx/m/n/10.95 (-12) Disinfection/
+ []
+
+
+Overfull \hbox (9.1807pt too wide) in paragraph at lines 65--65
+[]|\OT1/pplx/m/n/10.95 (-20) Disinfection
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\OT1/pplx/m/n/10.95 (+20) by-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\OT1/pplx/m/n/10.95 (+20) Trihalomethanes,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\OT1/pplx/m/n/10.95 (+20) haloacetic acids,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\OT1/pplx/m/n/10.95 (+20) Drinking-
+ []
+
+
+Overfull \hbox (10.82018pt too wide) in paragraph at lines 66--66
+[]|\OT1/pplx/m/n/10.95 (-20) Transformation
+ []
+
+
+Overfull \hbox (7.013pt too wide) in paragraph at lines 66--66
+[]|\OT1/pplx/m/n/10.95 (-20) Metabolites
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--66
+\OT1/pplx/m/n/10.95 (+20) from all
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--66
+[]|\OT1/pplx/m/n/10.95 (+20) Metabolites of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--66
+\OT1/pplx/m/n/10.95 (+20) per-flu-o-ri-nated
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+[]|\OT1/pplx/m/n/10.95 (+20) Bioaccumulation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+[]|\OT1/pplx/m/n/10.95 (+20) Chloroacetanilide
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+\OT1/pplx/m/n/10.95 (+20) her-bi-cide metabo-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
+[]|\OT1/pplx/m/n/10.95 (+20) Drinking-
+ []
+
+
+Overfull \hbox (0.51575pt too wide) in paragraph at lines 45--71
+[][]
+ []
+
+
+LaTeX Warning: Float too large for page by 36.99968pt on input line 71.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 )
-<eth-template/declaration-originality.pdf, id=462, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=468, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 149.
@@ -1559,7 +1795,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 149.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=465, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=471, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 149.
@@ -1587,7 +1823,7 @@ Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used o
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
- [27]
+ [27] [28]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -1610,18 +1846,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37170 strings out of 475188
- 691036 string characters out of 5767805
- 1933248 words of memory out of 5000000
- 57280 multiletter control sequences out of 15000+600000
+ 37180 strings out of 475188
+ 691352 string characters out of 5767805
+ 1941248 words of memory out of 5000000
+ 57287 multiletter control sequences out of 15000+600000
  629328 words of font info for 506 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,125p,1969b,2761s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (32 pages, 4051973 bytes).
+Output written on thesis.pdf (33 pages, 4055191 bytes).
 PDF statistics:
- 620 PDF objects out of 1000 (max. 8388607)
- 509 compressed objects within 6 object streams
- 115 named destinations out of 1000 (max. 500000)
+ 630 PDF objects out of 1000 (max. 8388607)
+ 517 compressed objects within 6 object streams
+ 118 named destinations out of 1000 (max. 500000)
  129372 words of extra memory for PDF output out of 154059 (max. 10000000)
 
