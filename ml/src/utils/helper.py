@@ -96,6 +96,7 @@ def compute_compounds_intersection(directory, compounds, compounds_with_zero_cou
 
 def csv_to_parquet_converter():
     print("Preprocess fingerprint from structure input file")
+
     src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}.csv")
     dest_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
 
@@ -108,6 +109,7 @@ def csv_to_parquet_converter():
     df = pd.DataFrame(data=data, index=index, columns=columns).reset_index()
     df = df.rename(columns={"index": "dsstox_substance_id"})
     df.to_parquet(dest_path, compression='gzip')
+    df.sample(n=100, replace=False).to_csv(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"test_sample.csv"), index=False)
 
     unique_chemicals = df['dsstox_substance_id'].unique()
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'w') as f:

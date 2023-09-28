@@ -22,7 +22,7 @@ fps_df = get_fingerprint_df()
 # Get assay endpoint ids from subset considered for ML
 aeids = get_subset_aeids()['aeid']
 
-for aeid in [108, 972]: #aeids[392:]:
+for aeid in aeids[392:]:
 
     # Get assay data
     assay_df = get_assay_df(aeid)

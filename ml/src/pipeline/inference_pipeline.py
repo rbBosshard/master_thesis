@@ -2,18 +2,15 @@ import os
 import pandas as pd
 from datetime import datetime
 
-from ml.src.pipeline.constants import LOG_DIR_PATH
+from ml.src.pipeline.constants import LOG_DIR_PATH, METADATA_SUBSET_DIR_PATH, FILE_FORMAT
 
-MOST_RECENT = 0
+MOST_RECENT = 1
 TARGET_RUN = "2023-09-11_11-32-31"
 
 algo = "binary_classification"
-logs_folder = os.path.join(LOG_DIR_PATH, f"runs_{algo}")
-subfolders = [f for f in os.listdir(logs_folder)]
+path = os.path.join(METADATA_SUBSET_DIR_PATH, f"model_paths{algo}{FILE_FORMAT}")
+model_paths = pd.read_parquet(path)
 
-
-def folder_name_to_datetime(folder_name):
-    return datetime.strptime(folder_name, '%Y-%m-%d_%H-%M-%S')
 
 
 sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)

@@ -57,8 +57,12 @@ for aeid in os.listdir(target_run_folder_path):
 
 precision_vs_recall_validation_results = pd.DataFrame(precision_vs_recall_validation_results)
 path = os.path.join(METADATA_SUBSET_DIR_PATH, f"precision_vs_recall_validation_results_{algo}{FILE_FORMAT}")
-precision_vs_recall_validation_results.to_parquet(path)
+precision_vs_recall_validation_results.to_parquet(path, compression='gzip')
 
+
+model_paths = pd.DataFrame(model_paths.items(), columns=['aeid', 'model_path'])
+path = os.path.join(METADATA_SUBSET_DIR_PATH, f"model_paths{algo}{FILE_FORMAT}")
+model_paths.to_parquet(path, compression='gzip')
 
 print("Done")
 
