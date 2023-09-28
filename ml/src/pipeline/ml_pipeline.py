@@ -22,7 +22,7 @@ fps_df = get_fingerprint_df()
 # Get assay endpoint ids from subset considered for ML
 aeids = get_subset_aeids()['aeid']
 
-for aeid in aeids[0:1]:
+for aeid in [108, 972]: #aeids[392:]:
 
     # Get assay data
     assay_df = get_assay_df(aeid)
@@ -65,7 +65,7 @@ for aeid in aeids[0:1]:
 
             # Predict on the Massbank validation set with the best estimator (X_val, y_val is unseen)
             predict_and_report(X_massbank_val_from_structure, y_massbank_val, classifier, best_estimator, "massbank_validation_from_structure")
-            predict_and_report(X_massbank_val_from_sirius, y_massbank_val, classifier, best_estimator, "massbank_validation_from_sirius")
+            # predict_and_report(X_massbank_val_from_sirius, y_massbank_val, classifier, best_estimator, "massbank_validation_from_sirius")
 
             elapsed = round((datetime.now() - start_time).total_seconds(), 2)
             LOGGER.info(f"Done {classifier['name']} >> {elapsed} seconds.\n{'_' * 75}\n\n")
