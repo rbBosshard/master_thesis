@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  28 SEP 2023 16:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  29 SEP 2023 23:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1220,30 +1220,30 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 107.
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 108.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 107.
-LaTeX Font Info:    ... okay on input line 107.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
  (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count555
@@ -1273,31 +1273,31 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )) (c:/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 107.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 108.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 107.
+Package hyperref Info: Link coloring ON on input line 108.
  (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
 
 \c@lstlisting=\count561
-LaTeX Info: Redefining \microtypecontext on input line 107.
-Package microtype Info: Applying patch `item' on input line 107.
-Package microtype Info: Applying patch `toc' on input line 107.
-Package microtype Info: Applying patch `eqnum' on input line 107.
-Package microtype Info: Applying patch `footnote' on input line 107.
-Package microtype Info: Applying patch `verbatim' on input line 107.
+LaTeX Info: Redefining \microtypecontext on input line 108.
+Package microtype Info: Applying patch `item' on input line 108.
+Package microtype Info: Applying patch `toc' on input line 108.
+Package microtype Info: Applying patch `eqnum' on input line 108.
+Package microtype Info: Applying patch `footnote' on input line 108.
+Package microtype Info: Applying patch `verbatim' on input line 108.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 107.
+LaTeX Info: Redefining \showhyphens on input line 108.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1317,12 +1317,12 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 107.
-Package biblatex Info: Reference segment=0 on input line 107.
-<eth-template/ETHlogo.pdf, id=44, 179.67125pt x 45.16875pt>
+Package biblatex Info: Reference section=0 on input line 108.
+Package biblatex Info: Reference segment=0 on input line 108.
+<eth-template/ETHlogo.pdf, id=76, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
-Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 117.
+Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 118.
 (pdftex.def)             Requested size: 179.67079pt x 45.16862pt.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -1381,73 +1381,136 @@ File: uesvect.fd
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.130 
+l.131 
        [1
 
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./chapters/background.tex
-<figures/fingerprint_schema.png, id=70, 2337.48282pt x 1336.24219pt>
-File: figures/fingerprint_schema.png Graphic file (type png)
-<use figures/fingerprint_schema.png>
-Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 14.
-(pdftex.def)             Requested size: 369.0pt x 210.9282pt.
- [1
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./chapters/background.tex [1
 
 
 ]
-<figures/aop.png, id=79, 385.44pt x 204.2832pt>
-File: figures/aop.png Graphic file (type png)
-<use figures/aop.png>
-Package pdftex.def Info: figures/aop.png  used on input line 23.
-(pdftex.def)             Requested size: 369.0pt x 195.57036pt.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 31.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 31.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 31.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 31.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 31.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 31.
+<figures/fingerprint_schema.png, id=116, 2337.48282pt x 1336.24219pt>
+File: figures/fingerprint_schema.png Graphic file (type png)
+<use figures/fingerprint_schema.png>
+Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 16.
+(pdftex.def)             Requested size: 369.0pt x 210.9282pt.
+
+
+Class memoir Warning: The material used in the headers is too large
+(27.2pt) for the given head height (13.6pt), it is recommended to
+either increase the head height or redesign the header
+(in both cases you will find help in the memoir manual). on input line 22.
+
+
+Overfull \vbox (13.59999pt too high) has occurred while \output is active []
+
  [2 <./figures/fingerprint_schema.png>]
+<figures/aop2.png, id=131, 963.6pt x 535.236pt>
+File: figures/aop2.png Graphic file (type png)
+<use figures/aop2.png>
+Package pdftex.def Info: figures/aop2.png  used on input line 25.
+(pdftex.def)             Requested size: 369.0pt x 204.95985pt.
+ [3 <./figures/aop2.png>]
+<figures/cytotoxicity.png, id=146, 908.39375pt x 623.32875pt>
+File: figures/cytotoxicity.png Graphic file (type png)
+<use figures/cytotoxicity.png>
+Package pdftex.def Info: figures/cytotoxicity.png  used on input line 48.
+(pdftex.def)             Requested size: 184.5pt x 126.59431pt.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 56.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 56.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 56.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 56.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 56.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 56.
+ [4 <./figures/cytotoxicity.png>]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
+Overfull \hbox (23.03268pt too wide) in paragraph at lines 65--66
+[]\OT1/pplx/m/n/10.95 (-20) Each compound-assay dataset in-volves the col-lec-tion of the re-spec-tive \OT1/pplx/m/it/10.95 (-20) concentration-
+ []
 
-LaTeX Warning: Reference `chap:introduction' on page 3 undefined on input line 38.
+[5]
+<figures/concentration_response_series.png, id=183, 1136.44576pt x 476.37975pt>
+File: figures/concentration_response_series.png Graphic file (type png)
+<use figures/concentration_response_series.png>
+Package pdftex.def Info: figures/concentration_response_series.png  used on input line 82.
+(pdftex.def)             Requested size: 369.0pt x 154.6762pt.
+LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 83.
+LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 90.
+ (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
+File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
+) [6 <./figures/concentration_response_series.png>]
+<figures/concentration_metric_distributions.png, id=194, 1813.77625pt x 453.695pt>
+File: figures/concentration_metric_distributions.png Graphic file (type png)
+<use figures/concentration_metric_distributions.png>
+Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 103.
+(pdftex.def)             Requested size: 369.0pt x 92.30194pt.
 
-[3 <./figures/aop.png>] [4] [5]
-<figures/tcpl.png, id=134, 668.4975pt x 648.021pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7 <./figures/concentration_metric_distributions.png>] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
+
+ []
+
+<figures/tcpl.png, id=217, 668.4975pt x 648.021pt>
 File: figures/tcpl.png Graphic file (type png)
 <use figures/tcpl.png>
-Package pdftex.def Info: figures/tcpl.png  used on input line 108.
+Package pdftex.def Info: figures/tcpl.png  used on input line 182.
 (pdftex.def)             Requested size: 147.59775pt x 143.06934pt.
-<figures/fit_models.png, id=135, 829.59938pt x 594.22pt>
+<figures/fit_models.png, id=218, 829.59938pt x 594.22pt>
 File: figures/fit_models.png Graphic file (type png)
 <use figures/fit_models.png>
-Package pdftex.def Info: figures/fit_models.png  used on input line 114.
+Package pdftex.def Info: figures/fit_models.png  used on input line 188.
 (pdftex.def)             Requested size: 202.95113pt x 145.36302pt.
- [6] [7 <./figures/tcpl.png> <./figures/fit_models.png>]
-<figures/cytotoxicity.png, id=155, 908.39375pt x 623.32875pt>
-File: figures/cytotoxicity.png Graphic file (type png)
-<use figures/cytotoxicity.png>
-Package pdftex.def Info: figures/cytotoxicity.png  used on input line 138.
-(pdftex.def)             Requested size: 184.5pt x 126.59431pt.
-) [8 <./figures/cytotoxicity.png>]
+) (./chapters/material_and_methods.tex [9] [10 <./figures/tcpl.png> <./figures/fit_models.png>]
+<figures/presence_matrix_all.png, id=237, 8198.63pt x 3936.7075pt>
+File: figures/presence_matrix_all.png Graphic file (type png)
+<use figures/presence_matrix_all.png>
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 11.
+(pdftex.def)             Requested size: 369.0pt x 177.1442pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/presence_matrix_subset.png, id=239, 8198.63pt x 3936.7075pt>
+File: figures/presence_matrix_subset.png Graphic file (type png)
+<use figures/presence_matrix_subset.png>
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 22.
+(pdftex.def)             Requested size: 369.0pt x 177.1442pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11
+
+] [12 <./figures/presence_matrix_all.png>] [13 <./figures/presence_matrix_subset.png>]) [14]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
+ [15
+
+]
+
+Class memoir Warning: The material used in the headers is too large
+(27.2pt) for the given head height (13.6pt), it is recommended to
+either increase the head height or redesign the header
+(in both cases you will find help in the memoir manual). on input line 153.
+
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
- [9
-
-]
+[16]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -1456,29 +1519,25 @@ Package microtype Info: Character `013' is missing
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 10380ED2C80C868828DCADFA314D731A;1454.
+(rerunfilecheck)             Checksum: D3D6069D3F50C2A144D170D7631255D7;2800.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36740 strings out of 475188
- 682249 string characters out of 5767805
- 1933248 words of memory out of 5000000
- 57087 multiletter control sequences out of 15000+600000
- 615716 words of font info for 408 fonts, out of 8000000 for 9000
+ 37000 strings out of 475188
+ 686730 string characters out of 5767805
+ 1934248 words of memory out of 5000000
+ 57182 multiletter control sequences out of 15000+600000
+ 626799 words of font info for 497 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,16n,125p,1764b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (11 pages, 2168162 bytes).
+ 80i,16n,125p,1764b,2193s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on thesis.pdf (18 pages, 8212402 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 106607 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 414 PDF objects out of 1000 (max. 8388607)
+ 334 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 118979 words of extra memory for PDF output out of 128383 (max. 10000000)
 

@@ -63,72 +63,227 @@
       \verb https://www.mdpi.com/1420-3049/27/7/2331
       \endverb
     \endentry
-    \entry{ankley2018}{article}{}
-      \name{author}{2}{}{%
-        {{hash=f5672d8250a2ad304d682fe2e05978be}{%
-           family={Ankley},
+    \entry{bell2018}{article}{}
+      \name{author}{24}{}{%
+        {{hash=591300d366d7edb120795966f7d6af19}{%
+           family={Bell},
+           familyi={B\bibinitperiod},
+           given={Shannon\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=a74d0a00dcc820adfe2276c28f2f2ddc}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Xiaoqing},
+           giveni={X\bibinitperiod}}}%
+        {{hash=24bbd85f38366aa032e9fe3caf8481fc}{%
+           family={Wambaugh},
+           familyi={W\bibinitperiod},
+           given={John\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=4a35b3da89c09763764f2168247fee04}{%
+           family={Allen},
            familyi={A\bibinitperiod},
-           given={Gerald\bibnamedelima T.},
-           giveni={G\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
-        {{hash=a175907c4d30922f0a6eabae13d8f279}{%
-           family={Edwards},
-           familyi={E\bibinitperiod},
-           given={Stephen\bibnamedelima W.},
-           giveni={S\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+           given={David\bibnamedelima G.},
+           giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=863d754f1487eb6272ee6dab8087ccf6}{%
+           family={Bartels},
+           familyi={B\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2df7b40394a27cbc87c8740972b5a562}{%
+           family={Brouwer},
+           familyi={B\bibinitperiod},
+           given={Kim\bibnamedelima L.R.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=7b71f07eda77b4c7b20665895c8925f5}{%
+           family={Casey},
+           familyi={C\bibinitperiod},
+           given={Warren\bibnamedelima M.},
+           giveni={W\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=415428586fc6b8c31df69ca23318fdac}{%
+           family={Choksi},
+           familyi={C\bibinitperiod},
+           given={Neepa},
+           giveni={N\bibinitperiod}}}%
+        {{hash=01afb822104dd3ca7f90dc83979f10e9}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Stephen\bibnamedelima S.},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=9d82cd3f83c0d9aa0cd002534e7c4896}{%
+           family={Fraczkiewicz},
+           familyi={F\bibinitperiod},
+           given={Grazyna},
+           giveni={G\bibinitperiod}}}%
+        {{hash=0a65d5ff16d638aee86aa10d15352fed}{%
+           family={Jarabek},
+           familyi={J\bibinitperiod},
+           given={Annie\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=704b08f5a6dfa9cffd8bd5def307b222}{%
+           family={Ke},
+           familyi={K\bibinitperiod},
+           given={Alice},
+           giveni={A\bibinitperiod}}}%
+        {{hash=de11b2d1d58d8c1de026a341219a9f05}{%
+           family={Lumen},
+           familyi={L\bibinitperiod},
+           given={Annie},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cefa943433668f2b22114b0b769ded88}{%
+           family={Lynn},
+           familyi={L\bibinitperiod},
+           given={Scott\bibnamedelima G.},
+           giveni={S\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=0aed9a14117608106c4ee9131a94ca5f}{%
+           family={Paini},
+           familyi={P\bibinitperiod},
+           given={Alicia},
+           giveni={A\bibinitperiod}}}%
+        {{hash=587fbe545560967198d8bd0e666dd93b}{%
+           family={Price},
+           familyi={P\bibinitperiod},
+           given={Paul\bibnamedelima S.},
+           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=caa0e6781fc87ada9e6eef1579e521c9}{%
+           family={Ring},
+           familyi={R\bibinitperiod},
+           given={Caroline},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8d4762a7ebd4b50d9d9e40acdfa33bb4}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Ted\bibnamedelima W.},
+           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=2bb354303f29e74cc53427e9ceac01a7}{%
+           family={Sipes},
+           familyi={S\bibinitperiod},
+           given={Nisha\bibnamedelima S.},
+           giveni={N\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=84872dab3bed217ed7eca95e589c9af1}{%
+           family={Sprankle},
+           familyi={S\bibinitperiod},
+           given={Catherine\bibnamedelima S.},
+           giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4c19fc45d29fb78b7d73a64f3877ef60}{%
+           family={Strickland},
+           familyi={S\bibinitperiod},
+           given={Judy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f48865cc95182a3836f529e4b71647c4}{%
+           family={Troutman},
+           familyi={T\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=71220d339048303a3da6c08a736bd818}{%
+           family={Wetmore},
+           familyi={W\bibinitperiod},
+           given={Barbara\bibnamedelima A.},
+           giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8b1838ad70937ae4147b9d73272edf4e}{%
+           family={Kleinstreuer},
+           familyi={K\bibinitperiod},
+           given={Nicole\bibnamedelima C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
       }
-      \strng{namehash}{b54270c03ed7e2555428f3565060a7bd}
-      \strng{fullhash}{b54270c03ed7e2555428f3565060a7bd}
-      \strng{bibnamehash}{b54270c03ed7e2555428f3565060a7bd}
-      \strng{authorbibnamehash}{b54270c03ed7e2555428f3565060a7bd}
-      \strng{authornamehash}{b54270c03ed7e2555428f3565060a7bd}
-      \strng{authorfullhash}{b54270c03ed7e2555428f3565060a7bd}
+      \strng{namehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{fullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
+      \strng{bibnamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authorbibnamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authornamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authorfullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
       \field{sortinit}{3}
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{2468-2020}
-      \field{journaltitle}{Current Opinion in Toxicology}
-      \field{note}{Risk assessment in Toxicology}
-      \field{title}{The adverse outcome pathway: A multifaceted framework supporting 21st century toxicology}
-      \field{volume}{9}
+      \field{issn}{0887-2333}
+      \field{journaltitle}{Toxicology in Vitro}
+      \field{title}{In vitro to in vivo extrapolation for high throughput prioritization and decision making}
+      \field{volume}{47}
       \field{year}{2018}
-      \field{pages}{1\bibrangedash 7}
-      \range{pages}{7}
+      \field{pages}{213\bibrangedash 227}
+      \range{pages}{15}
       \verb{doi}
-      \verb https://doi.org/10.1016/j.cotox.2018.03.004
+      \verb https://doi.org/10.1016/j.tiv.2017.11.016
       \endverb
       \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S2468202017301420
+      \verb https://www.sciencedirect.com/science/article/pii/S0887233317303661
       \endverb
       \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S2468202017301420
+      \verb https://www.sciencedirect.com/science/article/pii/S0887233317303661
       \endverb
-      \keyw{Adverse outcome pathway,Chemical assessment,Human health,Environment}
+      \keyw{IVIVE,High throughput testing,Toxicity testing,Toxicokinetic,Computational toxicology,Risk assessment}
     \endentry
-    \entry{tDistribution}{article}{}
-      \list{publisher}{1}{%
-        {[American Statistical Association, Taylor & Francis, Ltd.]}%
+    \entry{nymark2021}{article}{}
+      \name{author}{10}{}{%
+        {{hash=752f055e59183352aafb130b0807f868}{%
+           family={Nymark},
+           familyi={N\bibinitperiod},
+           given={Penny},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b2cdf5d3d9b0c9b1a7cbdad63d978a18}{%
+           family={Sachana},
+           familyi={S\bibinitperiod},
+           given={Magdalini},
+           giveni={M\bibinitperiod}}}%
+        {{hash=685b29f99163373e667980bcbf346065}{%
+           family={Leite},
+           familyi={L\bibinitperiod},
+           given={Sofia},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ab8daed62d408039c3b16cea7f634541}{%
+           family={Sund},
+           familyi={S\bibinitperiod},
+           given={Jukka},
+           giveni={J\bibinitperiod}}}%
+        {{hash=be3ad74c7b329876a5328516753bf8b0}{%
+           family={Krebs},
+           familyi={K\bibinitperiod},
+           given={Catharine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=88ca3069b9e5c92b068066f4358fe156}{%
+           family={Sullivan},
+           familyi={S\bibinitperiod},
+           given={Kristie},
+           giveni={K\bibinitperiod}}}%
+        {{hash=252e05bd7a6dc9fd14f636218d4d379c}{%
+           family={Edwards},
+           familyi={E\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=de69220ab78321d199403486459c3b92}{%
+           family={Viviani},
+           familyi={V\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=86db6131befda518390da15cc6407552}{%
+           family={Willett},
+           familyi={W\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=236d9e757ba3ee79bc59be214c7a2b52}{%
+           family={Landesmann},
+           familyi={L\bibinitperiod},
+           given={Brigitte},
+           giveni={B\bibinitperiod}}}%
       }
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \strng{namehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{fullhash}{089feaf1159589a1646240336ea9f81b}
+      \strng{bibnamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authorbibnamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authornamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authorfullhash}{089feaf1159589a1646240336ea9f81b}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{01621459}
-      \field{journaltitle}{Journal of the American Statistical Association}
-      \field{number}{408}
-      \field{title}{Robust Statistical Modeling Using the t Distribution}
-      \field{urlday}{20}
-      \field{urlmonth}{9}
-      \field{urlyear}{2023}
-      \field{volume}{84}
-      \field{year}{1989}
-      \field{urldateera}{ce}
-      \field{pages}{881\bibrangedash 896}
-      \range{pages}{16}
-      \verb{urlraw}
-      \verb http://www.jstor.org/stable/2290063
-      \endverb
-      \verb{url}
-      \verb http://www.jstor.org/stable/2290063
+      \field{journaltitle}{Frontiers in Public Health}
+      \field{month}{05}
+      \field{title}{Systematic Organization of COVID-19 Data Supported by the Adverse Outcome Pathway Framework}
+      \field{volume}{9}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.3389/fpubh.2021.638605
       \endverb
     \endentry
     \entry{judson2016}{article}{}
@@ -318,6 +473,105 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.2166/9781789061987
+      \endverb
+    \endentry
+    \entry{sheffield2021}{article}{}
+      \name{author}{5}{}{%
+        {{hash=1e32be9edc639536a3b58506be5831e1}{%
+           family={Sheffield},
+           familyi={S\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c798fb3664a992209cf1686c2651ae55}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=119053d246da278427fdcc2b4f14e15a}{%
+           family={Davidson},
+           familyi={D\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod}}}%
+        {{hash=312a4d038e505cdaef44f3000868d3e0}{%
+           family={Friedman},
+           familyi={F\bibinitperiod},
+           given={Katie\bibnamedelima Paul},
+           giveni={K\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=512bc1314e210daba15f3919632611f4}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{50bc9429c78c55b11ac20f857477d6e1}
+      \strng{fullhash}{d088baefaae41aaf11c2278637df3b93}
+      \strng{bibnamehash}{d088baefaae41aaf11c2278637df3b93}
+      \strng{authorbibnamehash}{d088baefaae41aaf11c2278637df3b93}
+      \strng{authornamehash}{50bc9429c78c55b11ac20f857477d6e1}
+      \strng{authorfullhash}{d088baefaae41aaf11c2278637df3b93}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{{Many applications of chemical screening are performed in concentration or dose–response mode, and it is necessary to extract appropriate parameters, including whether the chemical/assay pair is active and if so, what are concentrations where activity is seen. Typically, multiple mathematical models or curve shapes are tested against the data to assess the best fit. There are several commercial programs used for this purpose as well as open-source libraries. A widely used system for managing high-throughput screening (HTS) concentration–response data is tcpl (ToxCast Pipeline). The current implementation of tcpl has the concentration–response modeling code tightly integrated with the data management and databasing aspects of HTS data processing. Tcplfit2 is a stand-alone version of the curve-fitting and hitcalling core of tcpl that has been extended to include a large number of standard curve classes and to use benchmark dose modeling. This package will be useful for HTS concentration–response data such as high-throughput whole genome transcriptomics.tcplfit2 is written in R and is available from CRAN.}}
+      \field{issn}{1367-4803}
+      \field{journaltitle}{Bioinformatics}
+      \field{month}{11}
+      \field{number}{4}
+      \field{title}{{tcplfit2: an R-language general purpose concentration–response modeling package}}
+      \field{volume}{38}
+      \field{year}{2021}
+      \field{pages}{1157\bibrangedash 1158}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1093/bioinformatics/btab779
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/bioinformatics/article-pdf/38/4/1157/50422999/btab779.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/bioinformatics/btab779
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/bioinformatics/btab779
+      \endverb
+    \endentry
+    \entry{tcplv3.0}{manual}{}
+      \name{author}{2}{}{%
+        {{hash=23239d6d2e19d79f03fa49db8699f664}{%
+           family={Computational\bibnamedelima Toxicology},
+           familyi={C\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Center},
+           giveni={C\bibinitperiod},
+           prefix={for},
+           prefixi={f\bibinitperiod}}}%
+        {{hash=0fcb60d4b1909b5765f1c1003ff5caaa}{%
+           family={Exposure},
+           familyi={E\bibinitperiod},
+           given={US\bibnamedelima EPA},
+           giveni={U\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {CRAN}%
+      }
+      \strng{namehash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \strng{fullhash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \strng{bibnamehash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \strng{authorbibnamehash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \strng{authornamehash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \strng{authorfullhash}{6cfeeb952dc2af7b072a27eb8a532804}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{R package vignette for the tcpl package v3.0}
+      \field{title}{tcpl v3.0 Data Processing}
+      \field{year}{2023}
+      \verb{urlraw}
+      \verb https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html
+      \endverb
+      \verb{url}
+      \verb https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html
       \endverb
     \endentry
   \enddatalist
