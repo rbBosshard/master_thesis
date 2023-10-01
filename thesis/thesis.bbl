@@ -193,60 +193,6 @@
       \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
       \endverb
     \endentry
-    \entry{hollender}{article}{}
-      \name{author}{4}{}{%
-        {{hash=329dc2dcf5e0c1f7c14a16c4f5005590}{%
-           family={Hollender},
-           familyi={H\bibinitperiod},
-           given={Juliane},
-           giveni={J\bibinitperiod}}}%
-        {{hash=42df89dbe4a4b73eb793b6ba0d83cbdc}{%
-           family={Schymanski},
-           familyi={S\bibinitperiod},
-           given={Emma\bibnamedelima L.},
-           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
-        {{hash=a6348ef06e7107d8fb35f8f01d8a9174}{%
-           family={Singer},
-           familyi={S\bibinitperiod},
-           given={Heinz\bibnamedelima P.},
-           giveni={H\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-        {{hash=09d858c1d5eb938ca2446c824c7c9159}{%
-           family={Ferguson},
-           familyi={F\bibinitperiod},
-           given={P.\bibnamedelimi Lee},
-           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
-      }
-      \strng{namehash}{525a284aa9f413729e3fb66494225dd4}
-      \strng{fullhash}{fad096f6f8a8848b21305b23cf86bb12}
-      \strng{bibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
-      \strng{authorbibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
-      \strng{authornamehash}{525a284aa9f413729e3fb66494225dd4}
-      \strng{authorfullhash}{fad096f6f8a8848b21305b23cf86bb12}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Environmental Science \& Technology}
-      \field{note}{PMID: 28877430}
-      \field{number}{20}
-      \field{title}{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}
-      \field{volume}{51}
-      \field{year}{2017}
-      \field{pages}{11505\bibrangedash 11512}
-      \range{pages}{8}
-      \verb{doi}
-      \verb 10.1021/acs.est.7b02184
-      \endverb
-      \verb{eprint}
-      \verb https://doi.org/10.1021/acs.est.7b02184
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.1021/acs.est.7b02184
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1021/acs.est.7b02184
-      \endverb
-    \endentry
     \entry{banerjee2018}{article}{}
       \name{author}{4}{}{%
         {{hash=5c9ad4f97ce60c906be797c508b52d94}{%
@@ -276,8 +222,8 @@
       \strng{authorbibnamehash}{53b926651266d022a590eff551c16ead}
       \strng{authornamehash}{ea0268c4709c94c7834284073b5ed16f}
       \strng{authorfullhash}{53b926651266d022a590eff551c16ead}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0305-1048}
@@ -316,8 +262,8 @@
       \strng{authorbibnamehash}{dc199a5b50753ff6608b987b82cfd778}
       \strng{authornamehash}{dc199a5b50753ff6608b987b82cfd778}
       \strng{authorfullhash}{dc199a5b50753ff6608b987b82cfd778}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Chemical Genomics Robot}
@@ -476,6 +422,111 @@
       \endverb
       \verb{url}
       \verb https://research.aalto.fi/files/32997691/SCI_Duhrkop_Fleischauer_Sirius_4_Turning_tandem.pdf
+      \endverb
+    \endentry
+    \entry{tamara2022}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ace3349bb35301a62038f29f56b4a551}{%
+           family={Tamara},
+           familyi={T\bibinitperiod},
+           given={Sem},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3045650e17efa1d3136dd0c4bbde4ac3}{%
+           family={Boer},
+           familyi={B\bibinitperiod},
+           given={Maurits\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           prefix={den},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=9c6f0d96af99b0c3fc39e6030472175a}{%
+           family={Heck},
+           familyi={H\bibinitperiod},
+           given={Albert\bibnamedelimb J.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{74ef5cdf0309af2d53871bdfb5045429}
+      \strng{fullhash}{8053c630a50ace02751e31eca3f12443}
+      \strng{bibnamehash}{8053c630a50ace02751e31eca3f12443}
+      \strng{authorbibnamehash}{8053c630a50ace02751e31eca3f12443}
+      \strng{authornamehash}{74ef5cdf0309af2d53871bdfb5045429}
+      \strng{authorfullhash}{8053c630a50ace02751e31eca3f12443}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Chemical Reviews}
+      \field{note}{PMID: 34415162}
+      \field{number}{8}
+      \field{title}{High-Resolution Native Mass Spectrometry}
+      \field{volume}{122}
+      \field{year}{2022}
+      \field{pages}{7269\bibrangedash 7326}
+      \range{pages}{58}
+      \verb{doi}
+      \verb 10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+    \endentry
+    \entry{hollender}{article}{}
+      \name{author}{4}{}{%
+        {{hash=329dc2dcf5e0c1f7c14a16c4f5005590}{%
+           family={Hollender},
+           familyi={H\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42df89dbe4a4b73eb793b6ba0d83cbdc}{%
+           family={Schymanski},
+           familyi={S\bibinitperiod},
+           given={Emma\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=a6348ef06e7107d8fb35f8f01d8a9174}{%
+           family={Singer},
+           familyi={S\bibinitperiod},
+           given={Heinz\bibnamedelima P.},
+           giveni={H\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=09d858c1d5eb938ca2446c824c7c9159}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={P.\bibnamedelimi Lee},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{fullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{bibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authorbibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authornamehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{authorfullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Environmental Science \& Technology}
+      \field{note}{PMID: 28877430}
+      \field{number}{20}
+      \field{title}{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}
+      \field{volume}{51}
+      \field{year}{2017}
+      \field{pages}{11505\bibrangedash 11512}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1021/acs.est.7b02184
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.est.7b02184
       \endverb
     \endentry
     \entry{massbank}{misc}{}
@@ -659,8 +710,8 @@
       \strng{authorbibnamehash}{027b1ba03b1f50102ed218725212cdc0}
       \strng{authornamehash}{027b1ba03b1f50102ed218725212cdc0}
       \strng{authorfullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0887-2333}
