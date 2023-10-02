@@ -136,14 +136,6 @@ INPUT c:/texlive/2023/texmf-dist/tex/latex/environ/environ.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/environ/environ.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/trimspaces/trimspaces.sty
-INPUT c:/texlive/2023/texmf-dist/tex/latex/breakurl/breakurl.sty
-INPUT c:/texlive/2023/texmf-dist/tex/latex/breakurl/breakurl.sty
-INPUT c:/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-INPUT c:/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-INPUT c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-INPUT c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-INPUT c:/texlive/2023/texmf-dist/tex/generic/iftex/ifpdf.sty
-INPUT c:/texlive/2023/texmf-dist/tex/generic/iftex/ifpdf.sty
 INPUT ./eth-template/extrapackages.tex
 INPUT ./eth-template/extrapackages.tex
 INPUT ./eth-template/extrapackages.tex
@@ -212,6 +204,10 @@ INPUT c:/texlive/2023/texmf-dist/tex/latex/datetime/datetime.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/datetime/datetime.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fmtcount.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fmtcount.sty
+INPUT c:/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+INPUT c:/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+INPUT c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+INPUT c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 INPUT c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fcprefix.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fcprefix.sty
 INPUT c:/texlive/2023/texmf-dist/tex/latex/fmtcount/fcnumparser.sty
@@ -621,6 +617,8 @@ INPUT ./figures/presence_matrix_subset.png
 INPUT ./figures/presence_matrix_subset.png
 INPUT ./figures/presence_matrix_subset.png
 INPUT ./figures/presence_matrix_subset.png
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplrc9t.tfm
 OUTPUT thesis.thm
 INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/palatino/pplrc9t.vf
@@ -631,6 +629,7 @@ INPUT ./thesis.out
 INPUT thesis.run.xml
 OUTPUT thesis.run.xml
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb

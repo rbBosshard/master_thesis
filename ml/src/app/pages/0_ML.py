@@ -15,11 +15,7 @@ from ml.src.pipeline.ml_helper import get_fingerprint_df
 from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, FILE_FORMAT
 
 
-subset_assay_info_columns = ["aeid",
-                            "assay_component_endpoint_name",
-                            "assay_function_type",
-                            "signal_direction",
-                            "MechanisticTarget",
+subset_assay_info_columns = ["MechanisticTarget",
                             "ToxicityEndpoint",
                             "biological_process_target",
                             "intended_target_family",
@@ -27,9 +23,23 @@ subset_assay_info_columns = ["aeid",
                             "intended_target_type",
                             "intended_target_type_sub",
                             "burst_assay",
+                            "assay_function_type",
+                            "signal_direction",
+                            "aeid",
+                            "assay_component_endpoint_name",
                             ]
 
 algo = "binary_classification"
+if "predictions_df" not in st.session_state:
+    st.session_state.predictions_df = None
+
+    selected_compound
+
+if "compounds" not in st.session_state:
+    st.session_state.compounds = None
+
+if "selected_compound" not in st.session_state:
+    st.session_state.selected_compound = None
 
 if "assay_info" not in st.session_state:
     st.session_state.assay_info = pd.read_parquet(os.path.join(METADATA_SUBSET_DIR_PATH, 'assay_info.parquet.gzip'))
@@ -68,45 +78,50 @@ with col1:
         st.info("Choose a CSV file.")
     
     path = os.path.join(METADATA_SUBSET_DIR_PATH, f"model_paths{algo}{FILE_FORMAT}")
-    model_paths = pd.read_parquet(path)[:16]
+    model_paths = pd.read_parquet(path)[:]
 
     max_workers = -1
     predictions_df = None
-    if test_data is not None and st.button("Run"):
-        classifiers = {}
-        for index, row in model_paths.iterrows():
-            classifiers[row['aeid']] = joblib.load(row['model_path'])
+    if test_data is not None:
+        if st.button("Run"):
+            classifiers = {}
+            for index, row in model_paths.iterrows():
+                classifiers[row['aeid']] = joblib.load(row['model_path'])
 
-        def predict_for_endpoint(endpoint, clf, features):
-            prediction = clf.predict(features)
-            return endpoint, prediction
+            def predict_for_endpoint(endpoint, clf, features):
+                prediction = clf.predict(features)
+                return endpoint, prediction
 
-        compounds = test_data['dsstox_substance_id'].values
-        tasks = [(endpoint, clf, test_data.iloc[:, 1:]) for endpoint, clf in classifiers.items()]
-        results = Parallel(n_jobs=max_workers)(delayed(predict_for_endpoint)(*task) for task in tasks)
-        predictions = {endpoint: prediction for endpoint, prediction in results}
-        predictions_df = pd.DataFrame(predictions)
-        predictions_df.insert(0, 'dsstox_substance_id', test_data['dsstox_substance_id'])
-        
-        pivot_prediction = predictions_df.melt(id_vars=['dsstox_substance_id'], var_name='aeid', value_name='prediction')
-        predictions_df.set_index('dsstox_substance_id', inplace=True)
-        predictions_df = predictions_df.transpose()
-        st.success("Prediction done!")
+            st.session_state.compounds = test_data['dsstox_substance_id'].values
+            tasks = [(endpoint, clf, test_data.iloc[:, 1:]) for endpoint, clf in classifiers.items()]
+            results = Parallel(n_jobs=max_workers)(delayed(predict_for_endpoint)(*task) for task in tasks)
+            predictions = {endpoint: prediction for endpoint, prediction in results}
+            predictions_df = pd.DataFrame(predictions)
+            predictions_df.insert(0, 'dsstox_substance_id', test_data['dsstox_substance_id'])
+            
+            pivot_prediction = predictions_df.melt(id_vars=['dsstox_substance_id'], var_name='aeid', value_name='prediction')
+            predictions_df.set_index('dsstox_substance_id', inplace=True)
+            predictions_df = predictions_df.transpose()
+            st.session_state.predictions_df = predictions_df
+            st.success("Prediction done!")
+
+
         # Insert a dropdown menu to choose the compound to display the prediction for
-        selected_compound = st.selectbox("Select a compound to display the prediction for", compounds)
-        if selected_compound is not None:
-            with st.expander("Prediction for selected compound"):
-                st.dataframe(predictions_df[selected_compound], hide_index=True)
+        if st.session_state.compounds is not None:
+            st.session_state.selected_compound = st.selectbox("Select a compound to display the prediction for", st.session_state.compounds)
+            if st.session_state.selected_compound is not None:
+                with st.expander("Prediction for selected compound"):
+                    st.dataframe(st.session_state.predictions_df[ st.session_state.selected_compound], hide_index=True)
 
 
 with col2:
-    if predictions_df is not None:
+    if st.session_state.predictions_df is not None:
         col2.header("Interactive Assay Grouping")
 
-        df = st.session_state.assay_info.merge(predictions_df, left_on='aeid', right_index=True)
-        if 'Select' is not df.columns[0]:
-            st.session_state.assay_info.insert(0, 'Select', True)
-        group_column = st.sidebar.selectbox("Select Column to Group On", df.columns[3:])
+        df = st.session_state.assay_info.merge(st.session_state.predictions_df, left_on='aeid', right_index=True)
+        if 'Select' not in df.columns:
+            df.insert(0, 'Select', True)
+        group_column = st.sidebar.selectbox("Select Column to Group On", subset_assay_info_columns)
 
         grouped_df = df.groupby(group_column)
 
@@ -139,32 +154,22 @@ with col2:
             grouped_selected[group_name] = group_data[group_data['Select'] == True]
 
         counts = [(group_name, len(group_data)) for group_name, group_data in grouped_selected.items()]
+        total_count = sum(count for _, count in counts)
+        st.sidebar.write(f"Total assay endpoints selected: {total_count}")
 
         # aggregate example
-        avg_aeid = [(group_name, np.mean(group_data[selected_compound])) for group_name, group_data in grouped_selected.items()]
+        agg_hitcall = [(group_name, np.mean(group_data[st.session_state.selected_compound])) for group_name, group_data in grouped_selected.items()]
 
-        avg_age_df = pd.DataFrame(avg_aeid, columns=['Group', 'Average Age'])
+        agg_hitcall_df = pd.DataFrame(agg_hitcall, columns=['Group', 'Aggregated Hitcall'])
+        agg_hitcall_df_sorted = agg_hitcall_df.sort_values(by='Aggregated Hitcall', ascending=False)
 
-        fig = px.line_polar(avg_age_df, r='Average Age', theta='Group', line_close=True)
+        fig = px.bar(agg_hitcall_df_sorted, x='Group', y='Aggregated Hitcall', color='Group', title=f'{st.session_state.selected_compound}: Aggregated Hitcall per Group')
+        fig.update_traces(showlegend=False)
 
-        # Set the layout for the polar plot
-        fig.update_traces(fill='toself')
-        fig.update_layout(
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                ),
-            ),
-        )
+        with col1:
+            st.title("Plot")
+            st.plotly_chart(fig, use_container_width=True)
+            st.title("Counts")
+            st.dataframe(pd.DataFrame(counts, columns=['Group', 'Count']), hide_index=True)
 
-        st.title("Polar Plot")
-
-        st.plotly_chart(fig)
-
-        total_row_count = sum(count for _, count in counts)
-
-        st.sidebar.write(f"Assay endpoint counts per groups: {total_row_count}")
-        st.sidebar.dataframe(pd.DataFrame(counts, columns=['Group', 'Count']), hide_index=True)
-        st.sidebar.dataframe(avg_aeid)
-
-        st.sidebar.write(f"Total Number of Rows in Groups: {total_row_count}")
+        
