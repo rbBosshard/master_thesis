@@ -70,14 +70,14 @@ Alongside the rise of machine learning, this advancement has facilitated the cre
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/hts_robot.png}
-        \caption{A robot arm retrieves assay plates from incubators and places them at compound transfer stations or hands them off to another arm that services liquid dispensers or plate readers. Efforts in the automation, miniaturization and the readout technologies have enabled the growth of HTS. Image obtained from~\cite{hts_robot}}.
-        \label{fig:hts_robot}
+        \caption{Image obtained from~\cite{hts_robot}. A robot arm retrieves assay plates from incubators and places them at compound transfer stations or hands them off to another arm that services liquid dispensers or plate readers. Efforts in the automation, miniaturization and the readout technologies have enabled the growth of HTS.}
+    \label{fig:hts_robot}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/hts.png}
-        \caption{Modern microtitre assay plates consist of multiples of 96 wells, which are either prepared in the laboratory or acquired commercially from stock plates. These wells are filled with a dilution solvent, such as \emph{Dimethylsulfoxide (DMSO)}, along with the chemical compounds intended for analysis. Image obtained from~\cite{hts_plates}}.
+        \caption{Image obtained from~\cite{hts_plates}. Modern microtitre assay plates consist of multiples of 96 wells, which are either prepared in the lab or acquired commercially from stock plates. These wells are filled with a dilution solvent, such as \emph{Dimethylsulfoxide (DMSO)}, along with the chemical compounds intended for analysis.}
         \label{fig:hts_plates}
     \end{subfigure}
     \caption{High-Throughput Screening (HTS)}
@@ -91,12 +91,13 @@ In response to the pressing need for a more hazard-driven and comprehensive asse
 
 \section{Objectives and Significance}
 
-The objective of this thesis is to contribute to the development of an efficient MLinvitroTox framework for predicting compound toxicity across multiple endpoints. The primary goal is to enhance the integration of MLinvitroTox by creating an automated pipeline in the \texttt{Python} programming language. The aim of this undertaking is to improve the curation of both structural and toxicological data while also converting raw data into a format suitable for machine learning input. This approach is designed to effectively tackle the inherent complexities of modeling and processing heterogeneous datasets. The ultimate output of the pipeline is expected to comprise toxicity fingerprints that encapsulate the predicted toxicity from HRMS/MS environmental samples for the relevant endpoints of interest. These generated toxicity fingerprints will offer crucial insights for the prioritization process, aiding in the identification of the most hazardous compounds present in environmental samples.
+The main objective of this thesis is to contribute to the development of an efficient MLinvitroTox framework for predicting compound toxicity across multiple endpoints. The goal is to enhance the integration of MLinvitroTox by creating an automated pipeline in the \texttt{Python} programming language. This pipeline is designed to efficiently address the inherent complexities associated with modeling and processing heterogeneous datasets. Here, the emphasis lies in enhancing the curation and filtering of toxicological data and streamlining the process, which begins with raw concentration-response series data and culminates in the generation of the final toxicity predictions. The ultimate output is expected to comprise toxicity fingerprints that encapsulate the predicted toxicity from HRMS/MS environmental samples for the relevant endpoints of interest. These generated toxicity fingerprints will offer crucial insights for the prioritization process, aiding in the identification of the most hazardous compounds present in environmental samples.
 
-A limitation of the existing framework is its binary method of predicting toxicity for specific endpoints, classifying compounds as either toxic or non-toxic without considering variations in the severity of toxicity. It is essential, in the long term, to adopt a more refined approach that can capture the nuanced continuum of toxicity. This thesis endeavors to overcome this limitation by developing a pipeline capable of forecasting toxicity across numerous endpoints, employing continuous hitcalls.
+A particular limitation of the current framework is its binary approach to predicting toxicity for specific endpoints, categorizing compounds as either toxic or non-toxic without accounting for variations in toxicity severity. In the long term, it is crucial to adopt a more refined approach that can capture the nuanced continuum of toxicity. This thesis endeavors to overcome this limitation by developing a pipeline capable of forecasting toxicity across numerous endpoints, employing continuous hitcalls.
+
 
 
 
 \section{Thesis Structure}
 
-In the course of progressing through the subsequent chapters, insights will be provided into the materials and methods employed, focusing on the technical intricacies involved in the preparation of ToxCast/Tox21 toxicity data and their transformation into suitable inputs for the machine learning pipeline. This foundational work will establish the basis for the upcoming chapters, which will showcase the potential of MLinvitroTox. Furthermore, it will demonstrate the framework's effectiveness through validation using real-world mass spectral data from  \emph{MassBank}~\cite{massbank}, and delve into the implications of our research.
+In the course of progressing through the subsequent chapters, insights will be provided into the materials and methods employed, focusing on the technical intricacies involved in the preparation of ToxCast/Tox21 toxicity data and their transformation into suitable inputs for the machine learning pipeline. This foundational work will establish the basis for the upcoming chapters, which will showcase the potential of MLinvitroTox. Furthermore, the framework's effectiveness is demonstrated through the validation of real-world mass spectral data from \emph{MassBank}~\cite{massbank}, and the examination of the implications of this research is carried out.
