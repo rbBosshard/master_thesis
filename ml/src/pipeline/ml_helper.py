@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 from datetime import datetime
+import traceback
 
 import joblib
 import numpy as np
@@ -13,12 +14,21 @@ from sklearn import metrics
 from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 from sklearn.pipeline import Pipeline
+from sklearn.feature_selection import SelectFromModel
 from xgboost import XGBClassifier
+import xgboost as xgb
 from xgboost import plot_importance
 from sklearn.decomposition import NMF
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.ensemble import RandomForestClassifier
+from lightgbm import LGBMClassifier
+
+import matplotlib
+matplotlib.use('Agg')
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
     INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH
@@ -103,15 +113,7 @@ def split_data(X, y):
                                                         shuffle=True,  # shuffle the data before splitting (default)
                                                         stratify=y)  # stratify to ensure the same class distribution in the train and test sets
 
-    # Split the train set into train and validation sets
-    X_train, X_val, y_train, y_val = train_test_split(X_train,
-                                                      y_train,
-                                                      test_size=CONFIG['train_test_split_ratio'],
-                                                      random_state=CONFIG['random_state'],
-                                                      shuffle=True,  # shuffle the data before splitting (default)
-                                                      stratify=y_train)  # stratify to ensure the same class distribution in the train and test sets
-
-    return X_train, X_val, y_train, y_val, X_test, y_test
+    return X_train, y_train, X_test, y_test
 
 
 def partition_data(df):
@@ -160,17 +162,34 @@ def handle_oversampling(X, y):
     return X, y
 
 
+def build_preprocessing_pipeline():
+    preprocessing_pipeline_steps = []
+    if CONFIG['apply']['feature_selection']:
+        j = 0
+
+        feature_selection_variance_threshold = VarianceThreshold(0.01)
+        preprocessing_pipeline_steps.insert(j, ('feature_selection_variance_threshold', feature_selection_variance_threshold))
+        j += 1
+
+        feature_selection_model = XGBClassifier(tree_method='gpu_hist')
+        feature_selection_from_model = SelectFromModel(estimator=feature_selection_model, max_features=CONFIG['feature_selection']['max_features'])
+        preprocessing_pipeline_steps.insert(j, ('feature_selection_from_model', feature_selection_from_model))
+
+    return Pipeline(preprocessing_pipeline_steps)
+
+
 def build_pipeline(classifier):
     global CLASSIFIER_NAME
     CLASSIFIER_NAME = classifier['name']
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME), exist_ok=True)
     pipeline_steps = []
-    for step in classifier['steps']:
+    preprocess_pipeline_steps = []
+    for i, step in enumerate(classifier['steps']):
         step_name = step['name']
         step_args = step.get('args', {})  # get the hyperparameters for the step, if any
         step_instance = globals()[step_name](**step_args)  # dynmically create an instance of the step
         pipeline_steps.append((step_name, step_instance))
-    return Pipeline(pipeline_steps)
+    return Pipeline(pipeline_steps), Pipeline(preprocess_pipeline_steps)
 
 
 def build_param_grid(classifier_steps):
@@ -182,23 +201,32 @@ def build_param_grid(classifier_steps):
     return param_grid
 
 
-def grid_search_cv(X, y, classifier, pipeline):
+def grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline, preprocess_pipeline_steps):
     scoring = CONFIG['grid_search_cv']['scoring']
     # Define the scoring function using F-beta score if specified in the config file
     scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
 
     grid_search_cv = GridSearchCV(pipeline,
                                param_grid=build_param_grid(classifier['steps']),
-                               # outer grid: cross-validation, repeated stratified k-fold
+                               # grid: cross-validation, repeated stratified k-fold
                                cv=RepeatedStratifiedKFold(n_splits=CONFIG['grid_search_cv']['n_splits'],
                                                           n_repeats=CONFIG['grid_search_cv']['n_repeats'],
                                                           random_state=CONFIG['random_state']),
-                               scoring=scorer, # Todo: do not specify and compare with default, estimator scoring
+                               scoring=scorer,  # Todo: do not specify and compare with default, estimator scoring
                                n_jobs=CONFIG["grid_search_cv"]["n_jobs"],
                                verbose=CONFIG["grid_search_cv"]["verbose"],
                                )
 
-    grid_search_cv_fitted = grid_search_cv.fit(X, y)
+
+    # I dont want to output eval metrics for each iteration, so I set verbose to False
+    classifier_name = pipeline[-1].__class__.__name__
+    fit_method = getattr(grid_search_cv, 'fit')
+    eval_set = [(X_test, y_test)]
+    # **{f'{classifier_name}__eval_set': eval_set}) # , f'{classifier_name}__verbose': False
+    if classifier_name == "XGBClassifier":
+        grid_search_cv_fitted = fit_method(X_train, y_train, **{f'{classifier_name}__eval_set': eval_set, f'{classifier_name}__verbose': False})
+    else:
+        grid_search_cv_fitted = fit_method(X_train, y_train)
 
     LOGGER.info(f"{classifier['name']}: GridSearchCV Results:")
     best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
@@ -258,7 +286,7 @@ def predict_and_report(X, y, classifier, best_estimator, input_set):
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set), exist_ok=True)
     LOGGER.info(f"Predict ({input_set})")
 
-    if not CONFIG['threshold_moving']:
+    if not CONFIG['apply']['threshold_moving']:
         # ROC curve for finding the optimal threshold, we want to minimize the false negatives
         y_pred = best_estimator.predict(X)
     else:
@@ -276,25 +304,29 @@ def predict_and_report(X, y, classifier, best_estimator, input_set):
     report_df.to_csv(path)
     LOGGER.info(report)
 
-    cm = confusion_matrix(y, y_pred, labels=labels)
-    tn, fp, fn, tp = cm.ravel()  # Extract values from confusion matrix
-    LOGGER.info(f"Total: {len(y)} datapoints")
-    LOGGER.info(f"Ground truth: {tn + fp} positive, {tp + fn} negative")
-    LOGGER.info(f"Prediction: {tn + fn} positive, {tp + fp} negative")
+    try:
+        cm = confusion_matrix(y, y_pred, labels=labels)
+        tn, fp, fn, tp = cm.ravel()  # Extract values from confusion matrix
+        LOGGER.info(f"Total: {len(y)} datapoints")
+        LOGGER.info(f"Ground truth: {tn + fp} positive, {tp + fn} negative")
+        LOGGER.info(f"Prediction: {tn + fn} positive, {tp + fp} negative")
 
-    cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Positive", "Negative"])
-    cm_display.plot()
+        cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Positive", "Negative"])
+        cm_display.plot()
 
-    plt.title(f"Confusion Matrix for {classifier['name']}")
-    path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"confusion_matrix.png")
-    plt.savefig(path)
-    plt.close()
+        plt.title(f"Confusion Matrix for {classifier['name']}")
+        path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"confusion_matrix.png")
+        plt.savefig(path, format='png')
+        plt.close()
+
+    except Exception as e:
+        traceback_info = traceback.format_exc()
+        report_exception(e, traceback_info, classifier)
 
 
-def get_label_counts(y, y_train, y_val, y_test):
+def get_label_counts(y, y_train, y_test):
     print_label_count(y, "TOTAL")
     print_label_count(y_train, "TRAIN")
-    print_label_count(y_val, "VALIDATION")
     print_label_count(y_test, "TEST")
 
 
@@ -373,3 +405,21 @@ def save_model(grid_search):
     joblib.dump(best_params, best_params_path, compress=3)
 
     LOGGER.info(f"Saved model in {classifier_log_folder}")
+
+
+def preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
+    X_train = X_train.astype(np.uint8)
+    y_train = y_train.astype(np.uint8)
+    X_test = X_test.astype(np.uint8)
+    y_test = y_test.astype(np.uint8)
+    X_massbank_val_from_structure = X_massbank_val_from_structure.astype(np.uint8)
+    y_massbank_val = y_massbank_val.astype(np.uint8)
+    if preprocessing_pipeline_steps.steps:
+        X_train = preprocessing_pipeline_steps.fit_transform(X_train, y_train)  # use same feature selection for eval set as for train set
+        X_test = preprocessing_pipeline_steps.transform(X_test)
+        X_massbank_val_from_structure = preprocessing_pipeline_steps.transform(X_massbank_val_from_structure)
+        print(f"Number of selected features: {X_train.shape[1]}")
+        if X_train.shape[1] != X_test.shape[1]:
+            raise RuntimeError("Error in feature selection")
+
+    return X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val

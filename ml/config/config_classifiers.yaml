@@ -1,9 +1,32 @@
 # Don't forget to import all the classifiers
 # and transformers you want to use
 classifiers:
-  # - name: SVC
-  #   steps:
-  #     - name: SVC
+   - name: SVC
+     steps:
+       - name: SVC
+         args:
+#           kernel: [ 'rbf' ]
+#           C: [ 1.0 ]
+#           gamma: [ 'scale' ]
+           probability: [ True ]
+#           class_weight: [ 'balanced' ]
+#           decision_function_shape: [ 'ovr' ]
+#           cache_size: [ 2000 ]
+#           max_iter: [ -1 ]
+#           tol: [ 0.001 ]
+#           verbose: [ False ]
+#           random_state: [ 42 ]
+
+   - name: XGBClassifier
+     steps:
+       - name: XGBClassifier
+         args:
+           n_estimators: [ 100 ] # [100, 150, 200] # default = 100
+           tree_method: [ 'gpu_hist' ]
+           predictor: [ 'gpu_predictor' ]
+           objective: [ 'binary:logistic' ]
+           max_bin: 16  # Adjust based on your GPU memory capacity
+           early_stopping_rounds: [ 5 ]
 
   # - name: KNeighborsClassifier
   #   steps:
@@ -34,20 +57,22 @@ classifiers:
   #       args:
   #         n_estimators: [100, 150] # default = 100
 
-  - name: XGBClassifier
-    steps:
-#      - name: PCA
+
+
       # - name: VarianceThreshold
+      #   args:
+      #     threshold: [0.1]
 #      - name: NMF
 #        args:
 #          n_components: [50]
 ##          init: ['nndsvd']
 #          beta_loss: ['frobenius', 0.1, 0.8]
 #          solver: ['mu']
-      - name: XGBClassifier
-        args:
-          n_estimators: [100] # [100, 150, 200] # default = 100
-          tree_method: ['gpu_hist']
+
+
+
+
+
 
 #-   name: KNeighborsClassifier
 #    steps:

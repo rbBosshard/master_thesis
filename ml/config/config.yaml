@@ -5,28 +5,30 @@ fingerprint_file: ToxCast_CSIfps_10k
 file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 
-aeid: 806 # Assay id
-
-activity_threshold: 0.9 # Activity threshold on continuous hitcall for binary classification
+activity_threshold: 0.5 # Activity threshold on continuous hitcall for binary classification
 
 random_state: 0 # For reproducibility (observed high variance)
 
-train_test_split_ratio: 0.1
-train_val_split_ratio: 0.2
+train_test_split_ratio: 0.2
 
 apply:
   smote: 0 # oversampling
+  feature_selection: 1
+  threshold_moving: 1
+
+feature_selection:
+  max_features: 500 # must be <= 896.
 
 grid_search_cv:
   n_splits: 5 # Number of folds, 5
-  n_repeats: 2 # Number of repeats, 3
+  n_repeats: 1 # Number of repeats, 3
   scoring: f_beta # recall_macro, specificity, f1, roc_auc, accuracy
   # The F1 score is the harmonic mean of the precision and recall. The more generic F_beta score applies additional weights, valuing one of precision or recall more than the other.
   beta: 1 # F-beta = (1 + beta^2) * (precision * recall) / ((beta^2 * precision) + recall),  1 = F1, Two commonly used values for beta are 2, which weighs recall higher than precision, and 0.5, which weighs recall lower than precision.
   n_jobs: 1
   verbose: 1 # 0-3
 
-threshold_moving: 1
+
 
 # non-negative matrix factorizatio
 # Todo:

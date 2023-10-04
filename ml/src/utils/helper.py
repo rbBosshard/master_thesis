@@ -10,7 +10,7 @@ from ml.src.pipeline.constants import REMOTE_METADATA_DIR_PATH, MASSBANK_DIR_PAT
 
 
 def get_subset_aeids():
-    aeids_path = os.path.join(REMOTE_METADATA_DIR_PATH, 'subset', f"aeids{FILE_FORMAT}")
+    aeids_path = os.path.join(REMOTE_METADATA_DIR_PATH, 'subset', f"aeids_target_assays{FILE_FORMAT}")
     aeids = pd.read_parquet(aeids_path)
     return aeids
 
