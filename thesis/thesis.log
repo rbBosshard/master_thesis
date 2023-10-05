@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  5 OCT 2023 12:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  5 OCT 2023 20:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1535,43 +1535,44 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 ] [2]
-<figures/non_target_high_resolution_mass_spectrometry.png, id=120, 974.13937pt x 432.11438pt>
+<figures/non_target_high_resolution_mass_spectrometry.png, id=118, 974.13937pt x 432.11438pt>
 File: figures/non_target_high_resolution_mass_spectrometry.png Graphic file (type png)
 <use figures/non_target_high_resolution_mass_spectrometry.png>
-Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry.png  used on input line 58.
+Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry.png  used on input line 67.
 (pdftex.def)             Requested size: 415.0pt x 184.08464pt.
-<figures/hts_robot.png, id=125, 1927.2pt x 1278.7775pt>
+ [3 <./figures/non_target_high_resolution_mass_spectrometry.png>]
+<figures/hts_robot.png, id=133, 1927.2pt x 1278.7775pt>
 File: figures/hts_robot.png Graphic file (type png)
 <use figures/hts_robot.png>
-Package pdftex.def Info: figures/hts_robot.png  used on input line 72.
+Package pdftex.def Info: figures/hts_robot.png  used on input line 81.
 (pdftex.def)             Requested size: 199.19823pt x 132.15848pt.
-<figures/hts.png, id=128, 1040.88875pt x 717.68124pt>
+<figures/hts.png, id=136, 1040.88875pt x 717.68124pt>
 File: figures/hts.png Graphic file (type png)
 <use figures/hts.png>
-Package pdftex.def Info: figures/hts.png  used on input line 79.
+Package pdftex.def Info: figures/hts.png  used on input line 88.
 (pdftex.def)             Requested size: 199.19823pt x 137.34644pt.
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 80.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 89.
 
 
 Class memoir Warning: The material used in the headers is too large
 (27.2pt) for the given head height (13.6pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 91.
+(in both cases you will find help in the memoir manual). on input line 100.
 
 
 Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 
- [3 <./figures/non_target_high_resolution_mass_spectrometry.png>] [4 <./figures/hts_robot.png> <./figures/hts.png>]) (./chapters/background.tex [5] [6]
-<figures/fingerprint_schema.png, id=167, 2337.48282pt x 1336.24219pt>
+ [4 <./figures/hts_robot.png> <./figures/hts.png>] [5]) (./chapters/background.tex [6] [7]
+<figures/fingerprint_schema.png, id=171, 2337.48282pt x 1336.24219pt>
 File: figures/fingerprint_schema.png Graphic file (type png)
 <use figures/fingerprint_schema.png>
 Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 14.
 (pdftex.def)             Requested size: 415.0pt x 237.23053pt.
- [7
+ [8
 
 ]
-<figures/aop2.png, id=176, 963.6pt x 535.236pt>
+<figures/aop2.png, id=180, 963.6pt x 535.236pt>
 File: figures/aop2.png Graphic file (type png)
 <use figures/aop2.png>
 Package pdftex.def Info: figures/aop2.png  used on input line 25.
@@ -1579,19 +1580,19 @@ Package pdftex.def Info: figures/aop2.png  used on input line 25.
 
 Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 
- [8 <./figures/fingerprint_schema.png>] [9 <./figures/aop2.png>]
-<figures/cytotoxicity.png, id=200, 908.39375pt x 623.32875pt>
+ [9 <./figures/fingerprint_schema.png>] [10 <./figures/aop2.png>]
+<figures/cytotoxicity.png, id=205, 908.39375pt x 623.32875pt>
 File: figures/cytotoxicity.png Graphic file (type png)
 <use figures/cytotoxicity.png>
 Package pdftex.def Info: figures/cytotoxicity.png  used on input line 41.
 (pdftex.def)             Requested size: 207.5pt x 142.38293pt.
-) [10 <./figures/cytotoxicity.png>]
+) [11 <./figures/cytotoxicity.png>]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [11
+ [12
 
-] [12]
+] [13]
 
 Class memoir Warning: The material used in the headers is too large
 (27.2pt) for the given head height (13.6pt), it is recommended to
@@ -1601,7 +1602,7 @@ either increase the head height or redesign the header
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
-[13]
+[14]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -1617,18 +1618,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36851 strings out of 475188
- 685259 string characters out of 5767805
+ 36862 strings out of 475188
+ 685395 string characters out of 5767805
  1941248 words of memory out of 5000000
- 57132 multiletter control sequences out of 15000+600000
- 611727 words of font info for 438 fonts, out of 8000000 for 9000
+ 57134 multiletter control sequences out of 15000+600000
+ 612199 words of font info for 445 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,11n,125p,1950b,2240s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (16 pages, 8052721 bytes).
+Output written on thesis.pdf (17 pages, 8055162 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 277 compressed objects within 3 object streams
- 58 named destinations out of 1000 (max. 500000)
+ 347 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
  96388 words of extra memory for PDF output out of 106986 (max. 10000000)
 

@@ -5,7 +5,7 @@
 Over the past few decades, the upsurge in environmental pollution by chemical compounds has been driven by industrial processes, agricultural methods, consumerism and various other contributing factors. Although these chemicals are integral for many products and have the potential to improve the comfort of modern society, they can also pose risks and adversely affect both human health and the environment, either acutely or chronically. Toxic substances threaten wildlife but also make air, soil, drinking water and food supply less safe. 
 
 Nations worldwide maintain comprehensive chemical regulations\footnote{For instance, REACH, short for Registration, Evaluation, Authorisation, and Restriction of Chemicals, is an EU regulation aimed at improving chemical safety and allocating risk management responsibilities to companies operating in various sectors.}, however, it is anticipated that global chemicals production will double by 2030~\cite{chemicaloutlook}. Moreover, the widespread utilization of chemicals, including their inclusion in consumer goods, is expected to expand further.
-Even though there are over 275 million known chemical compounds registered by the \emph{Chemical Abstracts Service}~\cite{CAS}, merely a tiny fraction of them undergo close monitoring via target analytical approaches and even less is known about their toxicity profiles and negative health effects on organsims. Table~\ref{tab:ubiquitous_water_pollutants} provides an overview of omnipresent water pollutants.
+Even though there are over 275 million known chemical compounds registered by the \emph{Chemical Abstracts Service}~\cite{CAS}, merely a tiny fraction of them undergo close monitoring via target analytical approaches and even less is known about their toxicity profiles and negative health effects on organsims. Refer to Table~\ref{tab:ubiquitous_water_pollutants} for an overview of omnipresent water pollutants.
 
 \begin{table}[h]
     \begin{tabularx}{\linewidth}{XXXX}
@@ -33,30 +33,39 @@ Even though there are over 275 million known chemical compounds registered by th
      & & Chloroacetanilide herbicide metabolites & Drinking-water-quality \\
     \bottomrule
     \end{tabularx}
-    \caption{Table 2 adapted from~\cite{schwarzenbach2006}. Examples of ubiquitous water pollutants.}~\label{tab:ubiquitous_water_pollutants}
+    \caption{Examples of ubiquitous water pollutants. Table 2 adapted from~\cite{schwarzenbach2006}.}~\label{tab:ubiquitous_water_pollutants}
 \end{table}
 
+In light of the rapidly evolving chemical landscape, there is an increasing demand for future-proof, robust measurement and modeling methods. These methods are essential for evaluating the toxicity and exposure of chemicals, facilitating informed risk-based decision-making even when data on hazards and exposures are limited. It is worth noting that the need for adaptable approaches in chemical safety and sustainability efforts must also prioritize cost-efficiency and gain widespread acceptance among regulatory bodies, industry stakeholders, and the general public.
 
-In light of the rapidly evolving chemical landscape, there is an increasing demand for future-proof, robust measurement and modeling methods. These methods are essential for evaluating the toxicity and exposure of chemicals, facilitating  informed risk-based decision-making even when data on hazards and exposures are limited. It is worth noting that the need for adaptable approaches in chemical safety and sustainability efforts must also prioritize cost-efficiency and gain widespread acceptance among regulatory bodies, industry stakeholders, and the general public.
-
-For instance, the EU has introduced the 8th Environment Action Programme, as outlined in its European Green Deal~(cite{greendeal}), to provide direction for European environmental policy until the year 2030. This program reinforces the EU's ambitious goal of sustainable living within planetary limits, with a forward-looking vision that extends to 2050. Central to this vision is a zero-pollution commitment, encompassing air, water, and soil quality, all while prioritizing the well-being of EU citizens. In 2021, the European Commission introduced a sustainability-focused chemicals strategy~\cite{EUChemicalsStrategy}, which aligns with the EU's zero-pollution ambition. This strategy not only enables the evaluation of the safety and sustainability of both existing and future chemical compounds but also aims to reduce concerning substances, such as \emph{per- and polyfluoroalkyl substances (PFAS)}, through substitution or phasing out wherever feasible. In parallel, the \emph{U.S. Environmental Protection Agency (EPA)} shares a similar scientific consensus and is at the forefront of assessing the potential impacts of chemicals on human health and the environment. Leveraging advanced toxicological and exposure methods, EPA actively promotes risk reduction efforts through its own \emph{Chemical Safety for Sustainability National Research Program}. This program builds upon the achievements of research initiatives like \emph{ToxCast}\footnote{\url{https://www.epa.gov/comptox/toxcast}}, \emph{Tox21}\footnote{\url{https://tox21.gov/}}, and the Endocrine Disruptor Screening Program in the 21st Century (EDSP21), demonstrating a commitment to advancing chemical safety on a global scale.
+For instance, the EU has introduced the 8th Environment Action Programme, as outlined in its European Green Deal~(cite{greendeal}), to provide direction for European environmental policy until the year 2030. This program reinforces the EU's ambitious goal of sustainable living within planetary limits, with a forward-looking vision that extends to 2050. Central to this vision is a zero-pollution commitment, encompassing air, water, and soil quality, all while prioritizing the well-being of EU citizens. In 2021, the European Commission introduced a sustainability-focused chemicals strategy~\cite{EUChemicalsStrategy}, which aligns with the EU's zero-pollution ambition. This strategy not only enables the evaluation of the safety and sustainability of both existing and future chemical compounds but also aims to reduce concerning substances, such as \emph{per- and polyfluoroalkyl substances (PFAS)}, through substitution or phasing out wherever feasible. In parallel, the \emph{U.S. Environmental Protection Agency (EPA)} shares a similar scientific consensus and is at the forefront of assessing the potential impacts of chemicals on human health and the environment. Leveraging advanced toxicological and exposure methods, EPA actively promotes risk reduction efforts through its own Chemical Safety for Sustainability National Research Program. This program builds upon the achievements of research initiatives like \emph{ToxCast}\footnote{\url{https://www.epa.gov/comptox/toxcast}}, \emph{Tox21}\footnote{\url{https://tox21.gov/}}, and the Endocrine Disruptor Screening Program in the 21st Century (EDSP21), demonstrating a commitment to advancing chemical safety on a global scale.
 
 
 \section{The Imperative for Prioritization and Toxicity Assessment}
 
-Contemporary analytical techniques, including \emph{high-resolution mass spectrometry (HRMS/MS)}, are gaining significance across various domains such as metabolomics, drug discovery, environmental science and toxicology~\cite{tamara2022}. The application of nontarget HRMS/MS has notably improved the ability to detect unidentified emerging contaminants from environmental samples, often with unknown toxicity profiles. In the past, when it comes to prioritizing unidentified compounds, the standard approach has been to use signal intensity from the fragmentation data of tandem mass spectrometery (referred to as MS/MS or MS2). We now abbreviate this as MS2 for convenience. However, this approach tends to fall short in delivering an accurate assessment of environmental exposures because MS2 signal intensity may not relate proportionally to the compound's concentration in the sample. Furthermore, and of central importance to this work, this approach overlooks the toxicological factors essential for prioritizing compounds with concers related to environmental hazards. As a result, substances with the potential for severe ecological consequences, such as endocrine-disrupting compounds, often go undetected because of their low abundance, even though they exhibit high levels of toxicity. Hence, a pressing need exists for alternative approaches to prioritize unidentified nontarget HRMS/MS signals based on their hazard potential. Incorporating relevant toxicity considerations into the equation:
+Modern analytical techniques, including \emph{high resolution mass spectrometry (HRMS/MS)}, are gaining significance across various domains such as metabolomics, drug discovery, environmental science and toxicology~\cite{tamara2022}.
+
+In environmental monitoring, the application of nontarget HRMS/MS has notably improved the capacity to detect possibly thousands of contaminants in a single sample. The instrument generates complex spectra that provide information about the masses and fragmentation patterns of compounds present within the sample as illustrated in Figure~\ref{fig:non_target_high_resolution_mass_spectrometry}. Often, only a minority of these molecules can be definitively identified, while the majority remains unidentified, resulting in their classification into two categories:
+\begin{itemize}
+    \item[--] \textbf{Identified compounds} are substances for which their chemical structure and properties have been determined and confirmed using additional analytical techniques. These compounds are precisely characterized and can be linked to existing databases or reference spectra, enabling the retrieval of information about their toxicity and other relevant characteristics.
+    \item[--] \textbf{Unidentified compounds}, on the other hand, are substances that are detected but lack definitive characterization in terms of their chemical identity, structure, or properties, including its toxicity. Unidentified compounds are observed as peaks or features in these spectra, but their specific chemical attributes remain unknown. 
+    Further examination of these compounds is necessary, but it entails a substantial investment of time and resources, emphasizing the importance of prioritization.
+    
+\end{itemize}
+
+When it comes to prioritizing unidentified compounds for further comprhensive testing, the standard approach has been to rely on signal intensity from fragmentation data. However, this approach tends to fall short in delivering an accurate assessment of environmental exposures because the signal intensity may not relate proportionally to the compound's concentration in the sample. Furthermore this approach overlooks the toxicological factors essential for prioritizing compounds with concers related to environmental hazards. As a result, substances with the potential for severe ecological consequences, such as endocrine-disrupting compounds, often go undetected because of their low abundance, even though they exhibit high levels of toxicity. Hence, a pressing need exists for alternative approaches to prioritize unidentified nontarget HRMS/MS signals based on their hazard potential. By incorporating relevant toxicity factors into the equation:
 
 \begin{equation}
     \text{Risk} = \text{Hazard} \times \text{Exposure}
 \end{equation}
 
-augments our capacity to make well-informed decisions when evaluating the environmental risk associated with chemicals.
-Figure~\ref{fig:non_target_high_resolution_mass_spectrometry} illustrates the non-target screening with \emph{HRMS/MS} technique and the novel prioritization \emph{} approach.
+we augment the capacity to make well-informed decisions when evaluating the environmental risk associated with chemicals.
+
  
 \begin{figure}[htbp]  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
     \includegraphics[width=1.0\textwidth]{figures/non_target_high_resolution_mass_spectrometry.png}  
-    \caption{Schematic of the workflow used for non-target screening of environmental samples, featuring a customized prioritization step. Adapted from Figure 1 in the original source~\cite{hollender}.}
+    \caption{Schematic of the workflow used for nontarget HRMS/MS screening of environmental samples, featuring a customized prioritization step. Adapted from Figure 1 in the original source~\cite{hollender}.}
 ~\label{fig:non_target_high_resolution_mass_spectrometry} 
 \end{figure}
 
@@ -70,14 +79,14 @@ Alongside the rise of machine learning, this advancement has facilitated the cre
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/hts_robot.png}
-        \caption{Image obtained from~\cite{hts_robot}. A robot arm retrieves assay plates from incubators and places them at compound transfer stations or hands them off to another arm that services liquid dispensers or plate readers. Efforts in the automation, miniaturization and the readout technologies have enabled the growth of HTS.}
+        \caption{A robot arm retrieves assay plates from incubators and places them at compound transfer stations or hands them off to another arm that services liquid dispensers or plate readers. Efforts in the automation, miniaturization and the readout technologies have enabled the growth of HTS. Image obtained from~\cite{hts_robot}.}
     \label{fig:hts_robot}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/hts.png}
-        \caption{Image obtained from~\cite{hts_plates}. Modern microtitre assay plates consist of multiples of 96 wells, which are either prepared in the lab or acquired commercially from stock plates. These wells are filled with a dilution solvent, such as \emph{Dimethylsulfoxide (DMSO)}, along with the chemical compounds intended for analysis.}
+        \caption{Modern microtitre assay plates consist of multiples of 96 wells, which are either prepared in the lab or acquired commercially from stock plates. These wells are filled with a dilution solvent, such as \emph{Dimethylsulfoxide (DMSO)}, along with the chemical compounds intended for analysis. Image obtained from~\cite{hts_plates}.}
         \label{fig:hts_plates}
     \end{subfigure}
     \caption{High-Throughput Screening (HTS)}
