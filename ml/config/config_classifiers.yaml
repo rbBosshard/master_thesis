@@ -26,7 +26,7 @@ classifiers:
            predictor: [ 'gpu_predictor' ]
            objective: [ 'binary:logistic' ]
            max_bin: 16  # Adjust based on your GPU memory capacity
-           early_stopping_rounds: [ 5 ]
+#           early_stopping_rounds: [ 5 ]
 
   # - name: KNeighborsClassifier
   #   steps:

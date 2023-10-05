@@ -133,12 +133,12 @@ def partition_data(df):
 
     if CONFIG['ml_algorithm'] == 'binary_classification':
         t = CONFIG['activity_threshold']
-        LOGGER.info(f"Activity threshold: (hitcall >= {t} is active)\n")
-        y = (training_df['hitcall'] >= t).astype(int)
-        y_massbank_val = (validation_df['hitcall'] >= t).astype(int)
+        LOGGER.info(f"Activity threshold: (hitcall_c >= {t} is active)\n")
+        y = (training_df['hitcall_c'] >= t).astype(int)
+        y_massbank_val = (validation_df['hitcall_c'] >= t).astype(int)
     elif CONFIG['ml_algorithm'] == 'hitcall_regression':
-        y = training_df['hitcall']
-        y_massbank_val = validation_df['hitcall']
+        y = training_df['hitcall_c']
+        y_massbank_val = validation_df['hitcall_c']
     elif CONFIG['ml_algorithm'] == 'ac50_regression':
         y = training_df['ac50']
         y_massbank_val = validation_df['ac50']
@@ -393,33 +393,37 @@ def load_model(path):
     return model
 
 
-def save_model(grid_search):
-    best_estimator = grid_search.best_estimator_
-    best_params = grid_search.best_params_
-
+def save_model(best_estimator):
     classifier_log_folder = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME)
     best_estimator_path = os.path.join(classifier_log_folder, f"best_estimator.joblib")
     best_params_path = os.path.join(classifier_log_folder, f"best_params.joblib")
 
     joblib.dump(best_estimator, best_estimator_path, compress=3)
-    joblib.dump(best_params, best_params_path, compress=3)
+    joblib.dump(best_estimator.get_params(), best_params_path, compress=3)
 
     LOGGER.info(f"Saved model in {classifier_log_folder}")
 
 
-def preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
+def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
     X_train = X_train.astype(np.uint8)
     y_train = y_train.astype(np.uint8)
     X_test = X_test.astype(np.uint8)
     y_test = y_test.astype(np.uint8)
     X_massbank_val_from_structure = X_massbank_val_from_structure.astype(np.uint8)
     y_massbank_val = y_massbank_val.astype(np.uint8)
-    if preprocessing_pipeline_steps.steps:
-        X_train = preprocessing_pipeline_steps.fit_transform(X_train, y_train)  # use same feature selection for eval set as for train set
-        X_test = preprocessing_pipeline_steps.transform(X_test)
-        X_massbank_val_from_structure = preprocessing_pipeline_steps.transform(X_massbank_val_from_structure)
+    if preprocessing_pipeline.steps:
+        X_train = preprocessing_pipeline.fit_transform(X_train, y_train)  # use same feature selection for eval set as for train set
+        X_test = preprocessing_pipeline.transform(X_test)
+        X_massbank_val_from_structure = preprocessing_pipeline.transform(X_massbank_val_from_structure)
         print(f"Number of selected features: {X_train.shape[1]}")
         if X_train.shape[1] != X_test.shape[1]:
             raise RuntimeError("Error in feature selection")
+
+        # Save preprocessing_model
+        preprocessing_model_log_folder = os.path.join(LOG_PATH, f"{AEID}")
+        os.makedirs(preprocessing_model_log_folder, exist_ok=True)
+        preprocessing_model_path = os.path.join(preprocessing_model_log_folder, f"preprocessing_model.joblib")
+        joblib.dump(preprocessing_pipeline, preprocessing_model_path, compress=3)
+        LOGGER.info(f"Saved preprocessing model in {preprocessing_model_log_folder}")
 
     return X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val
