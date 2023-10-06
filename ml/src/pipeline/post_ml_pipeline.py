@@ -34,7 +34,8 @@ for aeid in os.listdir(target_run_folder_path):
             if model == "XGBClassifier":
                 model_path = os.path.join(aeid_path, model)
                 best_estimator_path = os.path.join(model_path, 'best_estimator.joblib')
-                model_paths[aeid] = best_estimator_path
+                optimal_threshold_path = os.path.join(model_path, 'optimal_threshold.joblib')
+                model_paths[aeid] = (best_estimator_path, optimal_threshold_path)
 
                 val_results = {}
                 for validation_type in os.listdir(model_path):

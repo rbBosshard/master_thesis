@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in [54]: #aeids_target_assays[:]:  # [97]:
+    for aeid in aeids_target_assays[:]:  # [97]:
         # Get assay data
         assay_df = get_assay_df(aeid)
 
@@ -41,12 +41,12 @@ if __name__ == '__main__':
         # Apply oversampling if configured
         X_train, y_train = handle_oversampling(X_train, y_train)
 
+        preprocessing_pipeline_steps = build_preprocessing_pipeline()
+
+        X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val = preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val)
+
         # Get the label counts
         get_label_counts(y, y_train, y_test)
-
-        preprocessing_pipeline = build_preprocessing_pipeline()
-
-        X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val = preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val)
 
         # Build for each classifier a pipeline according to the configurations in the config file
         for classifier in CONFIG_CLASSIFIERS['classifiers']:
@@ -54,10 +54,10 @@ if __name__ == '__main__':
                 start_time = datetime.now()
 
                 # Build the pipeline for the current classifier with the specified parameter grid
-                pipeline, preprocess_pipeline_steps = build_pipeline(classifier)
+                pipeline = build_pipeline(classifier)
 
                 # Perform grid search (Note: CV on TRAINING set with RepeatedStratifiedKFold)
-                grid_search = grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline, preprocess_pipeline_steps)
+                grid_search = grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline)
 
                 # Save best estimator (estimator with best performing parameters from grid search)
                 best_estimator = grid_search.best_estimator_

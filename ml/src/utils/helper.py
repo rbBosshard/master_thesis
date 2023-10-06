@@ -2,6 +2,9 @@ import os
 
 import numpy as np
 import pandas as pd
+import pubchempy as pcp
+import multiprocessing
+import joblib
 
 from ml.src.pipeline.constants import REMOTE_METADATA_DIR_PATH, MASSBANK_DIR_PATH, FILE_FORMAT, INPUT_DIR_PATH, \
     OUTPUT_DIR_PATH, INPUT_FINGERPRINTS_DIR_PATH, METADATA_DIR_PATH, METADATA_ALL_DIR_PATH, METADATA_SUBSET_DIR_PATH, \
@@ -95,17 +98,53 @@ def compute_compounds_intersection(directory, compounds, compounds_with_zero_cou
 
 
 def csv_to_parquet_converter():
-    print("Preprocess fingerprint from structure input file")
+    # print("Get mapping: GUID -> DTXSID from smiles (using pubchempy)")
+    # src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"massbank_smiles_guid_acc_20231005.csv")
+    # df = pd.read_csv(src_path)
+    # df = df.drop_duplicates()
+    #
+    #
+    # # Initialize an empty dictionary to store the mapping
+    # guid_to_dtxsid = {}
+    #
+    # def apply_get_dtxsid_parallel(row):
+    #     smiles = row['CH$SMILES']
+    #     guid = row['GUID']
+    #     c = pcp.get_compounds(smiles, 'smiles')
+    #     synonyms = c[0].synonyms
+    #     dtxsid_values = [item for item in synonyms if item.startswith("DTXSID")]
+    #     num_compounds = len(dtxsid_values)
+    #     if num_compounds == 1:
+    #         print("Unique DTXSID found")
+    #         dtxsid = dtxsid_values[0]
+    #     elif num_compounds > 2:
+    #         print("No unique DTXSID found")
+    #         dtxsid = dtxsid_values[0]
+    #     else:
+    #         dtxsid = None
+    #         print("No DTXSID found")
+    #
+    # result = joblib.Parallel(n_jobs=-1)(joblib.delayed(apply_get_dtxsid_parallel)(row) for _, row in df.iterrows())
 
+    print("Preprocess fingerprint from structure input file")
     src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}.csv")
     dest_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
 
     df = pd.read_csv(src_path)
-    # Skip the first 3 columns (relativeIndex, absoluteIndex, index) and transpose the dataframe
-    df = df.iloc[:, 3:].T
-    data = df.iloc[1:].values.astype(int)
-    index = df.index[1:]
-    columns = df.iloc[0]
+    # Old: Skip the first 3 columns (Unnamed: 0, relativeIndex, absoluteIndex) and transpose the dataframe
+    # df = df.iloc[:, 3:].T
+    # data = df.iloc[1:].values.astype(int)
+    # index = df.index[1:]
+    # columns = df.iloc[0]
+
+    # New: Skip  first column (Unnamed: 0), drop duplicated index.1
+    if 'index.1' in df.columns:
+        df = df.drop('index.1', axis=1)
+    df = df.iloc[:, 1:]
+    index = df['index']
+    data = df.iloc[:, 1:].values.astype(np.uint8)
+    columns = df.columns[1:]
+
     df = pd.DataFrame(data=data, index=index, columns=columns).reset_index()
     df = df.rename(columns={"index": "dsstox_substance_id"})
     df.to_parquet(dest_path, compression='gzip')
@@ -114,3 +153,6 @@ def csv_to_parquet_converter():
     unique_chemicals = df['dsstox_substance_id'].unique()
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'w') as f:
         f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))
+
+
+

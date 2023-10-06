@@ -29,7 +29,5 @@ REMOTE_DATA_DIR_PATH = os.path.join(ROOT_DIR, '../../../../pytcpl/data/')
 REMOTE_METADATA_DIR_PATH = os.path.join(REMOTE_DATA_DIR_PATH, 'metadata/')
 REMOTE_METADATA_SUBSET_DIR_PATH = os.path.join(REMOTE_METADATA_DIR_PATH, 'subset/')
 
-
-
 FILE_FORMAT = '.parquet.gzip'
-FINGERPRINT_FILE = "ToxCast_CSIfps_10k"
+FINGERPRINT_FILE = "ToxCast_20231006_fingerprints"

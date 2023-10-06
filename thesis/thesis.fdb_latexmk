@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber thesis"] 1696537771 "thesis.bcf" "thesis.bbl" "thesis" 1696537787 0
+["biber thesis"] 1696631836 "thesis.bcf" "thesis.bbl" "thesis" 1696631979 0
   "./refs.bib" 1696530651 18603 bfb002075036b7131db0c6ae031b663f ""
-  "thesis.bcf" 1696537786 107145 363543342babff994a4caf0b817a7935 "pdflatex"
+  "thesis.bcf" 1696631978 107145 363543342babff994a4caf0b817a7935 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1696537780 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1696537787 0
-  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1696531201 4681 3e949d6563d61d5ee6a66415a1601b18 ""
+["pdflatex"] 1696631972 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1696631979 0
+  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1696625784 4679 7330225c5326983fd8beeccec6b55908 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1691267210 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -230,25 +230,27 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1691269228 4687025 676c7d7298543c4303eabe86c426c675 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1691269303 8172629 8630c359bbd84e1bbe2b3d56affe7de2 ""
   "c:/texlive/2023/texmf.cnf" 1691269207 713 e69b156964470283e0530f5060668171 ""
-  "chapters/material_and_methods.tex" 1696537771 21434 5caa6871239608a139c9d5b682269ed8 ""
+  "chapters/appendix.tex" 1696626236 4153 71f50a853d2678529e8c287142f5ad44 ""
+  "chapters/material_and_methods.tex" 1696631967 21311 8bee5067995e3ddd6b37d0c36d0bddb6 ""
   "eth-template/ETHlogo.pdf" 1691253600 12666 b4023007c09129f6f4698ef1ed405aa9 ""
   "eth-template/ETHlogo.sty" 1691253600 299 e2abad9c54943afe91695fd7c02906f8 ""
   "eth-template/extrapackages.tex" 1691253600 2675 e8cee1fb289bc2525625e93f38f4740c ""
   "eth-template/layoutsetup.tex" 1696501725 3267 4ca99bfc587f77ba2d7f3fc75fc2dc3c ""
   "eth-template/macrosetup.tex" 1691253600 738 a1ddf6e00786b21534f8312de88c4feb ""
   "eth-template/theoremsetup.tex" 1691253600 1000 26f7d8ce3897fd4b39189a2363dadee4 ""
+  "figures/CRS.png" 1696621459 60908 29f9ea91c71cf2ef2273746e732a5e3d ""
+  "figures/POD.png" 1696629777 50957 8f4c5838db7f074bbd16e1c347155786 ""
   "figures/concentration_metric_distributions.png" 1694007125 133681 108a0659842950968653e672eab9ee79 ""
-  "figures/concentration_response_series.png" 1694369936 48515 70d60227f111a40a2ea252aaad180025 ""
   "figures/fit_models.png" 1695761294 271184 b0584555a39a93ee4af9b298b4eb7db4 ""
   "figures/presence_matrix_all.png" 1693517692 1231217 ff363d71a0821b60ba3859282cb0fa8f ""
   "figures/presence_matrix_subset.png" 1693517765 1034005 b31aff38784e237aba0e8abf3e503c4b ""
   "figures/tcpl.png" 1695217318 1122217 b4eb9c967526de97a584bf20bbf6858d ""
-  "thesis.aux" 1696537786 13046 fbc737512f1b36b5f59dfbcd321e1da8 "pdflatex"
-  "thesis.bbl" 1696537772 5730 b1fb76365f89944a9357920f8887b87d "biber thesis"
-  "thesis.out" 1696537786 2066 a413e7fa8dba1e04e78bdf244cec917a "pdflatex"
-  "thesis.run.xml" 1696537786 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
-  "thesis.tex" 1696531201 4681 3e949d6563d61d5ee6a66415a1601b18 ""
-  "thesis.toc" 1696537786 1246 db031c2fa76d849c65610a9dafc03d5b "pdflatex"
+  "thesis.aux" 1696631978 16689 20fed7936767b6de3ae51ae735ca3437 "pdflatex"
+  "thesis.bbl" 1696631838 5730 b1fb76365f89944a9357920f8887b87d "biber thesis"
+  "thesis.out" 1696631978 3027 02fafbb8f3387cc39e6ae3f53f0e57f6 "pdflatex"
+  "thesis.run.xml" 1696631978 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "thesis.tex" 1696625784 4679 7330225c5326983fd8beeccec6b55908 ""
+  "thesis.toc" 1696631978 1779 c07da16712d894aae8094a9f22505895 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

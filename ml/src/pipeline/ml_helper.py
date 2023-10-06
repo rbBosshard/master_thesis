@@ -25,10 +25,28 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
 from lightgbm import LGBMClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Lasso
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import VotingClassifier
+from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+# import gaussainNB
+from sklearn.naive_bayes import GaussianNB
+
+from sklearn.decomposition import NMF
 
 import matplotlib
 matplotlib.use('Agg')
+import warnings
+
+# Filter out ConvergenceWarnings
+# warnings.filterwarnings("ignore")
 
 from ml.src.pipeline.constants import ROOT_DIR, CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, METADATA_DIR_PATH, \
     INPUT_FINGERPRINTS_DIR_PATH, FINGERPRINT_FILE, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH
@@ -83,13 +101,13 @@ def get_assay_df(aeid):
     # omit_compound_mask = assay_df['omit_flag'] == "PASS"
     # assay_df = assay_df[omit_compound_mask]
     # LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
-    assay_df = assay_df[['dsstox_substance_id', 'hitcall', 'ac50']]
+    assay_df = assay_df[['dsstox_substance_id', 'hitcall_c', 'ac50']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
 
 
 def get_fingerprint_df():
-    fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
+    fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{CONFIG['fingerprint_file']}{FILE_FORMAT}")
     fps_df = pd.read_parquet(fps_file_path)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
     LOGGER.info("#" * 80)
@@ -127,21 +145,21 @@ def partition_data(df):
 
     # Partition the data into features (X) and labels (y)
     # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
-    X = training_df.iloc[:, 3:]
-    X_massbank_val_from_structure = validation_df.iloc[:, 3:]
-    X_massbank_val_from_sirius = validation_df.iloc[:, 3:]  # Todo: replace with predicted fingerprints
+    X = training_df.iloc[:, 3:].astype(np.uint8)
+    X_massbank_val_from_structure = validation_df.iloc[:, 3:].astype(np.uint8)
+    X_massbank_val_from_sirius = validation_df.iloc[:, 3:].astype(np.uint8)  # Todo: replace with predicted fingerprints
 
-    if CONFIG['ml_algorithm'] == 'binary_classification':
-        t = CONFIG['activity_threshold']
-        LOGGER.info(f"Activity threshold: (hitcall_c >= {t} is active)\n")
-        y = (training_df['hitcall_c'] >= t).astype(int)
-        y_massbank_val = (validation_df['hitcall_c'] >= t).astype(int)
-    elif CONFIG['ml_algorithm'] == 'hitcall_regression':
+    if CONFIG['ml_algorithm'] == 'hitcall_regression':
         y = training_df['hitcall_c']
         y_massbank_val = validation_df['hitcall_c']
     elif CONFIG['ml_algorithm'] == 'ac50_regression':
         y = training_df['ac50']
         y_massbank_val = validation_df['ac50']
+    else:  # CONFIG['ml_algorithm'] == 'binary_classification'
+        t = CONFIG['activity_threshold']
+        LOGGER.info(f"Activity threshold: (hitcall_c >= {t} is active)\n")
+        y = (training_df['hitcall_c'] >= t).astype(np.uint8)
+        y_massbank_val = (validation_df['hitcall_c'] >= t).astype(np.uint8)
 
     return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
@@ -165,15 +183,19 @@ def handle_oversampling(X, y):
 def build_preprocessing_pipeline():
     preprocessing_pipeline_steps = []
     if CONFIG['apply']['feature_selection']:
-        j = 0
+        if CONFIG['apply']['variance_threshold']:
+            # VarianceThreshold is a feature selector that removes all low-variance features. -> Did not improve results significantly
+            feature_selection_variance_threshold = VarianceThreshold(0.01)
+            preprocessing_pipeline_steps.append(('feature_selection_variance_threshold', feature_selection_variance_threshold))
 
-        feature_selection_variance_threshold = VarianceThreshold(0.01)
-        preprocessing_pipeline_steps.insert(j, ('feature_selection_variance_threshold', feature_selection_variance_threshold))
-        j += 1
+        if CONFIG['apply']['non_negative_matrix_factorization']:
+            # Non-Negative Matrix Factorization (NMF) -> Takes very long and did not improve results significantly (tested: n_components = [100, 200, 500]
+            feature_selection_nmf = NMF(n_components=100)
+            preprocessing_pipeline_steps.append(('feature_selection_nmf', feature_selection_nmf))
 
-        feature_selection_model = XGBClassifier(tree_method='gpu_hist')
-        feature_selection_from_model = SelectFromModel(estimator=feature_selection_model, max_features=CONFIG['feature_selection']['max_features'])
-        preprocessing_pipeline_steps.insert(j, ('feature_selection_from_model', feature_selection_from_model))
+        feature_selection_model = RandomForestClassifier(n_estimators=200, max_depth=7)  # RandomForestClassifier()  #XGBClassifier(tree_method='gpu_hist') #RandomForestClassifier()
+        feature_selection_from_model = SelectFromModel(estimator=feature_selection_model, threshold='mean')   # max_features=CONFIG['feature_selection']['max_features']
+        preprocessing_pipeline_steps.append(('feature_selection_from_model', feature_selection_from_model))
 
     return Pipeline(preprocessing_pipeline_steps)
 
@@ -182,14 +204,13 @@ def build_pipeline(classifier):
     global CLASSIFIER_NAME
     CLASSIFIER_NAME = classifier['name']
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME), exist_ok=True)
-    pipeline_steps = []
-    preprocess_pipeline_steps = []
+    pipeline_steps = []  # build_preprocessing_pipeline()
     for i, step in enumerate(classifier['steps']):
         step_name = step['name']
         step_args = step.get('args', {})  # get the hyperparameters for the step, if any
         step_instance = globals()[step_name](**step_args)  # dynmically create an instance of the step
         pipeline_steps.append((step_name, step_instance))
-    return Pipeline(pipeline_steps), Pipeline(preprocess_pipeline_steps)
+    return Pipeline(pipeline_steps)
 
 
 def build_param_grid(classifier_steps):
@@ -201,32 +222,26 @@ def build_param_grid(classifier_steps):
     return param_grid
 
 
-def grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline, preprocess_pipeline_steps):
-    scoring = CONFIG['grid_search_cv']['scoring']
-    # Define the scoring function using F-beta score if specified in the config file
-    scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
+def grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline):
+    scorer = None
+    if CONFIG['apply']['custom_scorer']:
+        scoring = CONFIG['grid_search_cv']['scoring']
+        scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
 
-    grid_search_cv = GridSearchCV(pipeline,
-                               param_grid=build_param_grid(classifier['steps']),
-                               # grid: cross-validation, repeated stratified k-fold
-                               cv=RepeatedStratifiedKFold(n_splits=CONFIG['grid_search_cv']['n_splits'],
-                                                          n_repeats=CONFIG['grid_search_cv']['n_repeats'],
-                                                          random_state=CONFIG['random_state']),
-                               scoring=scorer,  # Todo: do not specify and compare with default, estimator scoring
-                               n_jobs=CONFIG["grid_search_cv"]["n_jobs"],
-                               verbose=CONFIG["grid_search_cv"]["verbose"],
-                               )
+    grid_search_cv = GridSearchCV(
+        pipeline,
+        param_grid=build_param_grid(classifier['steps']),
+        cv=RepeatedStratifiedKFold(
+            n_splits=CONFIG['grid_search_cv']['n_splits'],
+            n_repeats=CONFIG['grid_search_cv']['n_repeats'],
+            random_state=CONFIG['random_state']),
+        scoring=scorer,
+        n_jobs=CONFIG["grid_search_cv"]["n_jobs"],
+        verbose=CONFIG["grid_search_cv"]["verbose"],
+    )
 
-
-    # I dont want to output eval metrics for each iteration, so I set verbose to False
-    classifier_name = pipeline[-1].__class__.__name__
-    fit_method = getattr(grid_search_cv, 'fit')
-    eval_set = [(X_test, y_test)]
-    # **{f'{classifier_name}__eval_set': eval_set}) # , f'{classifier_name}__verbose': False
-    if classifier_name == "XGBClassifier":
-        grid_search_cv_fitted = fit_method(X_train, y_train, **{f'{classifier_name}__eval_set': eval_set, f'{classifier_name}__verbose': False})
-    else:
-        grid_search_cv_fitted = fit_method(X_train, y_train)
+    # Use train set as input to Grid Search Cross Validation (kfold validation sets drawn internally from train set)
+    grid_search_cv_fitted = grid_search_cv.fit(X_train, y_train)
 
     LOGGER.info(f"{classifier['name']}: GridSearchCV Results:")
     best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
@@ -239,14 +254,19 @@ def find_optimal_threshold(X, y, best_estimator, input_set):
     # Predict the probabilities (using validation set)
     y_pred_proba = best_estimator.predict_proba(X)[:, 1]
 
-    # Tune the decission threshold for the classifier, used to map probabilities  to class labels
+    # Tune the decision threshold for the classifier, used to map probabilities to class labels
     fpr, tpr, thresholds = roc_curve(y, y_pred_proba)
 
     # Plot the ROC curve
     df_fpr_tpr = pd.DataFrame({'FPR': fpr, 'TPR': tpr, 'Threshold': thresholds})
 
-    # Find the optimal threshold
-    optimal_idx = np.argmax(tpr - fpr)
+    # Calculate the complement of the weight_tpr parameter
+    weight_tpr = CONFIG['threshold_moving']['weight_tpr']
+    weight_fpr = 1 - weight_tpr
+
+    # Find the optimal threshold based on a cost function, weighting true positive rate and false positive rate
+    costs = (1 - weight_tpr * tpr) + weight_fpr * fpr  # A higher weight_tpr value gives more weight to minimizing false negatives.
+    optimal_idx = np.argmin(costs)
     optimal_threshold = thresholds[optimal_idx]
 
     # Plot the ROC curve
@@ -278,7 +298,12 @@ def find_optimal_threshold(X, y, best_estimator, input_set):
 
     path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set, f"roc_curve.png")
     plt.savefig(path, dpi=300)
-    LOGGER.info(f"Optimal threshold saved as png")
+
+    if input_set == 'validation':
+        path = os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, f"optimal_treshold.joblib")
+        joblib.dump(optimal_threshold, path)
+
+    LOGGER.info(f"Optimal threshold saved.")
     return optimal_threshold
 
 
@@ -405,14 +430,8 @@ def save_model(best_estimator):
 
 
 def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
-    X_train = X_train.astype(np.uint8)
-    y_train = y_train.astype(np.uint8)
-    X_test = X_test.astype(np.uint8)
-    y_test = y_test.astype(np.uint8)
-    X_massbank_val_from_structure = X_massbank_val_from_structure.astype(np.uint8)
-    y_massbank_val = y_massbank_val.astype(np.uint8)
     if preprocessing_pipeline.steps:
-        X_train = preprocessing_pipeline.fit_transform(X_train, y_train)  # use same feature selection for eval set as for train set
+        X_train = preprocessing_pipeline.fit_transform(X_train, y_train)
         X_test = preprocessing_pipeline.transform(X_test)
         X_massbank_val_from_structure = preprocessing_pipeline.transform(X_massbank_val_from_structure)
         print(f"Number of selected features: {X_train.shape[1]}")

@@ -2,16 +2,22 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Contents}{i}{section*.1}%
 \contentsline {chapter}{\chapternumberline {1}Material and Methods}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Toxicity Data: InvitroDB v4.1}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}tcpl v3.0}{1}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}tcplFit2}{3}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}pytcpl}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Subset assay endpoints}{6}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Cytotoxicity handling}{8}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Curve Surfer}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.1}Toxicity Data}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}ToxCast invitroDB v4.1}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}tcpl v3.0}{1}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Concentration-Response Series}{2}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}tcplFit2}{3}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Curve Fitting}{3}{subsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.1.6}Hit Calling}{4}{subsection.1.1.6}%
+\contentsline {section}{\numberline {1.2}New Toxicity Pipeline Implementation: pytcpl}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Introduction}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Subset assay endpoints}{6}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Cytotoxicity handling}{8}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Curve Surfer}{9}{subsection.1.2.4}%
 \contentsline {section}{\numberline {1.3}Machine Learning Pipeline}{9}{section.1.3}%
 \contentsline {subsection}{\numberline {1.3.1}Preprocessing}{9}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}Binary Classification}{9}{subsection.1.3.2}%
 \contentsline {subsection}{\numberline {1.3.3}Regression}{10}{subsection.1.3.3}%
 \contentsline {subsection}{\numberline {1.3.4}Massbank Validation}{10}{subsection.1.3.4}%
-\contentsline {chapter}{Bibliography}{11}{section*.12}%
+\contentsline {chapter}{Bibliography}{11}{section*.13}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{12}{appendix.A}%

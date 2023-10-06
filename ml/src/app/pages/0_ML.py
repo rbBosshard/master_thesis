@@ -82,16 +82,18 @@ with col1:
         if st.button("Predict!"):
             classifiers = {}
             for index, row in model_paths.iterrows():
-                classifiers[row['aeid']] = joblib.load(row['model_path'])
+                classifiers[row['aeid']] = (joblib.load(row['model_path']), joblib.load(row['optimal_threshold.joblib']))
 
-
-            def predict_for_endpoint(endpoint, clf, features):
-                prediction = clf.predict(features)
+            def predict_for_endpoint(endpoint, clf_data, features):
+                clf = clf_data[0]
+                optimal_threshold = clf_data[1]
+                prediction_probabilities = clf.predict_proba(features)[:, 1]
+                prediction = (prediction_probabilities >= optimal_threshold).astype(int)
                 return endpoint, prediction
 
 
             st.session_state.compounds = test_data['dsstox_substance_id'].values
-            tasks = [(endpoint, clf, test_data.iloc[:, 1:]) for endpoint, clf in classifiers.items()]
+            tasks = [(endpoint, clf_data, test_data.iloc[:, 1:]) for endpoint, clf_data in classifiers.items()]
             results = Parallel(n_jobs=max_workers)(delayed(predict_for_endpoint)(*task) for task in tasks)
             predictions = {endpoint: prediction for endpoint, prediction in results}
             predictions_df = pd.DataFrame(predictions)
