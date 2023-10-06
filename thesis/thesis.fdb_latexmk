@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber thesis"] 1696631836 "thesis.bcf" "thesis.bbl" "thesis" 1696631979 0
+["biber thesis"] 1696633455 "thesis.bcf" "thesis.bbl" "thesis" 1696634006 0
   "./refs.bib" 1696530651 18603 bfb002075036b7131db0c6ae031b663f ""
-  "thesis.bcf" 1696631978 107145 363543342babff994a4caf0b817a7935 "pdflatex"
+  "thesis.bcf" 1696634005 107145 363543342babff994a4caf0b817a7935 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1696631972 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1696631979 0
-  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1696625784 4679 7330225c5326983fd8beeccec6b55908 ""
+["pdflatex"] 1696633999 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1696634006 0
+  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1696633028 4703 c5b3c48b78c35dcec21d3cdf98cca22f ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1691267210 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -214,6 +214,7 @@
   "c:/texlive/2023/texmf-dist/tex/latex/textcase/textcase.sty" 1691268420 3050 42e1650bbafdaeb05aa69e5d5263388a ""
   "c:/texlive/2023/texmf-dist/tex/latex/threeparttable/threeparttable.sty" 1691268464 13506 a4e71a27db1a69b6fabada5beebf0844 ""
   "c:/texlive/2023/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty" 1691268465 4806 f47a86719933c0946f57de994330d55b ""
+  "c:/texlive/2023/texmf-dist/tex/latex/tools/afterpage.sty" 1691268629 4085 a74f860614a63dec980cd99d94a878b0 ""
   "c:/texlive/2023/texmf-dist/tex/latex/tools/array.sty" 1691268629 12691 ddae4e0162a664f166015d992388b742 ""
   "c:/texlive/2023/texmf-dist/tex/latex/tools/calc.sty" 1691268629 10214 75bcd28386d4b4b9f28b2aff3cea7b24 ""
   "c:/texlive/2023/texmf-dist/tex/latex/tools/dcolumn.sty" 1691268629 2758 e40d567548bec26177b312c119fdc7ce ""
@@ -231,7 +232,7 @@
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1691269303 8172629 8630c359bbd84e1bbe2b3d56affe7de2 ""
   "c:/texlive/2023/texmf.cnf" 1691269207 713 e69b156964470283e0530f5060668171 ""
   "chapters/appendix.tex" 1696626236 4153 71f50a853d2678529e8c287142f5ad44 ""
-  "chapters/material_and_methods.tex" 1696631967 21311 8bee5067995e3ddd6b37d0c36d0bddb6 ""
+  "chapters/material_and_methods.tex" 1696633995 21242 f9e22ae15df9fd30daba96547e87af30 ""
   "eth-template/ETHlogo.pdf" 1691253600 12666 b4023007c09129f6f4698ef1ed405aa9 ""
   "eth-template/ETHlogo.sty" 1691253600 299 e2abad9c54943afe91695fd7c02906f8 ""
   "eth-template/extrapackages.tex" 1691253600 2675 e8cee1fb289bc2525625e93f38f4740c ""
@@ -244,13 +245,12 @@
   "figures/fit_models.png" 1695761294 271184 b0584555a39a93ee4af9b298b4eb7db4 ""
   "figures/presence_matrix_all.png" 1693517692 1231217 ff363d71a0821b60ba3859282cb0fa8f ""
   "figures/presence_matrix_subset.png" 1693517765 1034005 b31aff38784e237aba0e8abf3e503c4b ""
-  "figures/tcpl.png" 1695217318 1122217 b4eb9c967526de97a584bf20bbf6858d ""
-  "thesis.aux" 1696631978 16689 20fed7936767b6de3ae51ae735ca3437 "pdflatex"
-  "thesis.bbl" 1696631838 5730 b1fb76365f89944a9357920f8887b87d "biber thesis"
-  "thesis.out" 1696631978 3027 02fafbb8f3387cc39e6ae3f53f0e57f6 "pdflatex"
-  "thesis.run.xml" 1696631978 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
-  "thesis.tex" 1696625784 4679 7330225c5326983fd8beeccec6b55908 ""
-  "thesis.toc" 1696631978 1779 c07da16712d894aae8094a9f22505895 "pdflatex"
+  "thesis.aux" 1696634005 15602 b81deaf60a9fc9eda95370aa1dca42ba "pdflatex"
+  "thesis.bbl" 1696633457 5730 b1fb76365f89944a9357920f8887b87d "biber thesis"
+  "thesis.out" 1696634005 3129 511ec6b138030ed2064fc3e2e066ea37 "pdflatex"
+  "thesis.run.xml" 1696634005 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "thesis.tex" 1696633028 4703 c5b3c48b78c35dcec21d3cdf98cca22f ""
+  "thesis.toc" 1696634005 1858 8213b2d6c778450abf302d4e563c343b "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

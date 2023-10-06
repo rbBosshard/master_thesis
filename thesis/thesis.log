@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  7 OCT 2023 00:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  7 OCT 2023 01:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -657,6 +657,11 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
 \TPTL@width=\skip262
+) (c:/texlive/2023/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
+\AP@output=\toks60
+\AP@partial=\box69
+\AP@footins=\box70
 ) (./eth-template/extrapackages.tex (c:/texlive/2023/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
  (c:/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
@@ -789,7 +794,7 @@ Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
 \csq@qlevel=\count370
 \csq@maxlvl=\count371
 \csq@tshold=\count372
-\csq@ltx@everypar=\toks60
+\csq@ltx@everypar=\toks61
  (c:/texlive/2023/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
 )
@@ -806,8 +811,8 @@ Package: fmtcount 2020/01/30 v3.07
  (c:/texlive/2023/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
  (c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2023/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks61
-\XKV@tempa@toks=\toks62
+\XKV@toks=\toks62
+\XKV@tempa@toks=\toks63
 )
 \XKV@depth=\count373
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -849,8 +854,8 @@ Package datetime Info: No datetime.cfg file found, using default settings on inp
 \dayofyear=\count397
 \dayofweek=\count398
 LaTeX Info: Redefining \today on input line 736.
-\dt@a=\toks63
-\dt@b=\toks64
+\dt@a=\toks64
+\dt@b=\toks65
 ) (c:/texlive/2023/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
  (c:/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -865,7 +870,7 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_intertext_sep=\dimen300
 \l_MT_above_shortintertext_sep=\dimen301
 \l_MT_below_shortintertext_sep=\dimen302
-\xmathstrut@box=\box69
+\xmathstrut@box=\box71
 \xmathstrut@dim=\dimen303
 ) (c:/texlive/2023/texmf-dist/tex/latex/esvect/esvect.sty
 Package: esvect 
@@ -873,8 +878,8 @@ Package: esvect
 LaTeX Font Info:    Redeclaring math symbol \fldr on input line 38.
 ) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count400
-\lst@gtempboxa=\box70
-\lst@token=\toks65
+\lst@gtempboxa=\box72
+\lst@token=\toks66
 \lst@length=\count401
 \lst@currlwidth=\dimen304
 \lst@column=\count402
@@ -888,7 +893,7 @@ LaTeX Font Info:    Redeclaring math symbol \fldr on input line 38.
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 \c@lstnumber=\count406
 \lst@skipnumbers=\count407
-\lst@framebox=\box71
+\lst@framebox=\box73
 ) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
@@ -915,12 +920,12 @@ File: lstlang3.sty 2023/02/27 1.9 listings language file
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 ) (c:/texlive/2023/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2023/03/13 v3.1a Micro-typographical refinements (RS)
-\MT@toks=\toks66
-\MT@tempbox=\box72
+\MT@toks=\toks67
+\MT@tempbox=\box74
 \MT@count=\count408
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1059.
 LaTeX Info: Redefining \leftprotrusion on input line 1060.
-\MT@prot@toks=\toks67
+\MT@prot@toks=\toks68
 LaTeX Info: Redefining \rightprotrusion on input line 1078.
 LaTeX Info: Redefining \textls on input line 1368.
 \MT@outer@kern=\dimen308
@@ -1225,7 +1230,7 @@ Package: expl3 2023-08-03 L3 programming layer (loader)
  (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count554
-\l__pdf_internal_box=\box73
+\l__pdf_internal_box=\box75
 ))
 Package biblatex Info: ... and expl3
 (biblatex)             2023-08-03 L3 programming layer (loader) 
@@ -1240,43 +1245,43 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 110.
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 111.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
  (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count555
 \scratchdimen=\dimen309
-\scratchbox=\box74
+\scratchbox=\box76
 \nofMPsegments=\count556
 \nofMParguments=\count557
-\everyMPshowfont=\toks68
+\everyMPshowfont=\toks69
 \MPscratchCnt=\count558
 \MPscratchDim=\dimen310
 \MPnumerator=\count559
 \makeMPintoPDFobject=\count560
-\everyMPtoPDFconversion=\toks69
+\everyMPtoPDFconversion=\toks70
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -1293,31 +1298,31 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )) (c:/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 110.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 111.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 110.
+Package hyperref Info: Link coloring ON on input line 111.
  (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
 
 \c@lstlisting=\count561
-LaTeX Info: Redefining \microtypecontext on input line 110.
-Package microtype Info: Applying patch `item' on input line 110.
-Package microtype Info: Applying patch `toc' on input line 110.
-Package microtype Info: Applying patch `eqnum' on input line 110.
-Package microtype Info: Applying patch `footnote' on input line 110.
-Package microtype Info: Applying patch `verbatim' on input line 110.
+LaTeX Info: Redefining \microtypecontext on input line 111.
+Package microtype Info: Applying patch `item' on input line 111.
+Package microtype Info: Applying patch `toc' on input line 111.
+Package microtype Info: Applying patch `eqnum' on input line 111.
+Package microtype Info: Applying patch `footnote' on input line 111.
+Package microtype Info: Applying patch `verbatim' on input line 111.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 110.
+LaTeX Info: Redefining \showhyphens on input line 111.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1337,12 +1342,12 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 110.
-Package biblatex Info: Reference segment=0 on input line 110.
-<eth-template/ETHlogo.pdf, id=88, 179.67125pt x 45.16875pt>
+Package biblatex Info: Reference section=0 on input line 111.
+Package biblatex Info: Reference segment=0 on input line 111.
+<eth-template/ETHlogo.pdf, id=92, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
-Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 120.
+Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 121.
 (pdftex.def)             Requested size: 179.67079pt x 45.16862pt.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -1401,7 +1406,7 @@ File: uesvect.fd
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.133 
+l.134 
        [1
 
 
@@ -1426,76 +1431,65 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 ]
-<figures/CRS.png, id=144, 944.328pt x 474.573pt>
+<figures/CRS.png, id=149, 944.328pt x 474.573pt>
 File: figures/CRS.png Graphic file (type png)
 <use figures/CRS.png>
 Package pdftex.def Info: figures/CRS.png  used on input line 21.
-(pdftex.def)             Requested size: 373.49747pt x 187.7041pt.
+(pdftex.def)             Requested size: 332.00127pt x 166.84889pt.
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
 (Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 22.
  [2 <./figures/CRS.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3]
-LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 95.
+<figures/fit_models.png, id=174, 829.59938pt x 594.22pt>
+File: figures/fit_models.png Graphic file (type png)
+<use figures/fit_models.png>
+Package pdftex.def Info: figures/fit_models.png  used on input line 94.
+(pdftex.def)             Requested size: 373.49747pt x 267.52347pt.
+ [3] [4 <./figures/fit_models.png>]
+LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 106.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 )
-<figures/POD.png, id=178, 664.28175pt x 411.939pt>
+<figures/POD.png, id=194, 664.28175pt x 411.939pt>
 File: figures/POD.png Graphic file (type png)
 <use figures/POD.png>
-Package pdftex.def Info: figures/POD.png  used on input line 103.
-(pdftex.def)             Requested size: 207.5pt x 128.67404pt.
- [4]
-<figures/tcpl.png, id=189, 668.4975pt x 648.021pt>
-File: figures/tcpl.png Graphic file (type png)
-<use figures/tcpl.png>
-Package pdftex.def Info: figures/tcpl.png  used on input line 129.
-(pdftex.def)             Requested size: 165.99747pt x 160.90727pt.
-<figures/fit_models.png, id=190, 829.59938pt x 594.22pt>
-File: figures/fit_models.png Graphic file (type png)
-<use figures/fit_models.png>
-Package pdftex.def Info: figures/fit_models.png  used on input line 135.
-(pdftex.def)             Requested size: 228.25127pt x 163.48807pt.
- [5 <./figures/POD.png>]
-<figures/presence_matrix_all.png, id=208, 8198.63pt x 3936.7075pt>
+Package pdftex.def Info: figures/POD.png  used on input line 114.
+(pdftex.def)             Requested size: 332.00127pt x 205.88727pt.
+ [5 <./figures/POD.png>] [6]
+<figures/presence_matrix_all.png, id=219, 8198.63pt x 3936.7075pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
-Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 158.
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 152.
+(pdftex.def)             Requested size: 415.0pt x 199.24968pt.
+<figures/presence_matrix_subset.png, id=221, 8198.63pt x 3936.7075pt>
+File: figures/presence_matrix_subset.png Graphic file (type png)
+<use figures/presence_matrix_subset.png>
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 163.
 (pdftex.def)             Requested size: 415.0pt x 199.24968pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-[6 <./figures/tcpl.png> <./figures/fit_models.png>]
-<figures/presence_matrix_subset.png, id=219, 8198.63pt x 3936.7075pt>
-File: figures/presence_matrix_subset.png Graphic file (type png)
-<use figures/presence_matrix_subset.png>
-Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 169.
-(pdftex.def)             Requested size: 415.0pt x 199.24968pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [7 <./figures/presence_matrix_all.png>]
-Overfull \hbox (126.10474pt too wide) detected at line 204
+Overfull \hbox (126.10474pt too wide) detected at line 198
 []
  []
 
 [8 <./figures/presence_matrix_subset.png>]
-Overfull \hbox (27.7992pt too wide) detected at line 222
+Overfull \hbox (27.7992pt too wide) detected at line 216
 \OML/zplm/m/it/10.95 P\OT1/zplm/m/n/10.95 ([]) = \OML/zplm/m/it/10.95 P\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 ACC[] > ACC[]\OT1/zplm/m/n/10.95 ) \OMS/zplm/m/n/10.95 ^^A \OML/zplm/m/it/10.95 P\OT1/zplm/m/n/10.95 (\OML/zplm/m/it/10.95 ACC[] < []\OT1/zplm/m/n/10.95 )
  []
 
-) [9] [10]
+[9]) [10]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
  (./chapters/appendix.tex [11
 
 ]
-<figures/concentration_metric_distributions.png, id=256, 1813.77625pt x 453.695pt>
+<figures/concentration_metric_distributions.png, id=260, 1813.77625pt x 453.695pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 43.
@@ -1516,24 +1510,24 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 02FAFBB8F3387CC39E6AE3F53F0E57F6;3027.
+(rerunfilecheck)             Checksum: 511EC6B138030ED2064FC3E2E066EA37;3129.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36852 strings out of 475188
- 684303 string characters out of 5767805
- 1936248 words of memory out of 5000000
- 57146 multiletter control sequences out of 15000+600000
- 622276 words of font info for 430 fonts, out of 8000000 for 9000
+ 36847 strings out of 475188
+ 684261 string characters out of 5767805
+ 1937248 words of memory out of 5000000
+ 57145 multiletter control sequences out of 15000+600000
+ 620714 words of font info for 423 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,16n,125p,1467b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,17n,125p,1467b,2050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (15 pages, 2242568 bytes).
+Output written on thesis.pdf (15 pages, 1203621 bytes).
 PDF statistics:
- 360 PDF objects out of 1000 (max. 8388607)
- 289 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
- 113873 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 364 PDF objects out of 1000 (max. 8388607)
+ 295 compressed objects within 3 object streams
+ 65 named destinations out of 1000 (max. 500000)
+ 107732 words of extra memory for PDF output out of 128383 (max. 10000000)
 
