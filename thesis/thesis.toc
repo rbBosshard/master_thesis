@@ -3,33 +3,41 @@
 \contentsline {chapter}{Contents}{iii}{section*.1}%
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}The Challenge of Environmental Pollution}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}The Imperative for Prioritization and Toxicity Assessment}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.2}The Imperative for Prioritization and Toxicity Assessment}{3}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Unlocking the Potential of High-Throughput Screening and Machine Learning in Toxicity Prediction}{4}{section.1.3}%
-\contentsline {section}{\numberline {1.4}MLinvitroTox: A Novel Approach}{5}{section.1.4}%
+\contentsline {section}{\numberline {1.4}MLinvitroTox: A Novel Approach}{4}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Objectives and Significance}{5}{section.1.5}%
 \contentsline {section}{\numberline {1.6}Thesis Structure}{6}{section.1.6}%
-\contentsline {chapter}{\chapternumberline {2}Background}{8}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Toxicity Testing: From In Vitro Assays and Molecular Fingerprints to Predictive Models and Beyond}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Chemical Target Toxicity vs. Cytotoxicity}{10}{section.2.2}%
-\contentsline {chapter}{\chapternumberline {3}Related work}{12}{chapter.3}%
-\contentsline {chapter}{\chapternumberline {4}Material and Methods}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Toxicity Data and Processing}{13}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}ToxCast invitroDB v4.1}{13}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}tcpl v3.0}{14}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Concentration-Response Series}{14}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}tcplFit2}{15}{subsection.4.1.4}%
-\contentsline {subsection}{\numberline {4.1.5}Curve Fitting}{17}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {4.1.6}Hit Calling}{17}{subsection.4.1.6}%
-\contentsline {subsection}{\numberline {4.1.7}Flagging}{18}{subsection.4.1.7}%
-\contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Introduction}{18}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Subset assay endpoints}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Cytotoxicity Interference Evaluation}{20}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Curve Surfer}{21}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{21}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{21}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{21}{subsection.4.3.2}%
+\contentsline {chapter}{\chapternumberline {2}Background}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Toxicity Testing: From In Vitro Assays and Molecular Fingerprints to Predictive Models and Beyond}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Chemical Target Toxicity vs. Cytotoxicity}{9}{section.2.2}%
+\contentsline {chapter}{\chapternumberline {3}Related work}{11}{chapter.3}%
+\contentsline {chapter}{\chapternumberline {4}Material and Methods}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Toxicity Data and Processing}{12}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}ToxCast invitroDB v4.1}{12}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}tcpl v3.0}{12}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Concentration-Response Series}{13}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}tcplFit2}{14}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Curve Fitting}{16}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Hit Calling}{16}{subsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.1.7}Flagging}{17}{subsection.4.1.7}%
+\contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{17}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Introduction}{17}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Subset assay endpoints}{18}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Cytotoxicity Interference Evaluation}{19}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Curve Surfer}{20}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{20}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{20}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{20}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Regression}{21}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{21}{subsection.4.3.4}%
-\contentsline {chapter}{Bibliography}{23}{section*.20}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{27}{appendix.A}%
+\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{22}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Results}{22}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation}{22}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Discussion}{22}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Performance Analysis}{22}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Binary Classification}{22}{section.5.5}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Further}{23}{section.6.1}%
+\contentsline {chapter}{Bibliography}{25}{section*.21}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{29}{appendix.A}%

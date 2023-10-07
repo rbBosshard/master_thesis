@@ -128,6 +128,43 @@
       \verb 10.1126/science.1127291
       \endverb
     \endentry
+    \entry{greendeal}{book}{}
+      \name{author}{3}{}{%
+        {{hash=a9bee3ff64e0ef4f06532e455eb1658f}{%
+           family={Commission},
+           familyi={C\bibinitperiod},
+           given={European},
+           giveni={E\bibinitperiod}}}%
+        {{hash=896b581273e82993943cdd2cbbd4d75a}{%
+           family={Research},
+           familyi={R\bibinitperiod},
+           given={Directorate-General},
+           giveni={D\bibinithyphendelim G\bibinitperiod},
+           prefix={for},
+           prefixi={f\bibinitperiod}}}%
+        {{hash=32f28a2c732e178e43a0ceeffa08ab08}{%
+           family={Innovation},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Publications Office of the European Union}%
+      }
+      \strng{namehash}{11f28c4a6dd3649662f693d97138104b}
+      \strng{fullhash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{bibnamehash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{authorbibnamehash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \strng{authornamehash}{11f28c4a6dd3649662f693d97138104b}
+      \strng{authorfullhash}{649e9c4cbe401cae4dbb15f24818d4a8}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{European Green Deal - Research \& innovation call}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.2777/33415
+      \endverb
+    \endentry
     \entry{EUChemicalsStrategy}{article}{}
       \name{author}{1}{}{%
         {{hash=a9bee3ff64e0ef4f06532e455eb1658f}{%
@@ -142,8 +179,8 @@
       \strng{authorbibnamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
       \strng{authornamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
       \strng{authorfullhash}{a9bee3ff64e0ef4f06532e455eb1658f}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Communication from the Commission to the European Parliament, the Council, the European Economic and Social Committee and the Committee of the Regions - Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
@@ -182,8 +219,8 @@
       \strng{authorbibnamehash}{8053c630a50ace02751e31eca3f12443}
       \strng{authornamehash}{74ef5cdf0309af2d53871bdfb5045429}
       \strng{authorfullhash}{8053c630a50ace02751e31eca3f12443}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Chemical Reviews}
@@ -236,8 +273,8 @@
       \strng{authorbibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
       \strng{authornamehash}{525a284aa9f413729e3fb66494225dd4}
       \strng{authorfullhash}{fad096f6f8a8848b21305b23cf86bb12}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Environmental Science \& Technology}
@@ -290,8 +327,8 @@
       \strng{authorbibnamehash}{53b926651266d022a590eff551c16ead}
       \strng{authornamehash}{ea0268c4709c94c7834284073b5ed16f}
       \strng{authorfullhash}{53b926651266d022a590eff551c16ead}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0305-1048}
@@ -673,8 +710,8 @@
       \strng{authorbibnamehash}{027b1ba03b1f50102ed218725212cdc0}
       \strng{authornamehash}{027b1ba03b1f50102ed218725212cdc0}
       \strng{authorfullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0887-2333}
@@ -1144,8 +1181,8 @@
       \strng{authorbibnamehash}{5c4728af1b0c3ee9bb50da3de4303fbe}
       \strng{authornamehash}{03d19db257c28685c6aa9054728bef3a}
       \strng{authorfullhash}{5c4728af1b0c3ee9bb50da3de4303fbe}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Chemical Research in Toxicology}
@@ -1347,8 +1384,8 @@
       \strng{authorbibnamehash}{fe07fe5409ab0e3810abc013b3e6f408}
       \strng{authornamehash}{fe07fe5409ab0e3810abc013b3e6f408}
       \strng{authorfullhash}{fe07fe5409ab0e3810abc013b3e6f408}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{PLOS ONE}
