@@ -19,6 +19,1213 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{chemicaloutlook}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=77e735bae2840b83aacd3c4ad7e795a0}{%
+           family={Programme},
+           familyi={P\bibinitperiod},
+           given={United\bibnamedelimb Nations\bibnamedelima Environment},
+           giveni={U\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{fullhash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{bibnamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authorbibnamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authornamehash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \strng{authorfullhash}{77e735bae2840b83aacd3c4ad7e795a0}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Global Chemicals Outlook II - From Legacies to Innovative Solutions: Implementing the 2030 Agenda for Sustainable Development - Synthesis Report}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://wedocs.unep.org/20.500.11822/27651
+      \endverb
+      \verb{url}
+      \verb https://wedocs.unep.org/20.500.11822/27651
+      \endverb
+    \endentry
+    \entry{CAS}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b8ce532dfd4432b279775aeeaab4d317}{%
+           family={Service},
+           familyi={S\bibinitperiod},
+           given={Chemical\bibnamedelima Abstracts},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{fullhash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{bibnamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authorbibnamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authornamehash}{b8ce532dfd4432b279775aeeaab4d317}
+      \strng{authorfullhash}{b8ce532dfd4432b279775aeeaab4d317}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Source of chemical information located in Columbus, Ohio, United States}
+      \field{note}{https://www.cas.org/support/documentation/cas-databases}
+      \field{title}{Chemical Abstracts Service (CAS) is a division of the American Chemical Society}
+      \field{year}{2023}
+    \endentry
+    \entry{schwarzenbach2006}{article}{}
+      \name{author}{7}{}{%
+        {{hash=544316fcd720d22be33058990af9cc27}{%
+           family={Schwarzenbach},
+           familyi={S\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod}}}%
+        {{hash=abf0d037a7d99ba2b4d49a0750d217ae}{%
+           family={Escher},
+           familyi={E\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bc1e51811458d660d00f99bfbadde009}{%
+           family={Fenner},
+           familyi={F\bibinitperiod},
+           given={Kathrin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=6af5644992b5e107c5eacf396b543e51}{%
+           family={Hofstetter},
+           familyi={H\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3ab34db904b7dbbd29c0c325a354a5ab}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={C},
+           giveni={C\bibinitperiod}}}%
+        {{hash=e9ae36598de7df6ed14ff44bb6d4a88d}{%
+           family={Gunten},
+           familyi={G\bibinitperiod},
+           given={Urs},
+           giveni={U\bibinitperiod}}}%
+        {{hash=290674860dee0b88c20e55863c32c1c4}{%
+           family={Wehrli},
+           familyi={W\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{fullhash}{cb90c179d14ea786aef8cb09225299b2}
+      \strng{bibnamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authorbibnamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authornamehash}{cb42500b5a78df07c4797b51892841d8}
+      \strng{authorfullhash}{cb90c179d14ea786aef8cb09225299b2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science (New York, N.Y.)}
+      \field{month}{09}
+      \field{title}{The Challenge of Micropollutants in Aquatic Systems}
+      \field{volume}{313}
+      \field{year}{2006}
+      \field{pages}{1072\bibrangedash 7}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1126/science.1127291
+      \endverb
+    \endentry
+    \entry{EUChemicalsStrategy}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a9bee3ff64e0ef4f06532e455eb1658f}{%
+           family={Commission},
+           familyi={C\bibinitperiod},
+           given={European},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{fullhash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{bibnamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authorbibnamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authornamehash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \strng{authorfullhash}{a9bee3ff64e0ef4f06532e455eb1658f}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Communication from the Commission to the European Parliament, the Council, the European Economic and Social Committee and the Committee of the Regions - Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
+      \field{title}{EU Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
+      \endverb
+      \verb{url}
+      \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
+      \endverb
+    \endentry
+    \entry{tamara2022}{article}{}
+      \name{author}{3}{}{%
+        {{hash=ace3349bb35301a62038f29f56b4a551}{%
+           family={Tamara},
+           familyi={T\bibinitperiod},
+           given={Sem},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3045650e17efa1d3136dd0c4bbde4ac3}{%
+           family={Boer},
+           familyi={B\bibinitperiod},
+           given={Maurits\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           prefix={den},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=9c6f0d96af99b0c3fc39e6030472175a}{%
+           family={Heck},
+           familyi={H\bibinitperiod},
+           given={Albert\bibnamedelimb J.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{74ef5cdf0309af2d53871bdfb5045429}
+      \strng{fullhash}{8053c630a50ace02751e31eca3f12443}
+      \strng{bibnamehash}{8053c630a50ace02751e31eca3f12443}
+      \strng{authorbibnamehash}{8053c630a50ace02751e31eca3f12443}
+      \strng{authornamehash}{74ef5cdf0309af2d53871bdfb5045429}
+      \strng{authorfullhash}{8053c630a50ace02751e31eca3f12443}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Chemical Reviews}
+      \field{note}{PMID: 34415162}
+      \field{number}{8}
+      \field{title}{High-Resolution Native Mass Spectrometry}
+      \field{volume}{122}
+      \field{year}{2022}
+      \field{pages}{7269\bibrangedash 7326}
+      \range{pages}{58}
+      \verb{doi}
+      \verb 10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.chemrev.1c00212
+      \endverb
+    \endentry
+    \entry{hollender}{article}{}
+      \name{author}{4}{}{%
+        {{hash=329dc2dcf5e0c1f7c14a16c4f5005590}{%
+           family={Hollender},
+           familyi={H\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42df89dbe4a4b73eb793b6ba0d83cbdc}{%
+           family={Schymanski},
+           familyi={S\bibinitperiod},
+           given={Emma\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=a6348ef06e7107d8fb35f8f01d8a9174}{%
+           family={Singer},
+           familyi={S\bibinitperiod},
+           given={Heinz\bibnamedelima P.},
+           giveni={H\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=09d858c1d5eb938ca2446c824c7c9159}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={P.\bibnamedelimi Lee},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{fullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{bibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authorbibnamehash}{fad096f6f8a8848b21305b23cf86bb12}
+      \strng{authornamehash}{525a284aa9f413729e3fb66494225dd4}
+      \strng{authorfullhash}{fad096f6f8a8848b21305b23cf86bb12}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Environmental Science \& Technology}
+      \field{note}{PMID: 28877430}
+      \field{number}{20}
+      \field{title}{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}
+      \field{volume}{51}
+      \field{year}{2017}
+      \field{pages}{11505\bibrangedash 11512}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1021/acs.est.7b02184
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.est.7b02184
+      \endverb
+    \endentry
+    \entry{banerjee2018}{article}{}
+      \name{author}{4}{}{%
+        {{hash=5c9ad4f97ce60c906be797c508b52d94}{%
+           family={Banerjee},
+           familyi={B\bibinitperiod},
+           given={Priyanka},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8c2279ee1312675c9c184f733a1c280d}{%
+           family={Eckert},
+           familyi={E\bibinitperiod},
+           given={Andreas\bibnamedelima O},
+           giveni={A\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=805344eafb4ed1c4f2980798b222a1b6}{%
+           family={Schrey},
+           familyi={S\bibinitperiod},
+           given={Anna\bibnamedelima K},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=7c93f84036dfa085b2b62ec813db48ea}{%
+           family={Preissner},
+           familyi={P\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{ea0268c4709c94c7834284073b5ed16f}
+      \strng{fullhash}{53b926651266d022a590eff551c16ead}
+      \strng{bibnamehash}{53b926651266d022a590eff551c16ead}
+      \strng{authorbibnamehash}{53b926651266d022a590eff551c16ead}
+      \strng{authornamehash}{ea0268c4709c94c7834284073b5ed16f}
+      \strng{authorfullhash}{53b926651266d022a590eff551c16ead}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0305-1048}
+      \field{journaltitle}{Nucleic Acids Research}
+      \field{month}{04}
+      \field{number}{W1}
+      \field{title}{{ProTox-II: a webserver for the prediction of toxicity of chemicals}}
+      \field{volume}{46}
+      \field{year}{2018}
+      \field{pages}{W257\bibrangedash W263}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1093/nar/gky318
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/nar/article-pdf/46/W1/W257/25110434/gky318.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/nar/gky318
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/nar/gky318
+      \endverb
+    \endentry
+    \entry{hts_robot}{online}{}
+      \name{author}{1}{}{%
+        {{hash=dc199a5b50753ff6608b987b82cfd778}{%
+           family={Maggie\bibnamedelima Bartlett},
+           familyi={M\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={National\bibnamedelimb Human\bibnamedelimb Genome\bibnamedelimb Research\bibnamedelima Institute},
+           giveni={N\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{dc199a5b50753ff6608b987b82cfd778}
+      \strng{fullhash}{dc199a5b50753ff6608b987b82cfd778}
+      \strng{bibnamehash}{dc199a5b50753ff6608b987b82cfd778}
+      \strng{authorbibnamehash}{dc199a5b50753ff6608b987b82cfd778}
+      \strng{authornamehash}{dc199a5b50753ff6608b987b82cfd778}
+      \strng{authorfullhash}{dc199a5b50753ff6608b987b82cfd778}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Chemical Genomics Robot}
+      \field{year}{2009}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/High-throughput_screening#/media/File:Chemical_Genomics_Robot.jpg
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/High-throughput_screening#/media/File:Chemical_Genomics_Robot.jpg
+      \endverb
+    \endentry
+    \entry{hts_plates}{online}{}
+      \name{author}{1}{}{%
+        {{hash=42a9971c494e12687ce02853dbed15b6}{%
+           family={Rudd},
+           familyi={R\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{42a9971c494e12687ce02853dbed15b6}
+      \strng{fullhash}{42a9971c494e12687ce02853dbed15b6}
+      \strng{bibnamehash}{42a9971c494e12687ce02853dbed15b6}
+      \strng{authorbibnamehash}{42a9971c494e12687ce02853dbed15b6}
+      \strng{authornamehash}{42a9971c494e12687ce02853dbed15b6}
+      \strng{authorfullhash}{42a9971c494e12687ce02853dbed15b6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{High Throughput Screening - Accelerating Drug Discovery Efforts}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.ddw-online.com/hts-a-strategy-for-drug-discovery-900-200008/
+      \endverb
+      \verb{url}
+      \verb https://www.ddw-online.com/hts-a-strategy-for-drug-discovery-900-200008/
+      \endverb
+    \endentry
+    \entry{arturi}{article}{}
+      \name{author}{2}{}{%
+        {{hash=d9486e589741f2285ac45394d29a1118}{%
+           family={Arturi},
+           familyi={A\bibinitperiod},
+           given={Katarzyna},
+           giveni={K\bibinitperiod}}}%
+        {{hash=329dc2dcf5e0c1f7c14a16c4f5005590}{%
+           family={Hollender},
+           familyi={H\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \strng{fullhash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \strng{bibnamehash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \strng{authorbibnamehash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \strng{authornamehash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \strng{authorfullhash}{ed69dd28badad7e9139f789ebf66f4a6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Nontarget high-resolution mass spectrometry screening (NTS HRMS/MS) can detect thousands of organic substances in environmental samples. However, new strategies are needed to focus time-intensive identification efforts on features with the highest potential to cause adverse effects instead of the most abundant ones. To address this challenge, we developed MLinvitroTox, a machine learning framework that uses molecular fingerprints derived from fragmentation spectra (MS2) for a rapid classification of thousands of unidentified HRMS/MS features as toxic/nontoxic based on nearly 400 target-specific and over 100 cytotoxic endpoints from ToxCast/Tox21. Model development results demonstrated that using customized molecular fingerprints and models, over a quarter of toxic endpoints and the majority of the associated mechanistic targets could be accurately predicted with sensitivities exceeding 0.95. Notably, SIRIUS molecular fingerprints and xboost (Extreme Gradient Boosting) models with SMOTE (Synthetic Minority Oversampling Technique) for handling data imbalance were a universally successful and robust modeling configuration. Validation of MLinvitroTox on MassBank spectra showed that toxicity could be predicted from molecular fingerprints derived from MS2 with an average balanced accuracy of 0.75. By applying MLinvitroTox to environmental HRMS/MS data, we confirmed the experimental results obtained with target analysis and narrowed the analytical focus from tens of thousands of detected signals to 783 features linked to potential toxicity, including 109 spectral matches and 30 compounds with confirmed toxic activity.}
+      \field{journaltitle}{Environmental Science \& Technology}
+      \field{note}{PMID: 37279189}
+      \field{number}{0}
+      \field{title}{Machine Learning-Based Hazard-Driven Prioritization of Features in Nontarget Screening of Environmental High-Resolution Mass Spectrometry Data}
+      \field{volume}{0}
+      \field{year}{0}
+      \field{pages}{null}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1021/acs.est.3c00304
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.est.3c00304
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.est.3c00304
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.est.3c00304
+      \endverb
+    \endentry
+    \entry{sirius2019}{article}{}
+      \name{author}{9}{}{%
+        {{hash=c460e1dc63a8ce60dec74c70476470a0}{%
+           family={Dührkop},
+           familyi={D\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=3aa11cf7328c528fc992948c555676b5}{%
+           family={Fleischauer},
+           familyi={F\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fe2d6c8bc24023bd24eb5b5d1ddabfca}{%
+           family={Ludwig},
+           familyi={L\bibinitperiod},
+           given={Marcus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=87bfa87346b26d5e647fc1b50b684851}{%
+           family={Aksenov},
+           familyi={A\bibinitperiod},
+           given={Alexander\bibnamedelima A},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b489b6a1e1a85b5118ca1474885b404e}{%
+           family={Melnik},
+           familyi={M\bibinitperiod},
+           given={Alexey\bibnamedelima V},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=fca24157fc53705d3fdd2b8fbd96d444}{%
+           family={Meusel},
+           familyi={M\bibinitperiod},
+           given={Marvin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c87f8cdb434cfe0caa0fa62965f528b8}{%
+           family={Dorrestein},
+           familyi={D\bibinitperiod},
+           given={Pieter\bibnamedelima C},
+           giveni={P\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=d33559c1ef2f2c646c61c5818d443284}{%
+           family={Rousu},
+           familyi={R\bibinitperiod},
+           given={Juho},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7b293fa7e7921b48e54f7e763f6e0e0c}{%
+           family={Böcker},
+           familyi={B\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{5b35da55e18557ca035385539a9e4370}
+      \strng{fullhash}{da37d4b30f31f01fc95a974df600db98}
+      \strng{bibnamehash}{5b35da55e18557ca035385539a9e4370}
+      \strng{authorbibnamehash}{5b35da55e18557ca035385539a9e4370}
+      \strng{authornamehash}{5b35da55e18557ca035385539a9e4370}
+      \strng{authorfullhash}{da37d4b30f31f01fc95a974df600db98}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1548-7091}
+      \field{journaltitle}{Nature methods}
+      \field{month}{4}
+      \field{number}{4}
+      \field{title}{SIRIUS 4: a rapid tool for turning tandem mass spectra into metabolite structure information}
+      \field{volume}{16}
+      \field{year}{2019}
+      \field{pages}{299\bibrangedash 302}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/s41592-019-0344-8
+      \endverb
+      \verb{urlraw}
+      \verb https://research.aalto.fi/files/32997691/SCI_Duhrkop_Fleischauer_Sirius_4_Turning_tandem.pdf
+      \endverb
+      \verb{url}
+      \verb https://research.aalto.fi/files/32997691/SCI_Duhrkop_Fleischauer_Sirius_4_Turning_tandem.pdf
+      \endverb
+    \endentry
+    \entry{massbank}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://massbank.eu/MassBank/}
+      \field{note}{Accessed: 2023}
+      \field{title}{MassBank: High Quality Mass Spectral Database}
+    \endentry
+    \entry{janela2022}{article}{}
+      \name{author}{3}{}{%
+        {{hash=8480dc318eb7a1533921ef3ee4284a4c}{%
+           family={Janela},
+           familyi={J\bibinitperiod},
+           given={Tiago},
+           giveni={T\bibinitperiod}}}%
+        {{hash=23e45a45159d20c1819d388d4e4df888}{%
+           family={Takeuchi},
+           familyi={T\bibinitperiod},
+           given={Kosuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=47a4bbea95808ce55fc26d9535990987}{%
+           family={Bajorath},
+           familyi={B\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{be17359043bbe2aeec2b15ba377d04a9}
+      \strng{fullhash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{bibnamehash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{authorbibnamehash}{018301985c8e5cc60fd72663e45463a8}
+      \strng{authornamehash}{be17359043bbe2aeec2b15ba377d04a9}
+      \strng{authorfullhash}{018301985c8e5cc60fd72663e45463a8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1420-3049}
+      \field{journaltitle}{Molecules}
+      \field{number}{7}
+      \field{title}{Introducing a Chemically Intuitive Core-Substituent Fingerprint Designed to Explore Structural Requirements for Effective Similarity Searching and Machine Learning}
+      \field{volume}{27}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3390/molecules27072331
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/1420-3049/27/7/2331
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/1420-3049/27/7/2331
+      \endverb
+    \endentry
+    \entry{bell2018}{article}{}
+      \name{author}{24}{}{%
+        {{hash=591300d366d7edb120795966f7d6af19}{%
+           family={Bell},
+           familyi={B\bibinitperiod},
+           given={Shannon\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=a74d0a00dcc820adfe2276c28f2f2ddc}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Xiaoqing},
+           giveni={X\bibinitperiod}}}%
+        {{hash=24bbd85f38366aa032e9fe3caf8481fc}{%
+           family={Wambaugh},
+           familyi={W\bibinitperiod},
+           given={John\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=4a35b3da89c09763764f2168247fee04}{%
+           family={Allen},
+           familyi={A\bibinitperiod},
+           given={David\bibnamedelima G.},
+           giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=863d754f1487eb6272ee6dab8087ccf6}{%
+           family={Bartels},
+           familyi={B\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2df7b40394a27cbc87c8740972b5a562}{%
+           family={Brouwer},
+           familyi={B\bibinitperiod},
+           given={Kim\bibnamedelima L.R.},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=7b71f07eda77b4c7b20665895c8925f5}{%
+           family={Casey},
+           familyi={C\bibinitperiod},
+           given={Warren\bibnamedelima M.},
+           giveni={W\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=415428586fc6b8c31df69ca23318fdac}{%
+           family={Choksi},
+           familyi={C\bibinitperiod},
+           given={Neepa},
+           giveni={N\bibinitperiod}}}%
+        {{hash=01afb822104dd3ca7f90dc83979f10e9}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Stephen\bibnamedelima S.},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=9d82cd3f83c0d9aa0cd002534e7c4896}{%
+           family={Fraczkiewicz},
+           familyi={F\bibinitperiod},
+           given={Grazyna},
+           giveni={G\bibinitperiod}}}%
+        {{hash=0a65d5ff16d638aee86aa10d15352fed}{%
+           family={Jarabek},
+           familyi={J\bibinitperiod},
+           given={Annie\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=704b08f5a6dfa9cffd8bd5def307b222}{%
+           family={Ke},
+           familyi={K\bibinitperiod},
+           given={Alice},
+           giveni={A\bibinitperiod}}}%
+        {{hash=de11b2d1d58d8c1de026a341219a9f05}{%
+           family={Lumen},
+           familyi={L\bibinitperiod},
+           given={Annie},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cefa943433668f2b22114b0b769ded88}{%
+           family={Lynn},
+           familyi={L\bibinitperiod},
+           given={Scott\bibnamedelima G.},
+           giveni={S\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=0aed9a14117608106c4ee9131a94ca5f}{%
+           family={Paini},
+           familyi={P\bibinitperiod},
+           given={Alicia},
+           giveni={A\bibinitperiod}}}%
+        {{hash=587fbe545560967198d8bd0e666dd93b}{%
+           family={Price},
+           familyi={P\bibinitperiod},
+           given={Paul\bibnamedelima S.},
+           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=caa0e6781fc87ada9e6eef1579e521c9}{%
+           family={Ring},
+           familyi={R\bibinitperiod},
+           given={Caroline},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8d4762a7ebd4b50d9d9e40acdfa33bb4}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Ted\bibnamedelima W.},
+           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=2bb354303f29e74cc53427e9ceac01a7}{%
+           family={Sipes},
+           familyi={S\bibinitperiod},
+           given={Nisha\bibnamedelima S.},
+           giveni={N\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=84872dab3bed217ed7eca95e589c9af1}{%
+           family={Sprankle},
+           familyi={S\bibinitperiod},
+           given={Catherine\bibnamedelima S.},
+           giveni={C\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4c19fc45d29fb78b7d73a64f3877ef60}{%
+           family={Strickland},
+           familyi={S\bibinitperiod},
+           given={Judy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f48865cc95182a3836f529e4b71647c4}{%
+           family={Troutman},
+           familyi={T\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=71220d339048303a3da6c08a736bd818}{%
+           family={Wetmore},
+           familyi={W\bibinitperiod},
+           given={Barbara\bibnamedelima A.},
+           giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8b1838ad70937ae4147b9d73272edf4e}{%
+           family={Kleinstreuer},
+           familyi={K\bibinitperiod},
+           given={Nicole\bibnamedelima C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{fullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
+      \strng{bibnamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authorbibnamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authornamehash}{027b1ba03b1f50102ed218725212cdc0}
+      \strng{authorfullhash}{ec8ddab3a2f0a182a684fae3378d6ff1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0887-2333}
+      \field{journaltitle}{Toxicology in Vitro}
+      \field{title}{In vitro to in vivo extrapolation for high throughput prioritization and decision making}
+      \field{volume}{47}
+      \field{year}{2018}
+      \field{pages}{213\bibrangedash 227}
+      \range{pages}{15}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.tiv.2017.11.016
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0887233317303661
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0887233317303661
+      \endverb
+      \keyw{IVIVE,High throughput testing,Toxicity testing,Toxicokinetic,Computational toxicology,Risk assessment}
+    \endentry
+    \entry{nymark2021}{article}{}
+      \name{author}{10}{}{%
+        {{hash=752f055e59183352aafb130b0807f868}{%
+           family={Nymark},
+           familyi={N\bibinitperiod},
+           given={Penny},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b2cdf5d3d9b0c9b1a7cbdad63d978a18}{%
+           family={Sachana},
+           familyi={S\bibinitperiod},
+           given={Magdalini},
+           giveni={M\bibinitperiod}}}%
+        {{hash=685b29f99163373e667980bcbf346065}{%
+           family={Leite},
+           familyi={L\bibinitperiod},
+           given={Sofia},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ab8daed62d408039c3b16cea7f634541}{%
+           family={Sund},
+           familyi={S\bibinitperiod},
+           given={Jukka},
+           giveni={J\bibinitperiod}}}%
+        {{hash=be3ad74c7b329876a5328516753bf8b0}{%
+           family={Krebs},
+           familyi={K\bibinitperiod},
+           given={Catharine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=88ca3069b9e5c92b068066f4358fe156}{%
+           family={Sullivan},
+           familyi={S\bibinitperiod},
+           given={Kristie},
+           giveni={K\bibinitperiod}}}%
+        {{hash=252e05bd7a6dc9fd14f636218d4d379c}{%
+           family={Edwards},
+           familyi={E\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=de69220ab78321d199403486459c3b92}{%
+           family={Viviani},
+           familyi={V\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=86db6131befda518390da15cc6407552}{%
+           family={Willett},
+           familyi={W\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=236d9e757ba3ee79bc59be214c7a2b52}{%
+           family={Landesmann},
+           familyi={L\bibinitperiod},
+           given={Brigitte},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{fullhash}{089feaf1159589a1646240336ea9f81b}
+      \strng{bibnamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authorbibnamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authornamehash}{fd537c9b93c9c2229897a16f59ab69f9}
+      \strng{authorfullhash}{089feaf1159589a1646240336ea9f81b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Frontiers in Public Health}
+      \field{month}{05}
+      \field{title}{Systematic Organization of COVID-19 Data Supported by the Adverse Outcome Pathway Framework}
+      \field{volume}{9}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.3389/fpubh.2021.638605
+      \endverb
+    \endentry
+    \entry{judson2016}{article}{}
+      \name{author}{21}{}{%
+        {{hash=512bc1314e210daba15f3919632611f4}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=af079a909b8a5bc8d37ef705dc9a1ceb}{%
+           family={Houck},
+           familyi={H\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=eafebeabf78884b3477edfeb47686870}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Matt},
+           giveni={M\bibinitperiod}}}%
+        {{hash=28a0c8700cb4607630ea9c7e3d88352d}{%
+           family={Richard},
+           familyi={R\bibinitperiod},
+           given={Ann\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=93d9924f7b77779a732d5408e4b8a871}{%
+           family={Knudsen},
+           familyi={K\bibinitperiod},
+           given={Thomas\bibnamedelima B.},
+           giveni={T\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=c9fab90148bf15a9952a59dc9560e6a4}{%
+           family={Shah},
+           familyi={S\bibinitperiod},
+           given={Imran},
+           giveni={I\bibinitperiod}}}%
+        {{hash=3af329fc1d47ce70f4b5522280bf1c21}{%
+           family={Little},
+           familyi={L\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=83b45107bdc84b7d7640540d6213b7cb}{%
+           family={Wambaugh},
+           familyi={W\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7455d8693e9df2d66cf081f53f35f478}{%
+           family={Woodrow\bibnamedelima Setzer},
+           familyi={W\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=249e6f90fe9bfaf665034a3e4b67b832}{%
+           family={Kothya},
+           familyi={K\bibinitperiod},
+           given={Parth},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e76b2943d04da7128437b1e90de034fc}{%
+           family={Phuong},
+           familyi={P\bibinitperiod},
+           given={Jimmy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5d72eac88a7eeef719253bf8501ca6ac}{%
+           family={Filer},
+           familyi={F\bibinitperiod},
+           given={Dayne},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ac5565dfa3e1fae9cdb66bc4451ffecd}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Doris},
+           giveni={D\bibinitperiod}}}%
+        {{hash=db7743db1f6cab0180c930160992d4d0}{%
+           family={Reif},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a49116f12455817a10a330409a8d2890}{%
+           family={Rotroff},
+           familyi={R\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a2d66295ae9350a8f2f15a815193a6e4}{%
+           family={Kleinstreuer},
+           familyi={K\bibinitperiod},
+           given={Nicole},
+           giveni={N\bibinitperiod}}}%
+        {{hash=bfcb234b18e62296cd6ffa51bbebab2a}{%
+           family={Sipes},
+           familyi={S\bibinitperiod},
+           given={Nisha},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a40fd3e41223df334f82de907c3da843}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Menghang},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6104380e69df48738cbd1195932babee}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Ruili},
+           giveni={R\bibinitperiod}}}%
+        {{hash=22ade563ada0dbcbec1e73b0332156d9}{%
+           family={Crofton},
+           familyi={C\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=53df06686f67f8569c478d2e89005c6d}{%
+           family={Thomas},
+           familyi={T\bibinitperiod},
+           given={Russell\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9019395a978ebc29580134e3335170f7}
+      \strng{fullhash}{741cca7b33aeed824a9ba1cc1186c197}
+      \strng{bibnamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authorbibnamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authornamehash}{9019395a978ebc29580134e3335170f7}
+      \strng{authorfullhash}{741cca7b33aeed824a9ba1cc1186c197}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1096-6080}
+      \field{journaltitle}{Toxicological Sciences}
+      \field{month}{05}
+      \field{number}{2}
+      \field{title}{{Editor's Highlight: Analysis of the Effects of Cell Stress and Cytotoxicity on In Vitro Assay Activity Across a Diverse Chemical and Assay Space}}
+      \field{volume}{152}
+      \field{year}{2016}
+      \field{pages}{323\bibrangedash 339}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1093/toxsci/kfw092
+      \endverb
+      \verb{eprint}
+      \verb https://academic.oup.com/toxsci/article-pdf/152/2/323/26290632/kfw092.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/toxsci/kfw092
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/toxsci/kfw092
+      \endverb
+    \endentry
+    \entry{escher2021}{book}{}
+      \name{author}{3}{}{%
+        {{hash=48cb1d8f3ac222a08714604cf83bfc73}{%
+           family={Escher},
+           familyi={E\bibinitperiod},
+           given={Beate},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b5d0e925a96c0522fdd7b0afb5306d87}{%
+           family={Neale},
+           familyi={N\bibinitperiod},
+           given={Peta},
+           giveni={P\bibinitperiod}}}%
+        {{hash=6f87f4b83ee8cc349e65346e2a56ca11}{%
+           family={Leusch},
+           familyi={L\bibinitperiod},
+           given={Frederic},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IWA Publishing}%
+      }
+      \strng{namehash}{586418a1191078ea0ee4d49d5ad037db}
+      \strng{fullhash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{bibnamehash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{authorbibnamehash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \strng{authornamehash}{586418a1191078ea0ee4d49d5ad037db}
+      \strng{authorfullhash}{089e63ad2a3d468f9f8a7ff95c36713c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{{The first edition of Bioanalytical Tools in Water Quality Assessment was released in 2012. The field has exploded since and the second edition updates and reviews the application of bioanalytical tools for water quality assessment including surveillance monitoring. The book focuses on applications to water quality assessment ranging from wastewater to drinking water, including recycled water, as well as treatment processes and advanced water treatment. Emerging applications for other environmental matrices are also included. Bioanalytical Tools in Water Quality Assessment, Second Edition, not only demonstrates applications but also fills in the background knowledge in toxicology/ecotoxicology needed to appreciate these applications. Each chapter summarises fundamental material in a targeted way so that information can be applied to better understand the use of bioanalytical tools in water quality assessment.The book can be used by lecturers teaching academic and professional courses and also by risk assessors, regulators, experts, consultants, researchers and managers working in the water sector. It can also be a reference manual for environmental engineers, analytical chemists and toxicologists.Detailed descriptions of dose-response assessment, data reporting, mixture modelling and quality assurance/quality control are complemented by a series of online resources and tools to apply some of the principles and data methods explained in this book. This supplementary information is available at www.ufz.de/bioanalytical-tools.ISBN: 9781789061970 (Paperback)ISBN: 9781789061987 (eBook)}}
+      \field{isbn}{9781789061987}
+      \field{month}{06}
+      \field{title}{{Bioanalytical Tools in Water Quality Assessment}}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.2166/9781789061987
+      \endverb
+      \verb{eprint}
+      \verb https://iwaponline.com/book-pdf/899726/wio9781789061987.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2166/9781789061987
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2166/9781789061987
+      \endverb
+    \endentry
+    \entry{peets2022}{article}{}
+      \name{author}{6}{}{%
+        {{hash=8d8747a2dc4e8d3fdd4cbbcd7fd57fa9}{%
+           family={Peets},
+           familyi={P\bibinitperiod},
+           given={Pilleriin},
+           giveni={P\bibinitperiod}}}%
+        {{hash=7a3c2f4960d1f124147eebbd37555ba7}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei-Chieh},
+           giveni={W\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=a5a7dccadf4ca07a051572e68648e311}{%
+           family={MacLeod},
+           familyi={M\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=81f60f9a52727b617b422cdbaf01a173}{%
+           family={Breitholtz},
+           familyi={B\bibinitperiod},
+           given={Magnus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e503922768bea03d53583b804e9454c6}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Jonathan\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=1ea52df95d2dea6a25ae24fdd94cc0e3}{%
+           family={Kruve},
+           familyi={K\bibinitperiod},
+           given={Anneli},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{09b5617ee420a7958e08b068bf261473}
+      \strng{fullhash}{462e2af1355185c0bf5e13d859512bbc}
+      \strng{bibnamehash}{462e2af1355185c0bf5e13d859512bbc}
+      \strng{authorbibnamehash}{462e2af1355185c0bf5e13d859512bbc}
+      \strng{authornamehash}{09b5617ee420a7958e08b068bf261473}
+      \strng{authorfullhash}{462e2af1355185c0bf5e13d859512bbc}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Environmental Science \& Technology}
+      \field{note}{PMID: 36269851}
+      \field{number}{22}
+      \field{title}{MS2Tox Machine Learning Tool for Predicting the Ecotoxicity of Unidentified Chemicals in Water by Nontarget LC-HRMS}
+      \field{volume}{56}
+      \field{year}{2022}
+      \field{pages}{15508\bibrangedash 15517}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1021/acs.est.2c02536
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.est.2c02536
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.est.2c02536
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.est.2c02536
+      \endverb
+    \endentry
+    \entry{williams2017}{article}{}
+      \name{author}{11}{}{%
+        {{hash=c88bbdd3a80d04dc20d8a9af4a9e8332}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Antony\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=876dd9983fb7975577916f4b3d0e0631}{%
+           family={Grulke},
+           familyi={G\bibinitperiod},
+           given={Christopher\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=a94aeaf71f309b312a413eabd6602106}{%
+           family={Edwards},
+           familyi={E\bibinitperiod},
+           given={Jeff},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8382c6c1c4d6516bf7e826d39d5af70d}{%
+           family={McEachran},
+           familyi={M\bibinitperiod},
+           given={Andrew\bibnamedelima D.},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=fcff81ef8c5ce56cdfe8503bab3f41a2}{%
+           family={Mansouri},
+           familyi={M\bibinitperiod},
+           given={Kamel},
+           giveni={K\bibinitperiod}}}%
+        {{hash=7e620825e53964c486d9200464fb42a3}{%
+           family={Baker},
+           familyi={B\bibinitperiod},
+           given={Nancy\bibnamedelima C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=596b62f82f11d04c4a5ce88f1e231a8e}{%
+           family={Patlewicz},
+           familyi={P\bibinitperiod},
+           given={Grace},
+           giveni={G\bibinitperiod}}}%
+        {{hash=c9fab90148bf15a9952a59dc9560e6a4}{%
+           family={Shah},
+           familyi={S\bibinitperiod},
+           given={Imran},
+           giveni={I\bibinitperiod}}}%
+        {{hash=24bbd85f38366aa032e9fe3caf8481fc}{%
+           family={Wambaugh},
+           familyi={W\bibinitperiod},
+           given={John\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=b8c048bc3a28dc63f4f5afcfd40b66bc}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=28a0c8700cb4607630ea9c7e3d88352d}{%
+           family={Richard},
+           familyi={R\bibinitperiod},
+           given={Ann\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ae47adfdeb00d6e172d4671e58c7f87a}
+      \strng{fullhash}{2a1a7f4a383508651063c45ac6ddc53d}
+      \strng{bibnamehash}{ae47adfdeb00d6e172d4671e58c7f87a}
+      \strng{authorbibnamehash}{ae47adfdeb00d6e172d4671e58c7f87a}
+      \strng{authornamehash}{ae47adfdeb00d6e172d4671e58c7f87a}
+      \strng{authorfullhash}{2a1a7f4a383508651063c45ac6ddc53d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Cheminformatics}
+      \field{number}{1}
+      \field{title}{The CompTox Chemistry Dashboard: a community data resource for environmental chemistry}
+      \field{volume}{9}
+      \field{year}{2017}
+      \field{pages}{61}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1186/s13321-017-0247-6
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1186/s13321-017-0247-6
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1186/s13321-017-0247-6
+      \endverb
+    \endentry
+    \entry{wu2021}{article}{}
+      \name{author}{6}{}{%
+        {{hash=97528c903f77d706286869a0884f65b4}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Leihong},
+           giveni={L\bibinitperiod}}}%
+        {{hash=6104380e69df48738cbd1195932babee}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Ruili},
+           giveni={R\bibinitperiod}}}%
+        {{hash=c352624b4978fab7d1398673d0c37ce6}{%
+           family={Tetko},
+           familyi={T\bibinitperiod},
+           given={Igor\bibnamedelima V.},
+           giveni={I\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=bb3b308403f78b6b2b754ecf2561acec}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Zhonghua},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=6217aee82ac06f42ad642d1e5627e719}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=50b19a795924bc4d7edf515869228fdb}{%
+           family={Tong},
+           familyi={T\bibinitperiod},
+           given={Weida},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{03d19db257c28685c6aa9054728bef3a}
+      \strng{fullhash}{5c4728af1b0c3ee9bb50da3de4303fbe}
+      \strng{bibnamehash}{5c4728af1b0c3ee9bb50da3de4303fbe}
+      \strng{authorbibnamehash}{5c4728af1b0c3ee9bb50da3de4303fbe}
+      \strng{authornamehash}{03d19db257c28685c6aa9054728bef3a}
+      \strng{authorfullhash}{5c4728af1b0c3ee9bb50da3de4303fbe}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Chemical Research in Toxicology}
+      \field{note}{PMID: 33513003}
+      \field{number}{2}
+      \field{title}{Trade-off Predictivity and Explainability for Machine-Learning Powered Predictive Toxicology: An in-Depth Investigation with Tox21 Data Sets}
+      \field{volume}{34}
+      \field{year}{2021}
+      \field{pages}{541\bibrangedash 549}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1021/acs.chemrestox.0c00373
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1021/acs.chemrestox.0c00373
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1021/acs.chemrestox.0c00373
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1021/acs.chemrestox.0c00373
+      \endverb
+    \endentry
+    \entry{userguide}{online}{}
+      \name{author}{7}{}{%
+        {{hash=e76b2943d04da7128437b1e90de034fc}{%
+           family={Phuong},
+           familyi={P\bibinitperiod},
+           given={Jimmy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=bbe312b81b9bfd1bd1c3645956192425}{%
+           family={Truong},
+           familyi={T\bibinitperiod},
+           given={Lisa},
+           giveni={L\bibinitperiod}}}%
+        {{hash=bfcb234b18e62296cd6ffa51bbebab2a}{%
+           family={Sipes},
+           familyi={S\bibinitperiod},
+           given={Nisha},
+           giveni={N\bibinitperiod}}}%
+        {{hash=571d60c985628977ecabde4d777be40e}{%
+           family={Connors},
+           familyi={C\bibinitperiod},
+           given={Kristin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=af079a909b8a5bc8d37ef705dc9a1ceb}{%
+           family={Houck},
+           familyi={H\bibinitperiod},
+           given={Keith},
+           giveni={K\bibinitperiod}}}%
+        {{hash=512bc1314e210daba15f3919632611f4}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2151f71adda110135d46c192dbb73149}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{38d47952b4e17564a8fd87f45568f0a4}
+      \strng{fullhash}{ed80edd8d278db110acf33fe61a5b98a}
+      \strng{bibnamehash}{38d47952b4e17564a8fd87f45568f0a4}
+      \strng{authorbibnamehash}{38d47952b4e17564a8fd87f45568f0a4}
+      \strng{authornamehash}{38d47952b4e17564a8fd87f45568f0a4}
+      \strng{authorfullhash}{ed80edd8d278db110acf33fe61a5b98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{ToxCast Assay Annotation Data User Guide}
+      \field{year}{2014}
+      \verb{urlraw}
+      \verb https://www.epa.gov/sites/default/files/2015-08/documents/toxcast_assay_annotation_data_users_guide_20141021.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.epa.gov/sites/default/files/2015-08/documents/toxcast_assay_annotation_data_users_guide_20141021.pdf
+      \endverb
+    \endentry
     \entry{sheffield2021}{article}{}
       \name{author}{5}{}{%
         {{hash=1e32be9edc639536a3b58506be5831e1}{%
@@ -53,8 +1260,8 @@
       \strng{authorbibnamehash}{d088baefaae41aaf11c2278637df3b93}
       \strng{authornamehash}{50bc9429c78c55b11ac20f857477d6e1}
       \strng{authorfullhash}{d088baefaae41aaf11c2278637df3b93}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{{Many applications of chemical screening are performed in concentration or dose–response mode, and it is necessary to extract appropriate parameters, including whether the chemical/assay pair is active and if so, what are concentrations where activity is seen. Typically, multiple mathematical models or curve shapes are tested against the data to assess the best fit. There are several commercial programs used for this purpose as well as open-source libraries. A widely used system for managing high-throughput screening (HTS) concentration–response data is tcpl (ToxCast Pipeline). The current implementation of tcpl has the concentration–response modeling code tightly integrated with the data management and databasing aspects of HTS data processing. Tcplfit2 is a stand-alone version of the curve-fitting and hitcalling core of tcpl that has been extended to include a large number of standard curve classes and to use benchmark dose modeling. This package will be useful for HTS concentration–response data such as high-throughput whole genome transcriptomics.tcplfit2 is written in R and is available from CRAN.}}
@@ -104,8 +1311,8 @@
       \strng{authorbibnamehash}{6cfeeb952dc2af7b072a27eb8a532804}
       \strng{authornamehash}{6cfeeb952dc2af7b072a27eb8a532804}
       \strng{authorfullhash}{6cfeeb952dc2af7b072a27eb8a532804}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{R package vignette for the tcpl package v3.0}
@@ -116,6 +1323,50 @@
       \endverb
       \verb{url}
       \verb https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html
+      \endverb
+    \endentry
+    \entry{watt2018}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b2e5961606ddfae78b79abab7f15c725}{%
+           family={Watt},
+           familyi={W\bibinitperiod},
+           given={Eric\bibnamedelima D.},
+           giveni={E\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=b8c048bc3a28dc63f4f5afcfd40b66bc}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={Richard\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Public Library of Science}%
+      }
+      \strng{namehash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \strng{fullhash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \strng{bibnamehash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \strng{authorbibnamehash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \strng{authornamehash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \strng{authorfullhash}{fe07fe5409ab0e3810abc013b3e6f408}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PLOS ONE}
+      \field{month}{07}
+      \field{number}{7}
+      \field{title}{Uncertainty quantification in ToxCast high throughput screening}
+      \field{volume}{13}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 23}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0196963
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1371/journal.pone.0196963
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1371/journal.pone.0196963
       \endverb
     \endentry
   \enddatalist
