@@ -12,32 +12,25 @@ from imblearn.over_sampling import SMOTE
 from matplotlib import pyplot as plt
 from sklearn import metrics
 from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
+from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import SelectFromModel
 from xgboost import XGBClassifier
-import xgboost as xgb
+from xgboost import XGBRegressor
 from xgboost import plot_importance
 from sklearn.decomposition import NMF
-from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+
 from sklearn.neural_network import MLPClassifier
-from lightgbm import LGBMClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import Lasso
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import VotingClassifier
-from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import ExtraTreesClassifier
-# import gaussainNB
-from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import make_scorer, mean_squared_error, r2_score
 
 from sklearn.decomposition import NMF
 
@@ -101,7 +94,10 @@ def get_assay_df(aeid):
     # omit_compound_mask = assay_df['omit_flag'] == "PASS"
     # assay_df = assay_df[omit_compound_mask]
     # LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
-    assay_df = assay_df[['dsstox_substance_id', 'hitcall_c', 'ac50']]
+    hitcall = 'hitcall'
+    if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
+        hitcall = 'hitcall_c'
+    assay_df = assay_df[['dsstox_substance_id', hitcall, 'ac50']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
 
@@ -129,7 +125,8 @@ def split_data(X, y):
                                                         test_size=CONFIG['train_test_split_ratio'],
                                                         random_state=CONFIG['random_state'],
                                                         shuffle=True,  # shuffle the data before splitting (default)
-                                                        stratify=y)  # stratify to ensure the same class distribution in the train and test sets
+                                                        # stratify=y # stratify to ensure the same class distribution in the train and test sets
+                                                        )
 
     return X_train, y_train, X_test, y_test
 
@@ -149,23 +146,27 @@ def partition_data(df):
     X_massbank_val_from_structure = validation_df.iloc[:, 3:].astype(np.uint8)
     X_massbank_val_from_sirius = validation_df.iloc[:, 3:].astype(np.uint8)  # Todo: replace with predicted fingerprints
 
+    hitcall = 'hitcall'
+    if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
+        hitcall = 'hitcall_c'
+
     if CONFIG['ml_algorithm'] == 'hitcall_regression':
-        y = training_df['hitcall_c']
-        y_massbank_val = validation_df['hitcall_c']
+        y = training_df[hitcall]
+        y_massbank_val = validation_df[hitcall]
     elif CONFIG['ml_algorithm'] == 'ac50_regression':
         y = training_df['ac50']
         y_massbank_val = validation_df['ac50']
     else:  # CONFIG['ml_algorithm'] == 'binary_classification'
         t = CONFIG['activity_threshold']
-        LOGGER.info(f"Activity threshold: (hitcall_c >= {t} is active)\n")
-        y = (training_df['hitcall_c'] >= t).astype(np.uint8)
-        y_massbank_val = (validation_df['hitcall_c'] >= t).astype(np.uint8)
+        LOGGER.info(f"Activity threshold: ({hitcall} >= {t} is active)\n")
+        y = (training_df[hitcall] >= t).astype(np.uint8)
+        y_massbank_val = (validation_df[hitcall] >= t).astype(np.uint8)
 
     return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
-def print_label_count(y, title):
-    counts = y.value_counts().values
+def print_binarized_label_count(y, title):
+    counts = (y >= CONFIG['activity_threshold']).value_counts().values
     LOGGER.info(f"Label Count {title}: {len(y)} datapoints\n"
                 f" with {counts[0]} inactive, {counts[1]} active "
                 f"({counts[1] / sum(counts) * 100:.2f}%)\n")
@@ -176,7 +177,7 @@ def handle_oversampling(X, y):
     if CONFIG['apply']['smote']:
         oversampler = SMOTE(random_state=CONFIG['random_state'])
         X, y = oversampler.fit_resample(X, y)
-        print_label_count(y, "TRAIN (after oversampling)")
+        print_binarized_label_count(y, "TRAIN (after oversampling)")
     return X, y
 
 
@@ -193,7 +194,7 @@ def build_preprocessing_pipeline():
             feature_selection_nmf = NMF(n_components=100)
             preprocessing_pipeline_steps.append(('feature_selection_nmf', feature_selection_nmf))
 
-        feature_selection_model = RandomForestClassifier(n_estimators=200, max_depth=7)  # RandomForestClassifier()  #XGBClassifier(tree_method='gpu_hist') #RandomForestClassifier()
+        feature_selection_model = XGBRegressor(n_estimators=200, max_depth=7) # RandomForestClassifier(n_estimators=200, max_depth=7)  # RandomForestClassifier()  #XGBClassifier(tree_method='gpu_hist') #RandomForestClassifier()
         feature_selection_from_model = SelectFromModel(estimator=feature_selection_model, threshold='mean')   # max_features=CONFIG['feature_selection']['max_features']
         preprocessing_pipeline_steps.append(('feature_selection_from_model', feature_selection_from_model))
 
@@ -224,17 +225,31 @@ def build_param_grid(classifier_steps):
 
 def grid_search_cv(X_train, y_train, X_test, y_test, classifier, pipeline):
     scorer = None
-    if CONFIG['apply']['custom_scorer']:
-        scoring = CONFIG['grid_search_cv']['scoring']
-        scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
+
+    if 'classification' in CONFIG['ml_algorithm']:
+        cv = RepeatedStratifiedKFold(
+            n_splits=CONFIG['grid_search_cv']['n_splits'],
+            n_repeats=CONFIG['grid_search_cv']['n_repeats'],
+            random_state=CONFIG['random_state']
+        )
+        if CONFIG['apply']['custom_scorer']:
+            scoring = CONFIG['grid_search_cv']['scoring']
+            scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
+    else:
+        cv = KFold(n_splits=CONFIG['grid_search_cv']['n_splits'], shuffle=True, random_state=CONFIG['random_state'])
+        if CONFIG['apply']['custom_scorer']:
+            def custom_scorer(y_true, y_pred):
+                errors = np.abs(y_true - y_pred)
+                weight = 2.0  # weight for errors when the true value is closer to 1
+                custom_score = np.mean(np.where(y_true >= 0.5, weight * errors, errors))
+                return custom_score
+
+            scorer = make_scorer(custom_scorer, greater_is_better=False)
 
     grid_search_cv = GridSearchCV(
         pipeline,
         param_grid=build_param_grid(classifier['steps']),
-        cv=RepeatedStratifiedKFold(
-            n_splits=CONFIG['grid_search_cv']['n_splits'],
-            n_repeats=CONFIG['grid_search_cv']['n_repeats'],
-            random_state=CONFIG['random_state']),
+        cv=cv,
         scoring=scorer,
         n_jobs=CONFIG["grid_search_cv"]["n_jobs"],
         verbose=CONFIG["grid_search_cv"]["verbose"],
@@ -349,10 +364,47 @@ def predict_and_report(X, y, classifier, best_estimator, input_set):
         report_exception(e, traceback_info, classifier)
 
 
+def predict_and_report_regression(X, y, best_estimator, input_set):
+    os.makedirs(os.path.join(LOG_PATH, f"{AEID}", CLASSIFIER_NAME, input_set), exist_ok=True)
+    LOGGER.info(f"Predict ({input_set})")
+    y_pred = best_estimator.predict(X)
+
+    mse_val = mean_squared_error(y, y_pred)
+    r2_val = r2_score(y, y_pred)
+
+    report = f"Validation Set Results:\n"
+    report += f"Mean Squared Error (MSE): {mse_val:.2f}\n"
+    report += f"R-squared (R2): {r2_val:.2f}\n\n"
+    print(report)
+    with open("regression_report.txt", "w") as file:
+        file.write(report)
+
+    plt.scatter(y, y_pred, alpha=0.2, s=5)
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title("Validation Set - Actual vs. Predicted Values")
+    plt.savefig("validation_plot.png")
+    plt.close()
+
+    heatmap, xedges, yedges = np.histogram2d(y, y_pred, bins=5, range=[[0, 1], [0, 1]])
+    fig, ax = plt.subplots()
+    from matplotlib.colors import LogNorm
+    cax = ax.imshow(heatmap.T, extent=[0, 1, 0, 1], origin='lower', cmap='viridis', norm=LogNorm()) # , norm=LogNorm()
+    cbar = fig.colorbar(cax)
+    cbar.set_label('Frequency')
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title("Validation Set - Actual vs. Predicted Values")
+    plt.savefig("heatmap_plot.png")
+    plt.close()
+
+
+
+
 def get_label_counts(y, y_train, y_test):
-    print_label_count(y, "TOTAL")
-    print_label_count(y_train, "TRAIN")
-    print_label_count(y_test, "TEST")
+    print_binarized_label_count(y, "TOTAL")
+    print_binarized_label_count(y_train, "TRAIN")
+    print_binarized_label_count(y_test, "TEST")
 
 
 class ElapsedTimeFormatter(logging.Formatter):
@@ -430,6 +482,7 @@ def save_model(best_estimator):
 
 
 def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
+    # feature selection
     if preprocessing_pipeline.steps:
         X_train = preprocessing_pipeline.fit_transform(X_train, y_train)
         X_test = preprocessing_pipeline.transform(X_test)

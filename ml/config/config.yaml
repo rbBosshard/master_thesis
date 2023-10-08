@@ -1,4 +1,4 @@
-ml_algorithm: binary_classification
+ml_algorithm: hitcall_regression #  binary_classification  #  hitcall_regression
 ignore_warnings: True
 fingerprint_file: ToxCast_CSIfps_10k
 fingerprint_file_transposed: 1
@@ -7,18 +7,18 @@ remote_data_dir: ../../../pytcpl/data/output/
 
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
-random_state: 42 # For reproducibility
+random_state: 0 # For reproducibility
 
 train_test_split_ratio: 0.2
 
 apply:
-  smote: 0 # oversampling
-  feature_selection: 1
-  variance_threshold: 0
-  non_negative_matrix_factorization: 0
+  smote: 0  # oversampling
+  feature_selection: 0
+  variance_threshold: 0  # only if feature_selection on
+  non_negative_matrix_factorization: 0  # only if feature_selection on
   custom_scorer: 0
   threshold_moving: 1
-
+  cytotoxicity_corrected_hitcalls: 0
 
 threshold_moving:
   weight_tpr: 0.5 # A higher weight_tpr value gives more weight to minimizing false negatives.

@@ -7,7 +7,8 @@ sys.path.append(parent_dir)
 from ml.src.pipeline.ml_helper import load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, \
     split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, predict_and_report, \
-    get_label_counts, report_exception, save_model, build_preprocessing_pipeline, preprocess_all_sets
+    get_label_counts, report_exception, save_model, build_preprocessing_pipeline, preprocess_all_sets, \
+    predict_and_report_regression
 
 from datetime import datetime
 import traceback
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in aeids_target_assays[:]:  # [97]:
+    for aeid in [2363]: #aeids_target_assays[:]:  # [97]: #
         # Get assay data
         assay_df = get_assay_df(aeid)
 
@@ -38,12 +39,12 @@ if __name__ == '__main__':
         # Split ML data into train, validation and test set
         X_train, y_train, X_test, y_test = split_data(X, y)
 
-        # Apply oversampling if configured
-        X_train, y_train = handle_oversampling(X_train, y_train)
-
         preprocessing_pipeline_steps = build_preprocessing_pipeline()
 
         X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val = preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val)
+
+        # Apply oversampling if configured
+        X_train, y_train = handle_oversampling(X_train, y_train)
 
         # Get the label counts
         get_label_counts(y, y_train, y_test)
@@ -63,6 +64,8 @@ if __name__ == '__main__':
                 best_estimator = grid_search.best_estimator_
 
                 # Predict on the test set with the best estimator (X_test, y_test is unseen)
+                predict_and_report_regression(X_test, y_test, best_estimator, "validation")
+                exit()
                 predict_and_report(X_test, y_test, classifier, best_estimator, "validation")
 
                 # Concatenate training and test data
