@@ -351,9 +351,20 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
         y_pred_proba = best_estimator.predict_proba(X)[:, 1]
         y_pred = np.where(y_pred_proba > optimal_threshold, 1, 0)
 
+    folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set)
+
+    data = {
+        'Actual': y,
+        'Predicted': y_pred
+    }
+
+    df = pd.DataFrame(data)
+
+    df.to_csv(os.path.join(folder, f"reg_results.csv"), index=False)
+
     labels = [True, False]
     report = classification_report(y, y_pred, labels=labels, output_dict=True)
-    path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set, f"report.csv")
+    path = os.path.join(folder, f"report.csv")
     report_df = pd.DataFrame(report).transpose()
     report_df.to_csv(path)
     LOGGER.info(report)
@@ -369,7 +380,7 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
         cm_display.plot()
 
         plt.title(f"Confusion Matrix for {ESTIMATOR_NAME}")
-        path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set, f"confusion_matrix.png")
+        path = os.path.join(folder, f"confusion_matrix.png")
         plt.savefig(path, format='png')
         plt.close()
 
@@ -383,21 +394,37 @@ def predict_and_report_regression(X, y, best_estimator, input_set):
     LOGGER.info(f"Predict ({input_set}), {ESTIMATOR_NAME}")
     y_pred = best_estimator.predict(X)
 
+    folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set)
+
+    data = {
+        'Actual': y,
+        'Predicted': y_pred
+    }
+
+    df = pd.DataFrame(data)
+
+    df.to_csv(os.path.join(folder, f"reg_results.csv"), index=False)
+
     mse_val = mean_squared_error(y, y_pred)
     r2_val = r2_score(y, y_pred)
 
-    report = f"Validation Set Results:\n"
-    report += f"Mean Squared Error (MSE): {mse_val:.2f}\n"
-    report += f"R-squared (R2): {r2_val:.2f}\n\n"
-    print(report)
-    with open("regression_report.txt", "w") as file:
-        file.write(report)
+    data = {
+        'Metric': ['mse', 'r2'],
+        'Value': [mse_val, r2_val]
+    }
+
+    report_df = pd.DataFrame(data)
+
+    LOGGER.info(report_df.to_string(index=False))
+
+    # Save the report DataFrame to a CSV file
+    report_df.to_csv(os.path.join(folder, f"report.csv"), index=False)
 
     plt.scatter(y, y_pred, alpha=0.2, s=5)
     plt.xlabel("Actual Values")
     plt.ylabel("Predicted Values")
     plt.title("Validation Set - Actual vs. Predicted Values")
-    plt.savefig("validation_plot.png")
+    plt.savefig(os.path.join(folder, "results.png"))
     plt.close()
 
     heatmap, xedges, yedges = np.histogram2d(y, y_pred, bins=5, range=[[0, 1], [0, 1]])
@@ -409,7 +436,7 @@ def predict_and_report_regression(X, y, best_estimator, input_set):
     plt.xlabel("Actual Values")
     plt.ylabel("Predicted Values")
     plt.title("Validation Set - Actual vs. Predicted Values")
-    plt.savefig("heatmap_plot.png")
+    plt.savefig(os.path.join(folder, "results_heatmap.png"))
     plt.close()
 
 

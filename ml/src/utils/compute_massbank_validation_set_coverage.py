@@ -9,7 +9,7 @@ import matplotlib.ticker as mtick
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
 from ml.src.pipeline.constants import FILE_FORMAT, \
     METADATA_SUBSET_DIR_PATH, VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, \
-    INPUT_VALIDATION_DIR_PATH, MASSBANK_DIR_PATH, INPUT_ML_DIR_PATH
+    INPUT_VALIDATION_DIR_PATH, MASSBANK_DIR_PATH, INPUT_ML_DIR_PATH, INPUT_FINGERPRINTS_DIR_PATH
 
 
 def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1):
@@ -176,18 +176,18 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
 
 def prepare_validation_set():
     print("Prepare validation set (massbank)")
-    massbank_dtxsid_with_records_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records.csv")
+    massbank_dtxsid_with_records_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints.csv")
     massbank_dtxsid_with_records_sirius_training_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records_sirius_training.csv")
 
     massbank_dtxsid_with_records_df = pd.read_csv(massbank_dtxsid_with_records_path)
     massbank_dtxsid_with_records_sirius_training_df = pd.read_csv(massbank_dtxsid_with_records_sirius_training_path)
 
-    # Fitler compounds that have fingerprint from structure
+    # Filter compounds that have fingerprint from structure
     compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_without_fingerprint{FILE_FORMAT}")
     compounds_tested_without_fingerprint = pd.read_parquet(compounds_path)['dsstox_substance_id']
-    massbank_dtxsid_with_records_df = massbank_dtxsid_with_records_df[~massbank_dtxsid_with_records_df['dtxsid'].isin(compounds_tested_without_fingerprint)]
+    massbank_dtxsid_with_records_df = massbank_dtxsid_with_records_df[~massbank_dtxsid_with_records_df['dsstox_substance_id'].isin(compounds_tested_without_fingerprint)]
 
-    massbank_dtxsid_with_records = massbank_dtxsid_with_records_df['dtxsid']
+    massbank_dtxsid_with_records = massbank_dtxsid_with_records_df['dsstox_substance_id']
     massbank_dtxsid_with_records_sirius_training = massbank_dtxsid_with_records_sirius_training_df['dtxsid']
 
     massbank_dtxsid_with_records = set(massbank_dtxsid_with_records)
@@ -226,7 +226,6 @@ def prepare_validation_set():
     with open(os.path.join(MASSBANK_DIR_PATH, 'validation_compounds_safe_and_unsafe.out'), 'w') as f:
         for compound in massbank_dtxsid_with_records:
             f.write(compound + '\n')
-
 
 
 if __name__ == '__main__':

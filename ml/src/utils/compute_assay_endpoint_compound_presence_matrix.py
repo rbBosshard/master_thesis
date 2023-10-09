@@ -39,8 +39,8 @@ def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
 
         presence_matrix = pd.crosstab(df['aeid'], df['dsstox_substance_id'])  # get presence
 
-        aeid_compound_presence_matrix_path = os.path.join(METADATA_ALL_DIR_PATH, f"aeid_compound_presence_matrix{FILE_FORMAT}")
-        presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')
+        # aeid_compound_presence_matrix_path = os.path.join(METADATA_ALL_DIR_PATH, f"aeid_compound_presence_matrix{FILE_FORMAT}")
+        # presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')
 
         # Get compounds
         compounds = presence_matrix.columns.tolist()
@@ -58,30 +58,12 @@ def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
         presence_matrix = pd.read_parquet(aeid_compound_presence_matrix_path)
         presence_matrix = presence_matrix[presence_matrix.index.isin(aeids)].reset_index(drop=True)
 
-
         path = os.path.join(INPUT_ML_DIR_PATH, f"{0}{FILE_FORMAT}")
         df = pd.read_parquet(path)
         pivot_table = df.pivot(index='aeid', columns='dsstox_substance_id', values='hitcall')
         pivot_table = pivot_table.fillna(-1)
         pivot_table_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"pivot_table{FILE_FORMAT}")
         pivot_table.to_parquet(pivot_table_path, compression='gzip')
-        
-
-        cols_with_zero_count = presence_matrix.columns[presence_matrix.sum(axis=0) == 0]
-        presence_matrix = presence_matrix.drop(columns=cols_with_zero_count)
-        compounds_with_zero_count = cols_with_zero_count.tolist()
-        aeid_compound_presence_matrix_path = os.path.join(METADATA_SUBSET_DIR_PATH,
-                                                    f"aeid_compound_presence_matrix{FILE_FORMAT}")
-
-        presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')
-
-        compounds = presence_matrix.columns.tolist()
-        compounds_without_fingerprint = compute_compounds_intersection(METADATA_SUBSET_DIR_PATH, compounds, compounds_with_zero_count, compounds_with_fingerprint)
-
-        # Filter df by compounds that have a fingerprint from structure
-        aeid_compound_presence_matrix_path = os.path.join(METADATA_ALL_DIR_PATH, f"aeid_compound_presence_matrix_with_fingerprint{FILE_FORMAT}")
-        presence_matrix = pd.read_parquet(aeid_compound_presence_matrix_path)
-        presence_matrix = presence_matrix[presence_matrix.index.isin(aeids)].reset_index(drop=True)
 
         cols_with_zero_count = presence_matrix.columns[presence_matrix.sum(axis=0) == 0]
         presence_matrix = presence_matrix.drop(columns=cols_with_zero_count)
@@ -89,5 +71,9 @@ def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
         aeid_compound_presence_matrix_path = os.path.join(METADATA_SUBSET_DIR_PATH,
                                                     f"aeid_compound_presence_matrix_with_fingerprint{FILE_FORMAT}")
 
-        presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')
+        compounds = presence_matrix.columns.tolist()
+        compounds_without_fingerprint = compute_compounds_intersection(METADATA_SUBSET_DIR_PATH, compounds, compounds_with_zero_count, compounds_with_fingerprint)
 
+        # Filter df by compounds that have a fingerprint from structure
+        presence_matrix = presence_matrix.drop(columns=compounds_without_fingerprint)
+        presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')

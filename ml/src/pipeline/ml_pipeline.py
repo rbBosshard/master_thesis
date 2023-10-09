@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
                 if 'reg' in CONFIG['ml_algorithm']:
                     # Predict on the true Massbank validation set with the best estimator
-                    # predict_and_report_regression(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
+                    predict_and_report_regression(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
                     # Predict on the SIRIUS predicted Massbank validation set with the best estimator
                     # predict_and_report_regression(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
                     pass

@@ -12,3 +12,13 @@ When evaluating the effectiveness of a binary prediction technique using a valid
   \item False Positives (FP): The number of incorrectly predicted active cases.
   \item False Negatives (FN): The number of incorrectly predicted inactive cases.
 \end{enumerate}
+
+
+
+The reevaluation of cytotoxicity exceeded its intended goal of reducing false positives and likely resulted in the reclassification of too many active compounds as inactive. It is assumed that the strategy is not well-suited for this task and is overly aggressive in its approach. A more refined method will be considered for future work.
+
+The cytotoxicity reevaluation led to the reclassification of many active cases as inactive whenever externally assessed cytotoxicity was observed at a lower concentration than the presumably confounded specific response activity. This approach detected cases where non-specific toxicity contributed to the designation of activity, while the specific contribution was disregarded. The main issue is that we only compared the concentrations at which cytotoxicity and specific activity were observed, without modeling the magnitude of cytotoxicity. Consequently, we lack an estimate of the proportions of cytotoxic burst and specific bioactivity.
+
+In essence, every time we observed critical cytotoxicity activity before specific activity, we categorized cases as inactive, even when specific activity alone might have surpassed the efficacy cutoff. However, distinguishing these cases is challenging because response magnitudes/scales may not necessarily be comparable across assay endpoints. In some cases, we reclassified compounds as inactive even though we couldn't determine whether their activity would have exceeded the threshold without cytotoxicity burst. This presents an unknown challenge.
+
+An alternative approach could have involved keeping the activity as active and adding a flag to indicate cytotoxicity or removing the compound from the dataset. However, this would introduce bias into the dataset, making prediction models less representative of the real world. Ultimately, retaining hitcalls based solely on curve fitting and hitcalling yielded better results.

@@ -2,9 +2,7 @@ import os
 
 import numpy as np
 import pandas as pd
-import pubchempy as pcp
-import multiprocessing
-import joblib
+
 
 from ml.src.pipeline.constants import REMOTE_METADATA_DIR_PATH, MASSBANK_DIR_PATH, FILE_FORMAT, INPUT_DIR_PATH, \
     OUTPUT_DIR_PATH, INPUT_FINGERPRINTS_DIR_PATH, METADATA_DIR_PATH, METADATA_ALL_DIR_PATH, METADATA_SUBSET_DIR_PATH, \
@@ -25,8 +23,8 @@ def get_validation_compounds():
     return validation_compounds_safe_and_unsafe, validation_compounds_safe, validation_compounds_unsafe
 
 
-def calculate_hitcall_statistics(hitcall_infos, aeid, df_aeid):
-    hitcall_values = df_aeid['hitcall']
+def calculate_binarized_hitcall_statistics(hitcall_infos, aeid, df_aeid, hitcall):
+    hitcall_values = df_aeid[f"{hitcall}"]
     hitcall_values = (hitcall_values >= 0.5).astype(int)
     total_size = len(hitcall_values)
     num_active = hitcall_values.sum()
@@ -97,35 +95,42 @@ def compute_compounds_intersection(directory, compounds, compounds_with_zero_cou
     return compounds_without_fingerprint
 
 
-def csv_to_parquet_converter():
-    # print("Get mapping: GUID -> DTXSID from smiles (using pubchempy)")
-    # src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"massbank_smiles_guid_acc_20231005.csv")
-    # df = pd.read_csv(src_path)
-    # df = df.drop_duplicates()
-    #
-    #
-    # # Initialize an empty dictionary to store the mapping
-    # guid_to_dtxsid = {}
-    #
-    # def apply_get_dtxsid_parallel(row):
-    #     smiles = row['CH$SMILES']
-    #     guid = row['GUID']
-    #     c = pcp.get_compounds(smiles, 'smiles')
-    #     synonyms = c[0].synonyms
-    #     dtxsid_values = [item for item in synonyms if item.startswith("DTXSID")]
-    #     num_compounds = len(dtxsid_values)
-    #     if num_compounds == 1:
-    #         print("Unique DTXSID found")
-    #         dtxsid = dtxsid_values[0]
-    #     elif num_compounds > 2:
-    #         print("No unique DTXSID found")
-    #         dtxsid = dtxsid_values[0]
-    #     else:
-    #         dtxsid = None
-    #         print("No DTXSID found")
-    #
-    # result = joblib.Parallel(n_jobs=-1)(joblib.delayed(apply_get_dtxsid_parallel)(row) for _, row in df.iterrows())
+def get_sirius_fingerprints():
+    massbank_sirius_df = pd.read_csv(
+        os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_from-sirius_fps_pos_curated_20231009_withDTXSID.csv"))
+    fps_toxcast_df = pd.read_csv(os.path.join(INPUT_VALIDATION_DIR_PATH, f"ToxCast_20231006_fingerprints.csv"))
+    merged_df = massbank_sirius_df.merge(fps_toxcast_df[['index']], how='inner', left_on='DTXSID', right_on='index')
+    cols_to_select = merged_df.filter(regex='^\d+$').columns.to_list() + ['index']  # only fingerprint
+    grouped = merged_df[cols_to_select].groupby("index").mean()
+    # Convert the mean values to binary fingerprints again
+    binary_grouped = grouped.round().astype(int)
+    binary_grouped = binary_grouped.reset_index().rename(columns={'index': 'dsstox_substance_id'})
+    return binary_grouped
 
+
+def get_guid_dtxsid_mapping():
+    global massbank_guid_acc_df, massbank_metadata_df
+    # Table with DTXSID and accession column
+    massbank_dtxsid_acc_df = pd.read_csv(
+        os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_quality_filtered_full_table_20231005.csv"))
+    massbank_dtxsid_acc_df = massbank_dtxsid_acc_df.rename(columns={'CH$LINK': 'DTXSID'})
+    massbank_dtxsid_acc_df['DTXSID'] = massbank_dtxsid_acc_df['DTXSID'].str.replace('COMPTOX ', '')
+    # Table with GUID and accession column
+    massbank_guid_acc_df = pd.read_csv(
+        os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_smiles_guid_acc_20231005.csv"))
+    # Merge both tables on accession column
+    massbank_metadata_df = massbank_dtxsid_acc_df.merge(massbank_guid_acc_df, on="accession")
+    # Get GUID/DTXSID pairs
+    pairs = massbank_metadata_df[['GUID', 'DTXSID']].drop_duplicates()
+    # Check if chemical with DTXSID have a unique relationship to GUID
+    unique_guid = pairs['GUID'].nunique()  # = 1783
+    unique_dtxsid = pairs['DTXSID'].nunique()  # = 1466
+    is_one_to_one_relationship = (unique_guid == unique_dtxsid) and (unique_guid == len(pairs))  # False
+    print("'GUID'/'DTXSID' is_one_to_one_relationship:", is_one_to_one_relationship)
+    return pairs
+
+
+def csv_to_parquet_converter():
     print("Preprocess fingerprint from structure input file")
     src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}.csv")
     dest_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}{FILE_FORMAT}")
@@ -154,5 +159,11 @@ def csv_to_parquet_converter():
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'w') as f:
         f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))
 
+    # get_guid_dtxsid_mapping()
+    sirius_fingerprints = get_sirius_fingerprints()
+    sirius_fingerprints.to_csv(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints.csv"), index=False)
+    sirius_fingerprints.to_parquet(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}"), compression='gzip')
 
-
+    unique_chemicals = sirius_fingerprints['dsstox_substance_id'].unique()
+    with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_fingerprints_compounds.out"), 'w') as f:
+        f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))

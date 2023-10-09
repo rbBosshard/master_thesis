@@ -17,7 +17,7 @@ METADATA_DIR_PATH = os.path.join(DATA_DIR_PATH, 'metadata')
 
 INPUT_ML_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'ml')
 INPUT_VALIDATION_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'validation')
-INPUT_FINGERPRINTS_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'fingerprints_from_structure')
+INPUT_FINGERPRINTS_DIR_PATH = os.path.join(INPUT_DIR_PATH, 'fingerprints')
 
 COMPOUNDS_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'compounds')
 METADATA_SUBSET_DIR_PATH = os.path.join(METADATA_DIR_PATH, 'subset')
