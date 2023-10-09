@@ -4,6 +4,8 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_DIR_PATH = os.path.join(ROOT_DIR, '../../config')
 CONFIG_PATH = os.path.join(CONFIG_DIR_PATH, 'config.yaml')
 CONFIG_CLASSIFIERS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_classifiers.yaml')
+CONFIG_REGRESSORS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_regressors.yaml')
+
 
 LOG_DIR_PATH = os.path.join(ROOT_DIR, '../../logs')
 DATA_DIR_PATH = os.path.join(ROOT_DIR, '../../data')
