@@ -10,7 +10,7 @@
 \contentsline {section}{\numberline {1.6}Thesis Structure}{6}{section.1.6}%
 \contentsline {chapter}{\chapternumberline {2}Background}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Toxicity Testing: From In Vitro Assays and Molecular Fingerprints to Predictive Models and Beyond}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Chemical Target Toxicity vs. Cytotoxicity}{9}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Chemical Target Toxicity vs. Cytotoxicity}{10}{section.2.2}%
 \contentsline {chapter}{\chapternumberline {3}Related work}{12}{chapter.3}%
 \contentsline {chapter}{\chapternumberline {4}Material and Methods}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Toxicity Data and Processing}{13}{section.4.1}%
@@ -25,20 +25,21 @@
 \contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{19}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Introduction}{19}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}Subset assay endpoints}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Cytotoxicity Interference Evaluation}{19}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Curve Surfer}{21}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{21}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{21}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{22}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Regression}{22}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{22}{subsection.4.3.4}%
-\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{23}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Results}{23}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Evaluation}{23}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Discussion}{23}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Performance Analysis}{23}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Binary Classification}{23}{section.5.5}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion}{25}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Further}{25}{section.6.1}%
-\contentsline {chapter}{Bibliography}{27}{section*.21}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{31}{appendix.A}%
+\contentsline {subsection}{\numberline {4.2.3}Changes in the main pipeline}{19}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Cytotoxicity Interference Evaluation}{20}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Curve Surfer}{21}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{22}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{22}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{23}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Regression}{23}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{23}{subsection.4.3.4}%
+\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Results}{24}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation}{24}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Discussion}{24}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Performance Analysis}{24}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Binary Classification}{24}{section.5.5}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{26}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Further}{26}{section.6.1}%
+\contentsline {chapter}{Bibliography}{28}{section*.21}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{32}{appendix.A}%
