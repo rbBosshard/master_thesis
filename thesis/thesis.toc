@@ -12,42 +12,42 @@
 \contentsline {section}{\numberline {2.1}Toxicity Testing: From In Vitro Assays and Molecular Fingerprints to Predictive Models and Beyond}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Chemical Target Toxicity vs. Cytotoxicity}{10}{section.2.2}%
 \contentsline {chapter}{\chapternumberline {3}Related work}{12}{chapter.3}%
-\contentsline {chapter}{\chapternumberline {4}Material and Methods}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Toxicity Data and Processing}{13}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}ToxCast invitroDB v4.1}{13}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}tcpl v3.0}{13}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Efficacy Cutoff}{14}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Concentration-Response Series}{14}{subsection.4.1.4}%
-\contentsline {subsection}{\numberline {4.1.5}tcplFit2}{16}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {4.1.6}Curve Fitting}{16}{subsection.4.1.6}%
-\contentsline {subsection}{\numberline {4.1.7}Hit Calling}{16}{subsection.4.1.7}%
-\contentsline {subsection}{\numberline {4.1.8}Flagging}{18}{subsection.4.1.8}%
-\contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{19}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Introduction}{19}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Setup pipeline}{19}{subsection.4.2.2}%
-\contentsline {subsubsection}{Subsetting Data}{19}{section*.15}%
-\contentsline {subsubsection}{Exernal Assay Annotation}{20}{section*.17}%
-\contentsline {subsection}{\numberline {4.2.3}Main pipeline}{20}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Post-Processing pipeline}{21}{subsection.4.2.4}%
-\contentsline {subsubsection}{Post-Processing Curation}{21}{section*.20}%
-\contentsline {subsubsection}{Cytotoxicity Interference Reevaluation}{21}{section*.21}%
-\contentsline {subsection}{\numberline {4.2.5}Curve Surfer}{22}{subsection.4.2.5}%
-\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Training}{23}{subsection.4.3.1}%
-\contentsline {subsubsection}{Feature Selection}{23}{section*.25}%
-\contentsline {subsubsection}{Model Selection}{24}{section*.26}%
-\contentsline {subsection}{\numberline {4.3.2}Evalaution}{25}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Application}{25}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Binary Classification}{25}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Regression}{25}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Massbank Validation}{25}{subsection.4.3.6}%
-\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{26}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Results}{26}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Evaluation}{26}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Discussion}{26}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Performance Analysis}{26}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Binary Classification}{26}{section.5.5}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion}{28}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Further}{28}{section.6.1}%
-\contentsline {chapter}{Bibliography}{30}{section*.28}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{34}{appendix.A}%
+\contentsline {chapter}{\chapternumberline {4}Material and Methods}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Toxicity Data and Processing}{14}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}ToxCast invitroDB v4.1}{14}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}tcpl v3.0}{14}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Efficacy Cutoff}{15}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Concentration-Response Series}{15}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}tcplFit2}{17}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Curve Fitting}{17}{subsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.1.7}Hit Calling}{17}{subsection.4.1.7}%
+\contentsline {subsection}{\numberline {4.1.8}Flagging}{19}{subsection.4.1.8}%
+\contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{20}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Introduction}{20}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Setup pipeline}{20}{subsection.4.2.2}%
+\contentsline {subsubsection}{Subsetting Data}{20}{section*.15}%
+\contentsline {subsubsection}{Exernal Assay Annotation}{21}{section*.17}%
+\contentsline {subsection}{\numberline {4.2.3}Main pipeline}{21}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Post-Processing pipeline}{22}{subsection.4.2.4}%
+\contentsline {subsubsection}{Post-Processing Curation}{22}{section*.20}%
+\contentsline {subsubsection}{Cytotoxicity Interference Reevaluation}{22}{section*.21}%
+\contentsline {subsection}{\numberline {4.2.5}Curve Surfer}{23}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{23}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Training}{26}{subsection.4.3.1}%
+\contentsline {subsubsection}{Feature Selection}{26}{section*.27}%
+\contentsline {subsubsection}{Model Selection}{26}{section*.28}%
+\contentsline {subsection}{\numberline {4.3.2}Evalaution}{27}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Application}{28}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Binary Classification}{28}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Regression}{29}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Massbank Validation}{29}{subsection.4.3.6}%
+\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{30}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Results}{30}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation}{30}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Discussion}{30}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Performance Analysis}{30}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Binary Classification}{30}{section.5.5}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{32}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Further}{32}{section.6.1}%
+\contentsline {chapter}{Bibliography}{34}{section*.31}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{38}{appendix.A}%
