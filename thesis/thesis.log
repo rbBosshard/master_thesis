@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  10 OCT 2023 11:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  10 OCT 2023 15:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1344,7 +1344,7 @@ Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
 Package biblatex Info: Reference section=0 on input line 111.
 Package biblatex Info: Reference segment=0 on input line 111.
-<eth-template/ETHlogo.pdf, id=176, 179.67125pt x 45.16875pt>
+<eth-template/ETHlogo.pdf, id=184, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
 Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 121.
@@ -1436,18 +1436,18 @@ LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 5
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 )
-<figures/non_target_high_resolution_mass_spectrometry.png, id=282, 974.13937pt x 432.11438pt>
+<figures/non_target_high_resolution_mass_spectrometry.png, id=292, 974.13937pt x 432.11438pt>
 File: figures/non_target_high_resolution_mass_spectrometry.png Graphic file (type png)
 <use figures/non_target_high_resolution_mass_spectrometry.png>
 Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry.png  used on input line 70.
 (pdftex.def)             Requested size: 421.0pt x 186.74843pt.
  [3]
-<figures/hts_robot.png, id=296, 1927.2pt x 1278.7775pt>
+<figures/hts_robot.png, id=306, 1927.2pt x 1278.7775pt>
 File: figures/hts_robot.png Graphic file (type png)
 <use figures/hts_robot.png>
 Package pdftex.def Info: figures/hts_robot.png  used on input line 84.
 (pdftex.def)             Requested size: 202.0782pt x 134.07071pt.
-<figures/hts.png, id=299, 1040.88875pt x 717.68124pt>
+<figures/hts.png, id=309, 1040.88875pt x 717.68124pt>
 File: figures/hts.png Graphic file (type png)
 <use figures/hts.png>
 Package pdftex.def Info: figures/hts.png  used on input line 91.
@@ -1467,7 +1467,7 @@ Overfull \vbox (13.59999pt too high) has occurred while \output is active []
  [4 <./figures/non_target_high_resolution_mass_spectrometry.png>] [5 <./figures/hts_robot.png> <./figures/hts.png>]) (./chapters/background.tex [6] [7
 
 ]
-<figures/fingerprint_schema.png, id=336, 2337.48282pt x 1336.24219pt>
+<figures/fingerprint_schema.png, id=346, 2337.48282pt x 1336.24219pt>
 File: figures/fingerprint_schema.png Graphic file (type png)
 <use figures/fingerprint_schema.png>
 Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 20.
@@ -1476,7 +1476,7 @@ Package pdftex.def Info: figures/fingerprint_schema.png  used on input line 20.
 Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 
  [8 <./figures/fingerprint_schema.png>]
-<figures/aop2.png, id=348, 963.6pt x 535.236pt>
+<figures/aop2.png, id=358, 963.6pt x 535.236pt>
 File: figures/aop2.png Graphic file (type png)
 <use figures/aop2.png>
 Package pdftex.def Info: figures/aop2.png  used on input line 31.
@@ -1485,7 +1485,7 @@ Package pdftex.def Info: figures/aop2.png  used on input line 31.
 Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 
  [9 <./figures/aop2.png>]
-<figures/cytotoxicity.png, id=361, 908.39375pt x 623.32875pt>
+<figures/cytotoxicity.png, id=371, 908.39375pt x 623.32875pt>
 File: figures/cytotoxicity.png Graphic file (type png)
 <use figures/cytotoxicity.png>
 Package pdftex.def Info: figures/cytotoxicity.png  used on input line 47.
@@ -1493,7 +1493,7 @@ Package pdftex.def Info: figures/cytotoxicity.png  used on input line 47.
  [10]) (./chapters/related_work.tex [11 <./figures/cytotoxicity.png>]) (./chapters/material_and_methods.tex [12
 
 ]
-<figures/toxcast_db_annotations_recolored.png, id=389, 455.301pt x 293.898pt>
+<figures/toxcast_db_annotations_recolored.png, id=399, 455.301pt x 293.898pt>
 File: figures/toxcast_db_annotations_recolored.png Graphic file (type png)
 <use figures/toxcast_db_annotations_recolored.png>
 Package pdftex.def Info: figures/toxcast_db_annotations_recolored.png  used on input line 10.
@@ -1501,7 +1501,7 @@ Package pdftex.def Info: figures/toxcast_db_annotations_recolored.png  used on i
  [13
 
 ]
-<figures/CRS.png, id=408, 944.328pt x 474.573pt>
+<figures/CRS.png, id=418, 944.328pt x 474.573pt>
 File: figures/CRS.png Graphic file (type png)
 <use figures/CRS.png>
 Package pdftex.def Info: figures/CRS.png  used on input line 32.
@@ -1512,62 +1512,67 @@ Underfull \hbox (badness 1609) in paragraph at lines 33--33
  []
 
 [14 <./figures/toxcast_db_annotations_recolored.png>] [15 <./figures/CRS.png>]
-<figures/fit_models.png, id=433, 829.59938pt x 594.22pt>
+<figures/fit_models.png, id=443, 829.59938pt x 594.22pt>
 File: figures/fit_models.png Graphic file (type png)
 <use figures/fit_models.png>
 Package pdftex.def Info: figures/fit_models.png  used on input line 101.
 (pdftex.def)             Requested size: 378.89743pt x 271.3951pt.
-<figures/POD.png, id=437, 664.28175pt x 411.939pt>
+<figures/POD.png, id=447, 664.28175pt x 411.939pt>
 File: figures/POD.png Graphic file (type png)
 <use figures/POD.png>
 Package pdftex.def Info: figures/POD.png  used on input line 117.
 (pdftex.def)             Requested size: 202.0782pt x 125.3112pt.
-<figures/inactive_and_no_pod.png, id=438, 863.02425pt x 591.4095pt>
+<figures/inactive_and_no_pod.png, id=448, 863.02425pt x 591.4095pt>
 File: figures/inactive_and_no_pod.png Graphic file (type png)
 <use figures/inactive_and_no_pod.png>
 Package pdftex.def Info: figures/inactive_and_no_pod.png  used on input line 124.
 (pdftex.def)             Requested size: 202.0782pt x 138.47589pt.
  [16] [17 <./figures/fit_models.png>] [18 <./figures/POD.png> <./figures/inactive_and_no_pod.png>]
-<figures/presence_matrix_all.png, id=476, 1407.45825pt x 698.61pt>
+<figures/presence_matrix_all.png, id=486, 1407.45825pt x 698.61pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
-Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 169.
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 170.
 (pdftex.def)             Requested size: 202.0782pt x 100.29915pt.
-<figures/presence_matrix_subset.png, id=477, 1404.447pt x 702.82574pt>
+<figures/presence_matrix_subset.png, id=487, 1404.447pt x 702.82574pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
-Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 176.
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 177.
 (pdftex.def)             Requested size: 202.0782pt x 101.11888pt.
- [19]
-<figures/aeid_acid_aid.png, id=489, 352.9185pt x 91.542pt>
+ [19] [20 <./figures/presence_matrix_all.png> <./figures/presence_matrix_subset.png>]
+<figures/aeid_acid_aid.png, id=516, 352.9185pt x 91.542pt>
 File: figures/aeid_acid_aid.png Graphic file (type png)
 <use figures/aeid_acid_aid.png>
-Package pdftex.def Info: figures/aeid_acid_aid.png  used on input line 216.
+Package pdftex.def Info: figures/aeid_acid_aid.png  used on input line 232.
 (pdftex.def)             Requested size: 336.80128pt x 87.36389pt.
- [20 <./figures/presence_matrix_all.png> <./figures/presence_matrix_subset.png>]
-<figures/curve_surfer.png, id=503, 793.46437pt x 590.205pt>
+ [21]
+<figures/curve_surfer.png, id=529, 793.46437pt x 590.205pt>
 File: figures/curve_surfer.png Graphic file (type png)
 <use figures/curve_surfer.png>
-Package pdftex.def Info: figures/curve_surfer.png  used on input line 239.
+Package pdftex.def Info: figures/curve_surfer.png  used on input line 255.
 (pdftex.def)             Requested size: 421.0pt x 313.15839pt.
- [21 <./figures/aeid_acid_aid.png>] [22 <./figures/curve_surfer.png>]) (./chapters/results_discussion.tex [23] [24
+<figures/ml_dataset.png, id=534, 748.59676pt x 260.77425pt>
+File: figures/ml_dataset.png Graphic file (type png)
+<use figures/ml_dataset.png>
+Package pdftex.def Info: figures/ml_dataset.png  used on input line 270.
+(pdftex.def)             Requested size: 421.0pt x 146.6533pt.
+ [22 <./figures/aeid_acid_aid.png>] [23 <./figures/curve_surfer.png>] [24 <./figures/ml_dataset.png>]) (./chapters/results_discussion.tex [25] [26
 
-]) (./chapters/conclusion.tex [25] [26
+]) (./chapters/conclusion.tex [27] [28
 
-]) [27]
+]) [29]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [28
+ [30
 
-] [29] [30] (./chapters/appendix.tex [31]
-<figures/concentration_metric_distributions.png, id=632, 1512.852pt x 301.125pt>
+] [31] [32] (./chapters/appendix.tex [33]
+<figures/concentration_metric_distributions.png, id=682, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 43.
 (pdftex.def)             Requested size: 421.0pt x 83.7952pt.
 )
-<eth-template/declaration-originality.pdf, id=633, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=683, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 151.
@@ -1576,7 +1581,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf>
 Package pdftex.def Info: eth-template/declaration-originality.pdf  used on input line 151.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
-<eth-template/declaration-originality.pdf, id=636, page=1, 597.55246pt x 845.07718pt>
+<eth-template/declaration-originality.pdf, id=686, page=1, 597.55246pt x 845.07718pt>
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 151.
@@ -1585,7 +1590,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 151.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [32
+ [34
 
  <./figures/concentration_metric_distributions.png>]
 File: eth-template/declaration-originality.pdf Graphic file (type pdf)
@@ -1600,7 +1605,7 @@ File: eth-template/declaration-originality.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality.pdf , page1 used on input line 151.
 (pdftex.def)             Requested size: 597.57834pt x 845.1138pt.
- [33 <./eth-template/declaration-originality.pdf>]
+ [35 <./eth-template/declaration-originality.pdf>]
 
 Class memoir Warning: The material used in the headers is too large
 (27.2pt) for the given head height (13.6pt), it is recommended to
@@ -1610,7 +1615,7 @@ either increase the head height or redesign the header
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
 
-[34]
+[36]
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -1620,24 +1625,24 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-03>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 568A4975C5A96A807F53F3253C61A256;7504.
+(rerunfilecheck)             Checksum: F4B4B0E9FA9DB8C19D0D9CC2EB98FB7B;7518.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37458 strings out of 475188
- 697170 string characters out of 5767805
+ 37535 strings out of 475188
+ 698104 string characters out of 5767805
  1939248 words of memory out of 5000000
- 57440 multiletter control sequences out of 15000+600000
- 633024 words of font info for 577 fonts, out of 8000000 for 9000
+ 57455 multiletter control sequences out of 15000+600000
+ 634610 words of font info for 606 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,125p,2303b,2790s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (39 pages, 9788521 bytes).
+Output written on thesis.pdf (41 pages, 9820637 bytes).
 PDF statistics:
- 799 PDF objects out of 1000 (max. 8388607)
- 663 compressed objects within 7 object streams
- 146 named destinations out of 1000 (max. 500000)
- 123330 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 851 PDF objects out of 1000 (max. 8388607)
+ 710 compressed objects within 8 object streams
+ 168 named destinations out of 1000 (max. 500000)
+ 123351 words of extra memory for PDF output out of 128383 (max. 10000000)
 

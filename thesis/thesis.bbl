@@ -1362,6 +1362,90 @@
       \verb https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html
       \endverb
     \endentry
+    \entry{ice2022}{article}{}
+      \name{author}{11}{}{%
+        {{hash=5930531820eaf1e768a7adbf5228ea26}{%
+           family={Daniel},
+           familyi={D\bibinitperiod},
+           given={Amber\bibnamedelima B.},
+           giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=415428586fc6b8c31df69ca23318fdac}{%
+           family={Choksi},
+           familyi={C\bibinitperiod},
+           given={Neepa},
+           giveni={N\bibinitperiod}}}%
+        {{hash=4233068fd84339228d8770b7e74b1760}{%
+           family={Abedini},
+           familyi={A\bibinitperiod},
+           given={Jaleh},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2a84ea11a0c0c52d896423d56eca1315}{%
+           family={Bell},
+           familyi={B\bibinitperiod},
+           given={Shannon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a738b741989d51c1fc323f31138cbeb1}{%
+           family={Ceger},
+           familyi={C\bibinitperiod},
+           given={Patricia},
+           giveni={P\bibinitperiod}}}%
+        {{hash=530048f4a5715c2d0aa7c0f1008aadab}{%
+           family={Cook},
+           familyi={C\bibinitperiod},
+           given={Bethany},
+           giveni={B\bibinitperiod}}}%
+        {{hash=177e3e2c3a00755c27f14df5860e3cd2}{%
+           family={Karmaus},
+           familyi={K\bibinitperiod},
+           given={Agnes\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=f8f37c7be476ed0bc5cb87c3a1453b8f}{%
+           family={Rooney},
+           familyi={R\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=83c362b8452bc1b163d2e49dcdb75678}{%
+           family={To},
+           familyi={T\bibinitperiod},
+           given={Kimberly\bibnamedelima T.},
+           giveni={K\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=b44ff66e8575bdd84a41facb081c6d51}{%
+           family={Allen},
+           familyi={A\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a2d66295ae9350a8f2f15a815193a6e4}{%
+           family={Kleinstreuer},
+           familyi={K\bibinitperiod},
+           given={Nicole},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{c0636d5b47672233ac10ce1988cd70e2}
+      \strng{fullhash}{6567ba0fda6840b65d0f87f47651ec41}
+      \strng{bibnamehash}{c0636d5b47672233ac10ce1988cd70e2}
+      \strng{authorbibnamehash}{c0636d5b47672233ac10ce1988cd70e2}
+      \strng{authornamehash}{c0636d5b47672233ac10ce1988cd70e2}
+      \strng{authorfullhash}{6567ba0fda6840b65d0f87f47651ec41}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Humans are exposed to large numbers of chemicals during their daily activities. To assess and understand potential health impacts of chemical exposure, investigators and regulators need access to reliable toxicity data. In particular, reliable toxicity data for a wide range of chemistries are needed to support development of new approach methodologies (NAMs) such as computational models, which offer increased throughput relative to traditional approaches and reduce or replace animal use. NAMs development and evaluation require chemically diverse data sets that are typically constructed by incorporating results from multiple studies into a single, integrated view; however, integrating data is not always a straightforward task. Primary study sources often vary in the way data are organized and reported. Metadata and information needed to support interoperability and provide context are often lacking, which necessitates literature research on the assay prior to attempting data integration. The Integrated Chemical Environment (ICE) was developed to support the development, evaluation, and application of NAMs. ICE provides curated toxicity data and computational tools to integrate and explore available information, thus facilitating knowledge discovery and interoperability. This paper describes the data curation workflow for integrating data into ICE. Data destined for ICE undergo rigorous harmonization, standardization, and formatting processes using both automated and manual expert-driven approaches. These processes improve the utility of the data for diverse analyses and facilitate application within ICE or a user’s external workflow while preserving data integrity and context. ICE data curation provides the structure, reliability, and accessibility needed for data to support chemical assessments.}
+      \field{issn}{2673-3080}
+      \field{journaltitle}{Frontiers in Toxicology}
+      \field{title}{Data curation to support toxicity assessments using the Integrated Chemical Environment}
+      \field{volume}{4}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3389/ftox.2022.987848
+      \endverb
+      \verb{urlraw}
+      \verb https://www.frontiersin.org/articles/10.3389/ftox.2022.987848
+      \endverb
+      \verb{url}
+      \verb https://www.frontiersin.org/articles/10.3389/ftox.2022.987848
+      \endverb
+    \endentry
     \entry{watt2018}{article}{}
       \name{author}{2}{}{%
         {{hash=b2e5961606ddfae78b79abab7f15c725}{%

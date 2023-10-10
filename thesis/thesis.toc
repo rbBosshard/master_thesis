@@ -24,22 +24,30 @@
 \contentsline {subsection}{\numberline {4.1.8}Flagging}{18}{subsection.4.1.8}%
 \contentsline {section}{\numberline {4.2}New Toxicity Pipeline Implementation: pytcpl}{19}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Introduction}{19}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Subset assay endpoints}{19}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Changes in the main pipeline}{19}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Cytotoxicity Interference Evaluation}{20}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Curve Surfer}{21}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.2}Setup pipeline}{19}{subsection.4.2.2}%
+\contentsline {subsubsection}{Subsetting Data}{19}{section*.15}%
+\contentsline {subsubsection}{Exernal Assay Annotation}{20}{section*.17}%
+\contentsline {subsection}{\numberline {4.2.3}Main pipeline}{20}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Post-Processing pipeline}{21}{subsection.4.2.4}%
+\contentsline {subsubsection}{Post-Processing Curation}{21}{section*.20}%
+\contentsline {subsubsection}{Cytotoxicity Interference Reevaluation}{21}{section*.21}%
+\contentsline {subsection}{\numberline {4.2.5}Curve Surfer}{22}{subsection.4.2.5}%
 \contentsline {section}{\numberline {4.3}Machine Learning Pipeline}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Preprocessing}{22}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Binary Classification}{23}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Regression}{23}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Massbank Validation}{23}{subsection.4.3.4}%
-\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{24}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Results}{24}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Evaluation}{24}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Discussion}{24}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Performance Analysis}{24}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Binary Classification}{24}{section.5.5}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion}{26}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Further}{26}{section.6.1}%
-\contentsline {chapter}{Bibliography}{28}{section*.21}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{32}{appendix.A}%
+\contentsline {subsection}{\numberline {4.3.1}Training}{23}{subsection.4.3.1}%
+\contentsline {subsubsection}{Feature Selection}{23}{section*.25}%
+\contentsline {subsubsection}{Model Selection}{24}{section*.26}%
+\contentsline {subsection}{\numberline {4.3.2}Evalaution}{25}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Application}{25}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Binary Classification}{25}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Regression}{25}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Massbank Validation}{25}{subsection.4.3.6}%
+\contentsline {chapter}{\chapternumberline {5}Results and Discussion}{26}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Results}{26}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Evaluation}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Discussion}{26}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Performance Analysis}{26}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Binary Classification}{26}{section.5.5}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{28}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Further}{28}{section.6.1}%
+\contentsline {chapter}{Bibliography}{30}{section*.28}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{34}{appendix.A}%
