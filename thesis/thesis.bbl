@@ -1815,6 +1815,50 @@
       \verb https://doi.org/10.1371/journal.pone.0196963
       \endverb
     \endentry
+    \entry{seol2023}{article}{}
+      \name{author}{4}{}{%
+        {{hash=e715c1f5e5b4c296d2983a41c204b74e}{%
+           family={Seol},
+           familyi={S\bibinitperiod},
+           given={Da},
+           giveni={D\bibinitperiod}}}%
+        {{hash=79153405df0030f630967b65a74395e5}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Jeong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=215796ae1b247db13529a0d92489b2b9}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Chan},
+           giveni={C\bibinitperiod}}}%
+        {{hash=4dd185e5d8dc936b7a9be8f92d0cc840}{%
+           family={Hong},
+           familyi={H\bibinitperiod},
+           given={Sang},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d0172401b99aa0d64de4c777005eea9}
+      \strng{fullhash}{6598208bd785a092bff9f2e9ada4afa1}
+      \strng{bibnamehash}{6598208bd785a092bff9f2e9ada4afa1}
+      \strng{authorbibnamehash}{6598208bd785a092bff9f2e9ada4afa1}
+      \strng{authornamehash}{7d0172401b99aa0d64de4c777005eea9}
+      \strng{authorfullhash}{6598208bd785a092bff9f2e9ada4afa1}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Electronics}
+      \field{month}{01}
+      \field{title}{Alleviating Class-Imbalance Data of Semiconductor Equipment Anomaly Detection Study}
+      \field{volume}{12}
+      \field{year}{2023}
+      \field{pages}{585}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/electronics12030585
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
