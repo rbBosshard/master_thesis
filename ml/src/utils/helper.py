@@ -103,9 +103,9 @@ def get_sirius_fingerprints():
     cols_to_select = df.filter(regex='^\d+$').columns.to_list() + ['index']  # only fingerprint
 
     df = df[cols_to_select]
-    df = df.drop_duplicates()
+    # df = df.drop_duplicates()
     df = df.groupby("index").mean()
-    df = df.round().astype(int) # Convert the mean values to binary fingerprints again
+    df = df.round().astype(int)  # Convert the mean values to binary fingerprints again
     df = df.reset_index().rename(columns={'index': 'dsstox_substance_id'})
     return df
 

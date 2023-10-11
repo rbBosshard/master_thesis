@@ -28,7 +28,8 @@ if __name__ == '__main__':
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in [97]: #aeids_target_assays[:]:  # [97]: #
+    for aeid in [97, 300]: #aeids_target_assays[:]:  # [97]:
+
         # Init the aeid folder
         init_aeid(aeid)
         
@@ -42,7 +43,7 @@ if __name__ == '__main__':
         X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
         # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
-        assess_similarity(X_massbank_val_from_sirius, X_massbank_val_from_structure)
+        assess_similarity(X_massbank_val_from_structure, X_massbank_val_from_sirius)
 
         # Split ML data into train, validation and test set
         X_train, y_train, X_test, y_test = split_data(X, y)

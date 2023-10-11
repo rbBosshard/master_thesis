@@ -2391,22 +2391,21 @@
     <bcf:citekey order="27" intorder="1">escher2021</bcf:citekey>
     <bcf:citekey order="28" intorder="1">fay2018</bcf:citekey>
     <bcf:citekey order="29" intorder="1">cavasotto2022</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">richard2021</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">peets2022</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">williams2017</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">wu2021</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">kretschmer2023</bcf:citekey>
-    <bcf:citekey order="35" intorder="1">userguide</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">cavasotto2022</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">richard2021</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">kretschmer2023</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">peets2022</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">williams2017</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">wu2021</bcf:citekey>
     <bcf:citekey order="36" intorder="1">userguide</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">sheffield2021</bcf:citekey>
-    <bcf:citekey order="38" intorder="1">tcplv3.0</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">userguide</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">sheffield2021</bcf:citekey>
     <bcf:citekey order="39" intorder="1">tcplv3.0</bcf:citekey>
     <bcf:citekey order="40" intorder="1">tcplv3.0</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">sheffield2021</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">ice2022</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">watt2018</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">seol2023</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">seol2023</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">tcplv3.0</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">sheffield2021</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">ice2022</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">watt2018</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

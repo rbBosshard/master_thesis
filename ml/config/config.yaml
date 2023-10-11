@@ -5,7 +5,7 @@ file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 ignore_warnings: False
 
-ml_algorithm: classification # classification, regression
+ml_algorithm: regression # classification, regression
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
 random_state: 0 # For reproducibility

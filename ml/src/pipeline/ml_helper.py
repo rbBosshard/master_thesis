@@ -32,6 +32,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import make_scorer, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
 
 from sklearn.decomposition import NMF
 
@@ -144,32 +146,41 @@ def partition_data(df):
     validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
     validation_compounds = pd.read_parquet(validation_compounds_path)["dsstox_substance_id"]
 
-    # Load the massbank validation set (unsafe + safe compounds)
-    massbank_val_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}")
-    massbank_val_df = pd.read_parquet(massbank_val_path)
 
-    # Filter the massbank validation set for the safe compounds
-    massbank_val_df = massbank_val_df[massbank_val_df['dsstox_substance_id'].isin(validation_compounds)]
-    
-    # Update the validation compounds to only contain the safe compounds intersected with the massbank validation set
-    validation_compounds = massbank_val_df['dsstox_substance_id']
+    # Load the massbank validation set (unsafe + safe compounds)
+    massbank_val_pred_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}")
+    massbank_val_pred_df = pd.read_parquet(massbank_val_pred_path).drop(columns=['449']) # Why does SIRIUS Fingerprint has an additional column '449'?
+
+    # Identify common identifiers
+    massbank_val_pred_df = massbank_val_pred_df[massbank_val_pred_df['dsstox_substance_id'].isin(validation_compounds)]
+    massbank_val_true_df = df[df['dsstox_substance_id'].isin(validation_compounds)]
+
+    common_ids = set(massbank_val_pred_df['dsstox_substance_id']).intersection(massbank_val_true_df['dsstox_substance_id'])
+
+    # Filter rows in based on common identifiers
+    massbank_val_pred_df = massbank_val_pred_df[massbank_val_pred_df['dsstox_substance_id'].isin(common_ids)]
+    massbank_val_true_df = massbank_val_true_df[massbank_val_true_df['dsstox_substance_id'].isin(common_ids)]
+
+    # Arrange to match the order in massbank_val_true_df
+    massbank_val_true_df = massbank_val_true_df.sort_values(by='dsstox_substance_id')
+    massbank_val_pred_df = massbank_val_pred_df.sort_values(by='dsstox_substance_id')
+
+    validation_compounds = massbank_val_pred_df['dsstox_substance_id']
 
     validation_filter_condition = df['dsstox_substance_id'].isin(validation_compounds)
-    validation_df = df[validation_filter_condition]
     training_df = df[~validation_filter_condition]  # From this in a later step, another internal validation set is split off
 
-    # Update the massbank validation set to only contain compounds that were tested in the assay endpoint
-    massbank_val_df = massbank_val_df[massbank_val_df['dsstox_substance_id'].isin(validation_df['dsstox_substance_id'])]
-
     # Safety check that the compounds intersection with the exteranl validation set is empty
-    is_distinct = len(set(training_df['dsstox_substance_id']).intersection(validation_df['dsstox_substance_id'])) == 0
+    is_distinct = len(set(training_df['dsstox_substance_id']).intersection(massbank_val_pred_df['dsstox_substance_id'])) == 0
     assert is_distinct
 
     # Partition the data into features (X) and labels (y)
     # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
-    X = training_df.iloc[:, 3:].astype(np.uint8)
-    X_massbank_val_from_structure = validation_df.iloc[:, 3:].astype(np.uint8)
-    X_massbank_val_from_sirius = massbank_val_df.iloc[:, 1:].astype(np.uint8).drop(columns=['449'])  # Why does SIRIUS Fingerprint has an additional column '449'?
+    selected_columns = training_df.iloc[:, [0] + list(range(3, training_df.shape[1]))]
+
+    X = training_df.iloc[:, 3:]
+    X_massbank_val_from_structure = massbank_val_true_df.iloc[:, 3:]
+    X_massbank_val_from_sirius = massbank_val_pred_df.iloc[:, 1:]
 
     if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
         hitcall = 'hitcall_c'
@@ -179,58 +190,85 @@ def partition_data(df):
     # Distinguish between regression and binary classification
     if 'reg' in CONFIG['ml_algorithm']:
         y = training_df[hitcall]
-        y_massbank_val = validation_df[hitcall]
+        y_massbank_val = massbank_val_true_df[hitcall]
     else:  # binary classification
         t = CONFIG['activity_threshold']
         LOGGER.info(f"Activity threshold: ({hitcall} >= {t} is active)\n")
         y = (training_df[hitcall] >= t).astype(np.uint8)
-        y_massbank_val = (validation_df[hitcall] >= t).astype(np.uint8)
+        y_massbank_val = (massbank_val_true_df[hitcall] >= t).astype(np.uint8)
 
     return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
-def assess_similarity(df1, df2):
+def assess_similarity(ground_truth, predicted):
+    predicted = predicted.astype(int)
+    ground_truth = ground_truth.astype(int)
 
-    df1 = df1.astype(int)
-    df2 = df2.astype(int)
+    # Flatten both matrices to 1D arrays
+    y_true = ground_truth.to_numpy().flatten()
+    y_pred = predicted.to_numpy().flatten()
+
+    accuracy = accuracy_score(y_true, y_pred)
+    precision = precision_score(y_true, y_pred)
+    recall = recall_score(y_true, y_pred)
+    f1 = f1_score(y_true, y_pred)
+
+    # print("Accuracy:", accuracy)
+    # print("Precision:", precision)
+    # print("Recall:", recall)
+    # print("F1 Score:", f1)
 
     # Create a figure with two subplots (heatmap and line plot)
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(50, 10)) 
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(50, 20)) 
 
     # Calculate dissimilarity
-    ax1.set_title(f"Dissimilarity, pred - true fingerprints, blue=-1, white=0, red=1, {df1.shape}", fontsize=30)
-    ax1.set_xticklabels([])
-    ax1.set_xlabel('Compounds')
-    ax1.set_ylabel('Fingerprint features')
-    dissimilarity_matrix = (df1.values - df2.values).astype(int)
+
+    dissimilarity_matrix = (predicted.values - ground_truth.values).astype(int)
     cmap = sns.color_palette(['blue', 'white', 'red'])  # Blue for -1, White for 0, Red for 1
     sns.heatmap(dissimilarity_matrix,
-                # cbar=False,
+                cbar=False,
                 xticklabels=False,
                 yticklabels=False,
                 cmap='viridis',
                 ax=ax1,
                 )
+    ax1.set_title(f"Dissimilarity in Massbank validation set with shape {predicted.shape}: "
+                  f"Predicted - True Fingerprints. "
+                  f"Purple=-1, Green=0, Yellow=1",
+                  fontsize=50)
+    ax1.set_xticklabels([])
+    ax1.set_xlabel('Fingerprint features', fontsize=40)
+    ax1.set_ylabel('Compounds', fontsize=40)
+    # Display the metrics
+    legend_text = f"Accuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall: {recall:.2f}\nF1 Score: {f1:.2f}"
+    ax1.annotate(legend_text, xy=(1, 1), xytext=(0.9, 0.61), fontsize=40,
+                 xycoords='axes fraction', textcoords='axes fraction',
+                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.4))
 
-    sum_of_columns = df2.sum(axis=0)  # Calculate the sum of columns
-    ax2.plot(sum_of_columns, marker='', linestyle='-', label='true', alpha=0.6, linewidth=1, color='blue')
-    sum_of_columns = df1.sum(axis=0)  # Calculate the sum of columns
-    ax2.plot(sum_of_columns, marker='', linestyle='-', label='predicted', alpha=0.6, linewidth=1, color='red')
-    ax2.set_xlabel('Fingerprint features')
-    ax2.set_ylabel('Sum of present features')
-    ax2.set_title('Sum of present features in the columns', fontsize=30)
+    sum_of_columns = ground_truth.sum(axis=0)
+    ax2.plot(sum_of_columns, marker='.', linestyle='-', label='True Fingerprints')
+    sum_of_columns = predicted.sum(axis=0)
+    ax2.plot(sum_of_columns, marker='.', linestyle='--', label='Predicted by SIRIUS')
+    ax2.set_xlabel('Fingerprint Features', fontsize=40)
+    ax2.set_ylabel('Sum of Present Features', fontsize=40)
+    ax2.set_title('Sum of Bits in Fingerprint Features', fontsize=50)
     ax2.set_xticklabels([])
+    ax2.tick_params(axis='y', labelsize=35)
     ax2.set_xticks([])
-    ax2.legend()
-
+    ax2.set_xlim(0, len(sum_of_columns))
+    legend = ax2.legend(prop={'size': 40})
 
     # Adjust the layout of the subplots
+    plt.subplots_adjust(wspace=0, hspace=20)
     plt.tight_layout()
 
     path = os.path.join(LOG_PATH, f"{AEID}", "dissimilarity.png")
     plt.savefig(path, format='png')
     plt.close()
 
+
+
+    exit()
 
     def jaccard_similarity(matrix1, matrix2, axis):
         intersection = np.logical_and(matrix1, matrix2)
@@ -243,10 +281,10 @@ def assess_similarity(df1, df2):
 
 
     # Calculate Jaccard similarity and Hamming distance for rows and columns
-    row_jaccard_similarities = jaccard_similarity(df1.values, df2.values, axis=1)
-    row_hamming_distances = hamming_distance(df1.values, df2.values, axis=1)
-    col_jaccard_similarities = jaccard_similarity(df1.values, df2.values, axis=0)
-    col_hamming_distances = hamming_distance(df1.values, df2.values, axis=0)
+    row_jaccard_similarities = jaccard_similarity(predicted.values, ground_truth.values, axis=1)
+    row_hamming_distances = hamming_distance(predicted.values, ground_truth.values, axis=1)
+    col_jaccard_similarities = jaccard_similarity(predicted.values, ground_truth.values, axis=0)
+    col_hamming_distances = hamming_distance(predicted.values, ground_truth.values, axis=0)
     
     # print("Row Jaccard Similarities:", row_jaccard_similarities)
     # print("Row Hamming Distances:", row_hamming_distances)
@@ -283,8 +321,8 @@ def assess_similarity(df1, df2):
         plt.savefig(path, format='png')
         plt.close()
 
-    df1 = df1.astype(np.uint8)
-    df2 = df2.astype(np.uint8)
+    predicted = predicted.astype(np.uint8)
+    ground_truth = ground_truth.astype(np.uint8)
 
 def print_binarized_label_count(y, title):
     counts = (y >= CONFIG['activity_threshold']).value_counts().values

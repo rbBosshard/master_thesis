@@ -2,8 +2,7 @@
 
 \section{Toxicity Data and Processing}\label{sec:invitrodb}
 \subsection{ToxCast invitroDB v4.1}
-The most recent release of the ToxCast's database, referred to as \emph{invitroDBv4.1}, serves as a source of an extensive collection of HTS targeted bioactivity data (~100 GB). This database encompasses information on a total of $\num{10196}$ compounds, selectively tested across 1485 assay endpoints.
-Assay endpoints themselves stem from assays, please refer Figure~\ref{fig:toxcast_db_annotations_recolored} for an overview of the assay annotaion structure.
+The most recent release of the ToxCast's database, referred to as \emph{invitroDBv4.1}, serves as a source of an extensive collection of HTS toxicity data (\~100 GB). This database encompasses information on a total of $\num{10196}$ compounds, selectively tested across 1485 assay endpoints. Assay endpoints are inherently associated with a single assay in a one-to-many relationship, please refer Figure~\ref{fig:toxcast_db_annotations_recolored} for an overview of the assay annotaion structure.
 
 \begin{figure}  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
@@ -13,15 +12,13 @@ Assay endpoints themselves stem from assays, please refer Figure~\ref{fig:toxcas
 ~\label{fig:toxcast_db_annotations_recolored} 
 \end{figure}
 
-The assays utilize a range of technologies to assess the impact of chemical compounds on a wide array of biological targets, including individual proteins and cellular processes such as mitochondrial health, developmental processes and nuclear receptor signaling. This resource originates from the collaboration of two prominent institutions: the  U.S. EPA through its ToxCast program and the National Institutes of Health (NIH) via the Tox21 initiative. Using data collected from multiple research labs (refer to Table~\ref{tab:laboratories} in the Appendix), this relational database is accessible to the public and can be downloaded\footnote{\url{https://www.epa.gov/chemical-research/exploring-toxcast-data}, released on Sept 21, 2023} by visiting the official ToxCast website.
+The assays utilize a range of technologies to assess the impact of chemical compounds on a wide array of biological targets, including individual proteins, nuclear receptor signaling, developmental processes and cellular processes such as mitochondrial health. This resource originates from the collaboration of two prominent institutions: the  U.S. EPA through its ToxCast program and the National Institutes of Health (NIH) via the Tox21 initiative. Using data collected from multiple research labs (refer to Table~\ref{tab:laboratories} in the Appendix), this relational database is accessible to the public and can be downloaded\footnote{\url{https://www.epa.gov/chemical-research/exploring-toxcast-data}, released on Sept 21, 2023} by visiting the official ToxCast website.
 
 \subsection{tcpl v3.0}
-The \emph{tcpl}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcpl}} package provides a wide range of tools for efficiently managing HTS data. It enables reproducible concentration-response modeling and populates the \texttt{MYSQL} database, invitroDBv4.1. The multiple-concentration screening paradigm intends to pinpoint the bioactivity of compounds, while also estimating their efficacy and potency. 
-
-In Section~\ref{sec:pytcpl}, we introduce \emph{pytcpl} a \texttt{Python} reimplementation of the vital components that underpin the entire ToxCast pipeline. It should be noted that these components, as presented in the following, are applicable to both tcpl and pytcpl.
+The primary ToxCast pipeline is effectively managed through the extensive toolkit offered by the \emph{tcpl}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcpl}} package, which includes a variety of tools for high-throughput screening data management. It enables reproducible concentration-response modeling and populates the \texttt{MYSQL} database, invitroDBv4.1. The multiple-concentration screening paradigm intends to pinpoint the bioactivity of compounds, while also estimating their efficacy and potency. In Section~\ref{sec:pytcpl}, we introduce \emph{pytcpl}, a \texttt{Python} reimplementation of the major components that underpin the entire ToxCast pipeline. It should be noted that these components, as presented in the following, are applicable to both tcpl and pytcpl.
 
 \subsection{Efficacy Cutoff}
-The \emph{efficacy cutoff}, unique to each assay endpoint and illustrated for a single tested compound in Figure~\ref{fig:concentration_response_series}, plays a significant role in evaluating the compound's bioactivity. It serves as a threshold that differentiates active and inactive compounds, essentially defining the minimum response level that is biologically relevant. The process of establishing this threshold involves estimating the noise level in the assay responses.
+The evaluation of a compound's bioactivity is significantly influenced by the specific \emph{efficacy cutoff} associated with each assay endpoint, as exemplified for a tested compound in Figure~\ref{fig:concentration_response_series}. It serves as a threshold that differentiates active and inactive compounds, essentially defining the minimum response level of toxicity that is biologically relevant. The process of establishing this threshold involves estimating the noise level in the assay endpoint responses across all tested compounds.
 
 \subsection{Concentration-Response Series}
 Each compound $c_j$ tested within an assay endpoint $a_i$ involves the collection of the respective \emph{concentration-response series (CRS)} denoted as $CRS_{ij}$, showcased in Figure~\ref{fig:concentration_response_series}. A CRS is represented as a set of concentration-response pairs: 
@@ -110,7 +107,7 @@ Consider $t(z, \nu)$ as the Student's $t$-distribution with $\nu$ degrees of fre
 
 The \emph{Akaike Information Criterion (AIC)} is used as measure of goodness of fit, defined by the formula: $AIC = -2\log(L(\hat{\theta}, y)) + 2K$, where $L(\hat{\theta}, y)$ is the likelihood of the model given the data and $K$ is the number of model parameters. The model with the lowest AIC value is chosen as the \emph{winning} model. The winning model is then used to estimate the efficacy and potency of the compound. The potency estimates, also called \emph{point-of-departure (POD)} estimates, are derived from the fitted curve, identifying certain \emph{activity concentrations (AC)} at which the curve first reaches certain response levels. Central POD estimates are depicted graphically in Figure~\ref{fig:active_and_pod}.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
@@ -131,7 +128,7 @@ The \emph{Akaike Information Criterion (AIC)} is used as measure of goodness of 
 
 
 \subsection{Hit Calling}
-The \emph{continuous hitcall} is a measure of the probability that a compound is active, calculated based on the product of the following three probability values~\cite{sheffield2021}:
+The \emph{continuous hitcall} is a measure of the probability that a compound is active (toxic), calculated based on the product of the following three probability values~\cite{sheffield2021}:
 
 \begin{enumerate}[i.]
     \item that at least one median response is greater than the efficacy cutoff, computed by using the error parameter from the model fit and Student $t$-distribution to calculate the odds of at least one response exceeding the efficacy cutoff;
@@ -150,7 +147,7 @@ Finally, after processing, each CRS is assigned to an appropriate fit category b
 
 \section{New Toxicity Pipeline Implementation: pytcpl}\label{sec:pytcpl}
 \subsection{Introduction} 
-This thesis introduces \emph{pytcpl}\footnote{\url{https://github.com/rbBosshard/pytcpl}}, a streamlined \texttt{Python} repository inspired by the \texttt{R} packages \emph{tcpl} and {tcplfit2}. The package optimizes data storage and generates compressed \texttt{Parquet} files of the relevant raw data and metadata from \emph{invitroDBv4.1}. Exclusively utilizing this repository eliminates the need for a complex and extensive database installation, rendering downstream analysis more accessible and efficient. Our package is crafted to accomodate cusomizable processing steps and facilitate interactive data visualization with an own \emph{Curve Surfer}\footnote{\url{https://pytcpl.streamlit.app/}}. Furthermore, it enables researchers who prefer \texttt{Python} to easily participate in data analysis and exploration, overcoming any limitations associated with using \texttt{R} code.
+This thesis introduces pytcpl\footnote{\url{https://github.com/rbBosshard/pytcpl}}, a streamlined \texttt{Python} repository inspired by the \texttt{R} packages tcpl and {tcplfit2}. This package is crafted to accomodate cusomizable processing steps and facilitate interactive data visualization with an own \emph{Curve Surfer}\footnote{\url{https://pytcpl.streamlit.app/}}. The package optimizes data storage and generates compressed \texttt{Parquet} files of the relevant raw data and metadata from \emph{invitroDBv4.1}. Exclusively utilizing this repository eliminates the need for a complex and extensive database installation, rendering downstream analysis more accessible and efficient. It enables researchers who prefer \texttt{Python} to easily participate in data analysis and exploration, overcoming any limitations associated with using \texttt{R} code.
 
 The pytcpl pipeline adds an additional setup and post-processing step around the main pipeline:
 \begin{itemize}
@@ -163,7 +160,7 @@ The pytcpl pipeline adds an additional setup and post-processing step around the
 \subsubsection{Subsetting Data}
 For a better data comprehension, the presence matrix denoted as $P \in {{0, 1}}^{m \times n}$ is introduced. In this matrix, rows (indexed by $i$) represent assay endpoints $a_i$, and columns (indexed by $j$) indicate whether testing was performed (1) or not performed (0) for compound $c_j$ in those endpoints. Due to selective compound testing across different assay endpoints, matrix $P$ is sparse. For a visual representation of the presence matrix $P$ covering all assay endpoints and compounds in \textit{invitroDBv4.1}, refer to Figure~\ref{fig:presence_matrix_all}.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
@@ -183,10 +180,10 @@ For a better data comprehension, the presence matrix denoted as $P \in {{0, 1}}^
     ~\label{fig:presence_matrix}
 \end{figure}
 
-In this thesis, we exclusively considered assay endpoints that had been tested with a minimum of $\num{1000}$ compounds. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as the \emph{dataset}, which will be the focus of this thesis. 
+In this thesis, we exclusively considered assay endpoints that had been tested with a minimum of $\num{1000}$ compounds. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as \emph{the} dataset, which will be the focus of this thesis. 
 
 \subsubsection{Exernal Assay Annotation}
-The assay endpoints were tagged with external annotations that involve, the attributed toxcity endpoint, the type of mechanistic target and the Mode of Action.
+The assay endpoints were tagged with external annotations that involve the attributed toxcity endpoint, the type of mechanistic target and the mode of action.
 
 The investigated assay endpoints are enriched with external annotations attributed by the Integrated Chemical Environment (ICE)~\cite{ice2022}, which provide valuable context and information about each endpoint. These annotations encompass the following aspects:
 
@@ -234,7 +231,7 @@ As previously discussed in Chapter~\ref{chap:background}, the assessment of comp
 ~\label{fig:aeid_acid_aid}
 \end{figure}
 
-If no counterpart is available in the database, we presented in the following a statistical approach that allows for a cytotoxicity estimate. It uses the median ACC for the compound of interest across a set of assay endpoints dedicted for capturing the cytotoxicity burst. 
+If no counterpart is available in the database, we presented in the following a statistical approach that allows for a cytotoxicity estimate. It uses the median ACC for the compound of interest across a set of assay endpoints dedicated for capturing the cytotoxicity burst. 
 The ACC is assumed to have a Gaussian error distribution. Cytotoxicity in terms of the respective potencies is assumed when: $ACC_{\text{cyto}} \leq ACC_{\text{target}}$. The probability can be expressed as:
 
 \[
@@ -243,7 +240,7 @@ P(\text{cytotoxic}) = P(ACC_{\text{cyto}} - ACC_{\text{target}} \leq 0) = \Phi\l
     
 where $\Phi$ is the Gaussian cumulative distribution function. The standard deviations $\text{SD}_{ACC_{\text{cyto}}}$ and $\text{SD}_{ACC_{\text{target}}}$ are unknown but are estimated as $0.3 \log_{10}$ ${\mu M}$ units~\cite{watt2018}. 
 
-For the statistical approach with the burst assays, $\text{SD}_{ACC_{\text{cyto}}}$ can be derived from the median absolute deviation (MAD) of the respective ACC values. Additionally, $P(\text{cytotoxic})$ is muliplied by $\frac{n_{\text{hit}}}{n_{\text{tested}}}$, the ratio of the number where the compound was considerd active divided by the number of cytotoxicity burst assay endpoints where the compound was tested. 
+For the statistical approach with the cytotoxicity burst assays, $\text{SD}_{ACC_{\text{cyto}}}$ can be derived from the median absolute deviation (MAD) of the respective ACC values. Additionally, $P(\text{cytotoxic})$ is muliplied by $\frac{n_{\text{hit}}}{n_{\text{tested}}}$, the ratio of the number where the compound was considerd active divided by the number of cytotoxicity burst assay endpoints where the compound was tested. 
 
 Ultitmately, $P(\text{cytotoxic})$ is then mulitplied with the original continuous hitcall of active compounds. The final cytotoxicity-corrected hitcall is then defined as follows: $\text{hitcall}_{\text{c}} = \text{hitcall}_{\text{original}} * (1 - P(\text{cytotoxic}))$.
 

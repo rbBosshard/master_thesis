@@ -1260,6 +1260,64 @@
       \verb https://doi.org/10.1021/acs.chemrestox.0c00264
       \endverb
     \endentry
+    \entry{kretschmer2023}{article}{}
+      \name{author}{5}{}{%
+        {{hash=e599cf87d24fcf140a339ccf554e0ac2}{%
+           family={Kretschmer},
+           familyi={K\bibinitperiod},
+           given={Fleming},
+           giveni={F\bibinitperiod}}}%
+        {{hash=f35193cc1f2c1841ef41d592e271b3fa}{%
+           family={Seipp},
+           familyi={S\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fe2d6c8bc24023bd24eb5b5d1ddabfca}{%
+           family={Ludwig},
+           familyi={L\bibinitperiod},
+           given={Marcus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=84df03119c159d59b2f5c5267c769ebe}{%
+           family={Klau},
+           familyi={K\bibinitperiod},
+           given={Gunnar\bibnamedelima W.},
+           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=7b293fa7e7921b48e54f7e763f6e0e0c}{%
+           family={Böcker},
+           familyi={B\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cold Spring Harbor Laboratory}%
+      }
+      \strng{namehash}{dfaa72320a880c2a523faf0eb1eaf3ec}
+      \strng{fullhash}{2755fef4154154c2e10a177a07065d5e}
+      \strng{bibnamehash}{2755fef4154154c2e10a177a07065d5e}
+      \strng{authorbibnamehash}{2755fef4154154c2e10a177a07065d5e}
+      \strng{authornamehash}{dfaa72320a880c2a523faf0eb1eaf3ec}
+      \strng{authorfullhash}{2755fef4154154c2e10a177a07065d5e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A central assumption of all machine learning is that the training data are an informative subset of the true distribution we want to learn. Yet, this assumption may be violated in practice. Recently, learning from the molecular structures of small molecules has moved into the focus of the machine learning community. Usually, those small molecules are of biological interest, such as metabolites or drugs. Applications include prediction of toxicity, ligand binding or retention time.We investigate how well certain large-scale datasets cover the space of all known biomolecular structures. Investigation of coverage requires a sensible distance measure between molecular structures. We use a well-known distance measure based on solving the Maximum Common Edge Subgraph (MCES) problem, which agrees well with the chemical and biochemical intuition of similarity between compounds. Unfortunately, this computational problem is NP-hard, severely restricting the use of the corresponding distance measure in large-scale studies. We introduce an exact approach that combines Integer Linear Programming and intricate heuristic bounds to ensure efficient computations and dependable results.We find that several large-scale datasets frequently used in this domain of machine learning are far from a uniform coverage of known biomolecular structures. This severely confines the predictive power of models trained on this data. Next, we propose two further approaches to check if a training dataset differs substantially from the distribution of known biomolecular structures. On the positive side, our methods may allow creators of large-scale datasets to identify regions in molecular structure space where it is advisable to provide additional training data.Competing Interest StatementThe authors have declared no competing interest.}
+      \field{journaltitle}{bioRxiv}
+      \field{title}{Small molecule machine learning: All models are wrong, some may not even be useful}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1101/2023.03.27.534311
+      \endverb
+      \verb{eprint}
+      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311.full.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311
+      \endverb
+      \verb{url}
+      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311
+      \endverb
+    \endentry
     \entry{peets2022}{article}{}
       \name{author}{6}{}{%
         {{hash=8d8747a2dc4e8d3fdd4cbbcd7fd57fa9}{%
@@ -1471,64 +1529,6 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1021/acs.chemrestox.0c00373
-      \endverb
-    \endentry
-    \entry{kretschmer2023}{article}{}
-      \name{author}{5}{}{%
-        {{hash=e599cf87d24fcf140a339ccf554e0ac2}{%
-           family={Kretschmer},
-           familyi={K\bibinitperiod},
-           given={Fleming},
-           giveni={F\bibinitperiod}}}%
-        {{hash=f35193cc1f2c1841ef41d592e271b3fa}{%
-           family={Seipp},
-           familyi={S\bibinitperiod},
-           given={Jan},
-           giveni={J\bibinitperiod}}}%
-        {{hash=fe2d6c8bc24023bd24eb5b5d1ddabfca}{%
-           family={Ludwig},
-           familyi={L\bibinitperiod},
-           given={Marcus},
-           giveni={M\bibinitperiod}}}%
-        {{hash=84df03119c159d59b2f5c5267c769ebe}{%
-           family={Klau},
-           familyi={K\bibinitperiod},
-           given={Gunnar\bibnamedelima W.},
-           giveni={G\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
-        {{hash=7b293fa7e7921b48e54f7e763f6e0e0c}{%
-           family={Böcker},
-           familyi={B\bibinitperiod},
-           given={Sebastian},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Cold Spring Harbor Laboratory}%
-      }
-      \strng{namehash}{dfaa72320a880c2a523faf0eb1eaf3ec}
-      \strng{fullhash}{2755fef4154154c2e10a177a07065d5e}
-      \strng{bibnamehash}{2755fef4154154c2e10a177a07065d5e}
-      \strng{authorbibnamehash}{2755fef4154154c2e10a177a07065d5e}
-      \strng{authornamehash}{dfaa72320a880c2a523faf0eb1eaf3ec}
-      \strng{authorfullhash}{2755fef4154154c2e10a177a07065d5e}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{A central assumption of all machine learning is that the training data are an informative subset of the true distribution we want to learn. Yet, this assumption may be violated in practice. Recently, learning from the molecular structures of small molecules has moved into the focus of the machine learning community. Usually, those small molecules are of biological interest, such as metabolites or drugs. Applications include prediction of toxicity, ligand binding or retention time.We investigate how well certain large-scale datasets cover the space of all known biomolecular structures. Investigation of coverage requires a sensible distance measure between molecular structures. We use a well-known distance measure based on solving the Maximum Common Edge Subgraph (MCES) problem, which agrees well with the chemical and biochemical intuition of similarity between compounds. Unfortunately, this computational problem is NP-hard, severely restricting the use of the corresponding distance measure in large-scale studies. We introduce an exact approach that combines Integer Linear Programming and intricate heuristic bounds to ensure efficient computations and dependable results.We find that several large-scale datasets frequently used in this domain of machine learning are far from a uniform coverage of known biomolecular structures. This severely confines the predictive power of models trained on this data. Next, we propose two further approaches to check if a training dataset differs substantially from the distribution of known biomolecular structures. On the positive side, our methods may allow creators of large-scale datasets to identify regions in molecular structure space where it is advisable to provide additional training data.Competing Interest StatementThe authors have declared no competing interest.}
-      \field{journaltitle}{bioRxiv}
-      \field{title}{Small molecule machine learning: All models are wrong, some may not even be useful}
-      \field{year}{2023}
-      \verb{doi}
-      \verb 10.1101/2023.03.27.534311
-      \endverb
-      \verb{eprint}
-      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311.full.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311
-      \endverb
-      \verb{url}
-      \verb https://www.biorxiv.org/content/early/2023/03/27/2023.03.27.534311
       \endverb
     \endentry
     \entry{userguide}{online}{}
@@ -1813,50 +1813,6 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1371/journal.pone.0196963
-      \endverb
-    \endentry
-    \entry{seol2023}{article}{}
-      \name{author}{4}{}{%
-        {{hash=e715c1f5e5b4c296d2983a41c204b74e}{%
-           family={Seol},
-           familyi={S\bibinitperiod},
-           given={Da},
-           giveni={D\bibinitperiod}}}%
-        {{hash=79153405df0030f630967b65a74395e5}{%
-           family={Choi},
-           familyi={C\bibinitperiod},
-           given={Jeong},
-           giveni={J\bibinitperiod}}}%
-        {{hash=215796ae1b247db13529a0d92489b2b9}{%
-           family={Kim},
-           familyi={K\bibinitperiod},
-           given={Chan},
-           giveni={C\bibinitperiod}}}%
-        {{hash=4dd185e5d8dc936b7a9be8f92d0cc840}{%
-           family={Hong},
-           familyi={H\bibinitperiod},
-           given={Sang},
-           giveni={S\bibinitperiod}}}%
-      }
-      \strng{namehash}{7d0172401b99aa0d64de4c777005eea9}
-      \strng{fullhash}{6598208bd785a092bff9f2e9ada4afa1}
-      \strng{bibnamehash}{6598208bd785a092bff9f2e9ada4afa1}
-      \strng{authorbibnamehash}{6598208bd785a092bff9f2e9ada4afa1}
-      \strng{authornamehash}{7d0172401b99aa0d64de4c777005eea9}
-      \strng{authorfullhash}{6598208bd785a092bff9f2e9ada4afa1}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Electronics}
-      \field{month}{01}
-      \field{title}{Alleviating Class-Imbalance Data of Semiconductor Equipment Anomaly Detection Study}
-      \field{volume}{12}
-      \field{year}{2023}
-      \field{pages}{585}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.3390/electronics12030585
       \endverb
     \endentry
   \enddatalist
