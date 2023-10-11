@@ -7,6 +7,7 @@ import traceback
 import joblib
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import yaml
 from imblearn.over_sampling import SMOTE
 from matplotlib import pyplot as plt
@@ -94,7 +95,6 @@ def set_aeid(aeid):
 
 
 def get_assay_df(aeid):
-    set_aeid(aeid)
     LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
     assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
@@ -139,23 +139,42 @@ def split_data(X, y):
 
 
 def partition_data(df):
-    # Select the hitcall as the label based on the activity threshold
-
     # Split off the massbank validation set
+    # Load safe-to-use massbank compounds
     validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
     validation_compounds = pd.read_parquet(validation_compounds_path)["dsstox_substance_id"]
+
+    # Load the massbank validation set (unsafe + safe compounds)
+    massbank_val_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}")
+    massbank_val_df = pd.read_parquet(massbank_val_path)
+
+    # Filter the massbank validation set for the safe compounds
+    massbank_val_df = massbank_val_df[massbank_val_df['dsstox_substance_id'].isin(validation_compounds)]
+    
+    # Update the validation compounds to only contain the safe compounds intersected with the massbank validation set
+    validation_compounds = massbank_val_df['dsstox_substance_id']
+
     validation_filter_condition = df['dsstox_substance_id'].isin(validation_compounds)
-    training_df, validation_df = df[~validation_filter_condition], df[validation_filter_condition]
+    validation_df = df[validation_filter_condition]
+    training_df = df[~validation_filter_condition]  # From this in a later step, another internal validation set is split off
+
+    # Update the massbank validation set to only contain compounds that were tested in the assay endpoint
+    massbank_val_df = massbank_val_df[massbank_val_df['dsstox_substance_id'].isin(validation_df['dsstox_substance_id'])]
+
+    # Safety check that the compounds intersection with the exteranl validation set is empty
+    is_distinct = len(set(training_df['dsstox_substance_id']).intersection(validation_df['dsstox_substance_id'])) == 0
+    assert is_distinct
 
     # Partition the data into features (X) and labels (y)
     # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
     X = training_df.iloc[:, 3:].astype(np.uint8)
     X_massbank_val_from_structure = validation_df.iloc[:, 3:].astype(np.uint8)
-    X_massbank_val_from_sirius = validation_df.iloc[:, 3:].astype(np.uint8)  # Todo: replace with predicted fingerprints
+    X_massbank_val_from_sirius = massbank_val_df.iloc[:, 1:].astype(np.uint8).drop(columns=['449'])  # Why does SIRIUS Fingerprint has an additional column '449'?
 
-    hitcall = 'hitcall'
     if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
         hitcall = 'hitcall_c'
+    else:
+        hitcall = 'hitcall'
 
     # Distinguish between regression and binary classification
     if 'reg' in CONFIG['ml_algorithm']:
@@ -169,6 +188,103 @@ def partition_data(df):
 
     return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
+
+def assess_similarity(df1, df2):
+
+    df1 = df1.astype(int)
+    df2 = df2.astype(int)
+
+    # Create a figure with two subplots (heatmap and line plot)
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(50, 10)) 
+
+    # Calculate dissimilarity
+    ax1.set_title(f"Dissimilarity, pred - true fingerprints, blue=-1, white=0, red=1, {df1.shape}", fontsize=30)
+    ax1.set_xticklabels([])
+    ax1.set_xlabel('Compounds')
+    ax1.set_ylabel('Fingerprint features')
+    dissimilarity_matrix = (df1.values - df2.values).astype(int)
+    cmap = sns.color_palette(['blue', 'white', 'red'])  # Blue for -1, White for 0, Red for 1
+    sns.heatmap(dissimilarity_matrix,
+                # cbar=False,
+                xticklabels=False,
+                yticklabels=False,
+                cmap='viridis',
+                ax=ax1,
+                )
+
+    sum_of_columns = df2.sum(axis=0)  # Calculate the sum of columns
+    ax2.plot(sum_of_columns, marker='', linestyle='-', label='true', alpha=0.6, linewidth=1, color='blue')
+    sum_of_columns = df1.sum(axis=0)  # Calculate the sum of columns
+    ax2.plot(sum_of_columns, marker='', linestyle='-', label='predicted', alpha=0.6, linewidth=1, color='red')
+    ax2.set_xlabel('Fingerprint features')
+    ax2.set_ylabel('Sum of present features')
+    ax2.set_title('Sum of present features in the columns', fontsize=30)
+    ax2.set_xticklabels([])
+    ax2.set_xticks([])
+    ax2.legend()
+
+
+    # Adjust the layout of the subplots
+    plt.tight_layout()
+
+    path = os.path.join(LOG_PATH, f"{AEID}", "dissimilarity.png")
+    plt.savefig(path, format='png')
+    plt.close()
+
+
+    def jaccard_similarity(matrix1, matrix2, axis):
+        intersection = np.logical_and(matrix1, matrix2)
+        union = np.logical_or(matrix1, matrix2)
+        return np.sum(intersection, axis=axis) / np.sum(union, axis=axis)
+
+    # Function to calculate Hamming distance for rows and columns
+    def hamming_distance(matrix1, matrix2, axis):
+        return np.sum(matrix1 != matrix2, axis=axis)
+
+
+    # Calculate Jaccard similarity and Hamming distance for rows and columns
+    row_jaccard_similarities = jaccard_similarity(df1.values, df2.values, axis=1)
+    row_hamming_distances = hamming_distance(df1.values, df2.values, axis=1)
+    col_jaccard_similarities = jaccard_similarity(df1.values, df2.values, axis=0)
+    col_hamming_distances = hamming_distance(df1.values, df2.values, axis=0)
+    
+    # print("Row Jaccard Similarities:", row_jaccard_similarities)
+    # print("Row Hamming Distances:", row_hamming_distances)
+    # print("Column Jaccard Similarities:", col_jaccard_similarities)
+    # print("Column Hamming Distances:", col_hamming_distances)
+
+    
+    if 0:
+        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_row_jaccard_similarities.png")
+        sns.heatmap([row_jaccard_similarities], cmap='coolwarm',
+                xticklabels=False,
+                yticklabels=False,)
+        plt.savefig(path, format='png')
+        plt.close()
+
+        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_col_jaccard_similarities.png")
+        sns.heatmap([col_jaccard_similarities], cmap='coolwarm',
+                xticklabels=False,
+                yticklabels=False,)
+        plt.savefig(path, format='png')
+        plt.close()
+
+        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_row_hamming_distances.png")
+        sns.heatmap([row_hamming_distances], cmap='coolwarm', 
+                xticklabels=False,
+                yticklabels=False,)
+        plt.savefig(path, format='png')
+        plt.close()
+
+        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_col_hamming_distances.png")
+        sns.heatmap([col_hamming_distances], cmap='coolwarm',
+                xticklabels=False,
+                yticklabels=False,)
+        plt.savefig(path, format='png')
+        plt.close()
+
+    df1 = df1.astype(np.uint8)
+    df2 = df2.astype(np.uint8)
 
 def print_binarized_label_count(y, title):
     counts = (y >= CONFIG['activity_threshold']).value_counts().values
@@ -221,6 +337,11 @@ def build_pipeline(estimator):
     pipeline = Pipeline(pipeline_steps)
     LOGGER.info(f"Built Pipeline for {ESTIMATOR_NAME}")
     return pipeline
+
+
+def init_aeid(aeid):
+    set_aeid(aeid)
+    os.makedirs(os.path.join(LOG_PATH, f"{AEID}"), exist_ok=True)
 
 
 def init_estimator(estimator):
@@ -516,7 +637,7 @@ def save_model(best_estimator, fit_set):
     joblib.dump(best_estimator.get_params(), best_params_path, compress=3)
 
 
-def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val):
+def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val):
     # Feature selection fitted on train set. Transform all sets with the same feature selection
     if CONFIG['apply']['only_predict']:
         folder = os.path.join(TARGET_RUN_FOLDER, f"{AEID}")
@@ -527,6 +648,7 @@ def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test
         X_train = preprocessing_pipeline.fit_transform(X_train, y_train)
         X_test = preprocessing_pipeline.transform(X_test)
         X_massbank_val_from_structure = preprocessing_pipeline.transform(X_massbank_val_from_structure)
+        X_massbank_val_from_sirius = preprocessing_pipeline.transform(X_massbank_val_from_sirius)
         print(f"Number of selected features: {X_train.shape[1]}")
         if X_train.shape[1] != X_test.shape[1]:
             raise RuntimeError("Error in feature selection")
@@ -538,7 +660,7 @@ def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test
     joblib.dump(preprocessing_pipeline, preprocessing_model_path, compress=3)
     LOGGER.info(f"Saved preprocessing model in {preprocessing_model_log_folder}")
 
-    return X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val
+    return X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
 def folder_name_to_datetime(folder_name):

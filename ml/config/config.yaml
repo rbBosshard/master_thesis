@@ -1,10 +1,11 @@
-ml_algorithm: regression # classification, regression
-ignore_warnings: True
-fingerprint_file: ToxCast_CSIfps_10k
+
+fingerprint_file: ToxCast_20231006_fingerprints
 fingerprint_file_transposed: 1
 file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
+ignore_warnings: False
 
+ml_algorithm: classification # classification, regression
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
 random_state: 0 # For reproducibility
@@ -17,7 +18,7 @@ load_from_model:  # if apply: only_predict: 1
   target_run: 2023-09-28_00-26-22 # load from specific run
 
 apply:
-  only_predict: 1  # if 1, do not train, load model from old run
+  only_predict: 0  # if 1, do not train, load model from old run
   smote: 0  # oversampling
   feature_selection: 1
   variance_threshold: 0  # only if feature_selection on

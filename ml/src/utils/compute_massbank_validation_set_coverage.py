@@ -130,7 +130,6 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             # Add the equation line y = x
             max_value = max(merged_df['hit_ratio_df1'].max(), merged_df['hit_ratio_df2'].max())
             plt.plot([0, max_value], [0, max_value], linestyle='solid', color='blue', label='Equal distribution of active compounds')
-            # plt.plot([0, max_value / 2], [0, max_value], linestyle='dashed', color='blue', label=' Doubled active compounds')
             plt.ylabel('Active compounds in %: Massbank Validation Set')
             plt.xlabel('Active compounds in %: Assay Endpoint')
             plt.gca().xaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
@@ -174,7 +173,7 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             # presence_matrix.to_parquet(save_path, compression='gzip')
 
 
-def prepare_validation_set():
+def get_validation_set():
     print("Prepare validation set (massbank)")
     massbank_dtxsid_with_records_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints.csv")
     massbank_dtxsid_with_records_sirius_training_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records_sirius_training.csv")
@@ -229,5 +228,5 @@ def prepare_validation_set():
 
 
 if __name__ == '__main__':
-    prepare_validation_set()
+    get_validation_set()
     compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_MATRIX=1, COMPUTE_HIT_CALL_MATRIX=1)

@@ -8,7 +8,7 @@ from ml.src.pipeline.constants import LOG_DIR_PATH
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 sys.path.append(parent_dir)
 
-from ml.src.pipeline.ml_helper import load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, \
+from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, \
     split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, get_label_counts, report_exception, save_model, \
     build_preprocessing_pipeline, preprocess_all_sets, \
@@ -28,7 +28,10 @@ if __name__ == '__main__':
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in [2363]: #aeids_target_assays[:]:  # [97]: #
+    for aeid in [97]: #aeids_target_assays[:]:  # [97]: #
+        # Init the aeid folder
+        init_aeid(aeid)
+        
         # Get assay data
         assay_df = get_assay_df(aeid)
 
@@ -38,12 +41,16 @@ if __name__ == '__main__':
         # Partition data into X and y and respective massbank validation
         X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
+        # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
+        assess_similarity(X_massbank_val_from_sirius, X_massbank_val_from_structure)
+
         # Split ML data into train, validation and test set
         X_train, y_train, X_test, y_test = split_data(X, y)
 
         preprocessing_pipeline_steps = build_preprocessing_pipeline()
 
-        X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val = preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, y_massbank_val)
+        X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
+            preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
 
         # Apply oversampling if configured
         X_train, y_train = handle_oversampling(X_train, y_train)
@@ -96,13 +103,13 @@ if __name__ == '__main__':
                     # Predict on the true Massbank validation set with the best estimator
                     predict_and_report_regression(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
                     # Predict on the SIRIUS predicted Massbank validation set with the best estimator
-                    # predict_and_report_regression(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
+                    predict_and_report_regression(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
                     pass
                 else:
                     # Predict on the true Massbank validation set with the best estimator
                     predict_and_report_classification(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
                     # Predict on the SIRIUS predicted Massbank validation set with the best estimator
-                    # predict_and_report_classification(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
+                    predict_and_report_classification(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
                     pass
 
                 # Concatenate combined data (train + test) and true Massbank validation data

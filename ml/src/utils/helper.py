@@ -99,13 +99,15 @@ def get_sirius_fingerprints():
     massbank_sirius_df = pd.read_csv(
         os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_from-sirius_fps_pos_curated_20231009_withDTXSID.csv"))
     fps_toxcast_df = pd.read_csv(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"ToxCast_20231006_fingerprints.csv"))
-    merged_df = massbank_sirius_df.merge(fps_toxcast_df[['index']], how='inner', left_on='DTXSID', right_on='index')
-    cols_to_select = merged_df.filter(regex='^\d+$').columns.to_list() + ['index']  # only fingerprint
-    grouped = merged_df[cols_to_select].groupby("index").mean()
-    # Convert the mean values to binary fingerprints again
-    binary_grouped = grouped.round().astype(int)
-    binary_grouped = binary_grouped.reset_index().rename(columns={'index': 'dsstox_substance_id'})
-    return binary_grouped
+    df = massbank_sirius_df.merge(fps_toxcast_df[['index']], how='inner', left_on='DTXSID', right_on='index')
+    cols_to_select = df.filter(regex='^\d+$').columns.to_list() + ['index']  # only fingerprint
+
+    df = df[cols_to_select]
+    df = df.drop_duplicates()
+    df = df.groupby("index").mean()
+    df = df.round().astype(int) # Convert the mean values to binary fingerprints again
+    df = df.reset_index().rename(columns={'index': 'dsstox_substance_id'})
+    return df
 
 
 def get_guid_dtxsid_mapping():
