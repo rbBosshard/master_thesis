@@ -86,6 +86,7 @@ def load_config():
     log_config_estimators_path = os.path.join(LOG_PATH, '.log', "config_estimators.yaml")
     with open(log_config_estimators_path, 'w') as file:
         yaml.dump(CONFIG_ESTIMATORS, file)
+    
     LOGGER.info(f"Config files dumped to '{os.path.join(LOG_PATH, '.log')}'")
 
     return CONFIG, CONFIG_ESTIMATORS, START_TIME, LOGGER, TARGET_RUN_FOLDER
@@ -96,7 +97,7 @@ def set_aeid(aeid):
     AEID = aeid
 
 
-def get_assay_df(aeid):
+def get_assay_df():
     LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
     assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
@@ -115,7 +116,7 @@ def get_fingerprint_df():
     fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{CONFIG['fingerprint_file']}{FILE_FORMAT}")
     fps_df = pd.read_parquet(fps_file_path)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
-    LOGGER.info("#" * 80)
+    LOGGER.info("%" * 60 + "\n")
     return fps_df
 
 
@@ -146,7 +147,6 @@ def partition_data(df):
     validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
     validation_compounds = pd.read_parquet(validation_compounds_path)["dsstox_substance_id"]
 
-
     # Load the massbank validation set (unsafe + safe compounds)
     massbank_val_pred_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}")
     massbank_val_pred_df = pd.read_parquet(massbank_val_pred_path).drop(columns=['449']) # Why does SIRIUS Fingerprint has an additional column '449'?
@@ -176,7 +176,7 @@ def partition_data(df):
 
     # Partition the data into features (X) and labels (y)
     # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
-    selected_columns = training_df.iloc[:, [0] + list(range(3, training_df.shape[1]))]
+    feature_names = training_df.columns[3:]
 
     X = training_df.iloc[:, 3:]
     X_massbank_val_from_structure = massbank_val_true_df.iloc[:, 3:]
@@ -197,7 +197,7 @@ def partition_data(df):
         y = (training_df[hitcall] >= t).astype(np.uint8)
         y_massbank_val = (massbank_val_true_df[hitcall] >= t).astype(np.uint8)
 
-    return X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
+    return feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
 def assess_similarity(ground_truth, predicted):
@@ -272,9 +272,9 @@ def assess_similarity(ground_truth, predicted):
 
 def print_binarized_label_count(y, title):
     counts = (y >= CONFIG['activity_threshold']).value_counts().values
-    LOGGER.info(f"Binarized Label Count {title}: {len(y)} datapoints\n"
+    LOGGER.info(f"Binarized Label Count {title}: {len(y)} datapoints"
                 f" with {counts[0]} inactive, {counts[1]} active "
-                f"({counts[1] / sum(counts) * 100:.2f}%)\n")
+                f"({counts[1] / sum(counts) * 100:.2f}%)")
 
 
 def handle_oversampling(X, y):
@@ -296,15 +296,21 @@ def build_preprocessing_pipeline():
 
         if CONFIG['apply']['non_negative_matrix_factorization']:
             # Non-Negative Matrix Factorization (NMF) -> Takes very long and did not improve results significantly (tested: n_components = [100, 200, 500]
-            feature_selection_nmf = NMF(n_components=100)  # n_components=50, 100, 200
+            feature_selection_nmf = NMF(n_components=100, random_state=CONFIG['random_state'])  # n_components=50, 100, 200
             preprocessing_pipeline_steps.append(('feature_selection_nmf', feature_selection_nmf))
 
         if 'reg' in CONFIG['ml_algorithm']:
-            feature_selection_model = XGBRegressor()
+            feature_selection_model = XGBRegressor(random_state=CONFIG['random_state']) \
+                if CONFIG['feature_selection']['select_from_model'] == 'XGB' \
+                else RandomForestRegressor(random_state=CONFIG['random_state'])
         else:
-            feature_selection_model = XGBClassifier()  # RandomForestClassifier()
+            feature_selection_model = XGBClassifier(random_state=CONFIG['random_state']) \
+                if CONFIG['feature_selection']['select_from_model'] == 'XGB' \
+                else RandomForestClassifier(random_state=CONFIG['random_state'])
+
         feature_selection_from_model = SelectFromModel(estimator=feature_selection_model, threshold='mean')   # max_features=CONFIG['feature_selection']['max_features']
         preprocessing_pipeline_steps.append(('feature_selection_from_model', feature_selection_from_model))
+
     pipeline = Pipeline(preprocessing_pipeline_steps)
     LOGGER.info(f"Built Preprocessing pipeline (feature selection)")
     return pipeline
@@ -315,9 +321,11 @@ def build_pipeline(estimator):
     for i, step in enumerate(estimator['steps']):
         step_name = step['name']
         step_args = step.get('args', {})  # get the hyperparameters for the step, if any
+        step_args.update({'random_state': CONFIG['random_state']})
         step_instance = globals()[step_name](**step_args)  # dynmically create an instance of the step
         pipeline_steps.append((step_name, step_instance))
-    
+
+
     pipeline = Pipeline(pipeline_steps)
     LOGGER.info(f"Built Pipeline for {ESTIMATOR_NAME}")
     return pipeline
@@ -380,7 +388,7 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
 
     LOGGER.info(f"{estimator['name']}: GridSearchCV Results:")
     best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
-    LOGGER.info(f"Best params:\n{best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}\n")
+    LOGGER.info(f"Best params: {best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}\n")
 
     return grid_search_cv_fitted
 
@@ -484,6 +492,7 @@ def find_optimal_threshold(y, y_pred_proba, input_set, target_tpr, target_tnr, d
 
 def predict_and_report_classification(X, y, best_estimator, input_set):
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set), exist_ok=True)
+    LOGGER.info(f"\n")
     LOGGER.info(f"Predict ({input_set}), {ESTIMATOR_NAME}")
 
     # Predict the probabilities (using validation set)
@@ -535,13 +544,14 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
     labels = [True, False]
 
     for i, y_pred in enumerate(y_preds):
+        LOGGER.info("." * 50)
+        LOGGER.info(f"Predict {y_preds_names[i]}, {ESTIMATOR_NAME}")
         name = y_preds_names[i]
         desc = y_preds_descs[i]
         report = classification_report(y, y_pred, labels=labels, output_dict=True)
         path = os.path.join(folder, f"report_{name}.csv")
         report_df = pd.DataFrame(report).transpose()
         report_df.to_csv(path)
-        LOGGER.info(report)
 
         try:
             cmap = plt.get_cmap(CONFIG['cmap'])
@@ -570,15 +580,17 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
             plt.title(f"aeid: {AEID}, {ESTIMATOR_NAME}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
             path = os.path.join(folder, f"confusion_matrix_{name}.png")
             plt.savefig(path, format='png')
-            plt.close()
+            plt.close("all")
 
         except Exception as e:
             traceback_info = traceback.format_exc()
             report_exception(e, traceback_info, ESTIMATOR_NAME)
+            plt.close()
 
 
 def predict_and_report_regression(X, y, best_estimator, input_set):
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set), exist_ok=True)
+    LOGGER.info("\n")
     LOGGER.info(f"Predict ({input_set}), {ESTIMATOR_NAME}")
     y_pred = best_estimator.predict(X)
 
@@ -602,8 +614,6 @@ def predict_and_report_regression(X, y, best_estimator, input_set):
     }
 
     report_df = pd.DataFrame(data)
-
-    LOGGER.info(report_df.to_string(index=False))
 
     # Save the report to csv
     report_df.to_csv(os.path.join(folder, f"report.csv"), index=False)
@@ -699,13 +709,13 @@ def load_model(path, pipeline):
 def save_model(best_estimator, fit_set):
     estimator_log_folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME)
     best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_{fit_set}.joblib")
-    best_params_path = os.path.join(estimator_log_folder, f"best_params_{fit_set}.joblib")
-
     joblib.dump(best_estimator, best_estimator_path, compress=3)
-    joblib.dump(best_estimator.get_params(), best_params_path, compress=3)
+    # best_params_path = os.path.join(estimator_log_folder, f"best_params_{fit_set}.joblib")
+    # joblib.dump(best_estimator.get_params(), best_params_path, compress=3)
 
 
-def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val):
+def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train, X_test, y_test,
+                        X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val):
     # Feature selection fitted on train set. Transform all sets with the same feature selection
     if CONFIG['apply']['only_predict']:
         folder = os.path.join(TARGET_RUN_FOLDER, f"{AEID}")
@@ -714,11 +724,23 @@ def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test
 
     if preprocessing_pipeline.steps:
         X_train = preprocessing_pipeline.fit_transform(X_train, y_train)
+
+        num_features = X_train.shape[1]
+        LOGGER.info(f"Number of selected features: {num_features}")
+
+        # Get the selected feature indices and then names
+        selected_feature_indices = preprocessing_pipeline[-1].get_support()
+        feature_names = [feature_names[i] for i, selected in enumerate(selected_feature_indices) if selected]
+
+        # Transform other sets (e.g. subselect feature columns that were selected by the feature selection model)
         X_test = preprocessing_pipeline.transform(X_test)
         X_massbank_val_from_structure = preprocessing_pipeline.transform(X_massbank_val_from_structure)
         X_massbank_val_from_sirius = preprocessing_pipeline.transform(X_massbank_val_from_sirius)
-        print(f"Number of selected features: {X_train.shape[1]}")
-        if X_train.shape[1] != X_test.shape[1]:
+
+        # Assert that all sets have the same features
+        if num_features != X_test.shape[1] or num_features != X_massbank_val_from_structure.shape[1] or num_features != X_massbank_val_from_sirius.shape[1]:
+            LOGGER.error(f"Number of features in train, test, massbank_val_from_structure, massbank_val_from_sirius do not match: "
+                         f"{num_features}, {X_test.shape[1]}, {X_massbank_val_from_structure.shape[1]}, {X_massbank_val_from_sirius.shape[1]}")
             raise RuntimeError("Error in feature selection")
 
     # Save preprocessing_model
@@ -728,7 +750,7 @@ def preprocess_all_sets(preprocessing_pipeline, X_train, y_train, X_test, y_test
     joblib.dump(preprocessing_pipeline, preprocessing_model_path, compress=3)
     LOGGER.info(f"Saved preprocessing model in {preprocessing_model_log_folder}")
 
-    return X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
+    return feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
 def folder_name_to_datetime(folder_name):
@@ -742,3 +764,31 @@ def get_load_from_model_folder(rank=1):
     sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
     target_run_folder = sorted_subfolders[rank] if CONFIG['load_from_model']['use_last_run'] else CONFIG['load_from_model']['target_run']
     TARGET_RUN_FOLDER = os.path.join(logs_folder, target_run_folder)
+
+
+def get_feature_importance_if_applicable(best_estimator, feature_names):
+    best_estimator_model = best_estimator[-1]  # best_estimator is the pipeline and the last step is the model itself
+    try:
+        feature_importances = best_estimator_model.feature_importances_
+        importance_df = pd.DataFrame({'feature': feature_names, 'importances': feature_importances})
+        importance_df = importance_df.sort_values(by='importances', ascending=False)
+
+        # Select the top n or less features
+        top_n = min(CONFIG['feature_selection']['top_n_feature_importances_to_plot'], importance_df.shape[0])
+        top_importance_df = importance_df.head(top_n)
+
+        plt.figure(figsize=(12, 6))
+        sns.barplot(x='importances', y='feature', data=top_importance_df, palette='viridis')
+        plt.title(f'Feature Importance: {ESTIMATOR_NAME}')
+        plt.xlabel('Importance Score')
+        plt.ylabel('Features')
+        folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME)
+        path = os.path.join(folder, f'sorted_feature_importances.csv')
+        importance_df.to_csv(path, index=False)
+        path = os.path.join(folder, f'{top_n}_feature_importances.svg')
+        plt.savefig(path, format='svg', bbox_inches='tight')
+        plt.close()
+    except Exception as e:
+        feature_importances = None
+        LOGGER.error(f"Could not get feature importances for {ESTIMATOR_NAME}, {e}")
+    return feature_importances

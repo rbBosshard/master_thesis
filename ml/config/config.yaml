@@ -38,6 +38,8 @@ threshold_moving:
 
 feature_selection:
   variance_threshold: 0.01
+  select_from_model: XGB # XGB, RandomForest
+  top_n_feature_importances_to_plot: 100
 
 grid_search_cv:
   n_splits: 2 # Number of folds

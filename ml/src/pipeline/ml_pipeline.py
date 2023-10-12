@@ -3,16 +3,16 @@ import os
 
 import numpy as np
 
-from ml.src.pipeline.constants import LOG_DIR_PATH
-
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 sys.path.append(parent_dir)
 
-from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config, get_assay_df, get_fingerprint_df, merge_assay_and_fingerprint_df, \
+from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config, get_assay_df, get_fingerprint_df, \
+    merge_assay_and_fingerprint_df, \
     split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, get_label_counts, report_exception, save_model, \
     build_preprocessing_pipeline, preprocess_all_sets, \
-    predict_and_report_regression, predict_and_report_classification, load_model, init_estimator
+    predict_and_report_regression, predict_and_report_classification, load_model, init_estimator, \
+    get_feature_importance_if_applicable
 
 from datetime import datetime
 import traceback
@@ -35,13 +35,13 @@ if __name__ == '__main__':
             init_aeid(aeid)
 
             # Get assay data
-            assay_df = get_assay_df(aeid)
+            assay_df = get_assay_df()
 
             # Merge chemical ids in both dataframes
             df = merge_assay_and_fingerprint_df(assay_df, fps_df)
 
             # Partition data into X and y and respective massbank validation set (massbank validation set evaluates generalization to unseen data from spectral data)
-            X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
+            feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
             # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
             assess_similarity(X_massbank_val_from_structure, X_massbank_val_from_sirius)
@@ -49,10 +49,13 @@ if __name__ == '__main__':
             # Split ML data into train test set (test set evaluates generalization to unseen data)
             X_train, y_train, X_test, y_test = split_data(X, y)
 
+
+
             preprocessing_pipeline_steps = build_preprocessing_pipeline()
 
-            X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
-                preprocess_all_sets(preprocessing_pipeline_steps, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
+            feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
+                preprocess_all_sets(preprocessing_pipeline_steps, feature_names, X_train, y_train, X_test, y_test,
+                                    X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
 
             # Apply oversampling if configured
             X_train, y_train = handle_oversampling(X_train, y_train)
@@ -121,11 +124,14 @@ if __name__ == '__main__':
                     # Retrain the best estimator from the grid search with all data available for later inference
                     best_estimator.fit(X_all, y_all)
 
+                    # Get feature importances (only implemented for XGB and RandomForest)
+                    feature_importances = get_feature_importance_if_applicable(best_estimator, feature_names)
+
                     # Save the best estimator model, trained on all data available
                     save_model(best_estimator, "all")
 
                     elapsed = round((datetime.now() - start_time).total_seconds(), 2)
-                    LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n{'_' * 75}\n\n")
+                    LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n{'=' * 100}\n")
 
                 except Exception as e:
                     traceback_info = traceback.format_exc()
@@ -137,11 +143,16 @@ if __name__ == '__main__':
                 minutes, seconds = divmod(remainder, 60)
                 elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
 
-                LOGGER.info(f"Finished: Total time >> {elapsed_formatted}\n")
+                LOGGER.info(f"Finished {estimator}: Total time >> {elapsed_formatted}\n")
 
         except Exception as e:
             traceback_info = traceback.format_exc()
             report_exception(e, traceback_info, aeid)
 
 
-
+    # Calculate the elapsed time
+    elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
+    hours, remainder = divmod(elapsed_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+    LOGGER.info(f"Finished all: Total time >> {elapsed_formatted}\n")
