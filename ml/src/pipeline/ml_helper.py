@@ -385,10 +385,7 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
     return grid_search_cv_fitted
 
 
-def find_optimal_threshold(X, y, best_estimator, input_set, target_tpr, target_tnr):
-    # Predict the probabilities (using validation set)
-    y_pred_proba = best_estimator.predict_proba(X)[:, 1]
-
+def find_optimal_threshold(y, y_pred_proba, input_set, target_tpr, target_tnr, default_threshold):
     # Tune the classification threshold for the classifier, used to map probabilities to class labels
     fpr, tpr, thresholds = roc_curve(y, y_pred_proba)
     tnr = 1 - fpr
@@ -396,8 +393,10 @@ def find_optimal_threshold(X, y, best_estimator, input_set, target_tpr, target_t
     # Plot the ROC curve
     df_fpr_tpr = pd.DataFrame({'FPR': fpr, 'TPR': tpr, 'Threshold': thresholds})
 
-    # Fixed Threshold Evaluation (for model comparison)
-    # Find the threshold that achieves the desired TPR (target_tpr)
+    # Find the index of the threshold that is closest to the default threshold
+    idx_default = np.argmin(np.abs(thresholds - default_threshold))
+
+    # Fixed Threshold Evaluation (for model comparison), find the closest threshold that achieves the desired TPR, TNR
     idx_tpr = np.argmax(tpr >= target_tpr)
     fixed_threshold_tpr = thresholds[idx_tpr]
 
@@ -421,30 +420,47 @@ def find_optimal_threshold(X, y, best_estimator, input_set, target_tpr, target_t
     plt.figure(figsize=(8, 8))
     fontsize = 12
 
-    # Create scatter plot
-    plt.scatter(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], s=8, alpha=0.7)
-    plt.plot(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], linestyle='-')
+    # Classifier
+    plt.scatter(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], s=5, alpha=0.8, color='black', zorder=2)
+    plt.plot(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], linestyle='-', alpha=0.8, color='black', zorder=2,
+             label=f'ROC Curve: {ESTIMATOR_NAME}')
+
+    # No-Skill classifier
+    plt.plot([0, 1], [0, 1], linestyle='--', color='gray', alpha=0.8,
+             label='ROC Curve: No-Skill Classifier')
 
     # Highlight thresholds point
-    plt.scatter(fpr[idx_tpr], tpr[idx_tpr], color='orange', s=100, marker='o', label=f'TPR≥{target_tpr:.2f} Threshold: {fixed_threshold_tpr:.3f}')
-    plt.scatter(fpr[idx_tnr], tpr[idx_tnr], color='red', s=100, marker='o', label=f'TNR≥{target_tnr:.2f} Threshold: {fixed_threshold_tnr:.3f}')
-    plt.scatter(fpr[optimal_idx], tpr[optimal_idx], color='green', s=100, marker='o', label=f'Optimal Threshold: {optimal_threshold:.3f}')
+    plt.scatter(fpr[idx_default], tpr[idx_default], alpha=0.8, color='blue', s=120, marker='o',
+                label=f'"Default" Threshold: {default_threshold}')
+    plt.scatter(fpr[optimal_idx], tpr[optimal_idx], alpha=0.8, color='green', s=120, marker='o',
+                label=f'"Optimal" Threshold: {optimal_threshold:.3f}')
+    plt.scatter(fpr[idx_tpr], tpr[idx_tpr], alpha=0.8, color='orange', s=120, marker='o',
+                label=f'"TPR≈{target_tpr}" Threshold: {fixed_threshold_tpr:.3f}')
+    plt.scatter(fpr[idx_tnr], tpr[idx_tnr], alpha=0.8, color='red', s=120, marker='o',
+                label=f'"TNR≈{target_tnr}" Threshold: {fixed_threshold_tnr:.3f}')
 
-    plt.axhline(target_tnr, color='orange', linestyle='--')
-    plt.axvline(target_tnr, color='red', linestyle='--')
+    # plt.axhline(target_tnr, color='orange', linestyle=':', alpha=0.8)
+    # plt.axvline(target_tnr, color='red', linestyle=':', alpha=0.8)
 
-    plt.xlabel('False Positive Rate (FPR)', fontsize=fontsize+1)
-    plt.ylabel('True Positive Rate (TPR)', fontsize=fontsize+1)
-    plt.xticks(fontsize=fontsize-1)  # Adjust the font size as needed
-    plt.yticks(fontsize=fontsize-1)  # Adjust the font size as needed
-    plt.title('ROC Curve + Classification Thresholds', fontsize=fontsize+4)
-    plt.legend(fontsize=fontsize, loc='upper left')
+    # Info Legend
+    info_text = f'Info:\n' \
+                f'        TPR = TP / (TP + FN)\n' \
+                f'        FPR = FP / (FP + TN)\n' \
+                f'        TNR = 1 - FPR\n' \
+                f'        Optimal Cost(TPR, FPR) =\n' \
+                f'        {cost_tpr} * (1 - TPR) + {cost_fpr} * FPR'
+    plt.plot([1, 1], [1, 1], linestyle='', alpha=0.0, label=f'{info_text}')
 
-    # Add FPR and TPR formulas as text annotations
-    plt.annotate(f'TPR = TP / (TP + FN)\nFPR = FP / (FP + TN)\nTNR = 1 - FPR\ncost_optimal(TPR, FPR) =\n  {cost_tpr} * (1 - TPR) + {cost_fpr} * FPR',
-                 xycoords='axes fraction',
-                 xy=(1, 1), xytext=(0.62, 0.09), textcoords='axes fraction', fontsize=fontsize,
-                 bbox=dict(boxstyle='round', facecolor='green', alpha=0.3))
+    plt.legend(fontsize=fontsize, loc='lower right', framealpha=0.6)
+
+    plt.xlim(-0.01, 1)
+    plt.ylim(0, 1.01)
+    plt.xlabel('False Positive Rate (FPR)', fontsize=fontsize+2)
+    plt.ylabel('True Positive Rate (TPR)', fontsize=fontsize+2)
+    plt.xticks(fontsize=fontsize-1)
+    plt.yticks(fontsize=fontsize-1)
+    plt.suptitle(f"ROC Curve & Classification Thresholds", fontsize=fontsize+4)
+    plt.title(f"aeid: {AEID}, {ESTIMATOR_NAME}", fontsize=fontsize+3)
 
     plt.grid()
     plt.tight_layout()
@@ -470,50 +486,51 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
     os.makedirs(os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set), exist_ok=True)
     LOGGER.info(f"Predict ({input_set}), {ESTIMATOR_NAME}")
 
-    if not CONFIG['apply']['threshold_moving']:
-        # ROC curve for finding the optimal threshold, we want to minimize the false negatives
-        y_pred = best_estimator.predict(X)
-        data = {
-            'Actual': y,
-            'Predicted': y_pred
-        }
-        y_preds = [y_pred]
-        y_preds_names = ['using_default_threshold']
-        y_preds_descs = ['Classification Threshold default']
+    # Predict the probabilities (using validation set)
+    y_pred_proba = best_estimator.predict_proba(X)[:, 1]
+    default_threshold = CONFIG['threshold_moving']['default_threshold']
+    LOGGER.info(f"Default threshold: {default_threshold}")
+    y_pred_default_threshold = np.where(y_pred_proba >= default_threshold, 1, 0)
+    data = {'Actual': y, 'Predicted': y_pred_default_threshold}
+    y_preds = [y_pred_default_threshold]
+    y_preds_names = ['using_default_threshold']
+    y_preds_descs = [f'Classification Threshold default={default_threshold}']
 
-    else:
-        # Adjust predictions based on the optimal threshold
+    # Adjust predictions based on classification threshold
+    if CONFIG['apply']['threshold_moving']:
         target_tpr = CONFIG['threshold_moving']['target_tpr']
         target_tnr = CONFIG['threshold_moving']['target_tnr']
+
         optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr = \
-            find_optimal_threshold(X, y, best_estimator, input_set, target_tpr=target_tpr, target_tnr=target_tnr)
+            find_optimal_threshold(y, y_pred_proba, input_set, target_tpr=target_tpr, target_tnr=target_tnr,
+                                   default_threshold=default_threshold)
 
-        LOGGER.info(f"Fixed threshold TPR ≥ {target_tpr}: {fixed_threshold_tpr}")
-        LOGGER.info(f"Fixed threshold, TNR ≥ {target_tnr}: {fixed_threshold_tnr}")
         LOGGER.info(f"Optimal threshold: {optimal_threshold}")
+        LOGGER.info(f"Fixed threshold TPR≈{target_tpr}: {fixed_threshold_tpr}")
+        LOGGER.info(f"Fixed threshold, TNR≈{target_tnr}: {fixed_threshold_tnr}")
 
-        y_pred_proba = best_estimator.predict_proba(X)[:, 1]
+        y_pred_optimal_threshold = np.where(y_pred_proba >= optimal_threshold, 1, 0)
         y_pred_fixed_threshold_tpr = np.where(y_pred_proba >= fixed_threshold_tpr, 1, 0)
         y_pred_fixed_threshold_tnr = np.where(y_pred_proba >= fixed_threshold_tnr, 1, 0)
-        y_pred_optimal_threshold = np.where(y_pred_proba >= optimal_threshold, 1, 0)
 
-        y_preds = [y_pred_fixed_threshold_tpr, y_pred_fixed_threshold_tnr, y_pred_optimal_threshold]
-        y_preds_names = ['using_fixed_threshold_tpr', 'using_fixed_threshold_tnr', 'using_optimal_threshold']
-        y_preds_descs = [f'Classification Threshold TPR≥{target_tpr}',
-                         f'Classification Threshold TNR≥{target_tnr}',
-                         'Classification Threshold by cost(TPR,TNR)']
+        y_preds += [y_pred_optimal_threshold, y_pred_fixed_threshold_tpr, y_pred_fixed_threshold_tnr]
+        y_preds_names += ['using_optimal_threshold', 'using_fixed_threshold_tpr', 'using_fixed_threshold_tnr']
+        y_preds_descs += ['Classification Threshold by cost(TPR, TNR)',
+                          f'Classification Threshold by TPR≈{target_tpr}',
+                          f'Classification Threshold by TNR≈{target_tnr}']
 
-        data = {
-            'Actual': y,
+        new_data = {
+            'Predicted_with_optimal_threshold': y_pred_optimal_threshold,
             'Predicted_with_fixed_threshold_tpr': y_pred_fixed_threshold_tpr,
-            'Predicted_with_fixed_threshold_tnr': y_pred_fixed_threshold_tnr,
-            'Predicted_with_optimal_threshold': y_pred_optimal_threshold
+            'Predicted_with_fixed_threshold_tnr': y_pred_fixed_threshold_tnr
         }
+        data.update(new_data)
+        data = pd.DataFrame(data)
 
     folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set)
 
     df = pd.DataFrame(data)
-    df.to_csv(os.path.join(folder, f"reg_results.csv"), index=False)
+    df.to_csv(os.path.join(folder, f"estimator_results.csv"), index=False)
 
     labels = [True, False]
 
@@ -539,13 +556,18 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
                 'Negative': {'fontsize': 30},
             }
 
-            cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm,
-                                                        display_labels=display_labels,
-                                                        )
+            plt.figure(figsize=(8, 8))
+
+            # cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
+            # sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', cbar=False)
+            cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
             cm_display.plot(cmap=cmap, colorbar=False)
 
-            plt.suptitle(f"Confusion Matrix for aeid: {AEID}, {ESTIMATOR_NAME}", fontsize=12)
-            plt.title(f"{desc}", fontsize=11)
+            pos_count = cm[0, 0] + cm[0, 1]
+            neg_count = cm[1, 0] + cm[1, 1]
+
+            plt.suptitle(f"Confusion Matrix: {desc} ", fontsize=10)
+            plt.title(f"aeid: {AEID}, {ESTIMATOR_NAME}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
             path = os.path.join(folder, f"confusion_matrix_{name}.png")
             plt.savefig(path, format='png')
             plt.close()
@@ -658,10 +680,10 @@ def get_timestamp(time_point):
     return time_point.strftime('%Y-%m-%d_%H-%M-%S')
 
 
-def report_exception(exception, traceback_info, estimator):
+def report_exception(exception, traceback_info, entitiy):
     error_file_path = os.path.join(LOG_PATH, '.log', f"error.error")
     with open(error_file_path, "a") as f:
-        err_msg = f"{estimator} failed: {exception}"
+        err_msg = f"{entitiy} failed: {exception}"
         LOGGER.error(err_msg)
         LOGGER.error(traceback_info)
         print(err_msg, file=f)

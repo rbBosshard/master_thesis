@@ -25,13 +25,14 @@ apply:
   variance_threshold: 0  # only if feature_selection on
   non_negative_matrix_factorization: 0  # only if feature_selection on
   custom_scorer: 1
+
   threshold_moving: 1
   cytotoxicity_corrected_hitcalls: 0
 
 threshold_moving:
+  default_threshold: 0.5
   cost_tpr: 2 # For optimal threshold moving: A higher weight_tpr value gives more weight to maximizing true positive rate.
   cost_fpr: 1 # For optimal threshold moving: A higher weight_tpr value gives more weight to minimizing false negative rate.
-
   target_tpr: 0.5 # For fixed threshold evaluation at some target True Positive Rate
   target_tnr: 0.5 # For fixed threshold evaluation at some target False Positive Rate
 
@@ -39,7 +40,7 @@ feature_selection:
   variance_threshold: 0.01
 
 grid_search_cv:
-  n_splits: 5 # Number of folds
+  n_splits: 2 # Number of folds
   n_repeats: 1 # Number of repeats
   scoring: f_beta # recall_macro, f1, roc_auc, accuracy
   # The F1 score is the harmonic mean of the precision and recall. The more generic F_beta score applies additional weights, valuing one of precision or recall more than the other.

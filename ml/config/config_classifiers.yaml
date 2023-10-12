@@ -1,33 +1,33 @@
 # Don't forget to import in the python helper script all the classifiers and transformers specified here
 estimators:
-  - name: LogisticRegression
-    steps:
-      - name: LogisticRegression
-        args:
-          penalty: [ 'l2' ] # [ 'l1', 'l2', 'elasticnet', 'none' ]
-          C: [ 1.0 ] # [ 0.1, 1.0, 10.0, 100.0 ]
-          max_iter: [ 1000 ]
-          n_jobs: [ -1 ]
-
-  - name: SVC
-    steps:
-      - name: SVC
-        args:
-          kernel: [ 'rbf' ]  # [ 'linear', 'poly', 'rbf', 'sigmoid']
-          C: [ 1.0 ] # [ 0.1, 1.0, 10.0, 100.0 ]
-          probability: [ True ]
-
-
-  - name: MLPClassifier
-    steps:
-      - name: MLPClassifier
-        args:
-          hidden_layer_sizes: [ 100 ] # [ (100,), (64, 32), (100, 100)]
-          activation: [ 'relu'] # ['logistic', 'tanh', 'relu' ]
-          solver: [ 'adam' ]  # Optimization algorithm ['lbfgs', 'sgd', 'adam' ]
-          early_stopping: [ True ]
-          max_iter: [ 1000 ]
-
+#  - name: LogisticRegression
+#    steps:
+#      - name: LogisticRegression
+#        args:
+#          penalty: [ 'l2' ] # [ 'l1', 'l2', 'elasticnet', 'none' ]
+#          C: [ 1.0 ] # [ 0.1, 1.0, 10.0, 100.0 ]
+#          max_iter: [ 1000 ]
+#          n_jobs: [ -1 ]
+#
+#  - name: SVC
+#    steps:
+#      - name: SVC
+#        args:
+#          kernel: [ 'rbf' ]  # [ 'linear', 'poly', 'rbf', 'sigmoid']
+#          C: [ 1.0 ] # [ 0.1, 1.0, 10.0, 100.0 ]
+#          probability: [ True ]
+#
+#
+#  - name: MLPClassifier
+#    steps:
+#      - name: MLPClassifier
+#        args:
+#          hidden_layer_sizes: [ 100 ] # [ (100,), (64, 32), (100, 100)]
+#          activation: [ 'relu'] # ['logistic', 'tanh', 'relu' ]
+#          solver: [ 'adam' ]  # Optimization algorithm ['lbfgs', 'sgd', 'adam' ]
+#          early_stopping: [ True ]
+#          max_iter: [ 1000 ]
+#
   - name: RandomForestClassifier
     steps:
       - name: RandomForestClassifier
@@ -41,7 +41,7 @@ estimators:
     steps:
        - name: XGBClassifier
          args:
-            n_estimators: [100] # [50, 100, 150, 200]
+            n_estimators: [10] # [50, 100, 150, 200]
             n_jobs: [ -1 ]
             max_depth: [ 7 ] # [ 3, 5, 7, 9 ]
 #            gamma: [ 0.1] # [ 0.0, 0.1, 0.2 ]
