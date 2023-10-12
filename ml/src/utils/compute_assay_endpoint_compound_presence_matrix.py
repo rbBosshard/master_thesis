@@ -44,10 +44,10 @@ def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
 
         # Get compounds
         compounds = presence_matrix.columns.tolist()
-        compounds_without_fingerprint = compute_compounds_intersection(METADATA_ALL_DIR_PATH, compounds, [], compounds_with_fingerprint)
+        compounds_tested_without_fingerprint = compute_compounds_intersection(METADATA_ALL_DIR_PATH, compounds, [], compounds_with_fingerprint)
 
         # Filter df by compounds that have a fingerprint from structure
-        presence_matrix = presence_matrix.drop(columns=compounds_without_fingerprint)
+        presence_matrix = presence_matrix.drop(columns=compounds_tested_without_fingerprint)
         aeid_compound_presence_matrix_path = os.path.join(METADATA_ALL_DIR_PATH,
                                                           f"aeid_compound_presence_matrix_with_fingerprint{FILE_FORMAT}")
         presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')
@@ -72,8 +72,8 @@ def compute_assay_endpoint_compound_presence_matrix(ALL=1, SUBSET=1):
                                                     f"aeid_compound_presence_matrix_with_fingerprint{FILE_FORMAT}")
 
         compounds = presence_matrix.columns.tolist()
-        compounds_without_fingerprint = compute_compounds_intersection(METADATA_SUBSET_DIR_PATH, compounds, compounds_with_zero_count, compounds_with_fingerprint)
+        compounds_tested_without_fingerprint = compute_compounds_intersection(METADATA_SUBSET_DIR_PATH, compounds, compounds_with_zero_count, compounds_with_fingerprint)
 
         # Filter df by compounds that have a fingerprint from structure
-        presence_matrix = presence_matrix.drop(columns=compounds_without_fingerprint)
+        presence_matrix = presence_matrix.drop(columns=compounds_tested_without_fingerprint)
         presence_matrix.to_parquet(aeid_compound_presence_matrix_path, compression='gzip')

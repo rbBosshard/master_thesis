@@ -1,7 +1,7 @@
-massbank_dtxsid_with_records: 624 
-massbank_dtxsid_with_records_sirius_training: 596 
+massbank_dtxsid_with_records: 600 
+massbank_dtxsid_with_records_sirius_training: 623 
 
-intersection: 309 
+intersection: 171 
 
-validation_compounds_safe: 315 
-validation_compounds_unsafe: 596 
+validation_compounds_safe: 429 
+validation_compounds_unsafe: 623 

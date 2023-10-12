@@ -27,8 +27,9 @@ if __name__ == '__main__':
 
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
+
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in [97, 300]: #aeids_target_assays[:]:  # [97]:
+    for aeid in aeids_target_assays[:]:  # [97]:
 
         # Init the aeid folder
         init_aeid(aeid)
@@ -39,13 +40,13 @@ if __name__ == '__main__':
         # Merge chemical ids in both dataframes
         df = merge_assay_and_fingerprint_df(assay_df, fps_df)
 
-        # Partition data into X and y and respective massbank validation
+        # Partition data into X and y and respective massbank validation set (massbank validation set evaluates generalization to unseen data from spectral data)
         X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
         # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
         assess_similarity(X_massbank_val_from_structure, X_massbank_val_from_sirius)
 
-        # Split ML data into train, validation and test set
+        # Split ML data into train test set (test set evaluates generalization to unseen data)
         X_train, y_train, X_test, y_test = split_data(X, y)
 
         preprocessing_pipeline_steps = build_preprocessing_pipeline()
@@ -57,7 +58,7 @@ if __name__ == '__main__':
         X_train, y_train = handle_oversampling(X_train, y_train)
 
         # Get the label counts
-        get_label_counts(y, y_train, y_test)
+        get_label_counts(y, y_train, y_test, y_massbank_val)
 
         # Build for each estimator a pipeline according to the configurations in the config file
         for estimator in CONFIG_ESTIMATORS['estimators']:

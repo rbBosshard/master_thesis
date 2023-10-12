@@ -16,7 +16,7 @@ def extract_ml_relevant_pytcpl_output():
     df.to_parquet(dest_path, compression='gzip')
 
     # Get set of all compounds tested
-    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_without_fingerprint{FILE_FORMAT}")
+    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_without_fingerprint{FILE_FORMAT}")
     compounds_tested_without_fingerprint = pd.read_parquet(compounds_path)['dsstox_substance_id']
 
     aeids = get_subset_aeids()['aeid']

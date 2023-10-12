@@ -701,6 +701,11 @@ INPUT ./chapters/results_discussion.tex
 INPUT ./chapters/results_discussion.tex
 INPUT ./chapters/results_discussion.tex
 INPUT chapters/results_discussion.tex
+INPUT ./figures/confusion_matrix_metrics.png
+INPUT ./figures/confusion_matrix_metrics.png
+INPUT ./figures/confusion_matrix_metrics.png
+INPUT ./figures/confusion_matrix_metrics.png
+INPUT ./figures/confusion_matrix_metrics.png
 INPUT ./chapters/conclusion.tex
 INPUT ./chapters/conclusion.tex
 INPUT ./chapters/conclusion.tex

@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber thesis"] 1697023234 "thesis.bcf" "thesis.bbl" "thesis" 1697023260 0
+["biber thesis"] 1697060330 "thesis.bcf" "thesis.bbl" "thesis" 1697060354 0
   "./refs.bib" 1696960858 26630 f1803be408b38cd5f2f893ffca89968f ""
-  "thesis.bcf" 1697023259 109849 9944f0248eb51230b87b4a5c440566cd "pdflatex"
+  "thesis.bcf" 1697060354 109977 02ed95da0f049481aeb8633ca3747126 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1697023249 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697023260 0
-  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1697015076 4742 a3b53e408a55fbe096ece188c70c222c ""
+["pdflatex"] 1697060348 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697060354 0
+  "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1697054773 4744 afbff0d3542fed7fc1ccefda499eb1f7 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1691267210 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -237,7 +237,7 @@
   "chapters/introduction.tex" 1697017333 16001 abee0ac3278c49fa10aa8e53e257d404 ""
   "chapters/material_and_methods.tex" 1697023094 34876 9b3c49a75fa5588d0d2d149a9247734a ""
   "chapters/related_work.tex" 1697020869 4233 39ad4716875a699343d6f9cc302e3f24 ""
-  "chapters/results_discussion.tex" 1697023235 1191 918846c911061d27c592db1be823f0be ""
+  "chapters/results_discussion.tex" 1697060326 1157 2bbfe315e0e8eff3b3adfe899a7665e6 ""
   "eth-template/ETHlogo.pdf" 1691253600 12666 b4023007c09129f6f4698ef1ed405aa9 ""
   "eth-template/ETHlogo.sty" 1691253600 299 e2abad9c54943afe91695fd7c02906f8 ""
   "eth-template/extrapackages.tex" 1691253600 2675 e8cee1fb289bc2525625e93f38f4740c ""
@@ -252,6 +252,7 @@
   "figures/aeid_acid_aid.png" 1696712526 62467 671c66c6b5235c64f9c16bdfe389b110 ""
   "figures/aop2.png" 1695983034 6051660 348b2a87f3bed4f848c01106818d5adb ""
   "figures/concentration_metric_distributions.png" 1696885214 138334 3a84acf8880ba239128452bb92c52f47 ""
+  "figures/confusion_matrix_metrics.png" 1696960779 29976 8f7c6647adfef504e68872b4538b2ced ""
   "figures/curve_surfer.png" 1696693023 193720 e2825eeaf43317f9efae0ca5f55f7418 ""
   "figures/cytotoxicity.png" 1695738223 481970 b928e5804e08a228bd00be82c0366566 ""
   "figures/fingerprint_schema.png" 1695769025 254654 9bd2b034c61039dd8e926b18dcd1ff59 ""
@@ -265,12 +266,12 @@
   "figures/presence_matrix_all.png" 1696880857 128440 1e0084bb62f6cdf4dceca9e2ae69b27d ""
   "figures/presence_matrix_subset.png" 1696884079 36831 79f035624a46a9f6301bbcd4a005dc13 ""
   "figures/toxcast_db_annotations_recolored.png" 1696713388 885677 0808764a77ec4f56ed7a3fe44bb9fcff ""
-  "thesis.aux" 1697023259 48945 91cf15bb52a70e4a5a250017f4d30542 "pdflatex"
-  "thesis.bbl" 1697023238 82842 f1326e839fea45ed2c09d79cdfd6be8e "biber thesis"
-  "thesis.out" 1697023259 6655 836fdfb2518fc5b3af8f989cabc9a34e "pdflatex"
-  "thesis.run.xml" 1697023259 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
-  "thesis.tex" 1697015076 4742 a3b53e408a55fbe096ece188c70c222c ""
-  "thesis.toc" 1697023259 3758 867d2e41ce06e78826692292a9a93032 "pdflatex"
+  "thesis.aux" 1697060354 50336 dac4ca2d820fd67de463e9a93d5e9658 "pdflatex"
+  "thesis.bbl" 1697060334 84549 4beb326defd8830eb69b0f17d203d855 "biber thesis"
+  "thesis.out" 1697060354 6872 3c1d01b8e070348399b0ae26168511cc "pdflatex"
+  "thesis.run.xml" 1697060354 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "thesis.tex" 1697054773 4744 afbff0d3542fed7fc1ccefda499eb1f7 ""
+  "thesis.toc" 1697060354 3910 1b49a4ab48d0e6b6e51d11ed30943cf9 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

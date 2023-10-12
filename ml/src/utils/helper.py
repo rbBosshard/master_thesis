@@ -1,5 +1,6 @@
 import os
-
+import requests
+from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
 
@@ -7,7 +8,7 @@ import pandas as pd
 from ml.src.pipeline.constants import REMOTE_METADATA_DIR_PATH, MASSBANK_DIR_PATH, FILE_FORMAT, INPUT_DIR_PATH, \
     OUTPUT_DIR_PATH, INPUT_FINGERPRINTS_DIR_PATH, METADATA_DIR_PATH, METADATA_ALL_DIR_PATH, METADATA_SUBSET_DIR_PATH, \
     VALIDATION_COVERAGE_DIR_PATH, VALIDATION_COVERAGE_PLOTS_DIR_PATH, CONC_DIR_PATH, INPUT_VALIDATION_DIR_PATH, \
-    INPUT_ML_DIR_PATH, COMPOUNDS_DIR_PATH, FINGERPRINT_FILE
+    INPUT_ML_DIR_PATH, FINGERPRINT_FILE
 
 
 def get_subset_aeids():
@@ -65,13 +66,13 @@ def compute_compounds_intersection(directory, compounds, compounds_with_zero_cou
 
     intersection = compounds_with_fingerprint.intersection(compounds)
     compounds_not_tested = compounds_with_fingerprint.difference(compounds)
-    compounds_without_fingerprint = compounds.difference(compounds_with_fingerprint)
+    compounds_tested_without_fingerprint = compounds.difference(compounds_with_fingerprint)
 
     with open(os.path.join(directory, 'compounds_count.out'), 'w') as f:
         f.write(f"Number of compounds tested: {len(compounds)} \n")
         f.write(f"Number of compounds with fingerprint available: {len(compounds_with_fingerprint)} \n")
         f.write(f"Number of compounds tested and fingerprint available: {len(intersection)} \n")
-        f.write(f"Number of compounds tested and no fingerprint available: {len(compounds_without_fingerprint)} \n")
+        f.write(f"Number of compounds tested and no fingerprint available: {len(compounds_tested_without_fingerprint)} \n")
         f.write(f"Number of compounds not tested but fingerprint available: {len(compounds_not_tested)} \n")
 
     dest_path = os.path.join(directory, f'compounds_tested_with_fingerprint{FILE_FORMAT}')
@@ -86,13 +87,13 @@ def compute_compounds_intersection(directory, compounds, compounds_with_zero_cou
         for compound in compounds_not_tested:
             f.write(compound + '\n')
 
-    dest_path = os.path.join(directory, f'compounds_without_fingerprint{FILE_FORMAT}')
-    pd.DataFrame({'dsstox_substance_id': list(compounds_without_fingerprint)}).to_parquet(dest_path, compression='gzip')
-    with open(os.path.join(directory, f'compounds_without_fingerprint.out'), 'w') as f:
-        for compound in compounds_without_fingerprint:
+    dest_path = os.path.join(directory, f'compounds_tested_without_fingerprint{FILE_FORMAT}')
+    pd.DataFrame({'dsstox_substance_id': list(compounds_tested_without_fingerprint)}).to_parquet(dest_path, compression='gzip')
+    with open(os.path.join(directory, f'compounds_tested_without_fingerprint.out'), 'w') as f:
+        for compound in compounds_tested_without_fingerprint:
             f.write(compound + '\n')
 
-    return compounds_without_fingerprint
+    return compounds_tested_without_fingerprint
 
 
 def get_sirius_fingerprints():
@@ -132,6 +133,54 @@ def get_guid_dtxsid_mapping():
     return pairs
 
 
+def collect_sirius_training_set_compounds():
+    # Retrieve the inchi_keys of the training structures for positive and negative ion mode
+    df1 = None
+    df2 = None
+
+    # Positive ion mode: predictor=1 (https://www.csi-fingerid.uni-jena.de/v2.6/api/fingerid/trainingstructures?predictor=1)
+    training_structures_for_positive_ion_mode_url = 'https://www.csi-fingerid.uni-jena.de/v2.6/api/fingerid/trainingstructures?predictor=1'
+    response = requests.get(training_structures_for_positive_ion_mode_url)
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        training_structures_for_positive_ion_mode_inchi_keys = [line.split('\t')[0] for line in soup.get_text().splitlines() if 'InChI=' in line]
+        df1 = pd.DataFrame({'inchi_key': training_structures_for_positive_ion_mode_inchi_keys})
+        path = os.path.join(INPUT_VALIDATION_DIR_PATH, f'training_structures_for_positive_ion_mode_inchi_keys{FILE_FORMAT}')
+        df1.to_parquet(path)
+    else:
+        print(f"Failed to retrieve content. Status code: {response.status_code}")
+
+    # Negative ion mode: predictor=2 (https://www.csi-fingerid.uni-jena.de/v2.6/api/fingerid/trainingstructures?predictor=2)
+    training_structures_for_negative_ion_mode_url = 'https://www.csi-fingerid.uni-jena.de/v2.6/api/fingerid/trainingstructures?predictor=2'
+    response = requests.get(training_structures_for_negative_ion_mode_url)
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        training_structures_for_negative_ion_mode_inchi_keys = [line.split('\t')[0] for line in soup.get_text().splitlines() if 'InChI=' in line]
+        df2 = pd.DataFrame({'inchi_key': training_structures_for_negative_ion_mode_inchi_keys})
+        path = os.path.join(INPUT_VALIDATION_DIR_PATH, f'training_structures_for_negative_ion_mode_inchi_keys{FILE_FORMAT}')
+        df2.to_parquet(path)
+    else:
+        print(f"Failed to retrieve content. Status code: {response.status_code}")
+
+    df = df1.merge(df2, on='inchi_key').drop_duplicates()
+    # Save inchi_keys to .out file by splitting into batch size of 10000
+    inchi_keys = df['inchi_key']
+    inchi_keys.to_csv(os.path.join(INPUT_VALIDATION_DIR_PATH, f'training_structures_for_positive_and_negative_ion_mode_inchi_keys.csv'), index=False, header=False)
+    
+    # Load dtxsids from resulting inchi keys using batch search (https://comptox.epa.gov/dashboard/batch-search), do this manually!
+    path = os.path.join(INPUT_VALIDATION_DIR_PATH, f'training_structures_for_positive_and_negative_ion_mode_inchi_keys_dtxsids.csv')
+    dtxsids = pd.read_csv(path, sep=',')
+    dtxsids = dtxsids['DTXSID']
+    dtxsids = dtxsids.rename('dsstox_substance_id')
+    dtxsids = dtxsids.dropna()
+    dtxsids = dtxsids.drop_duplicates()
+    dtxsids.to_csv(os.path.join(INPUT_VALIDATION_DIR_PATH, f'training_structures_for_positive_and_negative_ion_mode_dtxsids_unique.csv'), index=False, columns=['dsstox_substance_id'])
+
+    return dtxsids
+
+
 def csv_to_parquet_converter():
     print("Preprocess fingerprint from structure input file")
     src_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}.csv")
@@ -161,7 +210,8 @@ def csv_to_parquet_converter():
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{FINGERPRINT_FILE}_compounds.out"), 'w') as f:
         f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))
 
-    # get_guid_dtxsid_mapping()
+    # guid_dtxsid_mapping = get_guid_dtxsid_mapping()
+    collect_sirius_training_set_compounds()
     sirius_fingerprints = get_sirius_fingerprints()
     sirius_fingerprints.to_csv(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints.csv"), index=False)
     sirius_fingerprints.to_parquet(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints{FILE_FORMAT}"), compression='gzip')

@@ -232,7 +232,7 @@ def assess_similarity(ground_truth, predicted):
                 cmap='viridis',
                 ax=ax1,
                 )
-    ax1.set_title(f"Dissimilarity in Massbank validation set with shape {predicted.shape}: "
+    ax1.set_title(f"(aeid={AEID}) Dissimilarity in Massbank Validation Set with Shape {predicted.shape}: "
                   f"Predicted - True Fingerprints. "
                   f"Purple=-1, Green=0, Yellow=1",
                   fontsize=50)
@@ -266,63 +266,9 @@ def assess_similarity(ground_truth, predicted):
     plt.savefig(path, format='png')
     plt.close()
 
-
-
-    exit()
-
-    def jaccard_similarity(matrix1, matrix2, axis):
-        intersection = np.logical_and(matrix1, matrix2)
-        union = np.logical_or(matrix1, matrix2)
-        return np.sum(intersection, axis=axis) / np.sum(union, axis=axis)
-
-    # Function to calculate Hamming distance for rows and columns
-    def hamming_distance(matrix1, matrix2, axis):
-        return np.sum(matrix1 != matrix2, axis=axis)
-
-
-    # Calculate Jaccard similarity and Hamming distance for rows and columns
-    row_jaccard_similarities = jaccard_similarity(predicted.values, ground_truth.values, axis=1)
-    row_hamming_distances = hamming_distance(predicted.values, ground_truth.values, axis=1)
-    col_jaccard_similarities = jaccard_similarity(predicted.values, ground_truth.values, axis=0)
-    col_hamming_distances = hamming_distance(predicted.values, ground_truth.values, axis=0)
-    
-    # print("Row Jaccard Similarities:", row_jaccard_similarities)
-    # print("Row Hamming Distances:", row_hamming_distances)
-    # print("Column Jaccard Similarities:", col_jaccard_similarities)
-    # print("Column Hamming Distances:", col_hamming_distances)
-
-    
-    if 0:
-        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_row_jaccard_similarities.png")
-        sns.heatmap([row_jaccard_similarities], cmap='coolwarm',
-                xticklabels=False,
-                yticklabels=False,)
-        plt.savefig(path, format='png')
-        plt.close()
-
-        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_col_jaccard_similarities.png")
-        sns.heatmap([col_jaccard_similarities], cmap='coolwarm',
-                xticklabels=False,
-                yticklabels=False,)
-        plt.savefig(path, format='png')
-        plt.close()
-
-        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_row_hamming_distances.png")
-        sns.heatmap([row_hamming_distances], cmap='coolwarm', 
-                xticklabels=False,
-                yticklabels=False,)
-        plt.savefig(path, format='png')
-        plt.close()
-
-        path = os.path.join(LOG_PATH, f"{AEID}", "heatmap_col_hamming_distances.png")
-        sns.heatmap([col_hamming_distances], cmap='coolwarm',
-                xticklabels=False,
-                yticklabels=False,)
-        plt.savefig(path, format='png')
-        plt.close()
-
     predicted = predicted.astype(np.uint8)
     ground_truth = ground_truth.astype(np.uint8)
+
 
 def print_binarized_label_count(y, title):
     counts = (y >= CONFIG['activity_threshold']).value_counts().values
@@ -439,61 +385,85 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
     return grid_search_cv_fitted
 
 
-def find_optimal_threshold(X, y, best_estimator, input_set):
+def find_optimal_threshold(X, y, best_estimator, input_set, target_tpr, target_tnr):
     # Predict the probabilities (using validation set)
     y_pred_proba = best_estimator.predict_proba(X)[:, 1]
 
-    # Tune the decision threshold for the classifier, used to map probabilities to class labels
+    # Tune the classification threshold for the classifier, used to map probabilities to class labels
     fpr, tpr, thresholds = roc_curve(y, y_pred_proba)
+    tnr = 1 - fpr
 
     # Plot the ROC curve
     df_fpr_tpr = pd.DataFrame({'FPR': fpr, 'TPR': tpr, 'Threshold': thresholds})
 
-    # Calculate the complement of the weight_tpr parameter
-    weight_tpr = CONFIG['threshold_moving']['weight_tpr']
-    weight_fpr = 1 - weight_tpr
+    # Fixed Threshold Evaluation (for model comparison)
+    # Find the threshold that achieves the desired TPR (target_tpr)
+    idx_tpr = np.argmax(tpr >= target_tpr)
+    fixed_threshold_tpr = thresholds[idx_tpr]
+
+    idx_tnr = np.abs(tnr - target_tnr).argmin()
+    fixed_threshold_tnr = thresholds[idx_tnr]
+
+    # Threshold Moving
+    def custom_cost_to_minimize(cost_tpr, tpr, cost_fpr, fpr):
+        # The goal is to minimize this cost function by penalizing the false negatives / false positives
+        # Linear combination of costs, higher tpr is better, lower fpr is better,
+        return cost_tpr * (1 - tpr) + cost_fpr * fpr
 
     # Find the optimal threshold based on a cost function, weighting true positive rate and false positive rate
-    costs = (1 - weight_tpr * tpr) + weight_fpr * fpr  # A higher weight_tpr value gives more weight to minimizing false negatives.
+    cost_tpr = CONFIG['threshold_moving']['cost_tpr']
+    cost_fpr = CONFIG['threshold_moving']['cost_fpr']
+    costs = custom_cost_to_minimize(cost_tpr, tpr, cost_fpr, fpr)
     optimal_idx = np.argmin(costs)
     optimal_threshold = thresholds[optimal_idx]
 
     # Plot the ROC curve
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(8, 8))
+    fontsize = 12
 
     # Create scatter plot
-    plt.scatter(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], s=10, label='ROC Points')
-    plt.plot(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], linestyle='-', label='ROC Curve')
+    plt.scatter(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], s=8, alpha=0.7)
+    plt.plot(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], linestyle='-')
 
-    # Highlight optimal point
-    plt.scatter(fpr[optimal_idx], tpr[optimal_idx], color='red', s=100, marker='x', label='Optimal Threshold')
-    plt.text(fpr[optimal_idx], tpr[optimal_idx], f'Optimal Threshold: {optimal_threshold:.3f}',
-             color='red', fontsize=10, ha='right', va='bottom')
+    # Highlight thresholds point
+    plt.scatter(fpr[idx_tpr], tpr[idx_tpr], color='orange', s=100, marker='o', label=f'TPR≥{target_tpr:.2f} Threshold: {fixed_threshold_tpr:.3f}')
+    plt.scatter(fpr[idx_tnr], tpr[idx_tnr], color='red', s=100, marker='o', label=f'TNR≥{target_tnr:.2f} Threshold: {fixed_threshold_tnr:.3f}')
+    plt.scatter(fpr[optimal_idx], tpr[optimal_idx], color='green', s=100, marker='o', label=f'Optimal Threshold: {optimal_threshold:.3f}')
 
-    # Add labels and title
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curve')
-    plt.legend()
+    plt.axhline(target_tnr, color='orange', linestyle='--')
+    plt.axvline(target_tnr, color='red', linestyle='--')
+
+    plt.xlabel('False Positive Rate (FPR)', fontsize=fontsize+1)
+    plt.ylabel('True Positive Rate (TPR)', fontsize=fontsize+1)
+    plt.xticks(fontsize=fontsize-1)  # Adjust the font size as needed
+    plt.yticks(fontsize=fontsize-1)  # Adjust the font size as needed
+    plt.title('ROC Curve + Classification Thresholds', fontsize=fontsize+4)
+    plt.legend(fontsize=fontsize, loc='upper left')
 
     # Add FPR and TPR formulas as text annotations
-    plt.annotate('FPR = FP / (FP + TN)', xy=(0.5, 0.2), xytext=(0.5, 0.2), textcoords='axes fraction',
-                 ha='center', va='bottom', fontsize=8, color='black')
-    plt.annotate('TPR = TP / (TP + FN)', xy=(0.5, 0.1), xytext=(0.5, 0.1), textcoords='axes fraction',
-                 ha='center', va='bottom', fontsize=8, color='black')
+    plt.annotate(f'TPR = TP / (TP + FN)\nFPR = FP / (FP + TN)\nTNR = 1 - FPR\ncost_optimal(TPR, FPR) =\n  {cost_tpr} * (1 - TPR) + {cost_fpr} * FPR',
+                 xycoords='axes fraction',
+                 xy=(1, 1), xytext=(0.62, 0.09), textcoords='axes fraction', fontsize=fontsize,
+                 bbox=dict(boxstyle='round', facecolor='green', alpha=0.3))
 
     plt.grid()
     plt.tight_layout()
 
     path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set, f"roc_curve.png")
-    plt.savefig(path, dpi=300)
+    plt.savefig(path)
+    plt.close()
 
-    if input_set == 'validation':
-        path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, f"optimal_treshold.joblib")
-        joblib.dump(optimal_threshold, path)
+    path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, f"fixed_threshold_tpr_{input_set}.joblib")
+    joblib.dump(fixed_threshold_tpr, path)
 
-    LOGGER.info(f"Optimal threshold saved.")
-    return optimal_threshold
+    path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, f"fixed_threshold_tnr_{input_set}.joblib")
+    joblib.dump(fixed_threshold_tnr, path)
+
+    path = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, f"optimal_threshold_{input_set}.joblib")
+    joblib.dump(optimal_threshold, path)
+
+    LOGGER.info(f"Optimal and fixed threshold saved.")
+    return optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr
 
 
 def predict_and_report_classification(X, y, best_estimator, input_set):
@@ -503,49 +473,86 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
     if not CONFIG['apply']['threshold_moving']:
         # ROC curve for finding the optimal threshold, we want to minimize the false negatives
         y_pred = best_estimator.predict(X)
+        data = {
+            'Actual': y,
+            'Predicted': y_pred
+        }
+        y_preds = [y_pred]
+        y_preds_names = ['using_default_threshold']
+        y_preds_descs = ['Classification Threshold default']
+
     else:
         # Adjust predictions based on the optimal threshold
-        optimal_threshold = find_optimal_threshold(X, y, best_estimator, input_set)
+        target_tpr = CONFIG['threshold_moving']['target_tpr']
+        target_tnr = CONFIG['threshold_moving']['target_tnr']
+        optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr = \
+            find_optimal_threshold(X, y, best_estimator, input_set, target_tpr=target_tpr, target_tnr=target_tnr)
+
+        LOGGER.info(f"Fixed threshold TPR ≥ {target_tpr}: {fixed_threshold_tpr}")
+        LOGGER.info(f"Fixed threshold, TNR ≥ {target_tnr}: {fixed_threshold_tnr}")
         LOGGER.info(f"Optimal threshold: {optimal_threshold}")
+
         y_pred_proba = best_estimator.predict_proba(X)[:, 1]
-        y_pred = np.where(y_pred_proba > optimal_threshold, 1, 0)
+        y_pred_fixed_threshold_tpr = np.where(y_pred_proba >= fixed_threshold_tpr, 1, 0)
+        y_pred_fixed_threshold_tnr = np.where(y_pred_proba >= fixed_threshold_tnr, 1, 0)
+        y_pred_optimal_threshold = np.where(y_pred_proba >= optimal_threshold, 1, 0)
+
+        y_preds = [y_pred_fixed_threshold_tpr, y_pred_fixed_threshold_tnr, y_pred_optimal_threshold]
+        y_preds_names = ['using_fixed_threshold_tpr', 'using_fixed_threshold_tnr', 'using_optimal_threshold']
+        y_preds_descs = [f'Classification Threshold TPR≥{target_tpr}',
+                         f'Classification Threshold TNR≥{target_tnr}',
+                         'Classification Threshold by cost(TPR,TNR)']
+
+        data = {
+            'Actual': y,
+            'Predicted_with_fixed_threshold_tpr': y_pred_fixed_threshold_tpr,
+            'Predicted_with_fixed_threshold_tnr': y_pred_fixed_threshold_tnr,
+            'Predicted_with_optimal_threshold': y_pred_optimal_threshold
+        }
 
     folder = os.path.join(LOG_PATH, f"{AEID}", ESTIMATOR_NAME, input_set)
 
-    data = {
-        'Actual': y,
-        'Predicted': y_pred
-    }
-
     df = pd.DataFrame(data)
-
     df.to_csv(os.path.join(folder, f"reg_results.csv"), index=False)
 
     labels = [True, False]
-    report = classification_report(y, y_pred, labels=labels, output_dict=True)
-    path = os.path.join(folder, f"report.csv")
-    report_df = pd.DataFrame(report).transpose()
-    report_df.to_csv(path)
-    LOGGER.info(report)
 
-    try:
-        cm = confusion_matrix(y, y_pred, labels=labels)
-        tn, fp, fn, tp = cm.ravel()  # Extract values from confusion matrix
-        LOGGER.info(f"Total: {len(y)} datapoints")
-        LOGGER.info(f"Ground truth: {tn + fp} positive, {tp + fn} negative")
-        LOGGER.info(f"Prediction: {tn + fn} positive, {tp + fp} negative")
+    for i, y_pred in enumerate(y_preds):
+        name = y_preds_names[i]
+        desc = y_preds_descs[i]
+        report = classification_report(y, y_pred, labels=labels, output_dict=True)
+        path = os.path.join(folder, f"report_{name}.csv")
+        report_df = pd.DataFrame(report).transpose()
+        report_df.to_csv(path)
+        LOGGER.info(report)
 
-        cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Positive", "Negative"])
-        cm_display.plot()
+        try:
+            cmap = plt.get_cmap(CONFIG['cmap'])
+            cm = confusion_matrix(y, y_pred, labels=labels)
+            tn, fp, fn, tp = cm.ravel()  # Extract values from confusion matrix
+            LOGGER.info(f"Total: {len(y)} datapoints")
+            LOGGER.info(f"Ground truth: {tn + fp} positive, {tp + fn} negative")
+            LOGGER.info(f"Prediction: {tn + fn} positive, {tp + fp} negative")
 
-        plt.title(f"Confusion Matrix for {ESTIMATOR_NAME}")
-        path = os.path.join(folder, f"confusion_matrix.png")
-        plt.savefig(path, format='png')
-        plt.close()
+            display_labels = {
+                'Positive': {'fontsize': 30},
+                'Negative': {'fontsize': 30},
+            }
 
-    except Exception as e:
-        traceback_info = traceback.format_exc()
-        report_exception(e, traceback_info, ESTIMATOR_NAME)
+            cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm,
+                                                        display_labels=display_labels,
+                                                        )
+            cm_display.plot(cmap=cmap, colorbar=False)
+
+            plt.suptitle(f"Confusion Matrix for aeid: {AEID}, {ESTIMATOR_NAME}", fontsize=12)
+            plt.title(f"{desc}", fontsize=11)
+            path = os.path.join(folder, f"confusion_matrix_{name}.png")
+            plt.savefig(path, format='png')
+            plt.close()
+
+        except Exception as e:
+            traceback_info = traceback.format_exc()
+            report_exception(e, traceback_info, ESTIMATOR_NAME)
 
 
 def predict_and_report_regression(X, y, best_estimator, input_set):
@@ -576,7 +583,7 @@ def predict_and_report_regression(X, y, best_estimator, input_set):
 
     LOGGER.info(report_df.to_string(index=False))
 
-    # Save the report DataFrame to a CSV file
+    # Save the report to csv
     report_df.to_csv(os.path.join(folder, f"report.csv"), index=False)
 
     plt.scatter(y, y_pred, alpha=0.2, s=5)
@@ -599,10 +606,11 @@ def predict_and_report_regression(X, y, best_estimator, input_set):
     plt.close()
 
 
-def get_label_counts(y, y_train, y_test):
+def get_label_counts(y, y_train, y_test, y_massbank_val):
     print_binarized_label_count(y, "TOTAL")
     print_binarized_label_count(y_train, "TRAIN")
     print_binarized_label_count(y_test, "TEST")
+    print_binarized_label_count(y_massbank_val, "MassBank VALIDATION")
 
 
 class ElapsedTimeFormatter(logging.Formatter):

@@ -1,10 +1,10 @@
 import os
-
 import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+
 
 from ml.src.utils.helper import get_subset_aeids, get_validation_compounds
 from ml.src.pipeline.constants import FILE_FORMAT, \
@@ -176,29 +176,29 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
 def get_validation_set():
     print("Prepare validation set (massbank)")
     massbank_dtxsid_with_records_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_massbank_fingerprints.csv")
-    massbank_dtxsid_with_records_sirius_training_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"massbank_dtxsid_with_records_sirius_training.csv")
+    massbank_dtxsid_used_for_sirius_training_path = os.path.join(INPUT_VALIDATION_DIR_PATH, f"training_structures_for_positive_and_negative_ion_mode_dtxsids_unique.csv")
 
     massbank_dtxsid_with_records_df = pd.read_csv(massbank_dtxsid_with_records_path)
-    massbank_dtxsid_with_records_sirius_training_df = pd.read_csv(massbank_dtxsid_with_records_sirius_training_path)
+    massbank_dtxsid_used_for_sirius_training_df = pd.read_csv(massbank_dtxsid_used_for_sirius_training_path)
 
     # Filter compounds that have fingerprint from structure
-    compounds_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_without_fingerprint{FILE_FORMAT}")
-    compounds_tested_without_fingerprint = pd.read_parquet(compounds_path)['dsstox_substance_id']
-    massbank_dtxsid_with_records_df = massbank_dtxsid_with_records_df[~massbank_dtxsid_with_records_df['dsstox_substance_id'].isin(compounds_tested_without_fingerprint)]
-
+    compounds_tested_with_fingerprint_path = os.path.join(METADATA_SUBSET_DIR_PATH, f"compounds_tested_with_fingerprint{FILE_FORMAT}")
+    compounds_tested_with_fingerprint = pd.read_parquet(compounds_tested_with_fingerprint_path)['dsstox_substance_id']
+    massbank_dtxsid_with_records_df = massbank_dtxsid_with_records_df[massbank_dtxsid_with_records_df['dsstox_substance_id'].isin(compounds_tested_with_fingerprint)]
+    massbank_dtxsid_used_for_sirius_training_with_records_df = massbank_dtxsid_used_for_sirius_training_df[massbank_dtxsid_used_for_sirius_training_df['dsstox_substance_id'].isin(compounds_tested_with_fingerprint)]
     massbank_dtxsid_with_records = massbank_dtxsid_with_records_df['dsstox_substance_id']
-    massbank_dtxsid_with_records_sirius_training = massbank_dtxsid_with_records_sirius_training_df['dtxsid']
+    massbank_dtxsid_used_for_sirius_training_with_records = massbank_dtxsid_used_for_sirius_training_with_records_df['dsstox_substance_id']
 
     massbank_dtxsid_with_records = set(massbank_dtxsid_with_records)
-    massbank_dtxsid_with_records_sirius_training = set(massbank_dtxsid_with_records_sirius_training)
+    massbank_dtxsid_used_for_sirius_training_with_records = set(massbank_dtxsid_used_for_sirius_training_with_records)
 
-    compounds_intersection = massbank_dtxsid_with_records.intersection(massbank_dtxsid_with_records_sirius_training)
-    compounds_safe_for_validation = massbank_dtxsid_with_records.difference(massbank_dtxsid_with_records_sirius_training)
-    compounds_unsafe_for_validation = massbank_dtxsid_with_records_sirius_training
+    compounds_intersection = massbank_dtxsid_with_records.intersection(massbank_dtxsid_used_for_sirius_training_with_records)
+    compounds_safe_for_validation = massbank_dtxsid_with_records.difference(massbank_dtxsid_used_for_sirius_training_with_records)
+    compounds_unsafe_for_validation = massbank_dtxsid_used_for_sirius_training_with_records
 
     with open(os.path.join(MASSBANK_DIR_PATH, 'compounds_count.out'), 'w') as f:
         f.write(f"massbank_dtxsid_with_records: {len(massbank_dtxsid_with_records)} \n")
-        f.write(f"massbank_dtxsid_with_records_sirius_training: {len(massbank_dtxsid_with_records_sirius_training)} \n")
+        f.write(f"massbank_dtxsid_with_records_sirius_training: {len(massbank_dtxsid_used_for_sirius_training_with_records)} \n")
         f.write("\n")
         f.write(f"intersection: {len(compounds_intersection)} \n")
         f.write("\n")
