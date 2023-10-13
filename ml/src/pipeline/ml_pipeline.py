@@ -29,7 +29,7 @@ if __name__ == '__main__':
     aeids_target_assays = get_subset_aeids()['aeid']
 
     # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in [97]: #aeids_target_assays[:]:  # [97]: #
+    for aeid in aeids_target_assays[:]:  # [97]: #
         try:
             # Init the aeid folder
             init_aeid(aeid)
