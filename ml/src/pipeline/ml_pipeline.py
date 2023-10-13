@@ -13,15 +13,16 @@ from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config,
     build_preprocessing_pipeline, preprocess_all_sets, \
     predict_and_report_regression, predict_and_report_classification, load_model, init_estimator_pipeline, \
     get_feature_importance_if_applicable, init_preprocessing_pipeline, init_target_variable, init_validation_set, \
-    init_ml_algo, predict_and_report, get_total_elapsed_time
+    init_ml_algo, predict_and_report, get_total_elapsed_time, add_status_file
 
 from datetime import datetime
 import traceback
 from ml.src.utils.helper import get_subset_aeids
 
 if __name__ == '__main__':
+    
     # Get ML configuration
-    CONFIG, CONFIG_ESTIMATORS, START_TIME, LOG_PATH, LOGGER, TARGET_RUN_FOLDER = load_config()
+    CONFIG, START_TIME, LOGGER, TARGET_RUN_FOLDER = load_config()
 
     # Get fingerprint data
     fps_df = get_fingerprint_df()
@@ -41,9 +42,9 @@ if __name__ == '__main__':
             for aeid in [97]:  #aeids_target_assays[:]:  # [97]: #
                 try:
                     # Init aeid
-                    AEID = init_aeid(aeid)
+                    init_aeid(aeid)
                     LOGGER.info("#" * 60)
-                    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}")
+                    LOGGER.info(f"Start ML pipeline for assay ID: {aeid}")
                     LOGGER.info("#" * 60)
 
                     # Get assay data
@@ -64,8 +65,8 @@ if __name__ == '__main__':
                     preprocessing_pipelines = build_preprocessing_pipeline()
 
                     for preprocessing_pipeline in preprocessing_pipelines:
-                        PREPROCESSING_PIPELINE = init_preprocessing_pipeline(preprocessing_pipeline)
-                        LOGGER.info(f"Apply {PREPROCESSING_PIPELINE}..")
+                        init_preprocessing_pipeline(preprocessing_pipeline)
+                        
                         feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
                             preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train, X_test, y_test,
                                                 X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
@@ -113,11 +114,11 @@ if __name__ == '__main__':
                             LOGGER.info("Internal Validation Done.\n")
 
                             # Retrain the best estimator from GridSearchCV with train+test set for Massbank validation (unseen)
-                            LOGGER.info("Retrain on train+validation set")
+                            LOGGER.info("Retrain on train+test set")
                             X_combined = np.vstack((X_train, X_test))
                             y_combined = np.concatenate((y_train, y_test))
                             best_estimator.fit(X_combined, y_combined)
-                            save_model(best_estimator, "train_val")
+                            save_model(best_estimator, "train_test")
 
                             # Predict on the 1. "true Massbank" and 2. "SIRIUS predicted" validation set
                             LOGGER.info("Start MassBank Validation")
@@ -131,18 +132,17 @@ if __name__ == '__main__':
                             X_all = np.vstack((X_combined, X_massbank_val_from_structure))
                             y_all = np.concatenate((y_combined, y_massbank_val))
                             best_estimator.fit(X_all, y_all)
+                            save_model(best_estimator, "full_data")
 
                             # Get feature importances (only implemented for XGB and RandomForest)
+                            init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
                             feature_importances = get_feature_importance_if_applicable(best_estimator, feature_names)
 
-                            # Save the best estimator model, trained on all data available
-                            save_model(best_estimator, "all")
-
                             # Write a success flag file to the aeid folder
-                            path = os.path.join(LOG_PATH, f"{aeid}", "success.txt")
-                            with open(path, "w") as file:
-                                file.write("SUCCESS")
+                            init_aeid(aeid)  # re-init aeid's DUMP_FOLDER
+                            add_status_file("success.txt")
 
+                            # Time elapsed
                             elapsed = round((datetime.now() - start_time).total_seconds(), 2)
                             LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n\n\n")
 
@@ -151,9 +151,8 @@ if __name__ == '__main__':
                     report_exception(e, traceback_info, aeid)
 
                     # Write a failed flag file to the aeid folder
-                    path = os.path.join(LOG_PATH, f"{aeid}", "failed.txt")
-                    with open(path, "w") as file:
-                        file.write("FAILED")
+                    init_aeid(aeid)  # re-init aeid's DUMP_FOLDER
+                    add_status_file("failed.txt")
 
     # Calculate the total elapsed time
     LOGGER.info(f"Finished all: Total time >> { get_total_elapsed_time()}\n")

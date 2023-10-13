@@ -75,7 +75,7 @@ TARGET_RUN_FOLDER = ""
 
 
 def load_config():
-    global CONFIG, CONFIG_ESTIMATORS, START_TIME, LOG_PATH, TARGET_RUN_FOLDER
+    global CONFIG, START_TIME, LOG_PATH, TARGET_RUN_FOLDER
 
     with open(CONFIG_PATH, 'r') as file:
         config = yaml.safe_load(file)
@@ -95,7 +95,7 @@ def load_config():
         yaml.dump(CONFIG, file)
         LOGGER.info(f"Config file dumped to '{os.path.join(LOG_PATH, '.log')}'")
 
-    return CONFIG, CONFIG_ESTIMATORS, START_TIME, LOG_PATH, LOGGER, TARGET_RUN_FOLDER
+    return CONFIG, START_TIME, LOGGER, TARGET_RUN_FOLDER
 
 
 def get_assay_df():
@@ -827,6 +827,7 @@ def init_preprocessing_pipeline(preprocessing_pipeline):
     global PREPROCESSING_PIPELINE, DUMP_FOLDER
     preprocessing_pipeline_name = preprocessing_pipeline[-1].estimator.__class__.__name__
     PREPROCESSING_PIPELINE = f"Feature_Selection_{preprocessing_pipeline_name}"
+    LOGGER.info(f"Apply {PREPROCESSING_PIPELINE}..")
     DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
     return PREPROCESSING_PIPELINE
@@ -851,9 +852,17 @@ def init_validation_set(validation_set):
     return VALIDATION_SET
 
 
+def add_status_file(status):
+    path = os.path.join(DUMP_FOLDER, f"{status}.txt")
+    with open(path, "w") as file:
+        file.write(status)
+
+
 def get_total_elapsed_time():
     elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
     hours, remainder = divmod(elapsed_seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
     return elapsed_formatted
+
+
