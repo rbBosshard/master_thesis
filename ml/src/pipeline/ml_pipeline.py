@@ -11,8 +11,9 @@ from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config,
     split_data, \
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, get_label_counts, report_exception, save_model, \
     build_preprocessing_pipeline, preprocess_all_sets, \
-    predict_and_report_regression, predict_and_report_classification, load_model, init_estimator, \
-    get_feature_importance_if_applicable, init_preprocessing_pipeline
+    predict_and_report_regression, predict_and_report_classification, load_model, init_estimator_pipeline, \
+    get_feature_importance_if_applicable, init_preprocessing_pipeline, init_target_variable, init_validation_set, \
+    init_ml_algo, predict_and_report, get_total_elapsed_time
 
 from datetime import datetime
 import traceback
@@ -28,138 +29,126 @@ if __name__ == '__main__':
     # Get assay endpoint ids from subset considered for ML
     aeids_target_assays = get_subset_aeids()['aeid']
 
-    # Iterate through aeids_target_assays and launch each iteration in a separate process
-    for aeid in aeids_target_assays[:]:  # [97]: #
-        try:
-            # Init the aeid folder
-            init_aeid(aeid)
+    # Iterate through target variables (hitcall, hitcall_c)
+    for target_variable in CONFIG['target_variables']:
+        init_target_variable(target_variable)
 
-            # Get assay data
-            assay_df = get_assay_df()
+        # Iterate through ML algorithms (binary classification, regression)
+        for ml_algorithm in CONFIG['ml_algorithms']:
+            ML_ALGORITHM = init_ml_algo(ml_algorithm)
 
-            # Merge chemical ids in both dataframes
-            df = merge_assay_and_fingerprint_df(assay_df, fps_df)
+            # Iterate through aeids_target_assays and launch each iteration in a separate process
+            for aeid in [97]:  #aeids_target_assays[:]:  # [97]: #
+                try:
+                    # Init/allocate aeid
+                    init_aeid(aeid)
 
-            # Partition data into X and y and respective massbank validation set (massbank validation set evaluates generalization to unseen data from spectral data)
-            feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
+                    # Get assay data
+                    assay_df = get_assay_df()
 
-            # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
-            assess_similarity(X_massbank_val_from_structure, X_massbank_val_from_sirius)
+                    # Merge chemical ids in both dataframes
+                    df = merge_assay_and_fingerprint_df(assay_df, fps_df)
 
-            # Split ML data into train test set (test set evaluates generalization to unseen data)
-            X_train, y_train, X_test, y_test = split_data(X, y)
+                    # Partition data into X and y and respective massbank validation set (massbank validation set evaluates generalization to unseen data from spectral data)
+                    feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = partition_data(df)
 
-            preprocessing_pipelines = build_preprocessing_pipeline()
+                    # Calculate the similarity between the two massbank validation sets, true and predicted fingerprints
+                    assess_similarity(X_massbank_val_from_structure, X_massbank_val_from_sirius)
 
-            for preprocessing_pipeline in preprocessing_pipelines:
-                preprocessing_pipeline_identifier = preprocessing_pipeline[-1].estimator.__class__.__name__
-                LOGGER.info(f"Apply {preprocessing_pipeline_identifier}")
-                init_preprocessing_pipeline(preprocessing_pipeline_identifier)
-                feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
-                    preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train, X_test, y_test,
-                                        X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
+                    # Split ML data into train test set (test set evaluates generalization to unseen data)
+                    X_train, y_train, X_test, y_test = split_data(X, y)
 
-                # Apply oversampling if configured
-                X_train, y_train = handle_oversampling(X_train, y_train)
+                    preprocessing_pipelines = build_preprocessing_pipeline()
 
-                # Get the label counts
-                get_label_counts(y, y_train, y_test, y_massbank_val)
+                    for preprocessing_pipeline in preprocessing_pipelines:
+                        PREPROCESSING_PIPELINE = init_preprocessing_pipeline(preprocessing_pipeline)
+                        LOGGER.info(f"Apply {PREPROCESSING_PIPELINE}..")
+                        feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
+                            preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train, X_test, y_test,
+                                                X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
 
-                # Build for each estimator a pipeline according to the configurations in the config file
-                for estimator in CONFIG_ESTIMATORS['estimators']:
-                    start_time = datetime.now()
+                        # Apply oversampling if configured
+                        X_train, y_train = handle_oversampling(X_train, y_train)
 
-                    # Init a new folder for this estimator
-                    init_estimator(estimator)
+                        # Get the label counts
+                        get_label_counts(y, y_train, y_test, y_massbank_val)
 
-                    # Training
-                    if not CONFIG['apply']['only_predict']:
+                        # Build for each estimator a pipeline according to the configurations in the config file
+                        for estimator in CONFIG_ESTIMATORS['estimators']:
+                            start_time = datetime.now()
 
-                        # Build the pipeline for the current estimator with the specified parameter grid
-                        pipeline = build_pipeline(estimator)
+                            # Init a new folder for this estimator
+                            ESTIMATOR_PIPELINE = init_estimator_pipeline(estimator)
 
-                        # Perform grid search (Note: CV on TRAINING set with RepeatedStratifiedKFold)
-                        grid_search = grid_search_cv(X_train, y_train, estimator, pipeline)
+                            # Training #
+                            if not CONFIG['apply']['only_predict']:
+                                # Build the pipeline for the current estimator with the specified parameter grid
+                                pipeline = build_pipeline(estimator)
 
-                        # Save best estimator (estimator with best performing parameters from grid search)
-                        best_estimator = grid_search.best_estimator_
-                    else:
-                        estimator_log_folder = os.path.join(TARGET_RUN_FOLDER, f"{aeid}", estimator['name'])
-                        best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_train.joblib")
-                        best_estimator = load_model(best_estimator_path, "train")
+                                # Perform grid search (Note: CV on TRAINING set with RepeatedStratifiedKFold)
+                                LOGGER.info("Start Grid Search Cross-Validation..")
+                                grid_search = grid_search_cv(X_train, y_train, estimator, pipeline)
+                                LOGGER.info("Training Done.\n")
 
-                    save_model(best_estimator, "train")
+                                # Save best estimator (estimator with best performing parameters from grid search)
+                                best_estimator = grid_search.best_estimator_
+                            else:
+                                estimator_log_folder = os.path.join(TARGET_RUN_FOLDER, f"{aeid}", estimator['name'])
+                                best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_train.joblib")
+                                best_estimator = load_model(best_estimator_path, "train")
 
-                    # Prediction
-                    # Predict on the test set with the best estimator (X_test, y_test is unseen)
-                    if 'reg' in CONFIG['ml_algorithm']:
-                        predict_and_report_regression(X_test, y_test, best_estimator, "validation")
-                    else:
-                        predict_and_report_classification(X_test, y_test, best_estimator, "validation")
+                            save_model(best_estimator, "train")
 
-                    # Concatenate training and test data
-                    X_combined = np.vstack((X_train, X_test))
-                    y_combined = np.concatenate((y_train, y_test))
+                            # Validation #
+                            # Predict on the test set with the best estimator (X_test, y_test is unseen)
+                            LOGGER.info("Start Internal Validation..")
+                            init_validation_set("internal_validation")
+                            predict_and_report(X_test, y_test, best_estimator)
+                            LOGGER.info("*" * 50)
+                            LOGGER.info("Internal Validation Done.\n")
 
-                    # Retrain the best estimator from the grid search with train+test data for Massbank validation (unseen)
-                    best_estimator.fit(X_combined, y_combined)
-                    save_model(best_estimator, "train_val")
+                            # Retrain the best estimator from GridSearchCV with train+test set for Massbank validation (unseen)
+                            LOGGER.info("Retrain on train+validation set")
+                            X_combined = np.vstack((X_train, X_test))
+                            y_combined = np.concatenate((y_train, y_test))
+                            best_estimator.fit(X_combined, y_combined)
+                            save_model(best_estimator, "train_val")
 
-                    if 'reg' in CONFIG['ml_algorithm']:
-                        # Predict on the true Massbank validation set with the best estimator
-                        predict_and_report_regression(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
-                        # Predict on the SIRIUS predicted Massbank validation set with the best estimator
-                        predict_and_report_regression(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
-                        pass
-                    else:
-                        # Predict on the true Massbank validation set with the best estimator
-                        predict_and_report_classification(X_massbank_val_from_structure, y_massbank_val, best_estimator, "massbank_validation_from_structure")
-                        # Predict on the SIRIUS predicted Massbank validation set with the best estimator
-                        predict_and_report_classification(X_massbank_val_from_sirius, y_massbank_val, best_estimator, "massbank_validation_from_sirius")
-                        pass
+                            # Predict on the 1. "true Massbank" and 2. "SIRIUS predicted" validation set
+                            LOGGER.info("Start MassBank Validation")
+                            massbank_validation_set_names = ["massbank_validation_from_structure", "massbank_validation_from_sirius"]
+                            for val in massbank_validation_set_names:
+                                init_validation_set(val)
+                                predict_and_report(X_massbank_val_from_structure, y_massbank_val, best_estimator)
+                            LOGGER.info("MassBank Validation Done.\n")
 
-                    # Concatenate combined data (train + test) and true Massbank validation data
-                    X_all = np.vstack((X_combined, X_massbank_val_from_structure))
-                    y_all = np.concatenate((y_combined, y_massbank_val))
+                            # Retrain the estimator on full data for future predictions
+                            X_all = np.vstack((X_combined, X_massbank_val_from_structure))
+                            y_all = np.concatenate((y_combined, y_massbank_val))
+                            best_estimator.fit(X_all, y_all)
 
-                    # Retrain the best estimator from the grid search with all data available for later inference
-                    best_estimator.fit(X_all, y_all)
+                            # Get feature importances (only implemented for XGB and RandomForest)
+                            feature_importances = get_feature_importance_if_applicable(best_estimator, feature_names)
 
-                    # Get feature importances (only implemented for XGB and RandomForest)
-                    feature_importances = get_feature_importance_if_applicable(best_estimator, feature_names)
+                            # Save the best estimator model, trained on all data available
+                            save_model(best_estimator, "all")
 
-                    # Save the best estimator model, trained on all data available
-                    save_model(best_estimator, "all")
+                            # Write a success flag file to the aeid folder
+                            path = os.path.join(LOG_PATH, f"{aeid}", "success.txt")
+                            with open(path, "w") as file:
+                                file.write("SUCCESS")
 
-                    elapsed = round((datetime.now() - start_time).total_seconds(), 2)
-                    LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n{'=' * 100}\n")
+                            elapsed = round((datetime.now() - start_time).total_seconds(), 2)
+                            LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n\n\n")
 
-                    # Calculate the elapsed time
-                    elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
-                    hours, remainder = divmod(elapsed_seconds, 3600)
-                    minutes, seconds = divmod(remainder, 60)
-                    elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+                except Exception as e:
+                    traceback_info = traceback.format_exc()
+                    report_exception(e, traceback_info, aeid)
 
-                    # Write a success flag file to the aeid folder
-                    path = os.path.join(LOG_PATH, f"{aeid}", "success.txt")
+                    # Write a failed flag file to the aeid folder
+                    path = os.path.join(LOG_PATH, f"{aeid}", "failed.txt")
                     with open(path, "w") as file:
-                        file.write("SUCCESS")
+                        file.write("FAILED")
 
-                    LOGGER.info(f"Finished {estimator}: Total time >> {elapsed_formatted}\n")
-
-        except Exception as e:
-            traceback_info = traceback.format_exc()
-            report_exception(e, traceback_info, aeid)
-            
-            # Write a failed flag file to the aeid folder
-            path = os.path.join(LOG_PATH, f"{aeid}", "failed.txt")
-            with open(path, "w") as file:
-                file.write("FAILED")
-
-
-    # Calculate the elapsed time
-    elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
-    hours, remainder = divmod(elapsed_seconds, 3600)
-    minutes, seconds = divmod(remainder, 60)
-    elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
-    LOGGER.info(f"Finished all: Total time >> {elapsed_formatted}\n")
+    # Calculate the total elapsed time
+    LOGGER.info(f"Finished all: Total time >> { get_total_elapsed_time()}\n")

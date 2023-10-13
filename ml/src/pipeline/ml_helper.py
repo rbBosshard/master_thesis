@@ -39,6 +39,8 @@ from sklearn.decomposition import NMF
 
 import matplotlib
 
+from ml.src.pipeline.ml_pipeline import START_TIME
+
 matplotlib.use('Agg')
 import warnings
 
@@ -47,16 +49,28 @@ import warnings
 
 from ml.src.pipeline.constants import CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, \
     INPUT_FINGERPRINTS_DIR_PATH, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH, \
-    CONFIG_REGRESSORS_PATH
+    CONFIG_REGRESSORS_PATH, CONFIG_DIR_PATH
 
 CONFIG = {}
 CONFIG_ESTIMATORS = {}
 START_TIME = datetime.now()
 LOGGER = logging.getLogger(__name__)
+LOGGER_FOLDER = ""
+
 LOG_PATH = ""
-AEID = 0
-PREPROCESSING = ""
-ESTIMATOR_NAME = ""
+RUN_FOLDER = ""
+TARGET_VARIABLE = ""
+ML_ALGORITHM = ""
+AEID = ""
+PREPROCESSING_PIPELINE = ""
+ESTIMATOR_PIPELINE = ""
+VALIDATION_SET = ""
+CLASSIFICATION_THRESHOLD = ""
+
+DUMP_FOLDER = ""
+
+PREPROCESSING_PIPELINE = ""
+ESTIMATOR_PIPELINE = ""
 TARGET_RUN_FOLDER = ""
 
 
@@ -69,14 +83,9 @@ def load_config():
             import warnings
             warnings.filterwarnings("ignore")
 
-    config_estimators_path = CONFIG_REGRESSORS_PATH if 'reg' in config['algo'] else CONFIG_CLASSIFIERS_PATH
-    with open(config_estimators_path, 'r') as file:
-        config_estimators = yaml.safe_load(file)
-
     CONFIG = config
-    CONFIG_ESTIMATORS = config_estimators
     START_TIME = datetime.now()
-    LOGGER = init_logger(CONFIG)
+    LOGGER = init_logger()
 
     # Get model folder of old run (if needed and specified in config: only_predict: 1)
     get_load_from_model_folder(rank=config['load_from_model']['rank'])
@@ -84,22 +93,12 @@ def load_config():
     log_config_path = os.path.join(LOG_PATH, '.log', "config.yaml")
     with open(log_config_path, 'w') as file:
         yaml.dump(CONFIG, file)
-    log_config_estimators_path = os.path.join(LOG_PATH, '.log', "config_estimators.yaml")
-    with open(log_config_estimators_path, 'w') as file:
-        yaml.dump(CONFIG_ESTIMATORS, file)
-    
-    LOGGER.info(f"Config files dumped to '{os.path.join(LOG_PATH, '.log')}'")
+        LOGGER.info(f"Config file dumped to '{os.path.join(LOG_PATH, '.log')}'")
 
     return CONFIG, CONFIG_ESTIMATORS, START_TIME, LOG_PATH, LOGGER, TARGET_RUN_FOLDER
 
 
-def set_aeid(aeid):
-    global AEID
-    AEID = aeid
-
-
 def get_assay_df():
-    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
     assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
 
@@ -108,8 +107,7 @@ def get_assay_df():
         assay_df = assay_df[omit_compound_mask]
         LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
 
-    hitcall = CONFIG['apply']['hitcall']
-    assay_df = assay_df[['dsstox_substance_id', hitcall, 'ac50']]
+    assay_df = assay_df[['dsstox_substance_id', TARGET_VARIABLE]]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
 
@@ -118,7 +116,7 @@ def get_fingerprint_df():
     fps_file_path = os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"{CONFIG['fingerprint_file']}{FILE_FORMAT}")
     fps_df = pd.read_parquet(fps_file_path)
     LOGGER.info(f"Fingerprint dataframe: {fps_df.shape[0]} chemicals, {fps_df.iloc[:, 1:].shape[1]} binary features")
-    LOGGER.info("%" * 60 + "\n")
+    LOGGER.info("%" * 70 + "\n")
     return fps_df
 
 
@@ -131,13 +129,14 @@ def merge_assay_and_fingerprint_df(assay_df, fps_df):
 
 
 def split_data(X, y):
+    stratifiy = None if 'reg' in CONFIG['algo'] else y
     # Split the data into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(X,
                                                         y,
                                                         test_size=CONFIG['train_test_split_ratio'],
                                                         random_state=CONFIG['random_state'],
                                                         shuffle=True,  # shuffle the data before splitting (default)
-                                                        # stratify=y # stratify to ensure the same class distribution in the train and test sets
+                                                        stratify=stratifiy # stratify to ensure the same class distribution in the train and test sets
                                                         )
 
     return X_train, y_train, X_test, y_test
@@ -177,24 +176,22 @@ def partition_data(df):
     assert is_distinct
 
     # Partition the data into features (X) and labels (y)
-    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and hitcall and ac50)
-    feature_names = training_df.columns[3:]
-
-    X = training_df.iloc[:, 3:]
-    X_massbank_val_from_structure = massbank_val_true_df.iloc[:, 3:]
+    # Select all columns as fingerprint features, starting from the third column (skipping dtxsid and target_variable)
+    feature_names = training_df.columns[2:]
+    X = training_df.iloc[:, 2:]
+    X_massbank_val_from_structure = massbank_val_true_df.iloc[:, 2:]
+    # SIRIUS validation set has only dtxsid and fingerprints. It looks up the target variable from structure companion
     X_massbank_val_from_sirius = massbank_val_pred_df.iloc[:, 1:]
-
-    hitcall = CONFIG['apply']['hitcall']
 
     # Distinguish between regression and binary classification
     if 'reg' in CONFIG['algo']:
-        y = training_df[hitcall]
-        y_massbank_val = massbank_val_true_df[hitcall]
+        y = training_df[TARGET_VARIABLE]
+        y_massbank_val = massbank_val_true_df[TARGET_VARIABLE]
     else:  # binary classification
         t = CONFIG['activity_threshold']
-        LOGGER.info(f"Activity threshold: ({hitcall} >= {t} is active)\n")
-        y = (training_df[hitcall] >= t).astype(np.uint8)
-        y_massbank_val = (massbank_val_true_df[hitcall] >= t).astype(np.uint8)
+        LOGGER.info(f"Activity threshold: ({TARGET_VARIABLE} >= {t} is active)\n")
+        y = (training_df[TARGET_VARIABLE] >= t).astype(np.uint8)
+        y_massbank_val = (massbank_val_true_df[TARGET_VARIABLE] >= t).astype(np.uint8)
 
     return feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
@@ -330,21 +327,10 @@ def build_pipeline(estimator):
         step_instance = globals()[step_name](**step_args)  # dynmically create an instance of the step
         pipeline_steps.append((step_name, step_instance))
 
-
     pipeline = Pipeline(pipeline_steps)
-    LOGGER.info(f"Built Pipeline for {ESTIMATOR_NAME}")
+    LOGGER.info("=" * 100 + "\n")
+    LOGGER.info(f"Built Pipeline for {ESTIMATOR_PIPELINE}")
     return pipeline
-
-
-def init_aeid(aeid):
-    set_aeid(aeid)
-    os.makedirs(os.path.join(LOG_PATH, f"{AEID}"), exist_ok=True)
-
-
-def init_estimator(estimator):
-    global ESTIMATOR_NAME
-    ESTIMATOR_NAME = estimator['name']
-    os.makedirs(os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME), exist_ok=True)
 
 
 def build_param_grid(estimator_steps):
@@ -393,12 +379,12 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
 
     LOGGER.info(f"{estimator['name']}: GridSearchCV Results:")
     best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
-    LOGGER.info(f"Best params: {best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}\n")
+    LOGGER.info(f"Best params: {best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}")
 
     return grid_search_cv_fitted
 
 
-def find_optimal_threshold(y, y_pred_proba, input_set, target_tpr, target_tnr, default_threshold):
+def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_tnr, default_threshold):
     # Tune the classification threshold for the classifier, used to map probabilities to class labels
     fpr, tpr, thresholds = roc_curve(y, y_pred_proba)
     tnr = 1 - fpr
@@ -436,7 +422,7 @@ def find_optimal_threshold(y, y_pred_proba, input_set, target_tpr, target_tnr, d
     # Classifier
     plt.scatter(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], s=5, alpha=0.8, color='black', zorder=2)
     plt.plot(df_fpr_tpr['FPR'], df_fpr_tpr['TPR'], linestyle='-', alpha=0.8, color='black', zorder=2,
-             label=f'ROC Curve: {ESTIMATOR_NAME}')
+             label=f'ROC Curve: {ESTIMATOR_PIPELINE}')
 
     # No-Skill classifier
     plt.plot([0, 1], [0, 1], linestyle='--', color='gray', alpha=0.8,
@@ -473,35 +459,35 @@ def find_optimal_threshold(y, y_pred_proba, input_set, target_tpr, target_tnr, d
     plt.xticks(fontsize=fontsize-1)
     plt.yticks(fontsize=fontsize-1)
     plt.suptitle(f"ROC Curve & Classification Thresholds", fontsize=fontsize+4)
-    plt.title(f"aeid: {AEID}, {ESTIMATOR_NAME}", fontsize=fontsize+3)
+    plt.title(f"aeid: {AEID}, {ESTIMATOR_PIPELINE}", fontsize=fontsize + 3)
 
     plt.grid()
     plt.tight_layout()
 
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME)
+    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
 
-    path = os.path.join(folder, input_set, f"roc_curve.svg")
+    path = os.path.join(folder, VALIDATION_SET, f"roc_curve.svg")
     plt.savefig(path)
     plt.close("all")
 
-    path = os.path.join(folder, f"fixed_threshold_tpr_{input_set}.joblib")
+    path = os.path.join(folder, f"fixed_threshold_tpr_{VALIDATION_SET}.joblib")
     joblib.dump(fixed_threshold_tpr, path)
 
-    path = os.path.join(folder, f"fixed_threshold_tnr_{input_set}.joblib")
+    path = os.path.join(folder, f"fixed_threshold_tnr_{VALIDATION_SET}.joblib")
     joblib.dump(fixed_threshold_tnr, path)
 
-    path = os.path.join(folder, f"optimal_threshold_{input_set}.joblib")
+    path = os.path.join(folder, f"optimal_threshold_{VALIDATION_SET}.joblib")
     joblib.dump(optimal_threshold, path)
 
     LOGGER.info(f"Optimal and fixed threshold saved.")
     return optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr
 
 
-def predict_and_report_classification(X, y, best_estimator, input_set):
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME, input_set)
+def predict_and_report_classification(X, y, best_estimator):
+    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE, VALIDATION_SET)
     os.makedirs(folder, exist_ok=True)
-    LOGGER.info(f"\n")
-    LOGGER.info(f"Predict ({input_set})")
+    LOGGER.info("+" * 60)
+    LOGGER.info(f"Predict ({VALIDATION_SET})")
 
     # Predict the probabilities (using validation set)
     y_pred_proba = best_estimator.predict_proba(X)[:, 1]
@@ -519,7 +505,7 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
         target_tnr = CONFIG['threshold_moving']['target_tnr']
 
         optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr = \
-            find_optimal_threshold(y, y_pred_proba, input_set, target_tpr=target_tpr, target_tnr=target_tnr,
+            find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr=target_tpr, target_tnr=target_tnr,
                                    default_threshold=default_threshold)
 
         LOGGER.info(f"Optimal threshold: {optimal_threshold}")
@@ -550,7 +536,7 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
     labels = [True, False]
 
     for i, y_pred in enumerate(y_preds):
-        LOGGER.info("." * 50)
+        LOGGER.info("." * 40)
         LOGGER.info(f"Predict {y_preds_names[i]}")
         name = y_preds_names[i]
         desc = y_preds_descs[i]
@@ -573,8 +559,6 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
 
         plt.figure(figsize=(8, 8))
 
-        # cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
-        # sns.heatmap(cm_df, annot=True, fmt='d', cmap='Blues', cbar=False)
         cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
         cm_display.plot(cmap=cmap, colorbar=False)
 
@@ -582,22 +566,27 @@ def predict_and_report_classification(X, y, best_estimator, input_set):
         neg_count = cm[1, 0] + cm[1, 1]
 
         plt.suptitle(f"Confusion Matrix: {desc} ", fontsize=10)
-        plt.title(f"aeid: {AEID}, {ESTIMATOR_NAME}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
+        plt.title(f"aeid: {AEID}, {ESTIMATOR_PIPELINE}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
         path = os.path.join(folder, f"confusion_matrix_{name}.svg")
         plt.savefig(path, format='svg')
         plt.close("all")
 
-        # except Exception as e:
-        #     traceback_info = traceback.format_exc()
-        #     report_exception(e, traceback_info, ESTIMATOR_NAME)
-        #     plt.close("all")
+
+def predict_and_report(X, y, best_estimator):
+    if ML_ALGORITHM == 'classification':
+        predict_and_report_classification(X, y, best_estimator)
+    elif ML_ALGORITHM == 'regression':
+        predict_and_report_regression(X, y, best_estimator)
+    else:
+        raise Exception(f"{ML_ALGORITHM} not supported.")
+    LOGGER.info("*" * 50)
 
 
-def predict_and_report_regression(X, y, best_estimator, input_set):
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME, input_set)
-    os.makedirs(os.path.join(folder, input_set), exist_ok=True)
+def predict_and_report_regression(X, y, best_estimator):
+    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE, VALIDATION_SET)
+    os.makedirs(os.path.join(folder, VALIDATION_SET), exist_ok=True)
     LOGGER.info("\n")
-    LOGGER.info(f"Predict ({input_set})")
+    LOGGER.info(f"Predict ({VALIDATION_SET})")
 
     y_pred = best_estimator.predict(X)
 
@@ -669,26 +658,7 @@ def create_empty_log_file(filename):
         pass
 
 
-def init_logger(CONFIG):
-    global LOGGER, LOG_PATH
-    LOG_PATH = os.path.join(LOG_DIR_PATH, CONFIG[''], f"{CONFIG['algo']}", f"{get_timestamp(START_TIME)}")
-    os.makedirs(LOG_PATH, exist_ok=True)
-    os.makedirs(os.path.join(LOG_PATH, '.log'), exist_ok=True)
-    log_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.log")
-    error_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.error")
-    create_empty_log_file(log_filename)
-    create_empty_log_file(error_filename)
 
-    file_handler = logging.FileHandler(log_filename, encoding='utf-8')
-    console_handler = logging.StreamHandler(stream=sys.stdout)
-    formatter = ElapsedTimeFormatter('%(message)s')
-    LOGGER.setLevel(logging.INFO)
-    file_handler.setFormatter(formatter)
-    console_handler.setFormatter(formatter)
-    LOGGER.addHandler(file_handler)
-    LOGGER.addHandler(console_handler)
-
-    return LOGGER
 
 
 def get_timestamp(time_point):
@@ -712,7 +682,7 @@ def load_model(path, pipeline):
 
 
 def save_model(best_estimator, fit_set):
-    estimator_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME)
+    estimator_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
     best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_{fit_set}.joblib")
     joblib.dump(best_estimator, best_estimator_path, compress=3)
     # best_params_path = os.path.join(estimator_log_folder, f"best_params_{fit_set}.joblib")
@@ -725,7 +695,7 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
     selected_feature_names = feature_names.copy()
     # Feature selection fitted on train set. Transform all sets with the same feature selection
     if CONFIG['apply']['only_predict']:
-        folder = os.path.join(TARGET_RUN_FOLDER, f"{AEID}", PREPROCESSING)
+        folder = os.path.join(TARGET_RUN_FOLDER, f"{AEID}", PREPROCESSING_PIPELINE)
         preprocessing_model_path = os.path.join(folder, f"preprocessing_model.joblib")
         preprocessing_pipeline = load_model(preprocessing_model_path, "preprocessing")
 
@@ -739,7 +709,7 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
         selected_feature_indices = preprocessing_pipeline[-1].get_support()
         selected_feature_names = [feature_names[i] for i, selected in enumerate(selected_feature_indices) if selected]
         selected_feature_df = pd.DataFrame(selected_feature_names, columns=['feature'])
-        selected_feature_df.to_csv(os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, "selected_features.csv"), index=False)
+        selected_feature_df.to_csv(os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, "selected_features.csv"), index=False)
 
         # Transform other sets (e.g. subselect feature columns that were selected by the feature selection model)
         X_test = preprocessing_pipeline.transform(X_test)
@@ -753,7 +723,7 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
             raise RuntimeError("Error in feature selection")
 
     # Save preprocessing_model
-    preprocessing_model_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING)
+    preprocessing_model_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE)
     os.makedirs(preprocessing_model_log_folder, exist_ok=True)
     preprocessing_model_path = os.path.join(preprocessing_model_log_folder, f"preprocessing_model.joblib")
     joblib.dump(preprocessing_pipeline, preprocessing_model_path, compress=3)
@@ -768,7 +738,7 @@ def folder_name_to_datetime(folder_name):
 
 def get_load_from_model_folder(rank=1):
     global TARGET_RUN_FOLDER
-    logs_folder = os.path.join(LOG_DIR_PATH, f"{CONFIG['algo']}")
+    logs_folder = os.path.join(LOG_DIR_PATH, TARGET_VARIABLE, CONFIG['algo'])
     subfolders = [f for f in os.listdir(logs_folder)]
     sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
     target_run_folder = sorted_subfolders[rank] if CONFIG['load_from_model']['use_last_run'] else CONFIG['load_from_model']['target_run']
@@ -782,30 +752,112 @@ def get_feature_importance_if_applicable(best_estimator, feature_names):
         importance_df = pd.DataFrame({'feature': feature_names, 'importances': feature_importances})
         importance_df = importance_df.sort_values(by='importances', ascending=False)
 
-        folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING, ESTIMATOR_NAME)
+        folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
         path = os.path.join(folder, f'sorted_feature_importances.csv')
         importance_df.to_csv(path, index=False)
 
-        ##Select the top n or less features
-        # top_n = min(CONFIG['feature_selection']['top_n_feature_importances_to_plot'], importance_df.shape[0])
-        # top_importance_df = importance_df.head(top_n)
-        # plt.figure(figsize=(12, 6))
-        # sns.barplot(x='importances', y='feature', data=top_importance_df, palette='viridis')
-        # plt.title(f'Feature Importance: {ESTIMATOR_NAME}')
-        # plt.xlabel('Importance Score')
-        # plt.ylabel('Features')
-        # path = os.path.join(folder, f'{top_n}_feature_importances.svg')
-        # plt.savefig(path, format='svg', bbox_inches='tight')
-        # plt.close("all")
     except Exception as e:
         feature_importances = None
-        LOGGER.error(f"Could not get feature importances for {ESTIMATOR_NAME}, {e}")
+        LOGGER.error(f"Feature Importance not implemented for {ESTIMATOR_PIPELINE}")
     return feature_importances
 
 
-def init_preprocessing_pipeline(preprocessing_pipeline_identifier):
-    global PREPROCESSING
-    PREPROCESSING = f"Feature_Selection_{preprocessing_pipeline_identifier}"
-    preprocessing_pipeline_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING)
-    os.makedirs(preprocessing_pipeline_log_folder, exist_ok=True)
-    
+def init_logger():
+    global LOGGER, LOG_PATH, LOGGER_FOLDER
+    init_run_folder()
+    LOG_PATH = os.path.join(LOG_DIR_PATH, RUN_FOLDER)
+    LOGGER_FOLDER = os.path.join(LOG_PATH, '.log')
+    os.makedirs(LOGGER_FOLDER, exist_ok=True)
+    log_filename = os.path.join(LOGGER_FOLDER, "ml_pipeline.log")
+    error_filename = os.path.join(LOGGER_FOLDER, "ml_pipeline.error")
+    create_empty_log_file(log_filename)
+    create_empty_log_file(error_filename)
+
+    file_handler = logging.FileHandler(log_filename, encoding='utf-8')
+    console_handler = logging.StreamHandler(stream=sys.stdout)
+    formatter = ElapsedTimeFormatter('%(message)s')
+    LOGGER.setLevel(logging.INFO)
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+    LOGGER.addHandler(file_handler)
+    LOGGER.addHandler(console_handler)
+    return LOGGER
+
+
+def init_run_folder():
+    global RUN_FOLDER, DUMP_FOLDER
+    RUN_FOLDER = get_timestamp(START_TIME)
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+    return RUN_FOLDER
+
+
+def init_target_variable(target_variable):
+    global TARGET_VARIABLE, DUMP_FOLDER
+    TARGET_VARIABLE = target_variable
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+    return TARGET_VARIABLE
+
+
+def init_ml_algo(ml_algorithm):
+    global ML_ALGORITHM, DUMP_FOLDER, CONFIG_ESTIMATORS
+    ML_ALGORITHM = ml_algorithm
+
+    with open(os.path.join(CONFIG_DIR_PATH, f'config_{ML_ALGORITHM}.yaml'), 'r') as file:
+        CONFIG_ESTIMATORS = yaml.safe_load(file)
+
+    with open(os.path.join(LOGGER_FOLDER, f'config_{ML_ALGORITHM}.yaml'), 'w') as file:
+        yaml.dump(CONFIG_ESTIMATORS, file)
+
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+
+    return ML_ALGORITHM
+
+
+def init_aeid(aeid):
+    global AEID, DUMP_FOLDER
+    AEID = str(aeid)
+    LOGGER.info("#" * 60)
+    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}")
+    LOGGER.info("#" * 60)
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+
+
+def init_preprocessing_pipeline(preprocessing_pipeline):
+    global PREPROCESSING_PIPELINE, DUMP_FOLDER
+    preprocessing_pipeline_name = preprocessing_pipeline[-1].estimator.__class__.__name__
+    PREPROCESSING_PIPELINE = f"Feature_Selection_{preprocessing_pipeline_name}"
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+    return PREPROCESSING_PIPELINE
+
+
+def init_estimator_pipeline(estimator):
+    global ESTIMATOR_PIPELINE, DUMP_FOLDER
+    ESTIMATOR_PIPELINE = estimator['name']
+    LOGGER.info(f"Apply {ESTIMATOR_PIPELINE}..")
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
+                               ESTIMATOR_PIPELINE)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+    return ESTIMATOR_PIPELINE
+
+
+def init_validation_set(validation_set):
+    global VALIDATION_SET, DUMP_FOLDER
+    VALIDATION_SET = validation_set
+    LOGGER.info(f"Validation Set: {VALIDATION_SET}")
+    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
+                               ESTIMATOR_PIPELINE, VALIDATION_SET)
+    os.makedirs(DUMP_FOLDER, exist_ok=True)
+    return VALIDATION_SET
+
+
+def get_total_elapsed_time():
+    elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
+    hours, remainder = divmod(elapsed_seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+    return elapsed_formatted

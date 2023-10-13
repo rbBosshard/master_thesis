@@ -1,5 +1,9 @@
+import base64
 import os
+from datetime import datetime
+
 import requests
+import streamlit as st
 from bs4 import BeautifulSoup
 import numpy as np
 import pandas as pd
@@ -219,3 +223,27 @@ def csv_to_parquet_converter():
     unique_chemicals = sirius_fingerprints['dsstox_substance_id'].unique()
     with open(os.path.join(INPUT_FINGERPRINTS_DIR_PATH, f"sirius_fingerprints_compounds.out"), 'w') as f:
         f.write('\n'.join(list(filter(lambda x: x is not None, unique_chemicals))))
+
+
+def folder_name_to_datetime(folder_name):
+    return datetime.strptime(folder_name, '%Y-%m-%d_%H-%M-%S')
+
+
+def get_verbose_name(t, default_threshold):
+    threshold_mapping = {
+                    'default': 'default_threshold',
+                    'optimal': 'optimal_threshold',
+                    'tpr': 'fixed_threshold_tpr',
+                    'tnr': 'fixed_threshold_tnr'
+    }
+    return threshold_mapping.get(t)
+
+
+def render_svg(svg):
+    """
+    Renders the given svg string.
+    https://gist.github.com/treuille/8b9cbfec270f7cda44c5fc398361b3b1
+    """
+    b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
+    html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
+    st.write(html, unsafe_allow_html=True)

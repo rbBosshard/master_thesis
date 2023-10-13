@@ -1,23 +1,19 @@
 import os
 import pandas as pd
-from datetime import datetime
 import json
 
-from ml.src.pipeline.constants import LOG_DIR_PATH, METADATA_SUBSET_DIR_PATH, FILE_FORMAT, OUTPUT_DIR_PATH
+from ml.src.pipeline.constants import LOG_DIR_PATH, OUTPUT_DIR_PATH
+from ml.src.utils.helper import folder_name_to_datetime
 
-MOST_RECENT = 1
-TARGET_RUN = "2023-10-13_02-07-39"
+MOST_RECENT = 0
+TARGET_RUN = "2023-10-13_08-50-29"
 
-target_hitcall = "hitcall" # change to "hitcall"
+target_hitcall = "hitcall"
 algo = "classification"
-logs_folder = os.path.join(LOG_DIR_PATH, f"{target_hitcall}", f"{algo}") # add f"{target_hitcall}",
+logs_folder = os.path.join(LOG_DIR_PATH, f"{target_hitcall}", f"{algo}")
 subfolders = [f for f in os.listdir(logs_folder)]
 
-NUM_AEIDS = 3
-
-def folder_name_to_datetime(folder_name):
-    return datetime.strptime(folder_name, '%Y-%m-%d_%H-%M-%S')
-
+NUM_AEIDS = 1000
 
 sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
 
@@ -128,7 +124,7 @@ path = os.path.join(folder_output_path, f"feature_importances_paths.json")
 with open(path, 'w') as fp:
     json.dump(feature_importances_paths, fp)
 
-print("=" * 100)
+print("=" * 40)
 
 print(f"Success: {success_counter}")
 print(f"Failed: {failed_counter}")

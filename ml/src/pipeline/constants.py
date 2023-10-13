@@ -3,8 +3,8 @@ import os
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_DIR_PATH = os.path.join(ROOT_DIR, '../../config')
 CONFIG_PATH = os.path.join(CONFIG_DIR_PATH, 'config.yaml')
-CONFIG_CLASSIFIERS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_classifiers.yaml')
-CONFIG_REGRESSORS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_regressors.yaml')
+CONFIG_CLASSIFIERS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_classification.yaml')
+CONFIG_REGRESSORS_PATH = os.path.join(CONFIG_DIR_PATH, 'config_regression.yaml')
 
 
 LOG_DIR_PATH = os.path.join(ROOT_DIR, '../../logs')

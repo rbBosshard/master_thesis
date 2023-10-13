@@ -5,7 +5,9 @@ file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 ignore_warnings: False
 
-algo: classification # classification, regression
+target_variables: [hitcall, hitcall_c]  # hitcall, hitcall_c
+
+ml_algorithms: [classification, regression] # classification, regression
 
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
@@ -26,8 +28,6 @@ apply:
   non_negative_matrix_factorization: 0  # only if feature_selection on
   custom_scorer: 1
   threshold_moving: 1
-  cytotoxicity_corrected_hitcalls: 0
-  hitcall: hitcall  # hitcall, hitcall_c
   filters_with_ice_omit_flags: 0
 
 threshold_moving:
