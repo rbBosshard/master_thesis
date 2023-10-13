@@ -200,7 +200,7 @@ def assess_similarity(ground_truth, predicted):
     f1 = f1_score(y_true, y_pred)
 
     # Create a figure with two subplots (heatmap and line plot)
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(50, 20)) 
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(40, 20)) 
 
     # Calculate dissimilarity
     dissimilarity_matrix = (predicted.values - ground_truth.values).astype(int)
@@ -211,33 +211,33 @@ def assess_similarity(ground_truth, predicted):
                 cmap='viridis',
                 ax=ax1,
                 )
-    ax1.set_title(f"(aeid={AEID}) Difference in Massbank Validation Set with Shape {predicted.shape}: "
-                  f"Predicted - True Fingerprints. "
-                  f"Purple=-1, Green=0, Yellow=1",
-                  fontsize=50)
+    ax1.set_title(f"(aeid={AEID}) Difference in Massbank validation set {predicted.shape}: "
+                  f"predicted - true fingerprints. "
+                  f"purple:-1, green:0, yellow:1",
+                  fontsize=42)
     ax1.set_xticklabels([])
     ax1.set_xlabel('Fingerprint features', fontsize=40)
     ax1.set_ylabel('Compounds', fontsize=40)
     # Display the metrics
     legend_text = f"Accuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall: {recall:.2f}\nF1 Score: {f1:.2f}"
-    ax1.annotate(legend_text, xy=(1, 1), xytext=(0.9, 0.61), fontsize=40,
+    ax1.annotate(legend_text, xy=(1, 1), xytext=(0.86, 0.61), fontsize=40,
                  xycoords='axes fraction', textcoords='axes fraction',
                  bbox=dict(boxstyle='round', facecolor='white', alpha=0.4))
 
     sum_of_columns = ground_truth.sum(axis=0)
-    ax2.plot(sum_of_columns, marker='.', linestyle='-', label='True Fingerprints')
+    ax2.plot(sum_of_columns, marker='.', linestyle='-', label='True fingerprints')
     sum_of_columns = predicted.sum(axis=0)
-    ax2.plot(sum_of_columns, marker='.', linestyle='--', label='Predicted by SIRIUS')
-    ax2.set_xlabel('Fingerprint Features', fontsize=40)
-    ax2.set_ylabel('Sum of Present Features', fontsize=40)
-    ax2.set_title('Sum of Bits in Fingerprint Features', fontsize=50)
+    ax2.plot(sum_of_columns, marker='.', linestyle='--', label='Predicted fingerprints by SIRIUS')
+    ax2.set_xlabel('Fingerprint features', fontsize=40)
+    ax2.set_ylabel('Sum of present features', fontsize=40)
+    ax2.set_title('Sum of bits in fingerprint features, calculated column by column.', fontsize=42)
     ax2.set_xticklabels([])
     ax2.tick_params(axis='y', labelsize=35)
     ax2.set_xticks([])
     ax2.set_xlim(0, len(sum_of_columns))
     legend = ax2.legend(prop={'size': 40})
     for line in legend.get_lines():
-        line.set_linewidth(3.0)  # Adjust the line width as needed
+        line.set_linewidth(5.0)  # Adjust the line width as needed
 
     # Adjust the layout of the subplots
     plt.subplots_adjust(wspace=0, hspace=20)
@@ -281,13 +281,16 @@ def build_preprocessing_pipeline():
             feature_selection_nmf = NMF(n_components=100, random_state=CONFIG['random_state'])  # n_components=50, 100, 200
             preprocessing_pipeline_steps.append(('feature_selection_nmf', feature_selection_nmf))
 
-        if 'reg' in CONFIG['algo']:
+        if ML_ALGORITHM == 'regression':
             feature_selection_model1 = XGBRegressor(random_state=CONFIG['random_state'])
             feature_selection_model2 = RandomForestRegressor(random_state=CONFIG['random_state'])
-        else:
+        elif ML_ALGORITHM == 'classification':
             feature_selection_model1 = XGBClassifier(random_state=CONFIG['random_state'])
             feature_selection_model2 = RandomForestClassifier(random_state=CONFIG['random_state'])
 
+        else:
+            raise ValueError(f"Invalid ML algorithm: {ML_ALGORITHM}")
+        
         feature_selection_from_model1 = SelectFromModel(estimator=feature_selection_model1, threshold='mean')
         feature_selection_from_model2 = SelectFromModel(estimator=feature_selection_model2, threshold='mean')
 
@@ -330,26 +333,21 @@ def build_param_grid(estimator_steps):
 def grid_search_cv(X_train, y_train, estimator, pipeline):
     scorer = None
 
-    if 'reg' in CONFIG['algo']:
+    if ML_ALGORITHM == 'regression':
         cv = KFold(n_splits=CONFIG['grid_search_cv']['n_splits'], shuffle=True, random_state=CONFIG['random_state'])
+    elif ML_ALGORITHM == 'classification':
         if CONFIG['apply']['custom_scorer']:
-            def custom_scorer(y_true, y_pred):
-                errors = np.abs(y_true - y_pred)
-                weight = 2.0  # weight for errors when the true value is closer to 1
-                custom_score = np.mean(np.where(y_true >= 0.5, weight * errors, errors))
-                return custom_score
+            scoring = CONFIG['grid_search_cv']['scoring']
+            scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
 
-            scorer = make_scorer(custom_scorer, greater_is_better=False)
-    else:
         cv = RepeatedStratifiedKFold(
             n_splits=CONFIG['grid_search_cv']['n_splits'],
             n_repeats=CONFIG['grid_search_cv']['n_repeats'],
             random_state=CONFIG['random_state']
         )
-        if CONFIG['apply']['custom_scorer']:
-            scoring = CONFIG['grid_search_cv']['scoring']
-            scorer = scoring if scoring != 'f_beta' else make_scorer(fbeta_score, beta=CONFIG['grid_search_cv']['beta'])
-
+    else:
+        raise ValueError(f"Invalid ML algorithm: {ML_ALGORITHM}")
+    
     grid_search_cv = GridSearchCV(
         pipeline,
         param_grid=build_param_grid(estimator['steps']),
@@ -359,12 +357,13 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
         verbose=CONFIG["grid_search_cv"]["verbose"],
     )
 
-    # Use train set as input to Grid Search Cross Validation (kfold validation sets drawn internally from train set)
+    # Use train set as input to Grid Search Cross Validation (k-fold cross-validation sets drawn internally from train set)
     grid_search_cv_fitted = grid_search_cv.fit(X_train, y_train)
 
     LOGGER.info(f"{estimator['name']}: GridSearchCV Results:")
     best_params = grid_search_cv_fitted.best_params_ if grid_search_cv_fitted.best_params_ else "default"
-    LOGGER.info(f"Best params: {best_params} with mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}")
+    LOGGER.info(f"Best params: {best_params}")
+    LOGGER.info(f"With mean cross-validated {scorer} score: {grid_search_cv_fitted.best_score_}")
 
     return grid_search_cv_fitted
 
@@ -450,13 +449,10 @@ def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_t
     plt.savefig(os.path.join(DUMP_FOLDER, f"roc_curve.svg"), format='svg')
     plt.close("all")
 
-    thresholds = [f"default_{default_threshold}", f"optimal_{optimal_threshold}",
-                  f"tpr_{fixed_threshold_tpr}", f"tnr_{fixed_threshold_tnr}"]
-
-    for threshold in thresholds:
-        path = os.path.join(DUMP_FOLDER, f"{threshold}.txt")
-        open(path, 'w').close()
-
+    thresholds = [default_threshold, optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr]
+    thresholds_df = pd.DataFrame({'threshold': thresholds, 'threshold_name': ["default", "optimal", "tpr", "tnr"]})
+    thresholds_df.to_csv(os.path.join(DUMP_FOLDER, f"thresholds.csv"), index=False)
+            
     LOGGER.info(f"Optimal and fixed threshold saved.")
     return optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr
 
@@ -542,7 +538,7 @@ def predict_and_report_classification(X, y, best_estimator):
 
         plt.suptitle(f"Confusion Matrix: {desc} ", fontsize=10)
         plt.title(f"aeid: {AEID}, {ESTIMATOR_PIPELINE}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
-        plt.savefig(os.path.join(DUMP_FOLDER, f"confusion_matrix_{name}.svg"), format='svg')
+        plt.savefig(os.path.join(DUMP_FOLDER, f"cm_{name}.svg"), format='svg')
         plt.close("all")
 
 
@@ -650,7 +646,7 @@ def load_model(path, pipeline):
 
 
 def save_model(best_estimator, fit_set):
-    estimator_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
+    estimator_log_folder = os.path.join(DUMP_FOLDER)
     best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_{fit_set}.joblib")
     joblib.dump(best_estimator, best_estimator_path, compress=3)
     # best_params_path = os.path.join(estimator_log_folder, f"best_params_{fit_set}.joblib")
@@ -663,7 +659,7 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
     selected_feature_names = feature_names.copy()
     # Feature selection fitted on train set. Transform all sets with the same feature selection
     if CONFIG['apply']['only_predict']:
-        folder = os.path.join(TARGET_RUN_FOLDER, f"{AEID}", PREPROCESSING_PIPELINE)
+        folder = os.path.join(TARGET_RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
         preprocessing_model_path = os.path.join(folder, f"preprocessing_model.joblib")
         preprocessing_pipeline = load_model(preprocessing_model_path, "preprocessing")
 
@@ -691,11 +687,8 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
             raise RuntimeError("Error in feature selection")
 
     # Save preprocessing_model
-    preprocessing_model_log_folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE)
-    os.makedirs(preprocessing_model_log_folder, exist_ok=True)
-    preprocessing_model_path = os.path.join(preprocessing_model_log_folder, f"preprocessing_model.joblib")
+    preprocessing_model_path = os.path.join(DUMP_FOLDER, f"preprocessing_model.joblib")
     joblib.dump(preprocessing_pipeline, preprocessing_model_path, compress=3)
-    LOGGER.info(f"Saved preprocessing model in {preprocessing_model_log_folder}")
 
     return selected_feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
@@ -709,7 +702,13 @@ def get_load_from_model_folder(rank=1):
     logs_folder = os.path.join(LOG_DIR_PATH)
     subfolders = [f for f in os.listdir(logs_folder)]
     sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
-    target_run_folder = sorted_subfolders[rank] if CONFIG['load_from_model']['use_last_run'] else CONFIG['load_from_model']['target_run']
+    if CONFIG['load_from_model']['use_last_run']:
+        if len(sorted_subfolders) > 1:
+            target_run_folder = sorted_subfolders[rank]
+        else:
+            target_run_folder = ""
+    else:
+        target_run_folder = CONFIG['load_from_model']['target_run']
     TARGET_RUN_FOLDER = os.path.join(logs_folder, target_run_folder)
 
 
@@ -728,8 +727,8 @@ def get_feature_importance_if_applicable(best_estimator, feature_names):
 
 
 def init_logger():
-    global LOGGER, LOG_PATH, LOGGER_FOLDER
-    init_run_folder()
+    global LOGGER, LOG_PATH, LOGGER_FOLDER, RUN_FOLDER
+    RUN_FOLDER = get_timestamp(START_TIME)
     LOG_PATH = os.path.join(LOG_DIR_PATH, RUN_FOLDER)
     LOGGER_FOLDER = os.path.join(LOG_PATH, '.log')
     os.makedirs(LOGGER_FOLDER, exist_ok=True)
@@ -749,18 +748,10 @@ def init_logger():
     return LOGGER
 
 
-def init_run_folder():
-    global RUN_FOLDER, DUMP_FOLDER
-    RUN_FOLDER = get_timestamp(START_TIME)
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER)
-    os.makedirs(DUMP_FOLDER, exist_ok=True)
-    return RUN_FOLDER
-
-
 def init_target_variable(target_variable):
     global TARGET_VARIABLE, DUMP_FOLDER
     TARGET_VARIABLE = target_variable
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE)
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
     return TARGET_VARIABLE
 
@@ -775,7 +766,7 @@ def init_ml_algo(ml_algorithm):
     with open(os.path.join(LOGGER_FOLDER, f'config_{ML_ALGORITHM}.yaml'), 'w') as file:
         yaml.dump(config_estimators, file)
 
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM)
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE, ML_ALGORITHM)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
 
     return ML_ALGORITHM, config_estimators
@@ -784,7 +775,7 @@ def init_ml_algo(ml_algorithm):
 def init_aeid(aeid):
     global AEID, DUMP_FOLDER
     AEID = str(aeid)
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID)
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE, ML_ALGORITHM, AEID)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
 
 
@@ -793,7 +784,7 @@ def init_preprocessing_pipeline(preprocessing_pipeline):
     preprocessing_pipeline_name = preprocessing_pipeline[-1].estimator.__class__.__name__
     PREPROCESSING_PIPELINE = f"Feature_Selection_{preprocessing_pipeline_name}"
     LOGGER.info(f"Apply {PREPROCESSING_PIPELINE}..")
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
     return PREPROCESSING_PIPELINE
 
@@ -801,7 +792,7 @@ def init_preprocessing_pipeline(preprocessing_pipeline):
 def init_estimator_pipeline(estimator_name):
     global ESTIMATOR_PIPELINE, DUMP_FOLDER
     ESTIMATOR_PIPELINE = estimator_name
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
                                ESTIMATOR_PIPELINE)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
     return ESTIMATOR_PIPELINE
@@ -811,7 +802,7 @@ def init_validation_set(validation_set):
     global VALIDATION_SET, DUMP_FOLDER
     VALIDATION_SET = validation_set
     LOGGER.info(f"Validation Set: {VALIDATION_SET}")
-    DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
+    DUMP_FOLDER = os.path.join(LOG_PATH, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
                                ESTIMATOR_PIPELINE, VALIDATION_SET)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
     return VALIDATION_SET

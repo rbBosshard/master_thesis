@@ -5,9 +5,9 @@ file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 ignore_warnings: False
 
-target_variables: [hitcall, hitcall_c]  # hitcall, hitcall_c
+target_variables: [hitcall, hitcall_c]  # [hitcall, hitcall_c]
 
-ml_algorithms: [classification, regression] # classification, regression
+ml_algorithms: [classification, regression] # [classification, regression]
 
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
@@ -39,7 +39,6 @@ threshold_moving:
 
 feature_selection:
   variance_threshold: 0.01
-  top_n_feature_importances_to_plot: 100
 
 grid_search_cv:
   n_splits: 5 # Number of folds
