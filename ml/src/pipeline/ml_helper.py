@@ -813,15 +813,12 @@ def init_ml_algo(ml_algorithm):
     DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
 
-    return ML_ALGORITHM
+    return ML_ALGORITHM, CONFIG_ESTIMATORS
 
 
 def init_aeid(aeid):
     global AEID, DUMP_FOLDER
     AEID = str(aeid)
-    LOGGER.info("#" * 60)
-    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}")
-    LOGGER.info("#" * 60)
     DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
 
@@ -835,10 +832,9 @@ def init_preprocessing_pipeline(preprocessing_pipeline):
     return PREPROCESSING_PIPELINE
 
 
-def init_estimator_pipeline(estimator):
+def init_estimator_pipeline(estimator_name):
     global ESTIMATOR_PIPELINE, DUMP_FOLDER
-    ESTIMATOR_PIPELINE = estimator['name']
-    LOGGER.info(f"Apply {ESTIMATOR_PIPELINE}..")
+    ESTIMATOR_PIPELINE = estimator_name
     DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE,
                                ESTIMATOR_PIPELINE)
     os.makedirs(DUMP_FOLDER, exist_ok=True)

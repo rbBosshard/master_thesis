@@ -31,17 +31,20 @@ if __name__ == '__main__':
 
     # Iterate through target variables (hitcall, hitcall_c)
     for target_variable in CONFIG['target_variables']:
-        init_target_variable(target_variable)
+        TARGET_VARIABLE = init_target_variable(target_variable)
 
         # Iterate through ML algorithms (binary classification, regression)
         for ml_algorithm in CONFIG['ml_algorithms']:
-            ML_ALGORITHM = init_ml_algo(ml_algorithm)
+            ML_ALGORITHM, CONFIG_ESTIMATORS = init_ml_algo(ml_algorithm)
 
             # Iterate through aeids_target_assays and launch each iteration in a separate process
             for aeid in [97]:  #aeids_target_assays[:]:  # [97]: #
                 try:
-                    # Init/allocate aeid
-                    init_aeid(aeid)
+                    # Init aeid
+                    AEID = init_aeid(aeid)
+                    LOGGER.info("#" * 60)
+                    LOGGER.info(f"Start ML pipeline for assay ID: {AEID}")
+                    LOGGER.info("#" * 60)
 
                     # Get assay data
                     assay_df = get_assay_df()
@@ -78,7 +81,9 @@ if __name__ == '__main__':
                             start_time = datetime.now()
 
                             # Init a new folder for this estimator
-                            ESTIMATOR_PIPELINE = init_estimator_pipeline(estimator)
+                            estimator_name = estimator['name']
+                            ESTIMATOR_PIPELINE = init_estimator_pipeline(estimator_name)
+                            LOGGER.info(f"Apply {ESTIMATOR_PIPELINE}")
 
                             # Training #
                             if not CONFIG['apply']['only_predict']:
@@ -102,7 +107,7 @@ if __name__ == '__main__':
                             # Validation #
                             # Predict on the test set with the best estimator (X_test, y_test is unseen)
                             LOGGER.info("Start Internal Validation..")
-                            init_validation_set("internal_validation")
+                            VALIDATION_SET = init_validation_set("internal_validation")
                             predict_and_report(X_test, y_test, best_estimator)
                             LOGGER.info("*" * 50)
                             LOGGER.info("Internal Validation Done.\n")
