@@ -12,6 +12,8 @@ algo = "classification"
 logs_folder = os.path.join(LOG_DIR_PATH, f"runs_{algo}")
 subfolders = [f for f in os.listdir(logs_folder)]
 
+NUM_AEIDS = 3
+
 
 def folder_name_to_datetime(folder_name):
     return datetime.strptime(folder_name, '%Y-%m-%d_%H-%M-%S')
@@ -29,7 +31,7 @@ feature_importances_paths = {}
 aeid_paths = {}
 
 target_run_folder_path = os.path.join(logs_folder, target_run_folder)
-for aeid in os.listdir(target_run_folder_path)[:10]:
+for aeid in os.listdir(target_run_folder_path)[:NUM_AEIDS]:
     if aeid != ".log":
         aeid_path = os.path.join(target_run_folder_path, aeid)
         
@@ -102,7 +104,7 @@ for aeid in os.listdir(target_run_folder_path)[:10]:
             print(f"FAILED: aeid={aeid}, Incomplete validation results")
 
 # Create folder for target run
-folder_output_path = os.path.join(OUTPUT_DIR_PATH, f"{algo}{target_run_folder}")
+folder_output_path = os.path.join(OUTPUT_DIR_PATH, f"{algo}", f"{target_run_folder}")
 os.makedirs(folder_output_path, exist_ok=True)
 
 # Save dictionaries as json files
@@ -118,12 +120,12 @@ path = os.path.join(folder_output_path, f"validation_results.json")
 with open(path, 'w') as fp:
     json.dump(validation_results, fp)
 
-path = os.path.join(folder_output_path, f"feature_importances.json")
+path = os.path.join(folder_output_path, f"feature_importances_paths.json")
 with open(path, 'w') as fp:
     json.dump(feature_importances_paths, fp)
 
 
-
+print("All results successfully saved.")
 # aeid_paths = pd.DataFrame(aeid_paths.items(), columns=['aeid', 'model_path'])
 # path = os.path.join(folder_output_path, f"model_paths.csv")
 # aeid_paths.to_csv(path)
@@ -140,5 +142,28 @@ with open(path, 'w') as fp:
 # path = os.path.join(folder_output_path, f"feature_importances.csv")
 # feature_importances_paths.to_csv(path)
 
-print("Done")
+# print("Post-processing feature importances...")
+# # Compare feature importances and visualize them
+# for aeid in feature_importances_paths.keys():
+#     for preprocessing_model in feature_importances_paths[aeid].keys():
+#         for model in feature_importances_paths[aeid][preprocessing_model].keys():
+#             if len(feature_importances_paths[aeid][preprocessing_model][model]) > 0:
+#                 feature_importances_path = feature_importances_paths[aeid][preprocessing_model][model]
+#                 feature_importances = pd.read_csv(feature_importances_path)
+#                 feature_importances = feature_importances.rename(columns={'Unnamed: 0': 'feature'})
+#                 feature_importances = feature_importances.set_index('feature')
+#                 feature_importances = feature_importances.sort_values(by=['importance'], ascending=False)
+#                 feature_importances = feature_importances.reset_index()
+#                 feature_importances = feature_importances.rename(columns={'feature': 'index'})
+#                 feature_importances = feature_importances.set_index('index')
+#                 feature_importances = feature_importances.rename(columns={'importance': f"{aeid}_{preprocessing_model}_{model}"})
+#                 feature_importances = feature_importances.head(20)
+#                 # feature_importances.plot.barh()
+#                 # plt.show()
+#                 path = os.path.join(folder_output_path, f"feature_importances.csv")
+#                 feature_importances.to_csv(path, mode='a', header=False)
+
+
+
+
 
