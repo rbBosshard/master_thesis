@@ -2,60 +2,52 @@ import logging
 import os
 import sys
 from datetime import datetime
-import traceback
-
 import joblib
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import yaml
+import matplotlib
 from imblearn.over_sampling import SMOTE
 from matplotlib import pyplot as plt
+from matplotlib.colors import LogNorm
 from sklearn import metrics
-from sklearn.metrics import make_scorer, fbeta_score, roc_curve, classification_report, confusion_matrix
+from sklearn.metrics import fbeta_score, roc_curve, classification_report, confusion_matrix, make_scorer, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import SelectFromModel
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.decomposition import NMF
 from xgboost import XGBClassifier
 from xgboost import XGBRegressor
-from xgboost import plot_importance
-from sklearn.decomposition import NMF
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
-
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import make_scorer, mean_squared_error, r2_score
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from xgboost import plot_importance
 
+from ml.src.pipeline.constants import CONFIG_PATH, LOG_DIR_PATH, \
+    INPUT_FINGERPRINTS_DIR_PATH, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH, \
+    CONFIG_DIR_PATH
 
-from sklearn.decomposition import NMF
-
-import matplotlib
-
-from ml.src.pipeline.ml_pipeline import START_TIME
-
+# Plotting backend
 matplotlib.use('Agg')
-import warnings
 
 # Filter out ConvergenceWarnings
+import warnings
 # warnings.filterwarnings("ignore")
 
-from ml.src.pipeline.constants import CONFIG_PATH, LOG_DIR_PATH, CONFIG_CLASSIFIERS_PATH, \
-    INPUT_FINGERPRINTS_DIR_PATH, FILE_FORMAT, REMOTE_DATA_DIR_PATH, MASSBANK_DIR_PATH, \
-    CONFIG_REGRESSORS_PATH, CONFIG_DIR_PATH
-
-CONFIG = {}
-CONFIG_ESTIMATORS = {}
 START_TIME = datetime.now()
+CONFIG = {}
+
 LOGGER = logging.getLogger(__name__)
 LOGGER_FOLDER = ""
+
+DUMP_FOLDER = ""
+TARGET_RUN_FOLDER = ""
 
 LOG_PATH = ""
 RUN_FOLDER = ""
@@ -66,12 +58,6 @@ PREPROCESSING_PIPELINE = ""
 ESTIMATOR_PIPELINE = ""
 VALIDATION_SET = ""
 CLASSIFICATION_THRESHOLD = ""
-
-DUMP_FOLDER = ""
-
-PREPROCESSING_PIPELINE = ""
-ESTIMATOR_PIPELINE = ""
-TARGET_RUN_FOLDER = ""
 
 
 def load_config():
@@ -129,14 +115,16 @@ def merge_assay_and_fingerprint_df(assay_df, fps_df):
 
 
 def split_data(X, y):
-    stratifiy = None if 'reg' in CONFIG['algo'] else y
+    # stratify to ensure the same class distribution in the train and test sets
+    stratifiy = y if ML_ALGORITHM == 'classification' else None
+
     # Split the data into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(X,
                                                         y,
                                                         test_size=CONFIG['train_test_split_ratio'],
                                                         random_state=CONFIG['random_state'],
                                                         shuffle=True,  # shuffle the data before splitting (default)
-                                                        stratify=stratifiy # stratify to ensure the same class distribution in the train and test sets
+                                                        stratify=stratifiy 
                                                         )
 
     return X_train, y_train, X_test, y_test
@@ -144,6 +132,7 @@ def split_data(X, y):
 
 def partition_data(df):
     # Split off the massbank validation set
+
     # Load safe-to-use massbank compounds
     validation_compounds_path = os.path.join(MASSBANK_DIR_PATH, f"validation_compounds_safe{FILE_FORMAT}")
     validation_compounds = pd.read_parquet(validation_compounds_path)["dsstox_substance_id"]
@@ -155,7 +144,6 @@ def partition_data(df):
     # Identify common identifiers
     massbank_val_pred_df = massbank_val_pred_df[massbank_val_pred_df['dsstox_substance_id'].isin(validation_compounds)]
     massbank_val_true_df = df[df['dsstox_substance_id'].isin(validation_compounds)]
-
     common_ids = set(massbank_val_pred_df['dsstox_substance_id']).intersection(massbank_val_true_df['dsstox_substance_id'])
 
     # Filter rows in based on common identifiers
@@ -169,9 +157,9 @@ def partition_data(df):
     validation_compounds = massbank_val_pred_df['dsstox_substance_id']
 
     validation_filter_condition = df['dsstox_substance_id'].isin(validation_compounds)
-    training_df = df[~validation_filter_condition]  # From this in a later step, another internal validation set is split off
+    training_df = df[~validation_filter_condition]  # Another internal validation set is split off later from train set
 
-    # Safety check that the compounds intersection with the exteranl validation set is empty
+    # Safety check that the compounds intersection with the external validation set is empty
     is_distinct = len(set(training_df['dsstox_substance_id']).intersection(massbank_val_pred_df['dsstox_substance_id'])) == 0
     assert is_distinct
 
@@ -184,15 +172,17 @@ def partition_data(df):
     X_massbank_val_from_sirius = massbank_val_pred_df.iloc[:, 1:]
 
     # Distinguish between regression and binary classification
-    if 'reg' in CONFIG['algo']:
-        y = training_df[TARGET_VARIABLE]
-        y_massbank_val = massbank_val_true_df[TARGET_VARIABLE]
-    else:  # binary classification
+    if ML_ALGORITHM =='classification':
         t = CONFIG['activity_threshold']
         LOGGER.info(f"Activity threshold: ({TARGET_VARIABLE} >= {t} is active)\n")
         y = (training_df[TARGET_VARIABLE] >= t).astype(np.uint8)
         y_massbank_val = (massbank_val_true_df[TARGET_VARIABLE] >= t).astype(np.uint8)
-
+    elif ML_ALGORITHM =='regression':
+        y = training_df[TARGET_VARIABLE]
+        y_massbank_val = massbank_val_true_df[TARGET_VARIABLE]
+    else:
+        raise ValueError(f"Invalid ML algorithm: {ML_ALGORITHM}")
+    
     return feature_names, X, y, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val
 
 
@@ -209,16 +199,10 @@ def assess_similarity(ground_truth, predicted):
     recall = recall_score(y_true, y_pred)
     f1 = f1_score(y_true, y_pred)
 
-    # print("Accuracy:", accuracy)
-    # print("Precision:", precision)
-    # print("Recall:", recall)
-    # print("F1 Score:", f1)
-
     # Create a figure with two subplots (heatmap and line plot)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(50, 20)) 
 
     # Calculate dissimilarity
-
     dissimilarity_matrix = (predicted.values - ground_truth.values).astype(int)
     sns.heatmap(dissimilarity_matrix,
                 cbar=False,
@@ -227,7 +211,7 @@ def assess_similarity(ground_truth, predicted):
                 cmap='viridis',
                 ax=ax1,
                 )
-    ax1.set_title(f"(aeid={AEID}) Dissimilarity in Massbank Validation Set with Shape {predicted.shape}: "
+    ax1.set_title(f"(aeid={AEID}) Difference in Massbank Validation Set with Shape {predicted.shape}: "
                   f"Predicted - True Fingerprints. "
                   f"Purple=-1, Green=0, Yellow=1",
                   fontsize=50)
@@ -252,13 +236,14 @@ def assess_similarity(ground_truth, predicted):
     ax2.set_xticks([])
     ax2.set_xlim(0, len(sum_of_columns))
     legend = ax2.legend(prop={'size': 40})
+    for line in legend.get_lines():
+        line.set_linewidth(3.0)  # Adjust the line width as needed
 
     # Adjust the layout of the subplots
     plt.subplots_adjust(wspace=0, hspace=20)
     plt.tight_layout()
 
-    path = os.path.join(LOG_PATH, f"{AEID}", "dissimilarity.png")
-    plt.savefig(path, format='png')
+    plt.savefig(os.path.join(DUMP_FOLDER, "massbank_fingerprint_difference.png"), format='png')
     plt.close("all")
 
     predicted = predicted.astype(np.uint8)
@@ -425,8 +410,7 @@ def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_t
              label=f'ROC Curve: {ESTIMATOR_PIPELINE}')
 
     # No-Skill classifier
-    plt.plot([0, 1], [0, 1], linestyle='--', color='gray', alpha=0.8,
-             label='ROC Curve: No-Skill Classifier')
+    plt.plot([0, 1], [0, 1], linestyle='--', color='gray', alpha=0.8, label='ROC Curve: No-Skill Classifier')
 
     # Highlight thresholds point
     plt.scatter(fpr[idx_default], tpr[idx_default], alpha=0.8, color='blue', s=120, marker='o',
@@ -451,7 +435,6 @@ def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_t
     plt.plot([1, 1], [1, 1], linestyle='', alpha=0.0, label=f'{info_text}')
 
     plt.legend(fontsize=fontsize, loc='lower right', framealpha=0.6)
-
     plt.xlim(-0.01, 1)
     plt.ylim(0, 1.01)
     plt.xlabel('False Positive Rate (FPR)', fontsize=fontsize+2)
@@ -464,42 +447,36 @@ def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_t
     plt.grid()
     plt.tight_layout()
 
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
-
-    path = os.path.join(folder, VALIDATION_SET, f"roc_curve.svg")
-    plt.savefig(path)
+    plt.savefig(os.path.join(DUMP_FOLDER, f"roc_curve.svg"), format='svg')
     plt.close("all")
 
-    path = os.path.join(folder, f"fixed_threshold_tpr_{VALIDATION_SET}.joblib")
-    joblib.dump(fixed_threshold_tpr, path)
+    thresholds = [f"default_{default_threshold}", f"optimal_{optimal_threshold}",
+                  f"tpr_{fixed_threshold_tpr}", f"tnr_{fixed_threshold_tnr}"]
 
-    path = os.path.join(folder, f"fixed_threshold_tnr_{VALIDATION_SET}.joblib")
-    joblib.dump(fixed_threshold_tnr, path)
-
-    path = os.path.join(folder, f"optimal_threshold_{VALIDATION_SET}.joblib")
-    joblib.dump(optimal_threshold, path)
+    for threshold in thresholds:
+        path = os.path.join(DUMP_FOLDER, f"{threshold}.txt")
+        open(path, 'w').close()
 
     LOGGER.info(f"Optimal and fixed threshold saved.")
     return optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr
 
 
 def predict_and_report_classification(X, y, best_estimator):
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE, VALIDATION_SET)
-    os.makedirs(folder, exist_ok=True)
-    LOGGER.info("+" * 60)
-    LOGGER.info(f"Predict ({VALIDATION_SET})")
-
-    # Predict the probabilities (using validation set)
+    # Predict the probabilities
     y_pred_proba = best_estimator.predict_proba(X)[:, 1]
+
     default_threshold = CONFIG['threshold_moving']['default_threshold']
     LOGGER.info(f"Default threshold: {default_threshold}")
+
     y_pred_default_threshold = np.where(y_pred_proba >= default_threshold, 1, 0)
-    data = {'Actual': y, 'Predicted': y_pred_default_threshold}
+    data = {'Actual': y,
+            'Prediction Default': y_pred_default_threshold}
+
     y_preds = [y_pred_default_threshold]
     y_preds_names = ['default']
     y_preds_descs = [f'Classification Threshold default={default_threshold}']
 
-    # Adjust predictions based on classification threshold
+    # Adjust predictions based on classification threshold, threshold
     if CONFIG['apply']['threshold_moving']:
         target_tpr = CONFIG['threshold_moving']['target_tpr']
         target_tnr = CONFIG['threshold_moving']['target_tnr']
@@ -523,27 +500,26 @@ def predict_and_report_classification(X, y, best_estimator):
                           f'Classification Threshold by TNR≈{target_tnr}']
 
         new_data = {
-            'Predicted_with_optimal_threshold': y_pred_optimal_threshold,
-            'Predicted_with_fixed_threshold_tpr': y_pred_fixed_threshold_tpr,
-            'Predicted_with_fixed_threshold_tnr': y_pred_fixed_threshold_tnr
+            'Prediction Optimal': y_pred_optimal_threshold,
+            'Prediction TPR': y_pred_fixed_threshold_tpr,
+            'Prediction TNR': y_pred_fixed_threshold_tnr
         }
         data.update(new_data)
         data = pd.DataFrame(data)
 
     df = pd.DataFrame(data)
-    df.to_csv(os.path.join(folder, f"estimator_results.csv"), index=False)
+    df.to_csv(os.path.join(DUMP_FOLDER, f"estimator_results.csv"), index=False)
 
+    # Confusion Matrix
     labels = [True, False]
-
     for i, y_pred in enumerate(y_preds):
         LOGGER.info("." * 40)
         LOGGER.info(f"Predict {y_preds_names[i]}")
         name = y_preds_names[i]
         desc = y_preds_descs[i]
         report = classification_report(y, y_pred, labels=labels, output_dict=True)
-        path = os.path.join(folder, f"report_{name}.csv")
         report_df = pd.DataFrame(report).transpose()
-        report_df.to_csv(path)
+        report_df.to_csv(os.path.join(DUMP_FOLDER, f"report_{name}.csv"))
 
         cmap = plt.get_cmap(CONFIG['cmap'])
         cm = confusion_matrix(y, y_pred, labels=labels)
@@ -558,7 +534,6 @@ def predict_and_report_classification(X, y, best_estimator):
         }
 
         plt.figure(figsize=(8, 8))
-
         cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
         cm_display.plot(cmap=cmap, colorbar=False)
 
@@ -567,38 +542,33 @@ def predict_and_report_classification(X, y, best_estimator):
 
         plt.suptitle(f"Confusion Matrix: {desc} ", fontsize=10)
         plt.title(f"aeid: {AEID}, {ESTIMATOR_PIPELINE}, Count: {len(y)} (P:{pos_count}, N:{neg_count})", fontsize=10)
-        path = os.path.join(folder, f"confusion_matrix_{name}.svg")
-        plt.savefig(path, format='svg')
+        plt.savefig(os.path.join(DUMP_FOLDER, f"confusion_matrix_{name}.svg"), format='svg')
         plt.close("all")
 
 
 def predict_and_report(X, y, best_estimator):
+    LOGGER.info("+" * 60)
+    LOGGER.info(f"Predict ({VALIDATION_SET})")
     if ML_ALGORITHM == 'classification':
         predict_and_report_classification(X, y, best_estimator)
     elif ML_ALGORITHM == 'regression':
         predict_and_report_regression(X, y, best_estimator)
     else:
-        raise Exception(f"{ML_ALGORITHM} not supported.")
+        raise ValueError(f"Invalid ML algorithm: {ML_ALGORITHM}")
     LOGGER.info("*" * 50)
 
 
 def predict_and_report_regression(X, y, best_estimator):
-    folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE, VALIDATION_SET)
-    os.makedirs(os.path.join(folder, VALIDATION_SET), exist_ok=True)
-    LOGGER.info("\n")
-    LOGGER.info(f"Predict ({VALIDATION_SET})")
-
+    # Prediction
     y_pred = best_estimator.predict(X)
-
     data = {
         'Actual': y,
         'Predicted': y_pred
     }
-
     df = pd.DataFrame(data)
+    df.to_csv(os.path.join(DUMP_FOLDER, f"results.csv"), index=False)
 
-    df.to_csv(os.path.join(folder, f"reg_results.csv"), index=False)
-
+    # Report
     mse_val = mean_squared_error(y, y_pred)
     r2_val = r2_score(y, y_pred)
 
@@ -606,29 +576,27 @@ def predict_and_report_regression(X, y, best_estimator):
         'Metric': ['mse', 'r2'],
         'Value': [mse_val, r2_val]
     }
-
     report_df = pd.DataFrame(data)
+    report_df.to_csv(os.path.join(DUMP_FOLDER, f"report.csv"), index=False)
 
-    # Save the report to csv
-    report_df.to_csv(os.path.join(folder, f"report.csv"), index=False)
-
+    # Scatter plot
     plt.scatter(y, y_pred, alpha=0.2, s=5)
     plt.xlabel("Actual Values")
     plt.ylabel("Predicted Values")
-    plt.title("Validation Set - Actual vs. Predicted Values")
-    plt.savefig(os.path.join(folder, "results.svg"))
+    plt.title("Validation Set: Actual vs. Predicted Values")
+    plt.savefig(os.path.join(DUMP_FOLDER, "results.svg"), format='svg')
     plt.close("all")
 
+    # Heatmap
     heatmap, xedges, yedges = np.histogram2d(y, y_pred, bins=5, range=[[0, 1], [0, 1]])
     fig, ax = plt.subplots()
-    from matplotlib.colors import LogNorm
-    cax = ax.imshow(heatmap.T, extent=[0, 1, 0, 1], origin='lower', cmap='viridis', norm=LogNorm()) # , norm=LogNorm()
+    cax = ax.imshow(heatmap.T, extent=[0, 1, 0, 1], origin='lower', cmap='Blues', norm=LogNorm())
     cbar = fig.colorbar(cax)
     cbar.set_label('Frequency')
     plt.xlabel("Actual Values")
     plt.ylabel("Predicted Values")
-    plt.title("Validation Set - Actual vs. Predicted Values")
-    plt.savefig(os.path.join(folder, "results_heatmap.svg"))
+    plt.title("Validation Set: Actual vs. Predicted Values")
+    plt.savefig(os.path.join(DUMP_FOLDER, "results_heatmap.svg"), format='svg')
     plt.close("all")
 
 
@@ -709,7 +677,7 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
         selected_feature_indices = preprocessing_pipeline[-1].get_support()
         selected_feature_names = [feature_names[i] for i, selected in enumerate(selected_feature_indices) if selected]
         selected_feature_df = pd.DataFrame(selected_feature_names, columns=['feature'])
-        selected_feature_df.to_csv(os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, "selected_features.csv"), index=False)
+        selected_feature_df.to_csv(os.path.join(DUMP_FOLDER, "selected_features.csv"), index=False)
 
         # Transform other sets (e.g. subselect feature columns that were selected by the feature selection model)
         X_test = preprocessing_pipeline.transform(X_test)
@@ -738,7 +706,7 @@ def folder_name_to_datetime(folder_name):
 
 def get_load_from_model_folder(rank=1):
     global TARGET_RUN_FOLDER
-    logs_folder = os.path.join(LOG_DIR_PATH, TARGET_VARIABLE, CONFIG['algo'])
+    logs_folder = os.path.join(LOG_DIR_PATH)
     subfolders = [f for f in os.listdir(logs_folder)]
     sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
     target_run_folder = sorted_subfolders[rank] if CONFIG['load_from_model']['use_last_run'] else CONFIG['load_from_model']['target_run']
@@ -751,10 +719,7 @@ def get_feature_importance_if_applicable(best_estimator, feature_names):
         feature_importances = best_estimator_model.feature_importances_
         importance_df = pd.DataFrame({'feature': feature_names, 'importances': feature_importances})
         importance_df = importance_df.sort_values(by='importances', ascending=False)
-
-        folder = os.path.join(LOG_PATH, f"{AEID}", PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
-        path = os.path.join(folder, f'sorted_feature_importances.csv')
-        importance_df.to_csv(path, index=False)
+        importance_df.to_csv(os.path.join(DUMP_FOLDER, f'sorted_feature_importances.csv'), index=False)
 
     except Exception as e:
         feature_importances = None
@@ -801,19 +766,19 @@ def init_target_variable(target_variable):
 
 
 def init_ml_algo(ml_algorithm):
-    global ML_ALGORITHM, DUMP_FOLDER, CONFIG_ESTIMATORS
+    global ML_ALGORITHM, DUMP_FOLDER
     ML_ALGORITHM = ml_algorithm
 
     with open(os.path.join(CONFIG_DIR_PATH, f'config_{ML_ALGORITHM}.yaml'), 'r') as file:
-        CONFIG_ESTIMATORS = yaml.safe_load(file)
+        config_estimators = yaml.safe_load(file)
 
     with open(os.path.join(LOGGER_FOLDER, f'config_{ML_ALGORITHM}.yaml'), 'w') as file:
-        yaml.dump(CONFIG_ESTIMATORS, file)
+        yaml.dump(config_estimators, file)
 
     DUMP_FOLDER = os.path.join(LOG_PATH, RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM)
     os.makedirs(DUMP_FOLDER, exist_ok=True)
 
-    return ML_ALGORITHM, CONFIG_ESTIMATORS
+    return ML_ALGORITHM, config_estimators
 
 
 def init_aeid(aeid):
@@ -853,8 +818,7 @@ def init_validation_set(validation_set):
 
 
 def add_status_file(status):
-    path = os.path.join(DUMP_FOLDER, f"{status}.txt")
-    with open(path, "w") as file:
+    with open(os.path.join(DUMP_FOLDER, f"{status}.txt"), "w") as file:
         file.write(status)
 
 
