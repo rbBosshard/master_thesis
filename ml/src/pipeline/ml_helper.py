@@ -69,7 +69,7 @@ def load_config():
             import warnings
             warnings.filterwarnings("ignore")
 
-    config_estimators_path = CONFIG_REGRESSORS_PATH if 'reg' in config['ml_algorithm'] else CONFIG_CLASSIFIERS_PATH
+    config_estimators_path = CONFIG_REGRESSORS_PATH if 'reg' in config['algo'] else CONFIG_CLASSIFIERS_PATH
     with open(config_estimators_path, 'r') as file:
         config_estimators = yaml.safe_load(file)
 
@@ -102,12 +102,13 @@ def get_assay_df():
     LOGGER.info(f"Start ML pipeline for assay ID: {AEID}\n")
     assay_file_path = os.path.join(REMOTE_DATA_DIR_PATH, "output", f"{AEID}{FILE_FORMAT}")
     assay_df = pd.read_parquet(assay_file_path)
-    # omit_compound_mask = assay_df['omit_flag'] == "PASS"
-    # assay_df = assay_df[omit_compound_mask]
-    # LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
-    hitcall = 'hitcall'
-    if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
-        hitcall = 'hitcall_c'
+
+    if CONFIG['apply']['filters_with_ice_omit_flags']:
+        omit_compound_mask = assay_df['omit_flag'] == "PASS"
+        assay_df = assay_df[omit_compound_mask]
+        LOGGER.info(f"Number of compounds omitted through: ICE OMIT_FLAG filter: {len(omit_compound_mask)}")
+
+    hitcall = CONFIG['apply']['hitcall']
     assay_df = assay_df[['dsstox_substance_id', hitcall, 'ac50']]
     LOGGER.info(f"Assay dataframe: {assay_df.shape[0]} chemical/hitcall datapoints")
     return assay_df
@@ -183,13 +184,10 @@ def partition_data(df):
     X_massbank_val_from_structure = massbank_val_true_df.iloc[:, 3:]
     X_massbank_val_from_sirius = massbank_val_pred_df.iloc[:, 1:]
 
-    if CONFIG['apply']['cytotoxicity_corrected_hitcalls']:
-        hitcall = 'hitcall_c'
-    else:
-        hitcall = 'hitcall'
+    hitcall = CONFIG['apply']['hitcall']
 
     # Distinguish between regression and binary classification
-    if 'reg' in CONFIG['ml_algorithm']:
+    if 'reg' in CONFIG['algo']:
         y = training_df[hitcall]
         y_massbank_val = massbank_val_true_df[hitcall]
     else:  # binary classification
@@ -301,7 +299,7 @@ def build_preprocessing_pipeline():
             feature_selection_nmf = NMF(n_components=100, random_state=CONFIG['random_state'])  # n_components=50, 100, 200
             preprocessing_pipeline_steps.append(('feature_selection_nmf', feature_selection_nmf))
 
-        if 'reg' in CONFIG['ml_algorithm']:
+        if 'reg' in CONFIG['algo']:
             feature_selection_model1 = XGBRegressor(random_state=CONFIG['random_state'])
             feature_selection_model2 = RandomForestRegressor(random_state=CONFIG['random_state'])
         else:
@@ -361,7 +359,7 @@ def build_param_grid(estimator_steps):
 def grid_search_cv(X_train, y_train, estimator, pipeline):
     scorer = None
 
-    if 'reg' in CONFIG['ml_algorithm']:
+    if 'reg' in CONFIG['algo']:
         cv = KFold(n_splits=CONFIG['grid_search_cv']['n_splits'], shuffle=True, random_state=CONFIG['random_state'])
         if CONFIG['apply']['custom_scorer']:
             def custom_scorer(y_true, y_pred):
@@ -673,7 +671,7 @@ def create_empty_log_file(filename):
 
 def init_logger(CONFIG):
     global LOGGER, LOG_PATH
-    LOG_PATH = os.path.join(LOG_DIR_PATH, f"runs_{CONFIG['ml_algorithm']}", f"{get_timestamp(START_TIME)}")
+    LOG_PATH = os.path.join(LOG_DIR_PATH, CONFIG[''], f"{CONFIG['algo']}", f"{get_timestamp(START_TIME)}")
     os.makedirs(LOG_PATH, exist_ok=True)
     os.makedirs(os.path.join(LOG_PATH, '.log'), exist_ok=True)
     log_filename = os.path.join(LOG_PATH, '.log', "ml_pipeline.log")
@@ -770,7 +768,7 @@ def folder_name_to_datetime(folder_name):
 
 def get_load_from_model_folder(rank=1):
     global TARGET_RUN_FOLDER
-    logs_folder = os.path.join(LOG_DIR_PATH, f"runs_{CONFIG['ml_algorithm']}")
+    logs_folder = os.path.join(LOG_DIR_PATH, f"{CONFIG['algo']}")
     subfolders = [f for f in os.listdir(logs_folder)]
     sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
     target_run_folder = sorted_subfolders[rank] if CONFIG['load_from_model']['use_last_run'] else CONFIG['load_from_model']['target_run']
