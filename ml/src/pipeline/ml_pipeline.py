@@ -12,7 +12,7 @@ from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config,
     partition_data, handle_oversampling, grid_search_cv, build_pipeline, get_label_counts, report_exception, save_model, \
     build_preprocessing_pipeline, preprocess_all_sets, \
     predict_and_report_regression, predict_and_report_classification, load_model, init_estimator, \
-    get_feature_importance_if_applicable
+    get_feature_importance_if_applicable, init_preprocessing_pipeline
 
 from datetime import datetime
 import traceback
@@ -20,7 +20,7 @@ from ml.src.utils.helper import get_subset_aeids
 
 if __name__ == '__main__':
     # Get ML configuration
-    CONFIG, CONFIG_ESTIMATORS, START_TIME, LOGGER, TARGET_RUN_FOLDER = load_config()
+    CONFIG, CONFIG_ESTIMATORS, START_TIME, LOG_PATH, LOGGER, TARGET_RUN_FOLDER = load_config()
 
     # Get fingerprint data
     fps_df = get_fingerprint_df()
@@ -49,23 +49,24 @@ if __name__ == '__main__':
             # Split ML data into train test set (test set evaluates generalization to unseen data)
             X_train, y_train, X_test, y_test = split_data(X, y)
 
+            preprocessing_pipelines = build_preprocessing_pipeline()
 
+            for preprocessing_pipeline in preprocessing_pipelines:
+                preprocessing_pipeline_identifier = preprocessing_pipeline[-1].estimator.__class__.__name__
+                LOGGER.info(f"Apply {preprocessing_pipeline_identifier}")
+                init_preprocessing_pipeline(preprocessing_pipeline_identifier)
+                feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
+                    preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train, X_test, y_test,
+                                        X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
 
-            preprocessing_pipeline_steps = build_preprocessing_pipeline()
+                # Apply oversampling if configured
+                X_train, y_train = handle_oversampling(X_train, y_train)
 
-            feature_names, X_train, y_train, X_test, y_test, X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val = \
-                preprocess_all_sets(preprocessing_pipeline_steps, feature_names, X_train, y_train, X_test, y_test,
-                                    X_massbank_val_from_structure, X_massbank_val_from_sirius, y_massbank_val)
+                # Get the label counts
+                get_label_counts(y, y_train, y_test, y_massbank_val)
 
-            # Apply oversampling if configured
-            X_train, y_train = handle_oversampling(X_train, y_train)
-
-            # Get the label counts
-            get_label_counts(y, y_train, y_test, y_massbank_val)
-
-            # Build for each estimator a pipeline according to the configurations in the config file
-            for estimator in CONFIG_ESTIMATORS['estimators']:
-                try:
+                # Build for each estimator a pipeline according to the configurations in the config file
+                for estimator in CONFIG_ESTIMATORS['estimators']:
                     start_time = datetime.now()
 
                     # Init a new folder for this estimator
@@ -133,21 +134,27 @@ if __name__ == '__main__':
                     elapsed = round((datetime.now() - start_time).total_seconds(), 2)
                     LOGGER.info(f"Done {estimator['name']} >> {elapsed} seconds.\n{'=' * 100}\n")
 
-                except Exception as e:
-                    traceback_info = traceback.format_exc()
-                    report_exception(e, traceback_info, estimator)
+                    # Calculate the elapsed time
+                    elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
+                    hours, remainder = divmod(elapsed_seconds, 3600)
+                    minutes, seconds = divmod(remainder, 60)
+                    elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
 
-                # Calculate the elapsed time
-                elapsed_seconds = round((datetime.now() - START_TIME).total_seconds(), 2)
-                hours, remainder = divmod(elapsed_seconds, 3600)
-                minutes, seconds = divmod(remainder, 60)
-                elapsed_formatted = f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}"
+                    # Write a success flag file to the aeid folder
+                    path = os.path.join(LOG_PATH, f"{aeid}", "success.txt")
+                    with open(path, "w") as file:
+                        file.write("SUCCESS")
 
-                LOGGER.info(f"Finished {estimator}: Total time >> {elapsed_formatted}\n")
+                    LOGGER.info(f"Finished {estimator}: Total time >> {elapsed_formatted}\n")
 
         except Exception as e:
             traceback_info = traceback.format_exc()
             report_exception(e, traceback_info, aeid)
+            
+            # Write a failed flag file to the aeid folder
+            path = os.path.join(LOG_PATH, f"{aeid}", "failed.txt")
+            with open(path, "w") as file:
+                file.write("FAILED")
 
 
     # Calculate the elapsed time
