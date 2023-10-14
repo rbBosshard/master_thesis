@@ -14,7 +14,7 @@ Even though there are over 275 million known chemical compounds registered by th
     \toprule
     Origin/Usage & Class & Examples & Related Issues \\
     \midrule
-    Industrial & Solvents & Tetrachloromethane & Hepatotoxic \\
+    Industrial & Solvents & Tetrachloromethane & Hepatotoxicity \\
     Chemicals & Intermediates & Methyl-t-butylether & Drinking-water-quality \\ 
     & Petrochemicals & BTEX & Cancer \\ 
     \midrule
@@ -56,7 +56,7 @@ In environmental monitoring, the application of nontarget HRMS/MS has notably im
     
 \end{itemize}
 
-When it comes to prioritizing unidentified compounds for further in-depth testing and identification, the standard approach has been to rely on signal intensity from fragmentation data. However, this approach tends to fall short in delivering an accurate assessment of environmental exposures because the signal intensity may not relate proportionally to the compound's concentration in the sample. Furthermore this approach overlooks the toxicological factors essential for prioritizing compounds with concers related to environmental hazards. As a result, substances with the potential for severe ecological consequences, such as endocrine-disrupting compounds, often go undetected because of their low abundance, even though they exhibit high levels of toxicity. Hence, a pressing need exists for alternative approaches to prioritize unidentified nontarget HRMS/MS signals based on their hazard potential. By incorporating relevant toxicity factors into the equation:
+When it comes to prioritizing unidentified compounds for further in-depth testing and identification, the standard approach has been to rely on signal intensity from fragmentation data. However, this approach tends to fall short in delivering an accurate assessment of environmental exposures because the signal intensity may not relate proportionally to the compound's concentration in the sample. Furthermore this approach overlooks the toxicological factors essential for prioritizing compounds with concerns related to environmental hazards. As a result, substances with the potential for severe ecological consequences, such as endocrine-disrupting compounds, often go undetected because of their low abundance, even though they exhibit high levels of toxicity. Hence, a pressing need exists for alternative approaches to prioritize unidentified nontarget HRMS/MS signals based on their hazard potential. By incorporating relevant toxicity factors into the equation:
 
 \begin{equation}
     \text{Risk} = \text{Hazard} \times \text{Exposure}
@@ -105,7 +105,7 @@ In response to the pressing need for a more hazard-driven and inclusive assessme
 
 The main objective of this thesis is to contribute to the development of an efficient MLinvitroTox framework for predicting compound toxicity across multiple endpoints. The goal is to enhance the integration of MLinvitroTox by creating an automated pipeline in the \texttt{Python} programming language. This pipeline is designed to efficiently address the inherent complexities associated with modeling and processing heterogeneous datasets. In this context, the primary focus is on elevating the quality of curating and preparing toxicological data, with a particular emphasis on streamlining the entire process. This process begins with raw concentration-response series data and ultimately leads to the generation of conclusive toxicity predictions. The ultimate output is expected to comprise \emph{toxicity fingerprints} that encapsulate the predicted toxicity from HRMS/MS environmental samples for the relevant endpoints of interest. These generated toxicity fingerprints will offer crucial insights for the prioritization process, aiding in the identification of the most hazardous compounds present in environmental samples.
 
-One notable contraint of the existing framework lies in its binary \emph{hitcall} when predicting the toxicity of specific endpoints. It categorizes compounds as either toxic or non-toxic without accounting for variations in toxicity severity. In the long term, it is essential to adopt a more refined approach that can capture the nuanced continuum of toxicity. This thesis endeavors to overcome this limitation by developing a pipeline capable of forecasting toxicity across numerous endpoints, employing continuous hitcalls.
+One notable constraint of the existing framework lies in its binary \emph{hitcall} when predicting the toxicity of specific endpoints. It categorizes compounds as either toxic or non-toxic without accounting for variations in toxicity severity. In the long term, it is essential to adopt a more refined approach that can capture the nuanced continuum of toxicity. This thesis endeavors to overcome this limitation by developing a pipeline capable of forecasting toxicity across numerous endpoints, employing continuous hitcalls.
 
 
 

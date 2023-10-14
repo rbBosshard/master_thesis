@@ -7,7 +7,7 @@ ignore_warnings: False
 
 target_variables: [hitcall, hitcall_c]  # [hitcall, hitcall_c]
 
-ml_algorithms: [classification, regression] # [classification, regression]
+ml_algorithms: [classification] # [classification, regression]
 
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 

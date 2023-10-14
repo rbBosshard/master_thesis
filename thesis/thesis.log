@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  12 OCT 2023 18:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  14 OCT 2023 15:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1245,30 +1245,30 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 111.
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 112.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
  (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count555
@@ -1298,31 +1298,31 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )) (c:/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 111.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 112.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 111.
+Package hyperref Info: Link coloring ON on input line 112.
  (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
 
 \c@lstlisting=\count561
-LaTeX Info: Redefining \microtypecontext on input line 111.
-Package microtype Info: Applying patch `item' on input line 111.
-Package microtype Info: Applying patch `toc' on input line 111.
-Package microtype Info: Applying patch `eqnum' on input line 111.
-Package microtype Info: Applying patch `footnote' on input line 111.
-Package microtype Info: Applying patch `verbatim' on input line 111.
+LaTeX Info: Redefining \microtypecontext on input line 112.
+Package microtype Info: Applying patch `item' on input line 112.
+Package microtype Info: Applying patch `toc' on input line 112.
+Package microtype Info: Applying patch `eqnum' on input line 112.
+Package microtype Info: Applying patch `footnote' on input line 112.
+Package microtype Info: Applying patch `verbatim' on input line 112.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 111.
+LaTeX Info: Redefining \showhyphens on input line 112.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1342,12 +1342,12 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 111.
-Package biblatex Info: Reference segment=0 on input line 111.
+Package biblatex Info: Reference section=0 on input line 112.
+Package biblatex Info: Reference segment=0 on input line 112.
 <eth-template/ETHlogo.pdf, id=160, 179.67125pt x 45.16875pt>
 File: eth-template/ETHlogo.pdf Graphic file (type pdf)
 <use eth-template/ETHlogo.pdf>
-Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 121.
+Package pdftex.def Info: eth-template/ETHlogo.pdf  used on input line 122.
 (pdftex.def)             Requested size: 179.67079pt x 45.16862pt.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -1360,7 +1360,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.126 \newpage
+l.127 \newpage
                [1
 
 {c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}] (./chapters/achnowledgements.tex) [2] (./thesis.toc
@@ -1493,92 +1493,93 @@ Package pdftex.def Info: figures/cytotoxicity.png  used on input line 46.
  [10]) (./chapters/related_work.tex [11 <./figures/cytotoxicity.png>] [12
 
 ]) (./chapters/material_and_methods.tex [13]
-<figures/toxcast_db_annotations_recolored.png, id=382, 455.301pt x 293.898pt>
-File: figures/toxcast_db_annotations_recolored.png Graphic file (type png)
-<use figures/toxcast_db_annotations_recolored.png>
-Package pdftex.def Info: figures/toxcast_db_annotations_recolored.png  used on input line 9.
-(pdftex.def)             Requested size: 421.0pt x 271.76617pt.
+<figures/assay.png, id=381, 1254.6875pt x 879.285pt>
+File: figures/assay.png Graphic file (type png)
+<use figures/assay.png>
+Package pdftex.def Info: figures/assay.png  used on input line 9.
+(pdftex.def)             Requested size: 421.0pt x 295.03525pt.
  [14
 
-]
-<figures/CRS.png, id=402, 944.328pt x 474.573pt>
+] [15 <./figures/assay.png>]
+<figures/CRS.png, id=408, 944.328pt x 474.573pt>
 File: figures/CRS.png Graphic file (type png)
 <use figures/CRS.png>
-Package pdftex.def Info: figures/CRS.png  used on input line 29.
+Package pdftex.def Info: figures/CRS.png  used on input line 28.
 (pdftex.def)             Requested size: 421.0pt x 211.57173pt.
 
-Underfull \hbox (badness 1609) in paragraph at lines 30--30
+Underfull \hbox (badness 1609) in paragraph at lines 29--29
 []\OT1/cmss/bx/n/9 (+20) Figure 4.2: |\OT1/cmss/m/n/9 (+20) The CRS be-longs to \OT1/cmss/m/sl/9 (+20) Diofenolan \OT1/cmss/m/n/9 (+20) (DTXSID2041884), tested in the as-say end-point
  []
 
-[15 <./figures/toxcast_db_annotations_recolored.png>] [16 <./figures/CRS.png>]
-<figures/fit_models.png, id=425, 829.59938pt x 594.22pt>
+[16 <./figures/CRS.png>]
+<figures/fit_models.png, id=424, 829.59938pt x 594.22pt>
 File: figures/fit_models.png Graphic file (type png)
 <use figures/fit_models.png>
-Package pdftex.def Info: figures/fit_models.png  used on input line 98.
+Package pdftex.def Info: figures/fit_models.png  used on input line 97.
 (pdftex.def)             Requested size: 378.89743pt x 271.3951pt.
-<figures/POD.png, id=429, 664.28175pt x 411.939pt>
+ [17] [18 <./figures/fit_models.png>]
+<figures/POD.png, id=447, 664.28175pt x 411.939pt>
 File: figures/POD.png Graphic file (type png)
 <use figures/POD.png>
-Package pdftex.def Info: figures/POD.png  used on input line 114.
+Package pdftex.def Info: figures/POD.png  used on input line 113.
 (pdftex.def)             Requested size: 202.0782pt x 125.3112pt.
-<figures/inactive_and_no_pod.png, id=430, 863.02425pt x 591.4095pt>
+<figures/inactive_and_no_pod.png, id=448, 863.02425pt x 591.4095pt>
 File: figures/inactive_and_no_pod.png Graphic file (type png)
 <use figures/inactive_and_no_pod.png>
-Package pdftex.def Info: figures/inactive_and_no_pod.png  used on input line 121.
+Package pdftex.def Info: figures/inactive_and_no_pod.png  used on input line 120.
 (pdftex.def)             Requested size: 202.0782pt x 138.47589pt.
- [17] [18 <./figures/fit_models.png>] [19 <./figures/POD.png> <./figures/inactive_and_no_pod.png>]
-<figures/presence_matrix_all.png, id=468, 1407.45825pt x 698.61pt>
+ [19 <./figures/POD.png> <./figures/inactive_and_no_pod.png>] [20]
+<figures/presence_matrix_all.png, id=475, 1407.45825pt x 698.61pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
-Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 167.
+Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 166.
 (pdftex.def)             Requested size: 202.0782pt x 100.29915pt.
-<figures/presence_matrix_subset.png, id=469, 1404.447pt x 702.82574pt>
+<figures/presence_matrix_subset.png, id=476, 1404.447pt x 702.82574pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
-Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 174.
+Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 173.
 (pdftex.def)             Requested size: 202.0782pt x 101.11888pt.
- [20] [21 <./figures/presence_matrix_all.png> <./figures/presence_matrix_subset.png>]
-<figures/aeid_acid_aid.png, id=499, 352.9185pt x 91.542pt>
+ [21 <./figures/presence_matrix_all.png> <./figures/presence_matrix_subset.png>] [22]
+<figures/aeid_acid_aid.png, id=507, 352.9185pt x 91.542pt>
 File: figures/aeid_acid_aid.png Graphic file (type png)
 <use figures/aeid_acid_aid.png>
-Package pdftex.def Info: figures/aeid_acid_aid.png  used on input line 229.
+Package pdftex.def Info: figures/aeid_acid_aid.png  used on input line 228.
 (pdftex.def)             Requested size: 336.80128pt x 87.36389pt.
- [22]
-<figures/curve_surfer.png, id=512, 793.46437pt x 590.205pt>
+ [23 <./figures/aeid_acid_aid.png>]
+<figures/curve_surfer.png, id=517, 793.46437pt x 590.205pt>
 File: figures/curve_surfer.png Graphic file (type png)
 <use figures/curve_surfer.png>
-Package pdftex.def Info: figures/curve_surfer.png  used on input line 252.
+Package pdftex.def Info: figures/curve_surfer.png  used on input line 251.
 (pdftex.def)             Requested size: 421.0pt x 313.15839pt.
- [23 <./figures/aeid_acid_aid.png>] [24 <./figures/curve_surfer.png>]
-<figures/ml_dataset.png, id=530, 660.66824pt x 264.38776pt>
+ [24 <./figures/curve_surfer.png>]
+<figures/ml_dataset.png, id=528, 660.66824pt x 264.38776pt>
 File: figures/ml_dataset.png Graphic file (type png)
 <use figures/ml_dataset.png>
-Package pdftex.def Info: figures/ml_dataset.png  used on input line 267.
+Package pdftex.def Info: figures/ml_dataset.png  used on input line 266.
 (pdftex.def)             Requested size: 336.80128pt x 134.78352pt.
-<figures/Project_overview.png, id=532, 862.1811pt x 614.7768pt>
+<figures/Project_overview.png, id=530, 862.1811pt x 614.7768pt>
 File: figures/Project_overview.png Graphic file (type png)
 <use figures/Project_overview.png>
-Package pdftex.def Info: figures/Project_overview.png  used on input line 277.
+Package pdftex.def Info: figures/Project_overview.png  used on input line 276.
 (pdftex.def)             Requested size: 421.0pt x 300.19261pt.
-<figures/Project_overview_train.png, id=534, 862.1811pt x 614.7768pt>
+<figures/Project_overview_train.png, id=532, 862.1811pt x 614.7768pt>
 File: figures/Project_overview_train.png Graphic file (type png)
 <use figures/Project_overview_train.png>
-Package pdftex.def Info: figures/Project_overview_train.png  used on input line 287.
+Package pdftex.def Info: figures/Project_overview_train.png  used on input line 286.
 (pdftex.def)             Requested size: 421.0pt x 300.19261pt.
  [25 <./figures/ml_dataset.png>] [26 <./figures/Project_overview.png (PNG copy)>] [27 <./figures/Project_overview_train.png (PNG copy)>]
-<figures/Massbank_overlap.png, id=561, 702.625pt x 451.6875pt>
+<figures/Massbank_overlap.png, id=560, 702.625pt x 451.6875pt>
 File: figures/Massbank_overlap.png Graphic file (type png)
 <use figures/Massbank_overlap.png>
-Package pdftex.def Info: figures/Massbank_overlap.png  used on input line 322.
+Package pdftex.def Info: figures/Massbank_overlap.png  used on input line 321.
 (pdftex.def)             Requested size: 202.0782pt x 129.90395pt.
-<figures/activity_ratio_comparison.png, id=562, 631.158pt x 489.027pt>
+<figures/activity_ratio_comparison.png, id=561, 631.158pt x 489.027pt>
 File: figures/activity_ratio_comparison.png Graphic file (type png)
 <use figures/activity_ratio_comparison.png>
-Package pdftex.def Info: figures/activity_ratio_comparison.png  used on input line 329.
+Package pdftex.def Info: figures/activity_ratio_comparison.png  used on input line 328.
 (pdftex.def)             Requested size: 202.0782pt x 156.56645pt.
- [28 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]) (./chapters/results_discussion.tex [29]
-<figures/confusion_matrix_metrics.png, id=575, 853.1875pt x 239.89626pt>
+) (./chapters/results_discussion.tex [28] [29 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]
+<figures/confusion_matrix_metrics.png, id=574, 853.1875pt x 239.89626pt>
 File: figures/confusion_matrix_metrics.png Graphic file (type png)
 <use figures/confusion_matrix_metrics.png>
 Package pdftex.def Info: figures/confusion_matrix_metrics.png  used on input line 17.
@@ -1594,7 +1595,7 @@ Package microtype Info: Character `013' is missing
  [32
 
 ] [33] [34] (./chapters/appendix.tex [35]
-<figures/concentration_metric_distributions.png, id=704, 1512.852pt x 301.125pt>
+<figures/concentration_metric_distributions.png, id=703, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 43.
@@ -1604,7 +1605,7 @@ Package pdftex.def Info: figures/concentration_metric_distributions.png  used on
 Class memoir Warning: The material used in the headers is too large
 (27.2pt) for the given head height (13.6pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 153.
+(in both cases you will find help in the memoir manual). on input line 154.
 
 \tf@thm=\write6
 \openout6 = `thesis.thm'.
@@ -1627,18 +1628,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37585 strings out of 475188
- 699896 string characters out of 5767805
+ 37607 strings out of 475188
+ 699873 string characters out of 5767805
  1941248 words of memory out of 5000000
- 57499 multiletter control sequences out of 15000+600000
- 634509 words of font info for 606 fonts, out of 8000000 for 9000
+ 57501 multiletter control sequences out of 15000+600000
+ 636589 words of font info for 620 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,17n,125p,2301b,2790s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (42 pages, 10545577 bytes).
+Output written on thesis.pdf (42 pages, 9991759 bytes).
 PDF statistics:
- 826 PDF objects out of 1000 (max. 8388607)
- 690 compressed objects within 7 object streams
+ 825 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
  172 named destinations out of 1000 (max. 500000)
- 123308 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 129452 words of extra memory for PDF output out of 154059 (max. 10000000)
 

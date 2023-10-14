@@ -40,7 +40,7 @@ if __name__ == '__main__':
             ML_ALGORITHM, CONFIG_ESTIMATORS = init_ml_algo(ml_algorithm)
 
             # Iterate through aeids_target_assays and launch each iteration in a separate process
-            for aeid in [97]:  #aeids_target_assays[:]:  # [97]: #
+            for aeid in aeids_target_assays[190:]:  # [97]: #
                 try:
                     # Init aeid
                     init_aeid(aeid)
