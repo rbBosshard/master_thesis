@@ -70,7 +70,7 @@ with st.spinner(f"Loading.."):
                                         showscale=showscale,
                                        colorbar=dict(tickvals=[0, 1], ticktext=["Absent   ", "Present   "])))
 
-            font_size = 60  # Good for 33% zoom in browser (laptop resolution)
+            font_size = 120  # Good for 33% zoom in browser (laptop resolution)
             if not EXPORT:
                 fig.update_layout(
                     title=f"Presence matrix",
@@ -79,13 +79,16 @@ with st.spinner(f"Loading.."):
                 )
 
             fig.update_layout(
-                yaxis=dict(autorange="reversed", tickfont=dict(size=font_size//2)),  # Adjust label font size
-                xaxis=dict(tickfont=dict(size=font_size//2)),  # Hide x-axis tick labels
+                yaxis=dict(autorange="reversed", tickfont=dict(size=(font_size-10))),  # Adjust label font size
+                xaxis=dict(tickfont=dict(size=font_size-10)),  # Hide x-axis tick labels
             )
 
             fig.update_xaxes(title_text="Compound Index", title_font=dict(size=font_size))
             fig.update_yaxes(title_text="Assay Endpoint Index", title_font=dict(size=font_size))
+            # set tick labels font size in x axis and y axis
 
+
+            
             st.plotly_chart(fig, use_container_width=True)
 
             df = df.T

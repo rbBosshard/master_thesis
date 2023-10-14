@@ -129,11 +129,12 @@ def compute_massbank_validation_set_coverage(COLLECT_STATS=1, COMPUTE_PRESENCE_M
             plt.scatter(merged_df['hit_ratio_df1'], merged_df['hit_ratio_df2'], marker='o', alpha=0.5)
             # Add the equation line y = x
             max_value = max(merged_df['hit_ratio_df1'].max(), merged_df['hit_ratio_df2'].max())
-            plt.plot([0, max_value], [0, max_value], linestyle='solid', color='blue', label='Equal distribution of active compounds')
-            plt.ylabel('Active compounds in %: Massbank Validation Set')
-            plt.xlabel('Active compounds in %: Assay Endpoint')
+            plt.plot([0, max_value], [0, max_value], linestyle='solid', color='blue', label='Equal distribution of active compounds in both validation sets')
+            plt.ylabel('Active compounds in %: Massbank Validation Set', fontsize=14)
+            plt.xlabel('Active compounds in %: Assay Endpoint', fontsize=16)
             plt.gca().xaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
             plt.gca().yaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
+            plt.tick_params(axis='both', labelsize=14) 
 
             plt.title('Active Compounds in % per Assay Endpoint vs. Massbank Validation Set')
             # plt.title('Representativeness of Validation Set')

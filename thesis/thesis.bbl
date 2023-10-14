@@ -1771,6 +1771,75 @@
       \verb https://www.frontiersin.org/articles/10.3389/ftox.2022.987848
       \endverb
     \endentry
+    \entry{feshuk2023}{article}{}
+      \name{author}{8}{}{%
+        {{hash=79677ed13a33cfdc9c0eddd897a81025}{%
+           family={Feshuk},
+           familyi={F\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=246af415cf006f2437431456c6b0102e}{%
+           family={Kolaczkowski},
+           familyi={K\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=195b7b9cdc7164ce8f8555e1308c694f}{%
+           family={Dunham},
+           familyi={D\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=761600d5ab1d98c8e7e73c587bc09e24}{%
+           family={Davidson-Fritz},
+           familyi={D\bibinithyphendelim F\bibinitperiod},
+           given={S.\bibnamedelimi E.},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=9585d300335b8127530646231d8adae9}{%
+           family={Carstens},
+           familyi={C\bibinitperiod},
+           given={K.\bibnamedelimi E.},
+           giveni={K\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=25289088678a4ae9c74df9275c8ab269}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=318ce133ba3beba42fc298cc94be2692}{%
+           family={Judson},
+           familyi={J\bibinitperiod},
+           given={R.\bibnamedelimi S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=cb986196da6739b6302b4e06d07437c3}{%
+           family={Paul\bibnamedelima Friedman},
+           familyi={P\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{633e960699771a7405de60656962a866}
+      \strng{fullhash}{b436c1111d87bac23e15e57934ea0f76}
+      \strng{bibnamehash}{633e960699771a7405de60656962a866}
+      \strng{authorbibnamehash}{633e960699771a7405de60656962a866}
+      \strng{authornamehash}{633e960699771a7405de60656962a866}
+      \strng{authorfullhash}{b436c1111d87bac23e15e57934ea0f76}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Introduction: The US Environmental Protection Agency Toxicity Forecaster (ToxCast) program makes in vitro medium- and high-throughput screening assay data publicly available for prioritization and hazard characterization of thousands of chemicals. The assays employ a variety of technologies to evaluate the effects of chemical exposure on diverse biological targets, from distinct proteins to more complex cellular processes like mitochondrial toxicity, nuclear receptor signaling, immune responses, and developmental toxicity. The ToxCast data pipeline (tcpl) is an open-source R package that stores, manages, curve-fits, and visualizes ToxCast data and populates the linked MySQL Database, invitrodb.Methods: Herein we describe major updates to tcpl and invitrodb to accommodate a new curve-fitting approach. The original tcpl curve-fitting models (constant, Hill, and gain-loss models) have been expanded to include Polynomial 1 (Linear), Polynomial 2 (Quadratic), Power, Exponential 2, Exponential 3, Exponential 4, and Exponential 5 based on BMDExpress and encoded by the R package dependency, tcplfit2. Inclusion of these models impacted invitrodb (beta version v4.0) and tcpl v3 in several ways: (1) long-format storage of generic modeling parameters to permit additional curve-fitting models; (2) updated logic for winning model selection; (3) continuous hit calling logic; and (4) removal of redundant endpoints as a result of bidirectional fitting.Results and discussion: Overall, the hit call and potency estimates were largely consistent between invitrodb v3.5 and 4.0. Tcpl and invitrodb provide a standard for consistent and reproducible curve-fitting and data management for diverse, targeted in vitro assay data with readily available documentation, thus enabling sharing and use of these data in myriad toxicology applications. The software and database updates described herein promote comparability across multiple tiers of data within the US Environmental Protection Agency CompTox Blueprint.}
+      \field{issn}{2673-3080}
+      \field{journaltitle}{Frontiers in Toxicology}
+      \field{title}{The ToxCast pipeline: updates to curve-fitting approaches and database structure}
+      \field{volume}{5}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.3389/ftox.2023.1275980
+      \endverb
+      \verb{urlraw}
+      \verb https://www.frontiersin.org/articles/10.3389/ftox.2023.1275980
+      \endverb
+      \verb{url}
+      \verb https://www.frontiersin.org/articles/10.3389/ftox.2023.1275980
+      \endverb
+    \endentry
     \entry{watt2018}{article}{}
       \name{author}{2}{}{%
         {{hash=b2e5961606ddfae78b79abab7f15c725}{%
