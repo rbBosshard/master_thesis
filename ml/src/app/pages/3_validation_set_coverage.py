@@ -21,6 +21,7 @@ with st.spinner(f"Loading.."):
         path = os.path.join(VALIDATION_COVERAGE_PLOTS_DIR_PATH, subset_ids_list_name,
                             f"presence_matrix{FILE_FORMAT}")
         df_presence_matrix = pd.read_parquet(path).T
+
         dfs_wrapped.append((subset_ids_list_name, df_coverage_info, df_presence_matrix))
 
     tabs = st.tabs([df_wrapped[0] for df_wrapped in dfs_wrapped])
@@ -72,10 +73,14 @@ with st.spinner(f"Loading.."):
 
             # fig.update_layout(title_text=f'overlap')
             fig.update_xaxes(type='category')
-            fig.update_traces(marker=dict(size=4), marker_symbol='circle-open', marker_color='black')
+            fig.update_traces(marker=dict(size=4), marker_symbol='circle-open')
             fig.update_xaxes(showticklabels=False,
                              title_text=f'Assay endpoints',
-                             title_font_size=18)
+                             title_font_size=20)
             fig.update_yaxes(title_text=f"# Compounds in Massbank validation set",
-                            title_font_size=18)
+                            title_font_size=20)
+            
+            # set y range from 0 to max value
+
+            fig.update_yaxes(range=[0, df_coverage_info['overlap'].max()+50])
             st.plotly_chart(fig)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  15 OCT 2023 02:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  15 OCT 2023 03:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1651,11 +1651,11 @@ File: figures/Project_overview_train.png Graphic file (type png)
 Package pdftex.def Info: figures/Project_overview_train.png  used on input line 301.
 (pdftex.def)             Requested size: 421.0pt x 300.19261pt.
  [25 <./figures/curve_surfer.png>] [26 <./figures/ml_dataset.png> <./figures/Project_overview.png (PNG copy)>] [27 <./figures/Project_overview_train.png (PNG copy)>] [28]
-<figures/Massbank_overlap.png, id=580, 526.96875pt x 338.76563pt>
+<figures/Massbank_overlap.png, id=580, 616.80438pt x 478.78876pt>
 File: figures/Massbank_overlap.png Graphic file (type png)
 <use figures/Massbank_overlap.png>
 Package pdftex.def Info: figures/Massbank_overlap.png  used on input line 338.
-(pdftex.def)             Requested size: 202.0782pt x 129.91083pt.
+(pdftex.def)             Requested size: 202.0782pt x 156.86108pt.
 <figures/activity_ratio_comparison.png, id=581, 763.05075pt x 594.42075pt>
 File: figures/activity_ratio_comparison.png Graphic file (type png)
 <use figures/activity_ratio_comparison.png>
@@ -1719,7 +1719,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  94i,16n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (42 pages, 10065604 bytes).
+Output written on thesis.pdf (42 pages, 10077935 bytes).
 PDF statistics:
  849 PDF objects out of 1000 (max. 8388607)
  714 compressed objects within 8 object streams
