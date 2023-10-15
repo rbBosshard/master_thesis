@@ -37,7 +37,7 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Global Chemicals Outlook II - From Legacies to Innovative Solutions: Implementing the 2030 Agenda for Sustainable Development - Synthesis Report}
+      \field{title}{{Global Chemicals Outlook II - From Legacies to Innovative Solutions: Implementing the 2030 Agenda for Sustainable Development - Synthesis Report}}
       \field{year}{2019}
       \verb{urlraw}
       \verb https://wedocs.unep.org/20.500.11822/27651
@@ -66,7 +66,7 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{Source of chemical information located in Columbus, Ohio, United States}
       \field{note}{https://www.cas.org/support/documentation/cas-databases}
-      \field{title}{Chemical Abstracts Service (CAS) is a division of the American Chemical Society}
+      \field{title}{{Chemical Abstracts Service (CAS) is a division of the American Chemical Society}}
       \field{year}{2023}
     \endentry
     \entry{schwarzenbach2006}{article}{}
@@ -119,7 +119,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science (New York, N.Y.)}
       \field{month}{09}
-      \field{title}{The Challenge of Micropollutants in Aquatic Systems}
+      \field{title}{{The Challenge of Micropollutants in Aquatic Systems}}
       \field{volume}{313}
       \field{year}{2006}
       \field{pages}{1072\bibrangedash 7}
@@ -159,7 +159,7 @@
       \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{European Green Deal - Research \& innovation call}
+      \field{title}{{European Green Deal - Research \& innovation call}}
       \field{year}{2021}
       \verb{doi}
       \verb 10.2777/33415
@@ -184,7 +184,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Communication from the Commission to the European Parliament, the Council, the European Economic and Social Committee and the Committee of the Regions - Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
-      \field{title}{EU Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}
+      \field{title}{{{EU} Chemicals Strategy for Sustainability Towards a Toxic-Free Environment}}
       \field{year}{2020}
       \verb{urlraw}
       \verb https://environment.ec.europa.eu/strategy/chemicals-strategy_en
@@ -226,7 +226,7 @@
       \field{journaltitle}{Chemical Reviews}
       \field{note}{PMID: 34415162}
       \field{number}{8}
-      \field{title}{High-Resolution Native Mass Spectrometry}
+      \field{title}{{High-Resolution Native Mass Spectrometry}}
       \field{volume}{122}
       \field{year}{2022}
       \field{pages}{7269\bibrangedash 7326}
@@ -280,7 +280,7 @@
       \field{journaltitle}{Environmental Science \& Technology}
       \field{note}{PMID: 28877430}
       \field{number}{20}
-      \field{title}{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}
+      \field{title}{{Nontarget Screening with High Resolution Mass Spectrometry in the Environment: Ready to Go?}}
       \field{volume}{51}
       \field{year}{2017}
       \field{pages}{11505\bibrangedash 11512}
@@ -371,7 +371,7 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Chemical Genomics Robot}
+      \field{title}{{Chemical Genomics Robot}}
       \field{year}{2009}
       \verb{urlraw}
       \verb https://en.wikipedia.org/wiki/High-throughput_screening#/media/File:Chemical_Genomics_Robot.jpg
@@ -398,7 +398,7 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{High Throughput Screening - Accelerating Drug Discovery Efforts}
+      \field{title}{{High Throughput Screening - Accelerating Drug Discovery Efforts}}
       \field{year}{2017}
       \verb{urlraw}
       \verb https://www.ddw-online.com/hts-a-strategy-for-drug-discovery-900-200008/
@@ -430,11 +430,10 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Nontarget high-resolution mass spectrometry screening (NTS HRMS/MS) can detect thousands of organic substances in environmental samples. However, new strategies are needed to focus time-intensive identification efforts on features with the highest potential to cause adverse effects instead of the most abundant ones. To address this challenge, we developed MLinvitroTox, a machine learning framework that uses molecular fingerprints derived from fragmentation spectra (MS2) for a rapid classification of thousands of unidentified HRMS/MS features as toxic/nontoxic based on nearly 400 target-specific and over 100 cytotoxic endpoints from ToxCast/Tox21. Model development results demonstrated that using customized molecular fingerprints and models, over a quarter of toxic endpoints and the majority of the associated mechanistic targets could be accurately predicted with sensitivities exceeding 0.95. Notably, SIRIUS molecular fingerprints and xboost (Extreme Gradient Boosting) models with SMOTE (Synthetic Minority Oversampling Technique) for handling data imbalance were a universally successful and robust modeling configuration. Validation of MLinvitroTox on MassBank spectra showed that toxicity could be predicted from molecular fingerprints derived from MS2 with an average balanced accuracy of 0.75. By applying MLinvitroTox to environmental HRMS/MS data, we confirmed the experimental results obtained with target analysis and narrowed the analytical focus from tens of thousands of detected signals to 783 features linked to potential toxicity, including 109 spectral matches and 30 compounds with confirmed toxic activity.}
       \field{journaltitle}{Environmental Science \& Technology}
       \field{note}{PMID: 37279189}
       \field{number}{0}
-      \field{title}{Machine Learning-Based Hazard-Driven Prioritization of Features in Nontarget Screening of Environmental High-Resolution Mass Spectrometry Data}
+      \field{title}{{Machine Learning-Based Hazard-Driven Prioritization of Features in Nontarget Screening of Environmental High-Resolution Mass Spectrometry Data}}
       \field{volume}{0}
       \field{year}{0}
       \field{pages}{null}
@@ -514,7 +513,7 @@
       \field{journaltitle}{Nature methods}
       \field{month}{4}
       \field{number}{4}
-      \field{title}{SIRIUS 4: a rapid tool for turning tandem mass spectra into metabolite structure information}
+      \field{title}{{SIRIUS 4: a rapid tool for turning tandem mass spectra into metabolite structure information}}
       \field{volume}{16}
       \field{year}{2019}
       \field{pages}{299\bibrangedash 302}
@@ -535,7 +534,7 @@
       \field{labeltitlesource}{title}
       \field{howpublished}{https://massbank.eu/MassBank/}
       \field{note}{Accessed: 2023}
-      \field{title}{MassBank: High Quality Mass Spectral Database}
+      \field{title}{{MassBank: High Quality Mass Spectral Database}}
     \endentry
     \entry{janela2022}{article}{}
       \name{author}{3}{}{%
@@ -568,7 +567,7 @@
       \field{issn}{1420-3049}
       \field{journaltitle}{Molecules}
       \field{number}{7}
-      \field{title}{Introducing a Chemically Intuitive Core-Substituent Fingerprint Designed to Explore Structural Requirements for Effective Similarity Searching and Machine Learning}
+      \field{title}{{Introducing a Chemically Intuitive Core-Substituent Fingerprint Designed to Explore Structural Requirements for Effective Similarity Searching and Machine Learning}}
       \field{volume}{27}
       \field{year}{2022}
       \verb{doi}
@@ -716,7 +715,7 @@
       \field{labeltitlesource}{title}
       \field{issn}{0887-2333}
       \field{journaltitle}{Toxicology in Vitro}
-      \field{title}{In vitro to in vivo extrapolation for high throughput prioritization and decision making}
+      \field{title}{{In vitro to in vivo extrapolation for high throughput prioritization and decision making}}
       \field{volume}{47}
       \field{year}{2018}
       \field{pages}{213\bibrangedash 227}
@@ -797,7 +796,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Frontiers in Public Health}
       \field{month}{05}
-      \field{title}{Systematic Organization of COVID-19 Data Supported by the Adverse Outcome Pathway Framework}
+      \field{title}{{Systematic Organization of COVID-19 Data Supported by the Adverse Outcome Pathway Framework}}
       \field{volume}{9}
       \field{year}{2021}
       \verb{doi}
@@ -975,7 +974,6 @@
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{{The first edition of Bioanalytical Tools in Water Quality Assessment was released in 2012. The field has exploded since and the second edition updates and reviews the application of bioanalytical tools for water quality assessment including surveillance monitoring. The book focuses on applications to water quality assessment ranging from wastewater to drinking water, including recycled water, as well as treatment processes and advanced water treatment. Emerging applications for other environmental matrices are also included. Bioanalytical Tools in Water Quality Assessment, Second Edition, not only demonstrates applications but also fills in the background knowledge in toxicology/ecotoxicology needed to appreciate these applications. Each chapter summarises fundamental material in a targeted way so that information can be applied to better understand the use of bioanalytical tools in water quality assessment.The book can be used by lecturers teaching academic and professional courses and also by risk assessors, regulators, experts, consultants, researchers and managers working in the water sector. It can also be a reference manual for environmental engineers, analytical chemists and toxicologists.Detailed descriptions of dose-response assessment, data reporting, mixture modelling and quality assurance/quality control are complemented by a series of online resources and tools to apply some of the principles and data methods explained in this book. This supplementary information is available at www.ufz.de/bioanalytical-tools.ISBN: 9781789061970 (Paperback)ISBN: 9781789061987 (eBook)}}
       \field{isbn}{9781789061987}
       \field{month}{06}
       \field{title}{{Bioanalytical Tools in Water Quality Assessment}}
@@ -1088,7 +1086,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{ACS Omega}
       \field{number}{51}
-      \field{title}{Machine Learning Toxicity Prediction: Latest Advances by Toxicity End Point}
+      \field{title}{{Machine Learning Toxicity Prediction: Latest Advances by Toxicity End Point}}
       \field{volume}{7}
       \field{year}{2022}
       \field{pages}{47536\bibrangedash 47546}
@@ -1242,7 +1240,7 @@
       \field{journaltitle}{Chemical Research in Toxicology}
       \field{note}{PMID: 33140634}
       \field{number}{2}
-      \field{title}{The Tox21 10K Compound Library: Collaborative Chemistry Advancing Toxicology}
+      \field{title}{{The Tox21 10K Compound Library: Collaborative Chemistry Advancing Toxicology}}
       \field{volume}{34}
       \field{year}{2021}
       \field{pages}{189\bibrangedash 216}
@@ -1301,9 +1299,8 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{A central assumption of all machine learning is that the training data are an informative subset of the true distribution we want to learn. Yet, this assumption may be violated in practice. Recently, learning from the molecular structures of small molecules has moved into the focus of the machine learning community. Usually, those small molecules are of biological interest, such as metabolites or drugs. Applications include prediction of toxicity, ligand binding or retention time.We investigate how well certain large-scale datasets cover the space of all known biomolecular structures. Investigation of coverage requires a sensible distance measure between molecular structures. We use a well-known distance measure based on solving the Maximum Common Edge Subgraph (MCES) problem, which agrees well with the chemical and biochemical intuition of similarity between compounds. Unfortunately, this computational problem is NP-hard, severely restricting the use of the corresponding distance measure in large-scale studies. We introduce an exact approach that combines Integer Linear Programming and intricate heuristic bounds to ensure efficient computations and dependable results.We find that several large-scale datasets frequently used in this domain of machine learning are far from a uniform coverage of known biomolecular structures. This severely confines the predictive power of models trained on this data. Next, we propose two further approaches to check if a training dataset differs substantially from the distribution of known biomolecular structures. On the positive side, our methods may allow creators of large-scale datasets to identify regions in molecular structure space where it is advisable to provide additional training data.Competing Interest StatementThe authors have declared no competing interest.}
       \field{journaltitle}{bioRxiv}
-      \field{title}{Small molecule machine learning: All models are wrong, some may not even be useful}
+      \field{title}{{Small molecule machine learning: All models are wrong, some may not even be useful}}
       \field{year}{2023}
       \verb{doi}
       \verb 10.1101/2023.03.27.534311
@@ -1364,7 +1361,7 @@
       \field{journaltitle}{Environmental Science \& Technology}
       \field{note}{PMID: 36269851}
       \field{number}{22}
-      \field{title}{MS2Tox Machine Learning Tool for Predicting the Ecotoxicity of Unidentified Chemicals in Water by Nontarget LC-HRMS}
+      \field{title}{{MS2Tox Machine Learning Tool for Predicting the Ecotoxicity of Unidentified Chemicals in Water by Nontarget LC-HRMS}}
       \field{volume}{56}
       \field{year}{2022}
       \field{pages}{15508\bibrangedash 15517}
@@ -1452,7 +1449,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Cheminformatics}
       \field{number}{1}
-      \field{title}{The CompTox Chemistry Dashboard: a community data resource for environmental chemistry}
+      \field{title}{{The CompTox Chemistry Dashboard: a community data resource for environmental chemistry}}
       \field{volume}{9}
       \field{year}{2017}
       \field{pages}{61}
@@ -1513,7 +1510,7 @@
       \field{journaltitle}{Chemical Research in Toxicology}
       \field{note}{PMID: 33513003}
       \field{number}{2}
-      \field{title}{Trade-off Predictivity and Explainability for Machine-Learning Powered Predictive Toxicology: An in-Depth Investigation with Tox21 Data Sets}
+      \field{title}{{Trade-off Predictivity and Explainability for Machine-Learning Powered Predictive Toxicology: An in-Depth Investigation with Tox21 Data Sets}}
       \field{volume}{34}
       \field{year}{2021}
       \field{pages}{541\bibrangedash 549}
@@ -1579,7 +1576,7 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{ToxCast Assay Annotation Data User Guide}
+      \field{title}{{ToxCast Assay Annotation Data User Guide}}
       \field{year}{2014}
       \verb{urlraw}
       \verb https://www.epa.gov/sites/default/files/2015-08/documents/toxcast_assay_annotation_data_users_guide_20141021.pdf
@@ -1626,7 +1623,6 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{{Many applications of chemical screening are performed in concentration or dose–response mode, and it is necessary to extract appropriate parameters, including whether the chemical/assay pair is active and if so, what are concentrations where activity is seen. Typically, multiple mathematical models or curve shapes are tested against the data to assess the best fit. There are several commercial programs used for this purpose as well as open-source libraries. A widely used system for managing high-throughput screening (HTS) concentration–response data is tcpl (ToxCast Pipeline). The current implementation of tcpl has the concentration–response modeling code tightly integrated with the data management and databasing aspects of HTS data processing. Tcplfit2 is a stand-alone version of the curve-fitting and hitcalling core of tcpl that has been extended to include a large number of standard curve classes and to use benchmark dose modeling. This package will be useful for HTS concentration–response data such as high-throughput whole genome transcriptomics.tcplfit2 is written in R and is available from CRAN.}}
       \field{issn}{1367-4803}
       \field{journaltitle}{Bioinformatics}
       \field{month}{11}
@@ -1678,7 +1674,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{R package vignette for the tcpl package v3.0}
-      \field{title}{tcpl v3.0 Data Processing}
+      \field{title}{{tcpl v3.0 Data Processing}}
       \field{year}{2023}
       \verb{urlraw}
       \verb https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html
@@ -1755,10 +1751,9 @@
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Humans are exposed to large numbers of chemicals during their daily activities. To assess and understand potential health impacts of chemical exposure, investigators and regulators need access to reliable toxicity data. In particular, reliable toxicity data for a wide range of chemistries are needed to support development of new approach methodologies (NAMs) such as computational models, which offer increased throughput relative to traditional approaches and reduce or replace animal use. NAMs development and evaluation require chemically diverse data sets that are typically constructed by incorporating results from multiple studies into a single, integrated view; however, integrating data is not always a straightforward task. Primary study sources often vary in the way data are organized and reported. Metadata and information needed to support interoperability and provide context are often lacking, which necessitates literature research on the assay prior to attempting data integration. The Integrated Chemical Environment (ICE) was developed to support the development, evaluation, and application of NAMs. ICE provides curated toxicity data and computational tools to integrate and explore available information, thus facilitating knowledge discovery and interoperability. This paper describes the data curation workflow for integrating data into ICE. Data destined for ICE undergo rigorous harmonization, standardization, and formatting processes using both automated and manual expert-driven approaches. These processes improve the utility of the data for diverse analyses and facilitate application within ICE or a user’s external workflow while preserving data integrity and context. ICE data curation provides the structure, reliability, and accessibility needed for data to support chemical assessments.}
       \field{issn}{2673-3080}
       \field{journaltitle}{Frontiers in Toxicology}
-      \field{title}{Data curation to support toxicity assessments using the Integrated Chemical Environment}
+      \field{title}{{Data curation to support toxicity assessments using the Integrated Chemical Environment}}
       \field{volume}{4}
       \field{year}{2022}
       \verb{doi}
@@ -1824,10 +1819,9 @@
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Introduction: The US Environmental Protection Agency Toxicity Forecaster (ToxCast) program makes in vitro medium- and high-throughput screening assay data publicly available for prioritization and hazard characterization of thousands of chemicals. The assays employ a variety of technologies to evaluate the effects of chemical exposure on diverse biological targets, from distinct proteins to more complex cellular processes like mitochondrial toxicity, nuclear receptor signaling, immune responses, and developmental toxicity. The ToxCast data pipeline (tcpl) is an open-source R package that stores, manages, curve-fits, and visualizes ToxCast data and populates the linked MySQL Database, invitrodb.Methods: Herein we describe major updates to tcpl and invitrodb to accommodate a new curve-fitting approach. The original tcpl curve-fitting models (constant, Hill, and gain-loss models) have been expanded to include Polynomial 1 (Linear), Polynomial 2 (Quadratic), Power, Exponential 2, Exponential 3, Exponential 4, and Exponential 5 based on BMDExpress and encoded by the R package dependency, tcplfit2. Inclusion of these models impacted invitrodb (beta version v4.0) and tcpl v3 in several ways: (1) long-format storage of generic modeling parameters to permit additional curve-fitting models; (2) updated logic for winning model selection; (3) continuous hit calling logic; and (4) removal of redundant endpoints as a result of bidirectional fitting.Results and discussion: Overall, the hit call and potency estimates were largely consistent between invitrodb v3.5 and 4.0. Tcpl and invitrodb provide a standard for consistent and reproducible curve-fitting and data management for diverse, targeted in vitro assay data with readily available documentation, thus enabling sharing and use of these data in myriad toxicology applications. The software and database updates described herein promote comparability across multiple tiers of data within the US Environmental Protection Agency CompTox Blueprint.}
       \field{issn}{2673-3080}
       \field{journaltitle}{Frontiers in Toxicology}
-      \field{title}{The ToxCast pipeline: updates to curve-fitting approaches and database structure}
+      \field{title}{{The ToxCast pipeline: updates to curve-fitting approaches and database structure}}
       \field{volume}{5}
       \field{year}{2023}
       \verb{doi}
@@ -1869,7 +1863,7 @@
       \field{journaltitle}{PLOS ONE}
       \field{month}{07}
       \field{number}{7}
-      \field{title}{Uncertainty quantification in ToxCast high throughput screening}
+      \field{title}{{Uncertainty quantification in ToxCast high throughput screening}}
       \field{volume}{13}
       \field{year}{2018}
       \field{pages}{1\bibrangedash 23}
@@ -1919,7 +1913,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Electronics}
       \field{month}{01}
-      \field{title}{Alleviating Class-Imbalance Data of Semiconductor Equipment Anomaly Detection Study}
+      \field{title}{{Alleviating Class-Imbalance Data of Semiconductor Equipment Anomaly Detection Study}}
       \field{volume}{12}
       \field{year}{2023}
       \field{pages}{585}

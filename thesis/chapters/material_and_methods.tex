@@ -198,7 +198,7 @@ The investigated assay endpoints are enriched with external annotations attribut
 \end{enumerate}
 
 \subsection{Main step}
-The pytcpl main pipeline is similar to the \texttt{R}-based tcpl+tcplFit2 pipeline, with the exception of the curve fitting stage where the pytcpl pipeline made a notable modification by including a novel model the removal of Exponential 3 model. The exclusion is a consequence of its infrequent selection as the winning model within the tcpl pipeline, indicating limited effectiveness in model fitting, as outlined in~\cite{feshuk2023}. Furthermore, an additional Gain-Loss 2 model was introduced during the curve-fitting stage. This model has one model parameter less than the Gain-Loss 1 model, which helps mitigate the risk of overfitting CRS data, making it less susceptible to outliers. Table~\ref{table:pytcpl_models} provides an overview of these changes within the pytcpl pipeline for reference.
+The pytcpl main pipeline is similar to the \texttt{R}-based tcpl+tcplFit2 pipeline, with the exception of the curve fitting stage where the pytcpl pipeline made a notable modification by including a novel model the removal of the Exponential 3 model. The exclusion is a consequence of its infrequent selection as the winning model within the tcpl pipeline, indicating limited effectiveness in model fitting, as outlined in~\cite{feshuk2023}. Furthermore, an additional Gain-Loss 2 model was introduced during the curve-fitting stage. This model has one model parameter less than the Gain-Loss 1 model, which helps mitigate the risk of overfitting CRS data, making it less susceptible to outliers. Table~\ref{table:pytcpl_models} provides an overview of these changes within the pytcpl pipeline for reference.
 
 \begin{table}
     \caption{pytcpl Model Updates}~\label{table:pytcpl_models}
@@ -284,7 +284,7 @@ The binary input features for the model are molecular fingerprints with $2362$ b
 \end{figure}
 
 
-The machine learning pipeline is structured into three main stages: model training, model evaluation and model application. The following sections and the Figure illustrated in Figure~\ref{fig:Project_overview} provide a detailed description of each stage.
+The machine learning pipeline is structured into three main stages: model training, model evaluation and model application. The following sections and the diagram illustrated in Figure~\ref{fig:Project_overview} provide a detailed description of each stage.
 
 \begin{figure}
     \centering
@@ -294,7 +294,7 @@ The machine learning pipeline is structured into three main stages: model traini
 \end{figure}
 
 \subsection{Training}
-The train stage is summarized in Figure~\ref{fig:Project_overview_train} and involves the generation of individual machine learning models for each assay endpoint. Each model is trained on a subset of the dataset with a 80/20 train-validation split. 
+The train stage is summarized in Figure~\ref{fig:Project_overview_train} and involves the generation of individual machine learning models for each assay endpoint. Each model is trained on a subset of the dataset with an 80/20 train-validation split. 
 
 \begin{figure} 
     \centering
@@ -304,7 +304,7 @@ The train stage is summarized in Figure~\ref{fig:Project_overview_train} and inv
 \end{figure}
 
 \subsubsection{Feature Selection}
-We applied feature selection\footnote{\texttt{sklearn.feature\_selection.SelectFromModel}} using either a xgboost or random forest model to narrow down important features. The specific number of selected fingerprint features is determined based on the set of features that surpass the mean feature importance threshold.
+We applied feature selection\footnote{\texttt{sklearn.feature\_selection.SelectFromModel}} using either a xgboost or random forest model to narrow down the assay-endpoint relevant fingerprint features. The number of selected features is based on those features that exceed the mean feature importance threshold. All subsequent estimators are trained on these selected features.
 
 \subsubsection{Model Selection}
 The following supervised machine learning models from the \texttt{sklearn} library were considered: 
@@ -323,10 +323,10 @@ For every machine learning model, the selection process is based on a grid searc
 To assess the performance of our trained models, we used two separate validation sets that were not part of the training data:
 
 \begin{enumerate}
-    \item The first straightforward validation set was used to evaluate how well the the best estimator found by the grid search 5-fold cross-validation generalizes for unseen compounds. This set was randomly sampled from the tested compounds in the specific assay endpoints, ensuring that the number of active and inactive compounds was balanced.
-    \item The MassBank validation set, as the second validation set, was used to evaluate the model's generalization capabilities, focusing on the domain gap between chemical structure space and fragmentation spectra. This validation set comprises compounds with both actual and SIRIUS-predicted fingerprints originating from MassBank spectra data. This dual fingerprint dataset enables the evaluation of the model's performance on both the actual and predicted fingerprints. In this context, the accuracy of SIRIUS framework's fingerprint predictions plays a critical role in assessing how well the model performs when applied to environmental samples. 
+    \item The first straightforward validation set was used to evaluate how well the best estimator found by the grid search 5-fold cross-validation generalizes for unseen compounds. This set was randomly sampled from the tested compounds in the specific assay endpoints, ensuring that the number of active and inactive compounds was balanced.
+    \item The MassBank validation set, as the second validation set, was used to evaluate the model's generalization capabilities, focusing on the domain gap between chemical structure space and fragmentation spectra. This validation set comprises compounds with both actual (from known structure) and SIRIUS-predicted fingerprints originating from MassBank spectra data. This dual fingerprint dataset enables the evaluation of the model's performance on both the actual and predicted fingerprints. In this context, the accuracy of SIRIUS framework's fingerprint predictions plays a critical role in assessing how well the model performs when applied to environmental samples. 
 
-    It's important to highlight that compounds susceptible to data leakage, which were previously used in training the SIRIUS+CSI:FingerID prediction model (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be exceptionally high because the model has already been exposed to and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data, resulting in two very similar MassBank validation sets.
+    It's important to highlight that compounds susceptible to data leakage, which were previously used in training the SIRIUS+CSI:FingerID prediction model (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless.
 
     After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation. Nevertheless, the size of the MassBank validation set can differ among various assay endpoints due to variations in the overlap between the compounds tested in MassBank spectral data and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:Massbank_validation}. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation in the validation set.
     
