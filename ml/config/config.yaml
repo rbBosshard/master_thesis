@@ -5,7 +5,7 @@ file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 ignore_warnings: False
 
-target_variables: [hitcall, hitcall_c]  # [hitcall, hitcall_c]
+target_variables: [hitcall_c]  # [hitcall, hitcall_c]
 
 ml_algorithms: [classification] # [classification, regression]
 

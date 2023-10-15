@@ -8,16 +8,13 @@ from ml.src.utils.helper import render_svg
 import streamlit as st
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-13_08-50-29"
+TARGET_RUN = "2023-10-14_16-38-47"
 
-target_values = [target_value for target_value in os.listdir(OUTPUT_DIR_PATH) if os.path.isdir(os.path.join(OUTPUT_DIR_PATH, target_value))]
-target_hitcall = st.sidebar.selectbox('Select Target Value', target_values)
+# Add a checkbox to the sidebar: Enable Reports
+report_is_enabled = st.sidebar.checkbox("Enable Reports")
 
-algos = [algo for algo in os.listdir(os.path.join(OUTPUT_DIR_PATH, target_hitcall)) if os.path.isdir(os.path.join(OUTPUT_DIR_PATH, target_hitcall, algo))]
-algo = st.sidebar.selectbox('Select ML supervised algorithm ', algos)
-
-logs_folder = os.path.join(OUTPUT_DIR_PATH, f"{target_hitcall}", f"{algo}")
-run_folder = st.sidebar.selectbox('Select Run', [run_folder for run_folder in os.listdir(logs_folder) if os.path.isdir(os.path.join(logs_folder, run_folder))])
+logs_folder = os.path.join(OUTPUT_DIR_PATH)
+run_folder = st.sidebar.selectbox('Select Run', [run_folder for run_folder in os.listdir(logs_folder)])
 
 folder = os.path.join(logs_folder, run_folder)
 
@@ -34,18 +31,23 @@ with open(os.path.join(folder, 'feature_importances_paths.json'), 'r') as fp:
 with open(os.path.join(folder, 'validation_results.json'), 'r') as fp:
     validation_results = json.load(fp)
 
+# Add a dropdown to the sidebar: Select single target variable
+selected_target_variable = st.sidebar.selectbox('Select Target Variable', list(validation_results.keys()))
+
+# Add a dropdown to the sidebar: Select single ml algorithm
+selected_ml_algorithm = st.sidebar.selectbox('Select ML Algorithm', list(validation_results[selected_target_variable].keys()))
 
 # Add a dropdown to the sidebar: Select single aeid
-selected_aeid = st.sidebar.selectbox('Select AEID', list(aeid_paths.keys()))
+selected_aeid = str(st.sidebar.selectbox('Select AEID', list(aeid_paths[selected_target_variable][selected_ml_algorithm].keys())))
 
 # Add a dropdown to the sidebar: Select single preprocessing model
-selected_preprocessing_model = st.sidebar.selectbox('Select Preprocessing Model', list(model_paths[selected_aeid].keys()))
+selected_preprocessing_model = st.sidebar.selectbox('Select Preprocessing Model', list(model_paths[selected_target_variable][selected_ml_algorithm][selected_aeid].keys()))
 
 # Add a dropdown to the sidebar: Select single estimator model
-selected_estimator_model = st.sidebar.selectbox('Select Estimator Model', list(model_paths[selected_aeid][selected_preprocessing_model].keys()))
+selected_estimator_model = st.sidebar.selectbox('Select Estimator Model', list(model_paths[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model].keys()))
 
 # Add a dropdown to the sidebar: Select single validation type
-selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(validation_results[selected_aeid][selected_preprocessing_model][selected_estimator_model].keys()))
+selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(validation_results[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model][selected_estimator_model].keys()))
 
 # # Add a dropdown to the sidebar: Select single classification threshold
 # selected_classification_threshold = st.sidebar.selectbox('Select Classification Threshold', list(validation_results[selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type].keys()))
@@ -54,7 +56,9 @@ selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(v
 
 st.title(f'Validation Results')
 info_data = {
-    "AEID": [selected_aeid],
+    "Target Variable": [selected_target_variable],
+    "ML Algorithm": [selected_ml_algorithm],
+    "aeid": [selected_aeid],
     "Feature Selection": [selected_preprocessing_model.split('_')[2]],
     "Estimator": [selected_estimator_model],
     "Validation Set": [selected_validation_type],
@@ -64,7 +68,7 @@ info_df = pd.DataFrame(info_data)
 st.dataframe(info_df, hide_index=True, use_container_width=True)
 
 # Plot the validation results
-validation_result = validation_results[selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type]
+validation_result = validation_results[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type]
 validation_results_df = pd.DataFrame(validation_result)
 
 
@@ -79,10 +83,11 @@ confusion_matrices_paths = {}
 reports = {}
 threshold_names = []
 threshold_values = []
-for classification_threshold in validation_results[selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type].keys():
-    cm_path = os.path.join(aeid_paths[selected_aeid], selected_preprocessing_model, selected_estimator_model, selected_validation_type, f'confusion_matrix_{classification_threshold}.svg')
+for classification_threshold in validation_results[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type].keys():
+    path_suffix = os.path.join(selected_preprocessing_model, selected_estimator_model, selected_validation_type)
+    cm_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][selected_aeid], path_suffix, f'cm_{classification_threshold}.svg')
     confusion_matrices_paths[classification_threshold] = cm_path
-    report_path = os.path.join(aeid_paths[selected_aeid], selected_preprocessing_model, selected_estimator_model, selected_validation_type, f'report_{classification_threshold}.csv')   
+    report_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][selected_aeid], path_suffix, f'report_{classification_threshold}.csv')   
     reports[classification_threshold] = pd.read_csv(report_path).reset_index(drop=True).rename(columns={'Unnamed: 0': 'class'})
     threshold_names.append(classification_threshold)
 
@@ -92,29 +97,38 @@ with st.container():
     col1, col2 = st.columns(2)
     with col1:
         i = 0
-        cm_path = confusion_matrices_paths[threshold_names[i]]
+        threshold = threshold_names[i]
+        cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
-        with st.expander("Show Report"):
-            st.dataframe(reports[i])
+        if report_is_enabled:
+            with st.expander("Show Report"):
+                st.dataframe(reports[threshold])
     with col2:
         i = 1
-        cm_path = confusion_matrices_paths[threshold_names[i]]
+        threshold = threshold_names[i]
+        cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
-        with st.expander("Show Report"):
-            st.dataframe(reports[i])
+        if report_is_enabled:
+            with st.expander("Show Report"):
+                st.dataframe(reports[threshold])
+
 with st.container():
     col1, col2 = st.columns(2)
     with col1:
         i = 2
-        cm_path = confusion_matrices_paths[threshold_names[i]]
+        threshold = threshold_names[i]
+        cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
-        with st.expander("Show Report"):
-            st.dataframe(reports[i])
+        if report_is_enabled:
+            with st.expander("Show Report"):
+                st.dataframe(reports[threshold])
     with col2:
         i = 3
-        cm_path = confusion_matrices_paths[threshold_names[i]]
+        threshold = threshold_names[i]
+        cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
-        with st.expander("Show Report"):
-            st.dataframe(reports[i])
+        if report_is_enabled:
+            with st.expander("Show Report"):
+                st.dataframe(reports[threshold])
 
 
