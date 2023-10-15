@@ -1,17 +1,17 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'thesis.blg'
-[123] biber-MSWIN64:340> INFO - === 
-[164] Biber.pm:419> INFO - Reading 'thesis.bcf'
-[272] Biber.pm:979> INFO - Found 32 citekeys in bib section 0
-[286] Biber.pm:4419> INFO - Processing section 0
-[299] Biber.pm:4610> INFO - Looking for bibtex file 'refs.bib' for section 0
-[362] bibtex.pm:1713> INFO - LaTeX decoding ...
-[411] bibtex.pm:1519> INFO - Found BibTeX data source 'refs.bib'
-[676] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[676] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[678] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
-[678] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[706] bbl.pm:660> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
-[740] bbl.pm:763> INFO - Output to thesis.bbl
-[740] Biber.pm:131> WARN - legacy month field 'April' in entry 'sirius2019' is not an integer - this will probably not sort properly.
-[740] Biber.pm:133> INFO - WARNINGS: 1
+[102] biber-MSWIN64:340> INFO - === 
+[144] Biber.pm:419> INFO - Reading 'thesis.bcf'
+[247] Biber.pm:979> INFO - Found 32 citekeys in bib section 0
+[261] Biber.pm:4419> INFO - Processing section 0
+[273] Biber.pm:4610> INFO - Looking for bibtex file 'refs.bib' for section 0
+[328] bibtex.pm:1713> INFO - LaTeX decoding ...
+[375] bibtex.pm:1519> INFO - Found BibTeX data source 'refs.bib'
+[620] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[620] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[622] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[622] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[651] bbl.pm:660> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
+[685] bbl.pm:763> INFO - Output to thesis.bbl
+[685] Biber.pm:131> WARN - legacy month field 'April' in entry 'sirius2019' is not an integer - this will probably not sort properly.
+[685] Biber.pm:133> INFO - WARNINGS: 1

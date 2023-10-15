@@ -162,6 +162,8 @@ The \texttt{pytcpl} pipeline adds an additional setup and post-processing step a
 \subsubsection{Subsetting Data}
 For a better data comprehension, the presence matrix denoted as $P \in {\{0, 1\}}^{m \times n}$ is introduced. In this matrix, rows (indexed by $i$) represent assay endpoints $a_i$, and columns (indexed by $j$) indicate whether testing was performed (1) or not performed (0) for compound $c_j$ in those endpoints. Due to selective compound testing across different assay endpoints, the matrix $P$ is sparse. For a visual representation of the presence matrix $P$ covering all assay endpoints and compounds in \textit{invitroDBv4.1}, refer to Figure~\ref{fig:presence_matrix_all}.
 
+In this thesis, we exclude \emph{biochemical in vitro} assays and focus solely on \emph{cell-based in vitro} assays that use intact cells (e.g.\ human primary cells and cell lines and rat primary liver cells) to assess cellular responses when exposed to test substances. Moreover, we exclusively considered assay endpoints that have been tested with a minimum of $\num{1000}$. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as \emph{the} dataset, which will be the focus of this thesis. 
+
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -182,7 +184,7 @@ For a better data comprehension, the presence matrix denoted as $P \in {\{0, 1\}
     ~\label{fig:presence_matrix}
 \end{figure}
 
-In this thesis, we exclusively considered assay endpoints that have been tested with a minimum of $\num{1000}$ compounds. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as \emph{the} dataset, which will be the focus of this thesis. 
+
 
 \subsubsection{Exernal Assay Annotation}
 The assay endpoints were tagged with external annotations that involve the attributed toxcity endpoint, the type of mechanistic target and the mode of action.
