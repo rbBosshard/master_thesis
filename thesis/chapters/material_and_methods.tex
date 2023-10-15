@@ -63,8 +63,7 @@ Concentration-response pairs, along with essential sample information such as we
 \subsection{Curve Fitting}
 Curve fitting involves the adjustment of mathematical models to best match observed data. Maximum Likelihood Estimation (MLE) is a statistical technique used to find parameter values that maximize the likelihood of observing the data within the model. The likelihood function represents the probability of observing the data given the model's parameters. The various curve fitting models investigated in \texttt{tcplFit2} are summarized in Table~\ref{tab:tcplfit2_models} and visually presented in Figure~\ref{fig:tcplfit2_models}.
 
-% \afterpage{
-%     \clearpage % Insert a page break before the table and figure
+
 \begin{table}
     \centering
     \begin{threeparttable}[b]
@@ -95,31 +94,28 @@ Curve fitting involves the adjustment of mathematical models to best match obser
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\textwidth]{figures/fit_models.png}
+    \includegraphics[width=0.98\textwidth]{figures/fit_models.png}
     \caption{Figure obtained from~\cite{tcplv3.0}.}
 ~\label{fig:tcplfit2_models}
 \end{figure}
 
-% \clearpage % Insert another page break after the table and figure
-% }
-
-In all models, it is presumed that the errors conform to a Student's t-distribution~\cite{tcplv3.0}. The presence of heavier tails in this t-distribution reduces the impact of outlier values, resulting in more resilient estimates compared to the frequently employed normal distribution. This robust model fitting approach eliminates the requirement for filtering out potential outliers before the fitting process. For a comprehensive explanation of the fitting procedure, please consult the official vignette\footnote{\url{https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html}}.
+In all models, it is presumed that the errors conform to a Student's $t$-distribution~\cite{tcplv3.0}. The presence of heavier tails in this t-distribution reduces the impact of outlier values, resulting in more resilient estimates compared to the frequently employed normal distribution. This robust model fitting approach eliminates the requirement for filtering out potential outliers before the fitting process. For a comprehensive explanation of the fitting procedure, please consult the official vignette\footnote{\url{https://cran.r-project.org/web/packages/tcpl/vignettes/Data_processing.html}}.
 
 The \emph{Akaike Information Criterion (AIC)} serves as the metric for assessing the goodness of fit of models, defined by the formula: $AIC = -2\log(L(\hat{\theta}, y)) + 2K$, where $L(\hat{\theta}, y)$ is the likelihood of the model $\theta$ given the data and $K$ is the number of model parameters. The model with the lowest AIC value is chosen as the \emph{winning} model. The winning model is then used to estimate the efficacy and potency of the compound. The potency estimates, also called \emph{point-of-departure (POD)} estimates, are derived from the fitted curve, identifying certain \emph{activity concentrations (AC)} at which the curve first reaches certain response levels. Central POD estimates are depicted graphically in Figure~\ref{fig:active_and_pod}.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/POD.png}
-        \caption{The Point of Departure (POD) (potency) estimates for the chemical \emph{Picoxystrobin} (DTXSID9047542) tested in the assay endpoint with $aeid=753$. The efficacy cutoff is defined at 25 percent-of-control activity. The winning fit model was the Hill function.~\emph{ACC}: The AC at the efficacy cutoff is $3.3 \mu M$.~\emph{AC50}: The AC at $50\%$ of the maximum response is $8.4 \mu M$.~\emph{ACtop}: The AC at the maximum response is $100 \mu M$.}
+        \caption{The Point of Departure (POD) potency)estimates for the chemical compound \emph{Picoxystrobin} (DTXSID9047542) tested in the assay endpoint with $aeid=753$. The efficacy cutoff is defined at $\sim25$ percent-of-control activity. The winning fit model was the Hill function.~\emph{ACC}: The AC at the efficacy cutoff is $3.3$ $\mu M$.~\emph{AC50}: The AC at $50\%$ of the maximum response is $8.4$ $\mu M$.~\emph{ACtop}: The AC at the maximum response is $100$ $\mu M$.}
     ~\label{fig:active_and_pod}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/inactive_and_no_pod.png}
-        \caption{The Point of Departure (POD) (potency) estimates are not available for the chemical compound \emph{PharmaGSID\_48518} (DTXSID9048518), also tested in the assay endpoint with $aeid=753$. In this case, it was unnecessary as no response reached or exceeded $80\%$ of the efficacy cutoff, clearly indicating the inactivity of the compound. In such scenarios, a calculation of POD estimates is not applicable.}
+        \caption{The Point of Departure (POD) potency estimates are not available for the chemical compound \emph{PharmaGSID\_48518} (DTXSID9048518), also tested in the assay endpoint with $aeid=753$. In this situation, it was unnecessary to fit curves as no response reached or exceeded $80\%$ of the efficacy cutoff, clearly indicating the inactivity of the compound. In such scenarios, a calculation of POD estimates is not applicable.}
         ~\label{fig:inactive_and_no_pod}
     \end{subfigure}
     \caption{Presence Matrix: assay endpoint-compound relationship.}
@@ -128,7 +124,7 @@ The \emph{Akaike Information Criterion (AIC)} serves as the metric for assessing
 
 
 \subsection{Hit Calling}
-A \emph{binary hitcall} hitcall simplifies the classification of the estimated activity for a specific compound tested in a particular assay endpoint and results in toxicity testing in a \emph{toxic} (hit) or \emph{non-toxic} (no hit) classification, often indicating whether the compound has reached a particular activity cutoff within a tested concentration range. It simplifies complex data into a straightforward result, making it easy to analyze and compare different compounds.
+A \emph{binary hitcall} hitcall simplifies the classification of the estimated activity for a specific compound tested in a particular assay endpoint and results in toxicity testing in a \emph{toxic} (hit) or \emph{non-toxic} (no hit) classification.
 
 The \emph{continuous hitcall}, on the other hand, provides a more nuanced evaluation of the likelihood that a compound is active. The \texttt{tcplFit2} package introduces a continuous hitcall, based on the product of the following three distinct probability values~\cite{sheffield2021}:
 
@@ -151,7 +147,7 @@ Finally, after processing, each CRS is assigned to an appropriate fit category b
 \subsection{Introduction} 
 This thesis introduces \texttt{pytcpl}\footnote{\url{https://github.com/rbBosshard/pytcpl}}, a streamlined \texttt{Python} repository inspired by the \texttt{R} packages \texttt{tcpl} and \texttt{tcplFit2}. This package was developed to accomodate customizable processing steps and facilitate interactive data visualization with an own \emph{Curve Surfer}\footnote{\url{https://pytcpl.streamlit.app/}}. The package optimizes data storage and generates compressed \texttt{Parquet} files of the relevant raw data and metadata from \emph{invitroDBv4.1}. Exclusively utilizing this repository eliminates the need for a complex and extensive database installation, rendering downstream analysis more accessible and efficient. It enables researchers who prefer \texttt{Python} to easily participate in data analysis and exploration, overcoming limitations associated with using \texttt{R} code.
 
-The \texttt{pytcpl} pipeline adds an additional setup and post-processing step around the main pipeline:
+The \texttt{pytcpl} pipeline adds a setup and post-processing step around the main pipeline:
 \begin{itemize}
     \item \textbf{Setup}: This step involves user-specified subsetting of assay endpoints, tagging assays with external assay annotations, enabling workload balancing for distributed processing and generating \texttt{Parquet} files from all raw and metadata, optionally for database decoupled analysis.
     \item \textbf{Main} (similar to \texttt{tcpl}+\texttt{tcplFit2}): This step involves cutoff determination, curve fitting, hit calling and flagging.
@@ -160,11 +156,11 @@ The \texttt{pytcpl} pipeline adds an additional setup and post-processing step a
 
 \subsection{Setup step}\label{sec:subset_data}
 \subsubsection{Subsetting Data}
-For a better data comprehension, the presence matrix denoted as $P \in {\{0, 1\}}^{m \times n}$ is introduced. In this matrix, rows (indexed by $i$) represent assay endpoints $a_i$, and columns (indexed by $j$) indicate whether testing was performed (1) or not performed (0) for compound $c_j$ in those endpoints. Due to selective compound testing across different assay endpoints, the matrix $P$ is sparse. For a visual representation of the presence matrix $P$ covering all assay endpoints and compounds in \textit{invitroDBv4.1}, refer to Figure~\ref{fig:presence_matrix_all}.
+For a better data comprehension, the presence matrix denoted as $P \in {\{0, 1\}}^{m \times n}$ is introduced. In this matrix, rows (indexed by $i$) represent assay endpoints $a_i$, and columns (indexed by $j$) indicate whether testing was performed (1) or not performed (0) for compound $c_j$ in those endpoints. Because of selective compound testing, the matrix P is sparse. For a visual representation of this presence matrix encompassing all assay endpoints and compounds in \textit{invitroDBv4.1}, refer to Figure~\ref{fig:presence_matrix_all}.
 
-In this thesis, we exclude \emph{biochemical in vitro} assays and focus solely on \emph{cell-based in vitro} assays that use intact cells (e.g.\ human primary cells and cell lines and rat primary liver cells) to assess cellular responses when exposed to test substances. Moreover, we exclusively considered assay endpoints that have been tested with a minimum of $\num{1000}$. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as \emph{the} dataset, which will be the focus of this thesis. 
+We exclude \emph{biochemical in vitro} assays and focus solely on \emph{cell-based in vitro} assays that use intact cells (e.g.\ human primary cells and cell lines and rat primary liver cells) to assess cellular responses when exposed to test substances. Moreover, we exclusively considered assay endpoints that have been tested with a minimum of $\num{1000}$. This selection criterion ensures the presence of adequate data for subsequent training of robust machine learning models. You can refer to Figure~\ref{fig:presence_matrix_subset} for a visual representation of the presence matrix $P$ which includes only this particular subset of assay endpoints. From this moment forward, we will refer to this specific subset as \emph{the} dataset, which will be the focus of this thesis. 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
@@ -176,7 +172,7 @@ In this thesis, we exclude \emph{biochemical in vitro} assays and focus solely o
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/presence_matrix_subset.png}
-        \caption{$P_{subset}$ covers a specific subset of relevant assay endpoints and compounds considered for this thesis, totaling $m =$ 345 assay endpoints and $n =$ 8'804 compounds. Assay endpoints with less then 1'000 tested compounds were omitted. There are 1'043'222 concentration-response series available.}
+        \caption{$P_{subset}$ covers a specific subset of relevant assay endpoints and compounds considered for this thesis, totaling $m =$ 345 assay endpoints and $n =$ 8'804 compounds. Assay endpoints with less than 1'000 compounds tested were omitted. There are 1'043'222 concentration-response series available.}
         ~\label{fig:presence_matrix_subset}
     \end{subfigure}
     \caption{Presence Matrix: In both (a) and (b), structured by ranking according to the number of compounds associated with each assay endpoint, with compounds sorted in descending order
@@ -185,10 +181,7 @@ In this thesis, we exclude \emph{biochemical in vitro} assays and focus solely o
 \end{figure}
 
 
-
-\subsubsection{Exernal Assay Annotation}
-The assay endpoints were tagged with external annotations that involve the attributed toxcity endpoint, the type of mechanistic target and the mode of action.
-
+\subsubsection{External Assay Annotation}
 The investigated assay endpoints are enriched with external annotations attributed by the Integrated Chemical Environment (ICE)~\cite{ice2022}, which provide valuable context and information about each endpoint. These annotations encompass the following aspects:
 
 \begin{enumerate}
@@ -202,7 +195,7 @@ The investigated assay endpoints are enriched with external annotations attribut
 \subsection{Main step}
 The \texttt{pytcpl} main pipeline is similar to the \texttt{R}-based \texttt{tcpl}+\texttt{tcplFit2} pipeline, with the exception of the curve fitting stage where the \texttt{pytcpl} pipeline made a notable modification by including a novel model the removal of the Exponential 3 model. The exclusion is a consequence of its infrequent selection as the winning model within the \texttt{tcpl} pipeline, indicating limited effectiveness in model fitting, as outlined in~\cite{feshuk2023}. Furthermore, an additional Gain-Loss 2 model was introduced during the curve-fitting stage. This model has one model parameter less than the Gain-Loss 1 model, which helps mitigate the risk of overfitting CRS data, making it less susceptible to outliers. Table~\ref{table:pytcpl_models} provides an overview of these changes within the \texttt{pytcpl} pipeline for reference.
 
-\begin{table}
+\begin{table}[h]
     \caption{\texttt{pytcpl} Model Updates}~\label{table:pytcpl_models}
     \centering
     \begin{threeparttable}[b]
@@ -228,21 +221,21 @@ Following the ICE guidelines\footnote{\url{https://ice.ntp.niehs.nih.gov/DATASET
 \subsubsection{Cytotoxicity Interference Reevaluation}
 As previously discussed in Chapter~\ref{chap:background}, the assessment of compound toxicity can be complicated by the presence of non-specific cytotoxic responses. In this section, we delve into the exploration of a method for reevaluating the reported hitcall status of active compounds, considering the estimated extent of cytotoxicity interference. The cytotoxicity of a compound in a target assay endpoint may be assessed by comparing the activity concentration at the efficacy cutoff, represented as $ACC_{\text{target}}$, with that of its corresponding viability assay endpoint counterpart (as exemplified in Table~\ref{fig:aeid_acid_aid}), referred to as $ACC_{\text{cyto}}$. 
 
-\begin{table}
+\begin{table}[h]
     \centering
     \caption{Each assay endpoint has an assay identifier (aid) used to match it with its viability counterpart that assesses cell loss. In this example, \emph{APR\_HepG2\_CellLoss\_24hr} (aeid=26) matches with aeid=38 and aeid=40. Similarly, \emph{APR\_HepG2\_CellLoss\_72hr} (aeid=46) matches with aeid=58 and aeid=60.}
     ~\label{fig:aeid_acid_aid}
-    \begin{tabular}{|l|l|l|l|l|}
-    \hline
+    \begin{tabular}{lllll}
+    \toprule
     aeid & assay\_endpoint\_name & aid & assay\_name & assay\_function\_type \\
-    \hline
+    \midrule
     26 & APR\_HepG2\_CellLoss\_24hr & 3 & APR\_HepG2\_24hr & \textbf{viability} \\
     38 & APR\_HepG2\_P-H2AX\_24hr & 3 & APR\_HepG2\_24hr & signaling \\
     40 & APR\_HepG2\_p53Act\_24hr & 3 & APR\_HepG2\_24hr & signaling \\
     46 & APR\_HepG2\_CellLoss\_72hr & 4 & APR\_HepG2\_72hr & \textbf{viability} \\
     58 & APR\_HepG2\_P-H2AX\_72hr & 4 & APR\_HepG2\_72hr & signaling \\
     60 & APR\_HepG2\_p53Act\_72hr & 4 & APR\_HepG2\_72hr & signaling \\
-    \hline
+    \bottomrule
     \end{tabular}
 \end{table}
 
@@ -253,19 +246,18 @@ The ACC is assumed to have a Gaussian error distribution. Cytotoxicity in terms 
 P(\text{cytotoxic}) = P(ACC_{\text{cyto}} - ACC_{\text{target}} \leq 0) = \Phi\left(\frac{ACC_{\text{cyto}} - ACC_{\text{target}}}{\sqrt{\text{SD}_{ACC_{\text{cyto}}}^2 + \text{SD}_{ACC_{\text{target}}}^2 }}\right)
 \]
     
-where $\Phi$ is the Gaussian cumulative distribution function. The standard deviations $\text{SD}_{ACC_{\text{cyto}}}$ and $\text{SD}_{ACC_{\text{target}}}$ are unknown but are estimated as $0.3 \log_{10}$ ${\mu M}$ units~\cite{watt2018}. 
-
-For the statistical approach with the cytotoxicity burst assays, $\text{SD}_{ACC_{\text{cyto}}}$ can be derived from the median absolute deviation (MAD) of the respective ACC values. Additionally, $P(\text{cytotoxic})$ is multiplied with the ratio of the number of cytotoxicity burst assay endpoints in which the compound exhibited activity ($n_{\text{hit}}$) to the total number of cytotoxicity burst assay endpoints in which the compound was tested ($n_{\text{tested}}$). 
+where $\Phi$ is the Gaussian cumulative distribution function. The standard deviations $\text{SD}_{ACC_{\text{cyto}}}$ and $\text{SD}_{ACC_{\text{target}}}$ are unknown but are estimated as $0.3 \log_{10}$ ${\mu M}$ units~\cite{watt2018}. For the statistical approach with the cytotoxicity burst assays, $\text{SD}_{ACC_{\text{cyto}}}$ can be derived from the median absolute deviation (MAD) of the respective ACC values. Additionally, $P(\text{cytotoxic})$ is multiplied with the ratio of the number of cytotoxicity burst assay endpoints in which the compound exhibited activity ($n_{\text{hit}}$) to the total number of cytotoxicity burst assay endpoints in which the compound was tested ($n_{\text{tested}}$). 
 
 Ultimately, $P(\text{cytotoxic})$ is then mulitplied with the original continuous hitcall of active compounds. The final cytotoxicity-corrected hitcall is then defined as follows: $\text{hitcall}_{\text{cyto-corrected}} = \text{hitcall}_{\text{original}} * (1 - P(\text{cytotoxic}))$.
 
 \subsection{Curve Surfer}
 Figure~\ref{fig:curve_surfer} presents the developed \emph{Curve Surfer}, a browser-based application that enables interactive data exploration and visualization of the processed data. The curve surfer tool is built using Streamlit, an open-source \texttt{Python} library that makes it easy to build custom web-apps for machine learning and data science. 
 
-\begin{figure}  % Placement options: h (here), t (top), b (bottom), p (page)
+
+\begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/curve_surfer.png}
-    \caption{The curve surfer provides the capability to narrow down assay endpoints based on critical annotations, and compounds can be selectively filtered using their DTXSID. Users can navigate through assay endpoints or the compounds within the current assay endpoint. Additionally, compounds can be filtered by their hitcall value or POD estimates using a range slider. Subsequently, the curve surfer displays comprehensive details for the chosen compound within the opted assay endpoint, showcasing CRS data along with curve fit models and metadata.}
+    \caption{The curve surfer provides the capability to narrow down assay endpoints based on critical annotations, and compounds can be selectively filtered using their DTXSID. Users can navigate through assay endpoints or the compounds within the current assay endpoint. Additionally, compounds can be filtered by their hitcall value or POD estimates using a range slider. It presents the CRS data, curve fit models, and associated metadata, all of which can be exported.}
 ~\label{fig:curve_surfer}
 \end{figure}
 
@@ -278,7 +270,7 @@ To create these individual datasets, we extract compounds that possess toxicity 
 
 The binary input features for the model are molecular fingerprints with $2362$ bits derived from chemical structures. The structural data was obtained from the U.S. EPA's DSSTox database, accessed through the CompTox Chemicals Dashboard\footnote{\url{https://www.epa.gov/comptox-tools}}. The structural data mining and the necessary structure cleanup, as mentioned in Section~\ref{sec:toxicity_testing}, was conducted by Dr.\ Kasia Arturi\footnote{\url{https://gitlab.renkulab.io/expectmine/generating-fingerprints}}.
 
-\begin{figure} 
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/ml_dataset.png}
     \caption{Schematic example of a machine learning dataset related to a single assay endpoint. The dataset is structured into a feature matrix with $n=2362$ and a target vector. The feature matrix consists of molecular fingerprints, and the target vector is the hitcall value. For binary classification, the hitcall value is binarized based on a specific activity threshold (=0.5)}
@@ -288,7 +280,7 @@ The binary input features for the model are molecular fingerprints with $2362$ b
 
 The machine learning pipeline is structured into three main stages: model training, model evaluation and model application. The following sections and the diagram illustrated in Figure~\ref{fig:Project_overview} provide a detailed description of each stage.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/Project_overview.png}
     \caption{MLinvitroTox: Machine Learning Pipeline Steps. Figure created by Lili Gasser.}
@@ -298,7 +290,7 @@ The machine learning pipeline is structured into three main stages: model traini
 \subsection{Training}
 The train stage is summarized in Figure~\ref{fig:Project_overview_train} and involves the generation of individual machine learning models for each assay endpoint. Each model is trained on a subset of the dataset with an 80/20 train-validation split. 
 
-\begin{figure} 
+\begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/Project_overview_train.png}
     \caption{MLinvitroTox Train Step. Figure created by Lili Gasser.}
@@ -328,12 +320,12 @@ To assess the performance of our trained models, we used two separate validation
     \item The first straightforward validation set was used to evaluate how well the best estimator found by the grid search 5-fold cross-validation generalizes for unseen compounds. This set was randomly sampled from the tested compounds in the specific assay endpoints, ensuring that the number of active and inactive compounds was balanced.
     \item The MassBank validation set, as the second validation set, was used to evaluate the model's generalization capabilities, focusing on the domain gap between chemical structure space and fragmentation spectra. This validation set comprises compounds with both actual (from known structure) and SIRIUS-predicted fingerprints originating from MassBank spectra data. This dual fingerprint dataset enables the evaluation of the model's performance on both the actual and predicted fingerprints. In this context, the accuracy of SIRIUS framework's fingerprint predictions plays a critical role in assessing how well the model performs when applied to environmental samples. 
 
-    It's important to highlight that compounds susceptible to data leakage, which were previously used in training the SIRIUS+CSI:FingerID prediction model (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless.
+    It is important to highlight that compounds susceptible to data leakage, which were previously used in training the SIRIUS+CSI:FingerID prediction model (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless.
 
     After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation. Nevertheless, the size of the MassBank validation set can differ among various assay endpoints due to variations in the overlap between the compounds tested in MassBank spectral data and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:Massbank_validation}. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation in the validation set.
     
     
-    \begin{figure}
+    \begin{figure}[h]
         \centering
         \begin{subfigure}[b]{0.48\textwidth}
             \centering
