@@ -13,8 +13,8 @@ The most recent release of the ToxCast's database, referred to as \emph{invitroD
 
 The assays utilize a range of technologies to assess the impact of chemical compounds on a wide array of biological targets, including individual proteins, nuclear receptor signaling, developmental processes and cellular processes such as mitochondrial health. This resource originates from the collaboration of two prominent institutions: the  U.S. EPA through its ToxCast program and the National Institutes of Health (NIH) via the Tox21 initiative. Using data collected from multiple research labs (refer to Table~\ref{tab:laboratories} in the Appendix), this relational database is accessible to the public and can be downloaded\footnote{\url{https://www.epa.gov/chemical-research/exploring-toxcast-data}, released on Sept 21, 2023} by visiting the official ToxCast website.
 
-\subsection{tcpl v3.0}
-The primary ToxCast pipeline is effectively managed through the extensive toolkit offered by the \emph{tcpl}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcpl}} package, which includes a variety of tools for high-throughput screening data management. It enables reproducible concentration-response modeling and populates the \texttt{MYSQL} database, invitroDBv4.1. The multiple concentration screening paradigm intends to pinpoint the bioactivity of compounds, while also estimating their efficacy and potency. In Section~\ref{sec:pytcpl}, we introduce \emph{pytcpl}, a \texttt{Python} reimplementation of the major components that underpin the entire ToxCast pipeline. It should be noted that these components, as presented in the following, are applicable to both tcpl and pytcpl.
+\subsection{\texttt{tcpl} v3.0}
+The primary ToxCast pipeline is effectively managed through the extensive toolkit offered by the \texttt{tcpl}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcpl}} package, which includes a variety of tools for high-throughput screening data management. It enables reproducible concentration-response modeling and populates the \texttt{MYSQL} database, invitroDBv4.1. The multiple concentration screening paradigm intends to pinpoint the bioactivity of compounds, while also estimating their efficacy and potency. In Section~\ref{sec:pytcpl}, we introduce \texttt{pytcpl}, a \texttt{Python} reimplementation of the major components that underpin the entire ToxCast pipeline. It should be noted that these components, as presented in the following, are applicable to both \texttt{tcpl} and \texttt{pytcpl}.
 
 \subsection{Efficacy Cutoff}
 The evaluation of a compound's bioactivity is significantly influenced by the specific \emph{efficacy cutoff} associated with each assay endpoint, as exemplified for a tested compound in Figure~\ref{fig:concentration_response_series}. It serves as a threshold that differentiates active and inactive compounds, essentially defining the minimum response level of toxicity that is biologically relevant. The process of establishing this threshold involves estimating the noise level in the assay endpoint based on the baseline median absolute deviation (bmad). The bmad is calculated using baseline response values, which are assumed to come from either untreated control wells or test samples from the two lowest concentrations. This calculation is performed just once for the entire assay endpoint.
@@ -57,18 +57,18 @@ Concentration-response pairs, along with essential sample information such as we
 \end{enumerate}
 
 
-\subsection{tcplFit2}\label{sec:tcplfit2}
-\emph{tcplFit2}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcplFit2}} is an extension to tcpl, focused on curve-fitting and hit-calling. The package also offers a flexible and robust fitting procedure, allowing for the use of different optimization algorithms and the incorporation of user-defined constraints. This sets it apart from other open-source CRS modeling packages such as \emph{drc} and \emph{mixtox}, as it is explicitly designed for HTS concentration-response data.
+\subsection{\texttt{tcplFit2}}\label{sec:tcplfit2}
+\texttt{tcplFit2}\footnote{\url{https://github.com/USEPA/CompTox-ToxCast-tcplFit2}} is an extension to \texttt{tcpl}, focused on curve-fitting and hit-calling. The package also offers a flexible and robust fitting procedure, allowing for the use of different optimization algorithms and the incorporation of user-defined constraints. This sets it apart from other open-source CRS modeling packages such as \texttt{drc} and \texttt{mixtox}, as it is explicitly designed for HTS concentration-response data.
 
 \subsection{Curve Fitting}
-Curve fitting involves the adjustment of mathematical models to best match observed data. Maximum Likelihood Estimation (MLE) is a statistical technique used to find parameter values that maximize the likelihood of observing the data within the model. The likelihood function represents the probability of observing the data given the model's parameters. The various curve fitting models investigated in tcplFit2 are summarized in Table~\ref{tab:tcplfit2_models} and visually presented in Figure~\ref{fig:tcplfit2_models}.
+Curve fitting involves the adjustment of mathematical models to best match observed data. Maximum Likelihood Estimation (MLE) is a statistical technique used to find parameter values that maximize the likelihood of observing the data within the model. The likelihood function represents the probability of observing the data given the model's parameters. The various curve fitting models investigated in \texttt{tcplFit2} are summarized in Table~\ref{tab:tcplfit2_models} and visually presented in Figure~\ref{fig:tcplfit2_models}.
 
 % \afterpage{
 %     \clearpage % Insert a page break before the table and figure
 \begin{table}
     \centering
     \begin{threeparttable}[b]
-    \caption{tcplfit2 Model Details}
+    \caption{\texttt{tcplFit2} Model Details}
     % \renewcommand{\arraystretch}{0.1}
     \begin{tabular}{lll}
     \toprule
@@ -130,7 +130,7 @@ The \emph{Akaike Information Criterion (AIC)} serves as the metric for assessing
 \subsection{Hit Calling}
 A \emph{binary hitcall} hitcall simplifies the classification of the estimated activity for a specific compound tested in a particular assay endpoint and results in toxicity testing in a \emph{toxic} (hit) or \emph{non-toxic} (no hit) classification, often indicating whether the compound has reached a particular activity cutoff within a tested concentration range. It simplifies complex data into a straightforward result, making it easy to analyze and compare different compounds.
 
-The \emph{continuous hitcall}, on the other hand, provides a more nuanced evaluation of the likelihood that a compound is active. The tcplFit2 package introduces a continuous hitcall, based on the product of the following three distinct probability values~\cite{sheffield2021}:
+The \emph{continuous hitcall}, on the other hand, provides a more nuanced evaluation of the likelihood that a compound is active. The \texttt{tcplFit2} package introduces a continuous hitcall, based on the product of the following three distinct probability values~\cite{sheffield2021}:
 
 \begin{enumerate}[i.]
     \item that at least one median response is greater than the efficacy cutoff, computed by using the error parameter from the model fit and Student's $t$-distribution to calculate the odds of at least one response exceeding the efficacy cutoff;
@@ -147,14 +147,14 @@ In certain instances, compounds underwent multiple tests within a single assay e
 Finally, after processing, each CRS is assigned to an appropriate fit category based on the level of certainty in the estimated bioactivity. Additionally, cautionary flags are assigned to account for problematic data series or uncertainty related fits and hits.
 
 
-\section{New Toxicity Pipeline Implementation: pytcpl}\label{sec:pytcpl}
+\section{New Toxicity Pipeline Implementation: \texttt{pytcpl}}\label{sec:pytcpl}
 \subsection{Introduction} 
-This thesis introduces pytcpl\footnote{\url{https://github.com/rbBosshard/pytcpl}}, a streamlined \texttt{Python} repository inspired by the \texttt{R} packages tcpl and {tcplfit2}. This package was developed to accomodate customizable processing steps and facilitate interactive data visualization with an own \emph{Curve Surfer}\footnote{\url{https://pytcpl.streamlit.app/}}. The package optimizes data storage and generates compressed \texttt{Parquet} files of the relevant raw data and metadata from \emph{invitroDBv4.1}. Exclusively utilizing this repository eliminates the need for a complex and extensive database installation, rendering downstream analysis more accessible and efficient. It enables researchers who prefer \texttt{Python} to easily participate in data analysis and exploration, overcoming limitations associated with using \texttt{R} code.
+This thesis introduces \texttt{pytcpl}\footnote{\url{https://github.com/rbBosshard/pytcpl}}, a streamlined \texttt{Python} repository inspired by the \texttt{R} packages \texttt{tcpl} and \texttt{tcplFit2}. This package was developed to accomodate customizable processing steps and facilitate interactive data visualization with an own \emph{Curve Surfer}\footnote{\url{https://pytcpl.streamlit.app/}}. The package optimizes data storage and generates compressed \texttt{Parquet} files of the relevant raw data and metadata from \emph{invitroDBv4.1}. Exclusively utilizing this repository eliminates the need for a complex and extensive database installation, rendering downstream analysis more accessible and efficient. It enables researchers who prefer \texttt{Python} to easily participate in data analysis and exploration, overcoming limitations associated with using \texttt{R} code.
 
-The pytcpl pipeline adds an additional setup and post-processing step around the main pipeline:
+The \texttt{pytcpl} pipeline adds an additional setup and post-processing step around the main pipeline:
 \begin{itemize}
     \item \textbf{Setup}: This step involves user-specified subsetting of assay endpoints, tagging assays with external assay annotations, enabling workload balancing for distributed processing and generating \texttt{Parquet} files from all raw and metadata, optionally for database decoupled analysis.
-    \item \textbf{Main} (similar to tcpl+tcplFit2): This step involves cutoff determination, curve fitting, hit calling and flagging.
+    \item \textbf{Main} (similar to \texttt{tcpl}+\texttt{tcplFit2}): This step involves cutoff determination, curve fitting, hit calling and flagging.
     \item \textbf{Post-Processing}: This step has the goal of improving the overall quality of the data and involves post-processing curation, cytotoxicity interference reevaluation and the custom export of the final results.
 \end{itemize}
 
@@ -198,16 +198,16 @@ The investigated assay endpoints are enriched with external annotations attribut
 \end{enumerate}
 
 \subsection{Main step}
-The pytcpl main pipeline is similar to the \texttt{R}-based tcpl+tcplFit2 pipeline, with the exception of the curve fitting stage where the pytcpl pipeline made a notable modification by including a novel model the removal of the Exponential 3 model. The exclusion is a consequence of its infrequent selection as the winning model within the tcpl pipeline, indicating limited effectiveness in model fitting, as outlined in~\cite{feshuk2023}. Furthermore, an additional Gain-Loss 2 model was introduced during the curve-fitting stage. This model has one model parameter less than the Gain-Loss 1 model, which helps mitigate the risk of overfitting CRS data, making it less susceptible to outliers. Table~\ref{table:pytcpl_models} provides an overview of these changes within the pytcpl pipeline for reference.
+The \texttt{pytcpl} main pipeline is similar to the \texttt{R}-based \texttt{tcpl}+\texttt{tcplFit2} pipeline, with the exception of the curve fitting stage where the \texttt{pytcpl} pipeline made a notable modification by including a novel model the removal of the Exponential 3 model. The exclusion is a consequence of its infrequent selection as the winning model within the \texttt{tcpl} pipeline, indicating limited effectiveness in model fitting, as outlined in~\cite{feshuk2023}. Furthermore, an additional Gain-Loss 2 model was introduced during the curve-fitting stage. This model has one model parameter less than the Gain-Loss 1 model, which helps mitigate the risk of overfitting CRS data, making it less susceptible to outliers. Table~\ref{table:pytcpl_models} provides an overview of these changes within the \texttt{pytcpl} pipeline for reference.
 
 \begin{table}
-    \caption{pytcpl Model Updates}~\label{table:pytcpl_models}
+    \caption{\texttt{pytcpl} Model Updates}~\label{table:pytcpl_models}
     \centering
     \begin{threeparttable}[b]
     % \renewcommand{\arraystretch}{1.4}
     \begin{tabular}{llll}
     \toprule
-    \textbf{Model} & \textbf{Label} & \textbf{Equations\tnote{1}} & \textbf{Role in pytcpl} \\
+    \textbf{Model} & \textbf{Label} & \textbf{Equations\tnote{1}} & \textbf{Role in} \texttt{pytcpl} \\
     \midrule
     Exponential 3 & exp3 & \(f(x) = a\left(\exp\left({\left(\frac{x}{b}\right)}^{p}\right) - 1\right)\) & Omitted \\
     Gain-Loss 2 & gnls2 & \(f(x) = \frac{tp}{1 + {\left(\frac{ga}{x}\right)}^{p}}\exp\left({-qx}\right)\) & New \\
@@ -272,7 +272,7 @@ Figure~\ref{fig:curve_surfer} presents the developed \emph{Curve Surfer}, a brow
 We employed distinct machine learning models for each assay endpoint, enabling the prediction of compound toxicity unique to each assay endpoint, coleveraging molecular structure inputs.
 These models utilize molecular fingerprints to predict compound toxicity, as illustrated in Figure~\ref{fig:ml_dataset}. We applied both binary classification and regression models. In the case of binary classification, we use a threshold of $0.5$ to convert the continuous hitcall target values into binarized outcomes.
 
-To create these individual datasets, we extract compounds that possess toxicity data for a given assay endpoint from the outputs generated by pytcpl. The associated hitcall values for these compounds are used as target variables within the machine learning model.
+To create these individual datasets, we extract compounds that possess toxicity data for a given assay endpoint from the outputs generated by \texttt{pytcpl}. The associated hitcall values for these compounds are used as target variables within the machine learning model.
 
 The binary input features for the model are molecular fingerprints with $2362$ bits derived from chemical structures. The structural data was obtained from the U.S. EPA's DSSTox database, accessed through the CompTox Chemicals Dashboard\footnote{\url{https://www.epa.gov/comptox-tools}}. The structural data mining and the necessary structure cleanup, as mentioned in Section~\ref{sec:toxicity_testing}, was conducted by Dr.\ Kasia Arturi\footnote{\url{https://gitlab.renkulab.io/expectmine/generating-fingerprints}}.
 

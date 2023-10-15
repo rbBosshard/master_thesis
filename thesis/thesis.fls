@@ -438,6 +438,7 @@ INPUT chapters/abstract.tex
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplr9t.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb9t.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplri9t.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/palatino/pplb9t.vf
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
@@ -513,6 +514,7 @@ INPUT c:/texlive/2023/texmf-dist/tex/latex/esvect/uesvect.fd
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/esvect/vect10.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/esvect/vect8.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/esvect/vect6.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/palatino/pplb9t.vf
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
@@ -595,7 +597,6 @@ INPUT ./figures/hts.png
 INPUT ./figures/hts.png
 INPUT ./figures/hts.png
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmssi9.tfm
-INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./chapters/background.tex
 INPUT ./chapters/background.tex
 INPUT ./chapters/background.tex
@@ -634,6 +635,7 @@ INPUT ./figures/assay.png
 INPUT ./figures/assay.png
 INPUT ./figures/assay.png
 INPUT ./figures/assay.png
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
 INPUT ./figures/CRS.png
 INPUT ./figures/CRS.png
 INPUT ./figures/CRS.png
@@ -690,6 +692,7 @@ INPUT c:/texlive/2023/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
 INPUT ./figures/presence_matrix_all.png
 INPUT ./figures/presence_matrix_all.png
 INPUT ./figures/presence_matrix_all.png
@@ -792,6 +795,7 @@ INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
+INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb

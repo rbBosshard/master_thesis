@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  15 OCT 2023 15:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  15 OCT 2023 16:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1430,7 +1430,12 @@ Package microtype Info: Loading generic protrusion settings for font family
  [1
 
 
-{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./eth-template/ETHlogo.pdf>] (./chapters/abstract.tex)
+{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./eth-template/ETHlogo.pdf>] (./chapters/abstract.tex
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+)
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -1498,10 +1503,6 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 7.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 7.
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtt' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
  [1
 
 
@@ -1510,7 +1511,7 @@ LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 5
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 ) [3]
-<figures/non_target_high_resolution_mass_spectrometry.png, id=272, 974.13937pt x 432.11438pt>
+<figures/non_target_high_resolution_mass_spectrometry.png, id=273, 974.13937pt x 432.11438pt>
 File: figures/non_target_high_resolution_mass_spectrometry.png Graphic file (type png)
 <use figures/non_target_high_resolution_mass_spectrometry.png>
 Package pdftex.def Info: figures/non_target_high_resolution_mass_spectrometry.png  used on input line 68.
@@ -1526,12 +1527,12 @@ either increase the head height or redesign the header
 Overfull \vbox (13.59999pt too high) has occurred while \output is active []
 
  [4 <./figures/non_target_high_resolution_mass_spectrometry.png>]
-<figures/hts_robot.png, id=286, 1927.2pt x 1278.7775pt>
+<figures/hts_robot.png, id=287, 1927.2pt x 1278.7775pt>
 File: figures/hts_robot.png Graphic file (type png)
 <use figures/hts_robot.png>
 Package pdftex.def Info: figures/hts_robot.png  used on input line 82.
 (pdftex.def)             Requested size: 202.0782pt x 134.07071pt.
-<figures/hts.png, id=289, 1040.88875pt x 717.68124pt>
+<figures/hts.png, id=290, 1040.88875pt x 717.68124pt>
 File: figures/hts.png Graphic file (type png)
 <use figures/hts.png>
 Package pdftex.def Info: figures/hts.png  used on input line 89.
@@ -1572,10 +1573,12 @@ File: figures/assay.png Graphic file (type png)
 <use figures/assay.png>
 Package pdftex.def Info: figures/assay.png  used on input line 9.
 (pdftex.def)             Requested size: 421.0pt x 295.03525pt.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 16.
  [14
 
 ] [15 <./figures/assay.png>]
-<figures/CRS.png, id=411, 944.328pt x 474.573pt>
+<figures/CRS.png, id=412, 944.328pt x 474.573pt>
 File: figures/CRS.png Graphic file (type png)
 <use figures/CRS.png>
 Package pdftex.def Info: figures/CRS.png  used on input line 28.
@@ -1586,13 +1589,13 @@ Underfull \hbox (badness 1609) in paragraph at lines 29--29
  []
 
 [16 <./figures/CRS.png>]
-<figures/fit_models.png, id=426, 815.54688pt x 582.175pt>
+<figures/fit_models.png, id=427, 815.54688pt x 582.175pt>
 File: figures/fit_models.png Graphic file (type png)
 <use figures/fit_models.png>
 Package pdftex.def Info: figures/fit_models.png  used on input line 98.
 (pdftex.def)             Requested size: 421.0pt x 300.5297pt.
  [17]
-<figures/POD.png, id=444, 664.28175pt x 411.939pt>
+<figures/POD.png, id=445, 664.28175pt x 411.939pt>
 File: figures/POD.png Graphic file (type png)
 <use figures/POD.png>
 Package pdftex.def Info: figures/POD.png  used on input line 114.
@@ -1612,57 +1615,60 @@ Underfull \hbox (badness 7963) in paragraph at lines 115--115
 \OT1/cmss/m/n/9 (+20) (DTXSID9047542) tested in the as-say end-
  []
 
-<figures/inactive_and_no_pod.png, id=445, 863.02425pt x 591.4095pt>
+<figures/inactive_and_no_pod.png, id=446, 863.02425pt x 591.4095pt>
 File: figures/inactive_and_no_pod.png Graphic file (type png)
 <use figures/inactive_and_no_pod.png>
 Package pdftex.def Info: figures/inactive_and_no_pod.png  used on input line 121.
 (pdftex.def)             Requested size: 202.0782pt x 138.47589pt.
-[18] [19 <./figures/fit_models.png>] [20 <./figures/POD.png> <./figures/inactive_and_no_pod.png>]
-<figures/presence_matrix_all.png, id=480, 1376.7435pt x 717.882pt>
+[18] [19 <./figures/fit_models.png>]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 150.
+ [20 <./figures/POD.png> <./figures/inactive_and_no_pod.png>]
+<figures/presence_matrix_all.png, id=481, 1376.7435pt x 717.882pt>
 File: figures/presence_matrix_all.png Graphic file (type png)
 <use figures/presence_matrix_all.png>
 Package pdftex.def Info: figures/presence_matrix_all.png  used on input line 169.
 (pdftex.def)             Requested size: 202.0782pt x 105.36636pt.
-<figures/presence_matrix_subset.png, id=481, 1374.3345pt x 717.882pt>
+<figures/presence_matrix_subset.png, id=482, 1374.3345pt x 717.882pt>
 File: figures/presence_matrix_subset.png Graphic file (type png)
 <use figures/presence_matrix_subset.png>
 Package pdftex.def Info: figures/presence_matrix_subset.png  used on input line 176.
 (pdftex.def)             Requested size: 202.0782pt x 105.55258pt.
  [21 <./figures/presence_matrix_all.png> <./figures/presence_matrix_subset.png>] [22] [23]
-<figures/curve_surfer.png, id=522, 793.46437pt x 590.205pt>
+<figures/curve_surfer.png, id=523, 793.46437pt x 590.205pt>
 File: figures/curve_surfer.png Graphic file (type png)
 <use figures/curve_surfer.png>
 Package pdftex.def Info: figures/curve_surfer.png  used on input line 265.
 (pdftex.def)             Requested size: 421.0pt x 313.15839pt.
-<figures/ml_dataset.png, id=529, 660.66824pt x 264.38776pt>
+<figures/ml_dataset.png, id=530, 660.66824pt x 264.38776pt>
 File: figures/ml_dataset.png Graphic file (type png)
 <use figures/ml_dataset.png>
 Package pdftex.def Info: figures/ml_dataset.png  used on input line 281.
 (pdftex.def)             Requested size: 336.80128pt x 134.78352pt.
-<figures/Project_overview.png, id=531, 862.1811pt x 614.7768pt>
+<figures/Project_overview.png, id=532, 862.1811pt x 614.7768pt>
 File: figures/Project_overview.png Graphic file (type png)
 <use figures/Project_overview.png>
 Package pdftex.def Info: figures/Project_overview.png  used on input line 291.
 (pdftex.def)             Requested size: 421.0pt x 300.19261pt.
  [24]
-<figures/Project_overview_train.png, id=543, 862.1811pt x 614.7768pt>
+<figures/Project_overview_train.png, id=544, 862.1811pt x 614.7768pt>
 File: figures/Project_overview_train.png Graphic file (type png)
 <use figures/Project_overview_train.png>
 Package pdftex.def Info: figures/Project_overview_train.png  used on input line 301.
 (pdftex.def)             Requested size: 421.0pt x 300.19261pt.
  [25 <./figures/curve_surfer.png>] [26 <./figures/ml_dataset.png> <./figures/Project_overview.png (PNG copy)>] [27 <./figures/Project_overview_train.png (PNG copy)>] [28]
-<figures/Massbank_overlap.png, id=580, 616.80438pt x 478.78876pt>
+<figures/Massbank_overlap.png, id=581, 616.80438pt x 478.78876pt>
 File: figures/Massbank_overlap.png Graphic file (type png)
 <use figures/Massbank_overlap.png>
 Package pdftex.def Info: figures/Massbank_overlap.png  used on input line 338.
 (pdftex.def)             Requested size: 202.0782pt x 156.86108pt.
-<figures/activity_ratio_comparison.png, id=581, 763.05075pt x 594.42075pt>
+<figures/activity_ratio_comparison.png, id=582, 763.05075pt x 594.42075pt>
 File: figures/activity_ratio_comparison.png Graphic file (type png)
 <use figures/activity_ratio_comparison.png>
 Package pdftex.def Info: figures/activity_ratio_comparison.png  used on input line 345.
 (pdftex.def)             Requested size: 202.0782pt x 157.4119pt.
 ) (./chapters/results_discussion.tex [29 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]
-<figures/confusion_matrix_metrics.png, id=591, 853.1875pt x 239.89626pt>
+<figures/confusion_matrix_metrics.png, id=592, 853.1875pt x 239.89626pt>
 File: figures/confusion_matrix_metrics.png Graphic file (type png)
 <use figures/confusion_matrix_metrics.png>
 Package pdftex.def Info: figures/confusion_matrix_metrics.png  used on input line 17.
@@ -1678,7 +1684,7 @@ Package microtype Info: Character `013' is missing
  [32
 
 ] [33] [34] (./chapters/appendix.tex [35]
-<figures/concentration_metric_distributions.png, id=725, 1512.852pt x 301.125pt>
+<figures/concentration_metric_distributions.png, id=726, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 43.
@@ -1711,18 +1717,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39628 strings out of 475188
- 746154 string characters out of 5767805
+ 39631 strings out of 475188
+ 746255 string characters out of 5767805
  1941248 words of memory out of 5000000
- 59423 multiletter control sequences out of 15000+600000
- 637712 words of font info for 634 fonts, out of 8000000 for 9000
+ 59431 multiletter control sequences out of 15000+600000
+ 637813 words of font info for 632 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,16n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (42 pages, 10078721 bytes).
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on thesis.pdf (42 pages, 10083538 bytes).
 PDF statistics:
- 849 PDF objects out of 1000 (max. 8388607)
- 714 compressed objects within 8 object streams
+ 854 PDF objects out of 1000 (max. 8388607)
+ 717 compressed objects within 8 object streams
  179 named destinations out of 1000 (max. 500000)
- 129459 words of extra memory for PDF output out of 154059 (max. 10000000)
+ 130995 words of extra memory for PDF output out of 154059 (max. 10000000)
 
