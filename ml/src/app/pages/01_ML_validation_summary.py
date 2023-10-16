@@ -17,17 +17,24 @@ st.set_page_config(
     layout="wide",
 )
 
+rename_dict = {
+    'True': 'Positive',
+    'False': 'Negative',
+    'macro avg': 'Macro Average',
+    'weighted avg': 'Weighted Average',
+}
 
-trendline_is_enabled = st.sidebar.checkbox("Enable trendline")
+
+trendline_is_enabled = st.sidebar.checkbox("Enable trendline", value=False)
 
 if trendline_is_enabled:
-    trendline_type = st.sidebar.selectbox('Select Trendline Type', [None, 'ols', 'lowess'])
+    trendline_type = st.sidebar.selectbox('Select Trendline Type', ['ols', 'lowess', None])
 else:
     trendline_type = None
 
-histogram_is_enabled = st.sidebar.checkbox("Enable histogram")
+histogram_is_enabled = st.sidebar.checkbox("Enable histogram", value=True)
 if histogram_is_enabled:
-    marginal_type = st.sidebar.selectbox('Select Marginal Type', [None, 'histogram', 'rug', 'box', 'violin'])
+    marginal_type = st.sidebar.selectbox('Select Marginal Type', ['box', 'histogram', 'violin', 'rug', None])
 else:
     marginal_type = None
 
@@ -99,7 +106,8 @@ selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(v
 
 def process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i):
     threshold = threshold_names[i]
-    # st.header(f"Classification Threshold: {threshold}")
+    st.markdown(f"#### Precision vs. recall using the '{threshold.upper()}' classification threshold and metric: {rename_dict[slice]}")
+
     filtered_reports = {}
 
     for estimator_model, aeid_dict in reports.items():
@@ -141,6 +149,7 @@ def process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal
         recall.append(-1)
         f1.append(-1)
         support.append(1000000000)
+        
     df = pd.DataFrame({'Estimator': estimators, 'aeid': aeids, 'Accuracy': accuracy, 'Precision': precision, 'Recall': recall, 'F1': f1, 'Support': support})
 
     trendline_args = {'trendline': trendline_type, 'trendline_color_override':'black'}
@@ -151,7 +160,6 @@ def process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal
         hisogram_args = {}
 
     args = {}
-    
     
     # Define the marker size as support-encoded, size depends on the validation type
     scale = 4 if selected_validation_type == 'val' else 2
@@ -164,24 +172,38 @@ def process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal
         opacity = 0.8
     
     # Colors: Light24, Alphabet, Dark24, Dark2, Set1, Pastel1, Set2, Pastel2, Set3, Antique, Bold, Pastel, Prism, Safe, Vivid
+    
+    
     fig = px.scatter(df,
         x='Recall', y='Precision', color='Estimator',
         hover_data=['aeid', 'Accuracy', 'F1', 'Support'], opacity=opacity,
         color_discrete_sequence=colors,
-        size_max=30, 
          **args, **trendline_args, **hisogram_args)
 
-    fig.update_traces(marker=dict(size=marker_size)) 
+    # Not working: Add annotations for the median values of the maringal distributions
+    # for i in range(len(fig.data)):
+    #     if fig.data[i].type == 'box':
+    #         median_value = np.median(fig.data[i]['x']) # Median value for the box plot
+    #         fig.add_annotation(
+    #             x=fig.data[i].x[0],  # X-coordinate for the annotation
+    #             y=median_value,  # Y-coordinate for the annotation
+    #             text=f'Median: {median_value:.2f}',  # Text for the annotation
+    #             showarrow=False,  # Hide arrow
+    #             font=dict(size=12),  # Font size
+    #             yshift=10  # Adjust vertical position of the annotation
+    #         )
 
-    fig.update_layout(title={'text': f'Precision/Recall ({slice}) with {threshold.upper()} classification threshold'}, title_font=dict(size=18))
+    for j, trace in enumerate(fig.data):
+        # filter for scatter traces
+        if 'scatter' in trace.type:
+            fig.data[j].update(marker=dict(size=marker_size, symbol="circle-dot", line=dict(color='black', width=0.7)))
 
-    fig.update_traces(marker=dict(symbol="circle-dot",
-            line=dict(
-                color='black',
-                width=0.7,
-            )
-        ))
+    # title={'text': f'Precision/Recall ({slice}) with {threshold.upper()} classification threshold'}
+    title = ''
+    margin = 0
+    fig.update_layout(title=title, title_font=dict(size=1), margin=dict(t=margin))
 
+   
     fig.update_layout(yaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'),
                             xaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'))
     
@@ -197,65 +219,71 @@ def process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal
     fig.update_layout(xaxis=dict(scaleanchor="y", scaleratio=1))
     fig.update_layout(yaxis=dict(scaleanchor="x", scaleratio=1)) 
     # make grid uniform
-    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
-    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    # fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    # fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
     fig.update_xaxes(showspikes=True, nticks=10, tickfont=dict(size=22, color="black"))  
     fig.update_yaxes(showspikes=True, nticks=10, tickfont=dict(size=22, color="black")) 
+
+
     fig.update_layout(
         xaxis_title_font=dict(size=25, color="black"),
         yaxis_title_font=dict(size=25, color="black"),
     )
     if i == 0: 
-        fig.update_layout(legend=dict(orientation='v', yanchor='top', y=0.42, xanchor='left', x=0.5, font=dict(size=19, color='black'), title_font=dict(size=18, color='black')))
+        fig.update_layout(legend=dict(orientation='v', yanchor='top', y=0.28, xanchor='left', x=0.33, font=dict(size=15, color='black'), title_font=dict(size=15, color='black')))
             # make legend box transparent
         fig.update_layout(legend=dict(bgcolor='rgba(255, 255, 255, 0.8)'))
     if not show_legend and i != 0:
         fig.update_layout(showlegend=False)
     
-
-
-    st.plotly_chart(fig)
+    col1, col2 = st.columns(2)
+    with col1:
+        st.plotly_chart(fig)
 
     # Create a summary table of average metrics, accuracy, precision, recall, f1 grouped by Estimator
     if show_summary:
-        st.markdown(f"##### Assay endpoint averaged metrics on: {slice}")
-        
-        # drop the dummy trace
-        df = df[df['aeid'] != '-1']
-        grouped = df[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1']].groupby(['Estimator']).mean().reset_index()
-        grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.2f}')
-        grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.2f}')
-        grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.2f}')
-        grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.2f}')
-        
-        summary = grouped[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1']]
+        with col2:
+            
+            
+            # drop the dummy trace
+            df = df[df['aeid'] != '-1']
+            grouped = df[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1', 'Support']].groupby(['Estimator']).mean().reset_index()
+            grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.2f}')
+            grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.2f}')
+            grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.2f}')
+            grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.2f}')
+            grouped['Support'] = grouped['Support'].apply(lambda x: f'{x:.0f}')
+            
+            summary = grouped[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1']]
 
-        custom_css = f"""
-        <style>
-            table {{
-                border-collapse: collapse;
-                # width: 100%;
-                margin: 0;
-            }}
-            th, td {{
-                padding: 5px;  /* Adjust the padding as needed */
-                text-align: left;
-            }}
-            th {{
-                font-size: 18;
-                font-weight: bold;
-                color: #6d6d6d;
-                background-color: #f7ffff;
-            }}
-            td {{
-                font-size: 18px;
-            }}
-        </style>
-        """
+            # custom_css = f"""
+            # <style>
+            #     table {{
+            #         border-collapse: collapse;
+            #         # width: 100%;
+            #         margin: 0;
+            #     }}
+            #     th, td {{
+            #         padding: 5px;  /* Adjust the padding as needed */
+            #         text-align: left;
+            #     }}
+            #     th {{
+            #         font-size: 18;
+            #         font-weight: bold;
+            #         color: #6d6d6d;
+            #         background-color: #f7ffff;
+            #     }}
+            #     td {{
+            #         font-size: 18px;
+            #     }}
+            # </style>
+            # """
 
-        # Display the table using st.markdown with custom CSS
-        st.markdown(custom_css, unsafe_allow_html=True)
-        st.markdown(summary.to_html(escape=False), unsafe_allow_html=True)
+            # # Display the table using st.markdown with custom CSS
+            # st.markdown(custom_css, unsafe_allow_html=True)
+            # st.markdown(summary.to_html(escape=False), unsafe_allow_html=True)
+
+            st.dataframe(summary)
 
 
 if selected_ml_algorithm == 'classification':
@@ -279,26 +307,11 @@ if selected_ml_algorithm == 'classification':
     slice = st.selectbox('Select Class Slice', ['macro avg', 'True', 'False', 'weighted avg', 'accuracy'])
     show_summary = st.checkbox("Show Summary", value=True)
     show_legend = st.checkbox("Show Legend", value=False)
-    clip_axis = st.checkbox("Clip Axis", value=True)
-    with st.container():
-        col1, col2 = st.columns(2)
-        with col1:
-            i = 0
-            process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i)
+    clip_axis = st.checkbox("Clip Axis", value=False)
+    for i in range(4):
+        process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i)
             
-        with col2:
-            i = 1
-            process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i)
-
-    with st.container():
-        col1, col2 = st.columns(2)
-        with col1:
-            i = 2
-            process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i)
-
-        with col2:
-            i = 3
-            process(trendline_is_enabled, trendline_type, histogram_is_enabled, marginal_type, reports, threshold_names, i)
+      
 
 
 

@@ -2406,8 +2406,6 @@
     <bcf:citekey order="42" intorder="1">ice2022</bcf:citekey>
     <bcf:citekey order="43" intorder="1">feshuk2023</bcf:citekey>
     <bcf:citekey order="44" intorder="1">watt2018</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">seol2023</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">seol2023</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

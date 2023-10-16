@@ -7,8 +7,12 @@ from ml.src.utils.helper import render_svg
 
 import streamlit as st
 
+st.set_page_config(
+    layout="wide",
+)
+
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_16-38-47"
+TARGET_RUN = "2023-10-14_16-38-47_all"
 
 # Add a checkbox to the sidebar: Enable Reports
 report_is_enabled = st.sidebar.checkbox("Enable Reports")
