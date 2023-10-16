@@ -322,7 +322,7 @@ To assess the performance of our trained models, we used two separate validation
 
     It is important to highlight that compounds susceptible to data leakage (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), which were previously used in training the SIRIUS+CSI:FingerID prediction model, have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless.
 
-    After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation. Nevertheless, the size of the MassBank validation set can differ among various assay endpoints due to variations in the overlap between the compounds tested in MassBank spectral data and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:Massbank_validation}. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation in the validation set.
+    After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation. Nevertheless, the size of the MassBank validation set can differ among various assay endpoints due to variations in the overlap between the compounds available in MassBank and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:Massbank_validation}. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation in the validation set.
 
     \begin{figure}[h]
         \centering
@@ -337,7 +337,7 @@ To assess the performance of our trained models, we used two separate validation
         \begin{subfigure}[b]{0.48\textwidth}
             \centering
             \includegraphics[width=\textwidth]{figures/Massbank_overlap.png}
-            \caption{This figure illustrates across assay endpoints the count of compounds for which we possess both toxicity data and SIRIUS-predicted fingerprints from MassBank spectra. The range in the number of compounds in the MassBank validation set, which spans from 149 to 415, ist due to differences in the overlap with the compounds tested in the respective assay endpoints.}
+            \caption{This graphic depicts the number of compounds, across various assay endpoints, for which we have both toxicity data and SIRIUS-predicted fingerprints derived from MassBank spectra. The range in the number of compounds in the MassBank validation set, which spans from 149 to 415, ist due to differences in the overlap with the compounds tested in the respective assay endpoints.}
         ~\label{fig:MassBank_overlap}
         \end{subfigure}
         \hfill

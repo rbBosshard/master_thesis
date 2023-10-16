@@ -1,5 +1,5 @@
 \chapter{Appendix}\label{chap:appendix}
-\begin{table}
+\begin{table}[h]
     \begin{center}
     \caption{Assay source names and long names}
     \begin{tabular}{ll}
@@ -38,7 +38,7 @@
 \end{center}
 \end{table}
 
-\begin{figure}[htbp]  % Placement options: h (here), t (top), b (bottom), p (page)
+\begin{figure}[h]  % Placement options: h (here), t (top), b (bottom), p (page)
     \centering
     \includegraphics[width=1.0\textwidth]{figures/concentration_metric_distributions.png}  
     \caption{Concentration metrics averaged across all concentration-response series aggregated by assay endpoint (blue) and compound (orange). E.g., the first chart shows the distribution on the average number of datapoints across all assay enpoint $a_i \in A$ with $\frac{1}{|C_i|} \sum_{j} n_{\text{datapoints}_{i,j}}$ and across all compounds $c_j \in C$ with $\frac{1}{|A_j|} \sum_{i} n_{\text{datapoints}_{i,j}}$. Similarly, the process is repeated for the other metrics: $n_{\text{groups}_{i,j}}$, $n_{\text{replicates}_{i,j}}$, $min_{\text{conc}_{i,j}}$, and $max_{\text{conc}_{i,j}}$.
