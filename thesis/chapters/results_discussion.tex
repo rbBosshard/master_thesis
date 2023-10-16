@@ -32,7 +32,7 @@ With these four values, a confusion matrix can be created, as shown in Table~\re
   \end{tabular}
 \end{table}
 
-In binary classification, the classification threshold is a crucial parameter dictating how the model assigns data points to one of two classes based on predicted class probabilities. This threshold significantly influences the model's metrics, as illustrated in Figure~\ref{fig:classification_threshold} and exemplified in Figure ~\ref{fig:cm1120}.
+In binary classification, the classification threshold is a crucial parameter dictating how the model assigns data points to one of two classes based on predicted class probabilities. This threshold significantly influences the model's metrics, as illustrated in Figure~\ref{fig:classification_threshold} and exemplified in Figure~\ref{fig:roc1120} and Figure~\ref{fig:cm1120}.
 \begin{figure} 
   \centering
   \includegraphics[width=0.5\textwidth]{figures/classification_threshold.png}
@@ -71,14 +71,12 @@ Various metrics assess predictive model performance, such as:
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{figures/cm1120.png}
-  \caption{For assay endpoint with aeid: 97, confusion matrices are shown for four different classification thresholds.}
+  \caption{For assay endpoint with aeid: 1120, confusion matrices are shown for four different classification thresholds.}
 ~\label{fig:cm1120}
 \end{figure}
 
 \subsubsection{Imbalanced Data}
-As depicted in Figure~\ref{fig:cm1120}, a substantial proportion of the studied assay endpoints display an unequal distribution of active (positive) and inactive (negative) compounds. Typically, the negative class considerably outweights the positive class. Such imbalanced datasets can result in skewed performance metrics, where the model may exhibit strong performance on the majority class while performing poorly on the minority class.
-
-To address imbalanced datasets, additional metrics such as macro averaged and weighted averaged metrics can be taken into account.
+A substantial proportion of the studied assay endpoints have an unequal distribution of active (positive) and inactive (negative) compounds. Typically, the negative class significantly outweights the positive class, as depicted by an example in Figure~\ref{fig:cm1120}. Such imbalanced datasets can result in skewed performance metrics, where the model may exhibit strong performance on the majority class while performing poorly on the minority class. To address imbalanced datasets, additional metrics such as macro averaged and weighted averaged metrics can be taken into account.
 In macro averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. As an example, macro averaged precision calculates the unweighted average of precision across all classes, whereas the weighted average of precision considers the impact of class prevalence.
 \[ \text{Macro Precision } = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
 \[ \text{Weighted Precision } = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
@@ -87,63 +85,181 @@ In both cases, $N$ is the total number of classes (e.g. $N=2$ for the binary cas
 
 
 \subsection{Performance}
-We evaluated the model performance using the previously mentioned metrics. The following figures show the performance metrics applied to:
 
-\begin{enumerate}
-  \item the internal validation dataset (Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
-  \item the fingerprint from the MassBank structure validation set (\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
-  \item the SIRIUS-predicted fingerprint from the MassBank validation set (\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
-\end{enumerate}
+Performance results were generated for every combination of:
 
-For each validation set, four figures are presented, each of which shows a different perspective on the performance metrics:
+\begin{itemize}
+  \item Target variables:
+  \begin{enumerate}
+    \item hitcall without cytotoxicity correction
+    \item hitcall with cytotoxicity correction
+  \end{enumerate}
+  \item Assay endpoints ($\geq 300$):
+  \item Feature selection models:
+    \begin{enumerate}
+      \item XGBoost
+      \item RandomForest
+    \end{enumerate}
+    \item Estimator models:
+    \begin{enumerate}
+      \item LogisticRegression
+      \item MLPClassifier
+      \item RandomForestClassifier
+      \item SVM (Support Vector Machine)
+      \item XGBoostClassifier
+    \end{enumerate}
+  \item Validation sets:
+    \begin{enumerate}
+      \item the internal validation dataset 
+      \item MassBank validation set with fingerprints from chemical structure
+      \item MassBank validation set with SIRIUS-predicted fingerprints
+    \end{enumerate}
+  \item Classification thresholds:
+    \begin{enumerate}
+      \item $default$  (classification threshold of 0.5)
+      \item $optimal$ (cost function weighting TPR twice as FPR)
+      \item $TPR \simeq 0.5$ (TPR approximately equal to 0.5)
+      \item $TNR \simeq 0.5$ (TNR approximately equal to 0.5)
+    \end{enumerate}
+  \item Metrics on:
+    \begin{enumerate}
+      \item macro average
+      \item weighted average
+      \item positive class
+      \item negative class
+    \end{enumerate}
+\end{itemize}
 
-\begin{enumerate}
-  \item the \emph{macro average} metrics
-  \item the \emph{weighted average} metrics
-  \item the separately sliced metrics for the \emph{positive} class
-  \item the separately sliced metrics for the \emph{negative} class
-\end{enumerate}
 
-The default classification threshold, which is 0.5, was used for predicting the class labels. Each figure shows performance on the binarized hitcall without cytotoxicity correction, in a scatter plot that compares precision against recall for all target assay endpoints employing each of the classifiers. All models use an XGBoost classifier as the underlying feature selection model. The marker size in the scatter plots reflects the varying number of compounds in the validation set across the assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models. The adjacent table provides the average metrics for the estimators across all target assay endpoint models.
+Below, we provide figures illustrating the performance of binary classification models under the following configurations:
+\begin{itemize}
+  \item binarized hitcall without cytotoxicity correction
+  \item XGBoost as the feature selection model
+  \item the default classification threshold
+\end{itemize}
 
+With these fixed settings, we assessed the performance across all assay endpoints, estimator models, validation sets, and metrics. The figures are presented in the subsequent order:
 
-\subsubsection{Internal validation}
-\begin{figure}[h]
+\begin{table}[h]
+  \centering
+  \caption{Figure References and Descriptions}
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Validation set} & \textbf{Metric} & \textbf{Figure} \\
+    \midrule
+    Internal & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg} \\
+    MassBank (from structure) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg} \\
+    MassBank (SIRIUS-predicted) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_macro_avg} \\
+    Internal & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg} \\
+    MassBank (from structure) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_weighted_avg} \\
+    MassBank (SIRIUS-predicted) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_weighted_avg} \\
+    Internal  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_val_default_true} \\
+    MassBank (from structure)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_true} \\
+    MassBank (SIRIUS-predicted)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_true} \\
+    Internal  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_val_default_false} \\
+    MassBank (from structure)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_false} \\
+    MassBank (SIRIUS-predicted)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_false} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}
   \centering
   \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_macro_avg.png}
-  \caption{}
+  \caption{Internal validation set, macro averaged metrics. The marker size reflects the varying number of compounds in the validation set across the assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models. The adjacent table provides the average metrics for the estimators across all target assay endpoint models.}
 ~\label{fig:hitcall_classification_xgb_val_default_macro_avg}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_macro_avg.png}
+  \caption{MassBank validation set with fingerprints from chemical structure, macro averaged metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_macro_avg.png}
+  \caption{MassBank validation set with SIRIUS-predicted fingerprints, macro averaged metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_macro_avg}
+\end{figure}
+
+\begin{figure}
   \centering
   \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_weighted_avg.png}
-  \caption{}
+  \caption{Internal validation set, weighted averaged metrics.}
 ~\label{fig:hitcall_classification_xgb_val_default_weighted_avg}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_weighted_avg.png}
+  \caption{MassBank validation set with fingerprints from chemical structure, weighted averaged metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_structure_default_weighted_avg}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_weighted_avg.png}
+  \caption{MassBank validation set with SIRIUS-predicted fingerprints, weighted averaged metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_weighted_avg}
+\end{figure}
+
+
+\begin{figure}
   \centering
   \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_true.png}
-  \caption{}
+  \caption{Internal validation set, positive class metrics.}
 ~\label{fig:hitcall_classification_xgb_val_default_true}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_true.png}
+  \caption{MassBank validation set with fingerprints from chemical structure, positive class metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_structure_default_true}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_true.png}
+  \caption{MassBank validation set with SIRIUS-predicted fingerprints, positive class metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_true}
+\end{figure}
+
+
+\begin{figure}
   \centering
   \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_false.png}
-  \caption{}
+  \caption{Internal validation set, negative class metrics.}
 ~\label{fig:hitcall_classification_xgb_val_default_false}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_false.png}
+  \caption{MassBank validation set with fingerprints from chemical structure, negative class metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_structure_default_false}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_false.png}
+  \caption{MassBank validation set with SIRIUS-predicted fingerprints, negative class metrics.}
+~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_false}
+\end{figure}
+
 \newpage
+% \subsection{Feature Importance}
+
+\section{}
 
 
 
 
-\subsubsection{MassBank structure validation}
 
 
-Performance results were generated for every combination of the three validation sets, the two target variables (hitcall, cytotoxicity corrected hitcall),  $\geq 300$ assay endpoints, two feature selection models (XGBoost, RandomForest), four classiifaction thresholds (default, optimal, TPR=0.5, TNR=0.5). 
+
+
 
 
