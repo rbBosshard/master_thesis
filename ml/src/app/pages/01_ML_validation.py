@@ -116,6 +116,8 @@ with st.container():
             with st.expander("Show Report"):
                 st.dataframe(reports[threshold])
 
+st.divider()
+
 with st.container():
     col1, col2 = st.columns(2)
     with col1:

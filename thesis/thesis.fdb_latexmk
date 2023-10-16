@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber thesis"] 1697476081 "thesis.bcf" "thesis.bbl" "thesis" 1697476224 0
+["biber thesis"] 1697479404 "thesis.bcf" "thesis.bbl" "thesis" 1697479677 0
   "./refs.bib" 1697475312 19347 3c5ecdb6fa48ebf98be7560bd52a232a ""
-  "thesis.bcf" 1697476223 109980 b1940dbca6a15d84c19b01992d1a3260 "pdflatex"
+  "thesis.bcf" 1697479676 109980 b1940dbca6a15d84c19b01992d1a3260 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1697476215 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697476224 0
+["pdflatex"] 1697479668 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697479677 0
   "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1697463036 4911 6e40825a2a660206fc5544c43019960d ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -262,9 +262,9 @@
   "chapters/background.tex" 1697375146 12175 fdcc1ed4a836da2a5a118474207c1f38 ""
   "chapters/conclusion.tex" 1696961110 22 dbf604a680aa1192b3965f0ae024a5d0 ""
   "chapters/introduction.tex" 1697429306 16674 286f097e9ce02d0479305a495ca7abc7 ""
-  "chapters/material_and_methods.tex" 1697463038 37780 bddaec337e379ecfed4bcacbfdf1c97d ""
+  "chapters/material_and_methods.tex" 1697477978 37775 94e46ea81690c29419c613d8b12a0476 ""
   "chapters/related_work.tex" 1697281060 4135 8a13e441a99268fe53931a4d037556e3 ""
-  "chapters/results_discussion.tex" 1697476209 9659 4e361ea9ed4740a305e4486fdda73b25 ""
+  "chapters/results_discussion.tex" 1697479667 9764 902d11fccc7d0a4ac2973e982f4e2cd7 ""
   "eth-template/ETHlogo.pdf" 1691253600 12666 b4023007c09129f6f4698ef1ed405aa9 ""
   "eth-template/ETHlogo.sty" 1691253600 299 e2abad9c54943afe91695fd7c02906f8 ""
   "eth-template/extrapackages.tex" 1691253600 2675 e8cee1fb289bc2525625e93f38f4740c ""
@@ -279,7 +279,7 @@
   "figures/aop2.png" 1695983034 6051660 348b2a87f3bed4f848c01106818d5adb ""
   "figures/assay.png" 1697288992 323933 d76f5099138c3a1147245dbc56052c50 ""
   "figures/classification_threshold.png" 1697475214 92559 8e99da457ab2fab147663123adf8a4c4 ""
-  "figures/cm97.png" 1697398778 73433 c4963ebb65b15a46350544b96ff42a2d ""
+  "figures/cm1120.png" 1697477191 75497 4d24866a3ad2f0db8b8d608de1d802de ""
   "figures/concentration_metric_distributions.png" 1697329344 134006 57cba24602fd7277d3aa95d73665379a ""
   "figures/curve_surfer.png" 1697385434 333568 c5ffc021926ce5b4de897cb6bb2e52c5 ""
   "figures/cytotoxicity.png" 1695738223 481970 b928e5804e08a228bd00be82c0366566 ""
@@ -298,13 +298,13 @@
   "figures/non_target_high_resolution_mass_spectrometry.png" 1696366226 452028 baf8d42617e5cad66106771860d53ea0 ""
   "figures/presence_matrix_all.png" 1697317899 307816 a59a382de9d4762daf1ea2a93a119414 ""
   "figures/presence_matrix_subset.png" 1697317862 64672 7c045b26b956e5548ee375f4e4d6874a ""
-  "figures/roc97.png" 1697399071 147868 d963763e3c050a2b3ae47c9a8e9606ab ""
-  "thesis.aux" 1697476223 56124 559ca4915b9070d92581f0c0cc3517e3 "pdflatex"
-  "thesis.bbl" 1697476083 78801 e41c29f852da52d3f576e580680b4a6b "biber thesis"
-  "thesis.out" 1697476223 6942 3d23ded1df51a18489ecad657f1ed247 "pdflatex"
-  "thesis.run.xml" 1697476223 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "figures/roc1120.png" 1697476819 111327 696a87013c99903d91607e09862dc570 ""
+  "thesis.aux" 1697479676 56401 7e48d4dc31723d022d5740177b50437b "pdflatex"
+  "thesis.bbl" 1697479407 78801 e41c29f852da52d3f576e580680b4a6b "biber thesis"
+  "thesis.out" 1697479676 7000 232973a261fa6e3f10757654b598a7cc "pdflatex"
+  "thesis.run.xml" 1697479676 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
   "thesis.tex" 1697463036 4911 6e40825a2a660206fc5544c43019960d ""
-  "thesis.toc" 1697476223 4176 2cd0d41cac2b9bf30cbf295d845634b1 "pdflatex"
+  "thesis.toc" 1697479676 4187 49c247df5b7f2ded55694a5195bcb052 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

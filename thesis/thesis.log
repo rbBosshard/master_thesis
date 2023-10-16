@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  16 OCT 2023 19:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  16 OCT 2023 20:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1342,18 +1342,6 @@ LaTeX Warning: Label `fig:Project_overview_train' multiply defined.
 
 LaTeX Warning: Label `fig:Project_overview_train@cref' multiply defined.
 
-
-LaTeX Warning: Label `fig:confusion_matrix' multiply defined.
-
-
-LaTeX Warning: Label `fig:confusion_matrix@cref' multiply defined.
-
-
-LaTeX Warning: Label `fig:hitcall_classification_xgb_val_default_false' multiply defined.
-
-
-LaTeX Warning: Label `fig:hitcall_classification_xgb_val_default_false@cref' multiply defined.
-
 )
 \openout1 = `thesis.aux'.
 
@@ -1708,67 +1696,63 @@ File: figures/activity_ratio_comparison.png Graphic file (type png)
 Package pdftex.def Info: figures/activity_ratio_comparison.png  used on input line 347.
 (pdftex.def)             Requested size: 202.0782pt x 157.4119pt.
  [29 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]) (./chapters/results_discussion.tex [30]
-<figures/classification_threshold.png, id=600, 779.91376pt x 549.85425pt>
+<figures/classification_threshold.png, id=601, 779.91376pt x 549.85425pt>
 File: figures/classification_threshold.png Graphic file (type png)
 <use figures/classification_threshold.png>
-Package pdftex.def Info: figures/classification_threshold.png  used on input line 36.
+Package pdftex.def Info: figures/classification_threshold.png  used on input line 38.
 (pdftex.def)             Requested size: 210.5pt x 148.40388pt.
  [31
 
-]
-<figures/roc97.png, id=610, 588.1975pt x 584.68437pt>
-File: figures/roc97.png Graphic file (type png)
-<use figures/roc97.png>
-Package pdftex.def Info: figures/roc97.png  used on input line 68.
-(pdftex.def)             Requested size: 294.69872pt x 292.93921pt.
- [32 <./figures/classification_threshold.png>]
-<figures/cm97.png, id=618, 624.83438pt x 544.53438pt>
-File: figures/cm97.png Graphic file (type png)
-<use figures/cm97.png>
-Package pdftex.def Info: figures/cm97.png  used on input line 76.
-(pdftex.def)             Requested size: 421.0pt x 366.90506pt.
- [33 <./figures/roc97.png>] [34 <./figures/cm97.png>]
-<figures/hitcall_classification_xgb_val_default_macro_avg.png, id=644, 1000.9395pt x 548.64975pt>
+] [32 <./figures/classification_threshold.png>]
+<figures/roc1120.png, id=619, 471.7625pt x 470.75874pt>
+File: figures/roc1120.png Graphic file (type png)
+<use figures/roc1120.png>
+Package pdftex.def Info: figures/roc1120.png  used on input line 66.
+(pdftex.def)             Requested size: 294.69872pt x 294.07265pt.
+<figures/cm1120.png, id=622, 752.8125pt x 699.8145pt>
+File: figures/cm1120.png Graphic file (type png)
+<use figures/cm1120.png>
+Package pdftex.def Info: figures/cm1120.png  used on input line 73.
+(pdftex.def)             Requested size: 421.0pt x 391.37021pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33 <./figures/roc1120.png>] [34 <./figures/cm1120.png>]
+<figures/hitcall_classification_xgb_val_default_macro_avg.png, id=648, 1000.9395pt x 548.64975pt>
 File: figures/hitcall_classification_xgb_val_default_macro_avg.png Graphic file (type png)
 <use figures/hitcall_classification_xgb_val_default_macro_avg.png>
-Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_macro_avg.png  used on input line 115.
+Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_macro_avg.png  used on input line 113.
 (pdftex.def)             Requested size: 416.79231pt x 228.46397pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/hitcall_classification_xgb_val_default_weighted_avg.png, id=645, 998.5305pt x 545.6385pt>
+<figures/hitcall_classification_xgb_val_default_weighted_avg.png, id=649, 998.5305pt x 545.6385pt>
 File: figures/hitcall_classification_xgb_val_default_weighted_avg.png Graphic file (type png)
 <use figures/hitcall_classification_xgb_val_default_weighted_avg.png>
-Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_weighted_avg.png  used on input line 122.
+Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_weighted_avg.png  used on input line 120.
 (pdftex.def)             Requested size: 416.79231pt x 227.75122pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/hitcall_classification_xgb_val_default_true.png, id=646, 1000.9395pt x 546.24075pt>
+<figures/hitcall_classification_xgb_val_default_true.png, id=650, 1000.9395pt x 546.24075pt>
 File: figures/hitcall_classification_xgb_val_default_true.png Graphic file (type png)
 <use figures/hitcall_classification_xgb_val_default_true.png>
-Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_true.png  used on input line 129.
+Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_true.png  used on input line 127.
 (pdftex.def)             Requested size: 416.79231pt x 227.46083pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/hitcall_classification_xgb_val_default_false.png, id=647, 998.5305pt x 545.6385pt>
+<figures/hitcall_classification_xgb_val_default_false.png, id=651, 998.5305pt x 545.6385pt>
 File: figures/hitcall_classification_xgb_val_default_false.png Graphic file (type png)
 <use figures/hitcall_classification_xgb_val_default_false.png>
-Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_false.png  used on input line 136.
+Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_false.png  used on input line 134.
 (pdftex.def)             Requested size: 416.79231pt x 227.75122pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-File: figures/hitcall_classification_xgb_val_default_macro_avg.png Graphic file (type png)
-<use figures/hitcall_classification_xgb_val_default_macro_avg.png>
-Package pdftex.def Info: figures/hitcall_classification_xgb_val_default_macro_avg.png  used on input line 144.
-(pdftex.def)             Requested size: 416.79231pt x 228.46397pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) (./chapters/conclusion.tex [35] [36 <./figures/hitcall_classification_xgb_val_default_macro_avg.png> <./figures/hitcall_classification_xgb_val_default_weighted_avg.png>] [37 <./figures/hitcall_classification_xgb_val_default_true.png> <./figures/hitcall_classification_xgb_val_default_false.png>] [38]) [39
+[35]) (./chapters/conclusion.tex [36 <./figures/hitcall_classification_xgb_val_default_macro_avg.png>] [37 <./figures/hitcall_classification_xgb_val_default_weighted_avg.png> <./figures/hitcall_classification_xgb_val_default_true.png>] [38 <./figures/hitcall_classification_xgb_val_default_false.png>]) [39
 
 ]
 Package microtype Info: Character `013' is missing
@@ -1777,7 +1761,7 @@ Package microtype Info: Character `013' is missing
  [40
 
 ] [41] [42] (./chapters/appendix.tex [43]
-<figures/concentration_metric_distributions.png, id=805, 1512.852pt x 301.125pt>
+<figures/concentration_metric_distributions.png, id=808, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 43.
@@ -1808,24 +1792,24 @@ L3 programming layer <2023-08-03>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3D23DED1DF51A18489ECAD657F1ED247;6942.
+(rerunfilecheck)             Checksum: 232973A261FA6E3F10757654B598A7CC;7000.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39989 strings out of 475188
- 753341 string characters out of 5767805
+ 39986 strings out of 475188
+ 753325 string characters out of 5767805
  1941248 words of memory out of 5000000
- 59727 multiletter control sequences out of 15000+600000
- 638760 words of font info for 650 fonts, out of 8000000 for 9000
+ 59729 multiletter control sequences out of 15000+600000
+ 638636 words of font info for 648 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,16n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (50 pages, 12001362 bytes).
+Output written on thesis.pdf (50 pages, 11975111 bytes).
 PDF statistics:
- 938 PDF objects out of 1000 (max. 8388607)
- 778 compressed objects within 8 object streams
- 202 named destinations out of 1000 (max. 500000)
+ 941 PDF objects out of 1000 (max. 8388607)
+ 780 compressed objects within 8 object streams
+ 201 named destinations out of 1000 (max. 500000)
  131030 words of extra memory for PDF output out of 154059 (max. 10000000)
 

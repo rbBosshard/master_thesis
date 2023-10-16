@@ -1,6 +1,9 @@
 \chapter{Results and Discussion}\label{chap:results_discussion}
+
+Within the scope of this thesis, our primary emphasis was on binary classification models. Although we did investigate regression models, the primary insights we obtained were predominantly derived from the analysis and evaluation of classification models. We have chosen not to include the results of the regression evaluation in this chapter. This choice was made due to the relatively greater complexity of assessing regression models and the recognition that the pivotal contributions had already been established within the classification framework.
+
 \section{Binary Classification}
-\subsection{Metrics}
+\subsection{Evaluation Metrics}
 When assessing the performance of a binary prediction model using a validation dataset containing known target values, four key metrics come into play:
 
 \begin{itemize}
@@ -10,8 +13,7 @@ When assessing the performance of a binary prediction model using a validation d
   \item False Negatives (FN): The number of incorrectly predicted inactive cases.
 \end{itemize}
 
-
-Using these four values, it is possible to construct a confusion matrix, as illustrated in Table~\ref{tab:confusion_matrix}.
+With these four values, a confusion matrix can be created, as shown in Table~\ref{tab:confusion_matrix}.
 
 \begin{table}[h]
   \centering
@@ -30,7 +32,7 @@ Using these four values, it is possible to construct a confusion matrix, as illu
   \end{tabular}
 \end{table}
 
-In binary classification, the classification threshold is a crucial parameter dictating how the model assigns data points to one of two classes based on predicted probabilities or scores. This threshold significantly influences the model's metrics, as illustrated in Figure~\ref{fig:classification_threshold}.
+In binary classification, the classification threshold is a crucial parameter dictating how the model assigns data points to one of two classes based on predicted class probabilities. This threshold significantly influences the model's metrics, as illustrated in Figure~\ref{fig:classification_threshold} and exemplified in Figure ~\ref{fig:cm1120}.
 \begin{figure} 
   \centering
   \includegraphics[width=0.5\textwidth]{figures/classification_threshold.png}
@@ -38,7 +40,7 @@ In binary classification, the classification threshold is a crucial parameter di
 ~\label{fig:classification_threshold}
 \end{figure}
 
-Several evaluation metrics can help assess the performance of a predictive model. These metrics include:
+Various metrics assess predictive model performance, such as:
 
 \begin{itemize}
   \item \textbf{Accuracy}: The ratio of correctly classified instances (TP) and (TN) to the total number of instances. It provides a general measure of the model's correctness.
@@ -56,36 +58,32 @@ Several evaluation metrics can help assess the performance of a predictive model
   \item \textbf{True Negative Rate (TNR) Specificity}: The proportion of correctly predicted inactive cases (TN) to all actual inactive cases (TN + FP).
   \[ TNR = \frac{TN}{TN + FP} \]
 
-  \item \textbf{Receiver Operating Characteristic (ROC) Curve}: A graphical representation of the model's performance across different classification thresholds. It plots the true positive rate (TNR) against the false positive rate (FPR).
-  
+  \item \textbf{Receiver Operating Characteristic (ROC) Curve}: A graphical representation of the model's performance across different classification thresholds. It plots the true positive rate (TNR) against the false positive rate (FPR), as exmplified for assay endpoint with aeid: 1120 in Figure~\ref{fig:roc1120}.
 \end{itemize}
 
-
-\subsubsection{Imbalanced Data}
-Exemplified in Figure~\ref{fig:confusion_matrix}, the majority of assay endpoints exhibit an imbalance in the distribution of active (positive) and inactive (negative) compounds when employing binarized toxicity hitcalls. Mostly the negative class significantly outweighs the postive class. Imbalanced datasets can lead to skewed performance metrics, as the model may perform well on the majority class but poorly on the minority class. To address imbalanced datasets, additional metrics such as macro-averaged and weighted-averaged metrics can be taken into account.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/roc97.png}
-  \caption{For assay endpoint with aeid: 97, the Receiver Operating Characteristic (ROC) curve is shown for the XGBoost Classifier. We predicted each trained model with four different classification thresholds, namely default = 0.5, optimal = cost(TPR, FPR), True Positive Rate = 0.5 (tnr), True Negative Rate = 0.5 (tnr).}
-~\label{fig:confusion_matrix}
+  \includegraphics[width=0.7\textwidth]{figures/roc1120.png}
+  \caption{The Receiver Operating Characteristic (ROC) curve is presented for the LogisticRegression classifier in the case of assay endpoint with aeid: 1120. We make predictions for each model combination using four distinct classification thresholds, specifically: the default threshold of 0.5, the optimal threshold determined by the cost function weighting TPR twice as FPR (to value recall), TPR approximately equal to 0.5, and TNR approximately equal to 0.5. Figure~\ref{fig:cm1120} shows the confusion matrices for the four thresholds.}
+~\label{fig:roc1120}
 \end{figure}
 
-
-\begin{figure} 
+\begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\textwidth]{figures/cm97.png}
+  \includegraphics[width=1.0\textwidth]{figures/cm1120.png}
   \caption{For assay endpoint with aeid: 97, confusion matrices are shown for four different classification thresholds.}
-~\label{fig:confusion_matrix}
+~\label{fig:cm1120}
 \end{figure}
 
-The majority of assay endpoints exhibit an imbalance in the distribution of active (positive) and inactive (negative) compounds when employing binarized toxicity hitcalls. Mostly the negative class significantly outweighs the postive class. Imbalanced datasets can lead to skewed performance metrics, as the model may perform well on the majority class but poorly on the minority class. To address imbalanced datasets, additional metrics such as macro-averaged and weighted-averaged metrics can be taken into account.
+\subsubsection{Imbalanced Data}
+As depicted in Figure~\ref{fig:cm1120}, a substantial proportion of the studied assay endpoints display an unequal distribution of active (positive) and inactive (negative) compounds. Typically, the negative class considerably outweights the positive class. Such imbalanced datasets can result in skewed performance metrics, where the model may exhibit strong performance on the majority class while performing poorly on the minority class.
 
-In macro-averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. As an example, macro-averaged precision calculates the unweighted average of precision across all classes, whereas the weighted-average of precision considers the impact of class prevalence.
-\[ \text{Macro-Precision } = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
-\[ \text{Weighted-Precision } = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
+To address imbalanced datasets, additional metrics such as macro averaged and weighted averaged metrics can be taken into account.
+In macro averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. As an example, macro averaged precision calculates the unweighted average of precision across all classes, whereas the weighted average of precision considers the impact of class prevalence.
+\[ \text{Macro Precision } = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
+\[ \text{Weighted Precision } = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
 
 In both cases, $N$ is the total number of classes (e.g. $N=2$ for the binary case), and $N_i$ represents the number of samples in class $i$. Similarly the macro-averaged and weighted-averaged recall and F1 score can be calculated.
-
 
 
 \subsection{Performance}
@@ -138,13 +136,14 @@ The default classification threshold, which is 0.5, was used for predicting the 
 ~\label{fig:hitcall_classification_xgb_val_default_false}
 \end{figure}
 
+\newpage
+
+
+
+
 \subsubsection{MassBank structure validation}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_macro_avg.png}
-  \caption{}
-  ~\label{fig:hitcall_classification_xgb_val_default_false}
-\end{figure}
 
 
-Perfromance results were generated for every combination of the three validation sets, the two target variables (hitcall, cytotoxicity corrected hitcall),  $\geq 300$ assay endpoints, two feature selection models (XGBoost, RandomForest), four classiifaction thresholds (default, optimal, TPR=0.5, TNR=0.5). 
+Performance results were generated for every combination of the three validation sets, the two target variables (hitcall, cytotoxicity corrected hitcall),  $\geq 300$ assay endpoints, two feature selection models (XGBoost, RandomForest), four classiifaction thresholds (default, optimal, TPR=0.5, TNR=0.5). 
+
+
