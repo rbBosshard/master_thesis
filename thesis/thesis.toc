@@ -39,10 +39,12 @@
 \contentsline {subsection}{\numberline {4.3.2}Evaluation}{28}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Application}{29}{subsection.4.3.3}%
 \contentsline {chapter}{\chapternumberline {5}Results and Discussion}{31}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Results}{31}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Binary Classification}{31}{subsection.5.1.1}%
-\contentsline {subsubsection}{Metrics}{31}{section*.31}%
-\contentsline {subsubsection}{Performance}{33}{section*.33}%
-\contentsline {chapter}{\chapternumberline {6}Conclusion}{36}{chapter.6}%
-\contentsline {chapter}{Bibliography}{37}{section*.39}%
-\contentsline {appendix}{\chapternumberline {A}Appendix}{41}{appendix.A}%
+\contentsline {section}{\numberline {5.1}Binary Classification}{31}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Metrics}{31}{subsection.5.1.1}%
+\contentsline {subsubsection}{Imbalanced Data}{33}{section*.33}%
+\contentsline {subsection}{\numberline {5.1.2}Performance}{35}{subsection.5.1.2}%
+\contentsline {subsubsection}{Internal validation}{35}{section*.36}%
+\contentsline {subsubsection}{MassBank structure validation}{35}{section*.41}%
+\contentsline {chapter}{\chapternumberline {6}Conclusion}{39}{chapter.6}%
+\contentsline {chapter}{Bibliography}{40}{section*.44}%
+\contentsline {appendix}{\chapternumberline {A}Appendix}{44}{appendix.A}%

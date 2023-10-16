@@ -119,7 +119,7 @@ with st.container():
 with st.container():
     col1, col2 = st.columns(2)
     with col1:
-        i = 2
+        i = 3
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
@@ -127,7 +127,7 @@ with st.container():
             with st.expander("Show Report"):
                 st.dataframe(reports[threshold])
     with col2:
-        i = 3
+        i = 2
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())

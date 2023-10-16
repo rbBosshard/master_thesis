@@ -1,7 +1,6 @@
 \chapter{Results and Discussion}\label{chap:results_discussion}
-\section{Results}
-\subsection{Binary Classification}
-\subsubsection{Metrics}
+\section{Binary Classification}
+\subsection{Metrics}
 When assessing the performance of a binary prediction model using a validation dataset containing known target values, four key metrics come into play:
 
 \begin{itemize}
@@ -11,8 +10,8 @@ When assessing the performance of a binary prediction model using a validation d
   \item False Negatives (FN): The number of incorrectly predicted inactive cases.
 \end{itemize}
 
-Using these four values, it is possible to construct a confusion matrix, as illustrated in Figure~\ref{tab:confusion_matrix}.
 
+Using these four values, it is possible to construct a confusion matrix, as illustrated in Table~\ref{tab:confusion_matrix}.
 
 \begin{table}[h]
   \centering
@@ -31,6 +30,13 @@ Using these four values, it is possible to construct a confusion matrix, as illu
   \end{tabular}
 \end{table}
 
+In binary classification, the classification threshold is a crucial parameter dictating how the model assigns data points to one of two classes based on predicted probabilities or scores. This threshold significantly influences the model's metrics, as illustrated in Figure~\ref{fig:classification_threshold}.
+\begin{figure} 
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/classification_threshold.png}
+  \caption{Relationship between threshold and classification. Figure obtained from~\cite{wicklin2020}}
+~\label{fig:classification_threshold}
+\end{figure}
 
 Several evaluation metrics can help assess the performance of a predictive model. These metrics include:
 
@@ -54,24 +60,61 @@ Several evaluation metrics can help assess the performance of a predictive model
   
 \end{itemize}
 
+
+\subsubsection{Imbalanced Data}
+Exemplified in Figure~\ref{fig:confusion_matrix}, the majority of assay endpoints exhibit an imbalance in the distribution of active (positive) and inactive (negative) compounds when employing binarized toxicity hitcalls. Mostly the negative class significantly outweighs the postive class. Imbalanced datasets can lead to skewed performance metrics, as the model may perform well on the majority class but poorly on the minority class. To address imbalanced datasets, additional metrics such as macro-averaged and weighted-averaged metrics can be taken into account.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/roc97.png}
+  \caption{For assay endpoint with aeid: 97, the Receiver Operating Characteristic (ROC) curve is shown for the XGBoost Classifier. We predicted each trained model with four different classification thresholds, namely default = 0.5, optimal = cost(TPR, FPR), True Positive Rate = 0.5 (tnr), True Negative Rate = 0.5 (tnr).}
+~\label{fig:confusion_matrix}
+\end{figure}
+
+
+\begin{figure} 
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/cm97.png}
+  \caption{For assay endpoint with aeid: 97, confusion matrices are shown for four different classification thresholds.}
+~\label{fig:confusion_matrix}
+\end{figure}
+
 The majority of assay endpoints exhibit an imbalance in the distribution of active (positive) and inactive (negative) compounds when employing binarized toxicity hitcalls. Mostly the negative class significantly outweighs the postive class. Imbalanced datasets can lead to skewed performance metrics, as the model may perform well on the majority class but poorly on the minority class. To address imbalanced datasets, additional metrics such as macro-averaged and weighted-averaged metrics can be taken into account.
 
 In macro-averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. As an example, macro-averaged precision calculates the unweighted average of precision across all classes, whereas the weighted-average of precision considers the impact of class prevalence.
-\[ \text{Macro-Precision } MP = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
-\[ \text{Weighted-Precision } WP = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
+\[ \text{Macro-Precision } = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
+\[ \text{Weighted-Precision } = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
 
 In both cases, $N$ is the total number of classes (e.g. $N=2$ for the binary case), and $N_i$ represents the number of samples in class $i$. Similarly the macro-averaged and weighted-averaged recall and F1 score can be calculated.
 
-\subsubsection{Performance}
-We evaluated the model performance using the previously mentioned metrics. The following figures depict the performance metrics for the default classification threshold. We used macro-averaged, weighted-averaged, and separately sliced metrics for the positive and negative classes, employing five different estimators. These scatter plots visually represent all target assay endpoint models applied to the internal validation dataset, utilizing the binarized hitcall without cytotoxicity correction as the target variable and an XGBoost classifier as the underlying feature selection model.
 
-The marker size in the scatter plots corresponds to the number of compounds in the validation dataset. Boxplots represent the estimators and illustrate the distribution of performance metrics across the target assay endpoint models. The table, located adjacent to the scatter plot, provides the average metrics for the estimators across all target assay endpoint models.
 
+\subsection{Performance}
+We evaluated the model performance using the previously mentioned metrics. The following figures show the performance metrics applied to:
+
+\begin{enumerate}
+  \item the internal validation dataset (Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
+  \item the fingerprint from the MassBank structure validation set (\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
+  \item the SIRIUS-predicted fingerprint from the MassBank validation set (\ref{fig:hitcall_classification_xgb_val_default_macro_avg},~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg},~\ref{fig:hitcall_classification_xgb_val_default_true},~\ref{fig:hitcall_classification_xgb_val_default_false})
+\end{enumerate}
+
+For each validation set, four figures are presented, each of which shows a different perspective on the performance metrics:
+
+\begin{enumerate}
+  \item the \emph{macro average} metrics
+  \item the \emph{weighted average} metrics
+  \item the separately sliced metrics for the \emph{positive} class
+  \item the separately sliced metrics for the \emph{negative} class
+\end{enumerate}
+
+The default classification threshold, which is 0.5, was used for predicting the class labels. Each figure shows performance on the binarized hitcall without cytotoxicity correction, in a scatter plot that compares precision against recall for all target assay endpoints employing each of the classifiers. All models use an XGBoost classifier as the underlying feature selection model. The marker size in the scatter plots reflects the varying number of compounds in the validation set across the assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models. The adjacent table provides the average metrics for the estimators across all target assay endpoint models.
+
+
+\subsubsection{Internal validation}
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_macro_avg.png}
   \caption{}
-~\label{fig:hitcall_classification_xgb_val_default_weighted_avg}
+~\label{fig:hitcall_classification_xgb_val_default_macro_avg}
 \end{figure}
 
 \begin{figure}[h]
@@ -95,10 +138,13 @@ The marker size in the scatter plots corresponds to the number of compounds in t
 ~\label{fig:hitcall_classification_xgb_val_default_false}
 \end{figure}
 
+\subsubsection{MassBank structure validation}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_macro_avg.png}
+  \caption{}
+  ~\label{fig:hitcall_classification_xgb_val_default_false}
+\end{figure}
 
-This is only a slice of the results and ever combination of target variable, feature selection model, and assay endpoint is available in a dashbaord.
-\begin{enumerate}
-  \item target variables: hitcall, hitcall\_cytotox, hitcall\_cytotox\_corr
-  \item feature selection models: XGBoost, Random Forest
-  \item 370 assay endpoint
-\end{enumerate}
+
+Perfromance results were generated for every combination of the three validation sets, the two target variables (hitcall, cytotoxicity corrected hitcall),  $\geq 300$ assay endpoints, two feature selection models (XGBoost, RandomForest), four classiifaction thresholds (default, optimal, TPR=0.5, TNR=0.5). 
