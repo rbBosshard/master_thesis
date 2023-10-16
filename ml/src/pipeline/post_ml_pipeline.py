@@ -6,13 +6,13 @@ from ml.src.pipeline.constants import LOG_DIR_PATH, OUTPUT_DIR_PATH
 from ml.src.utils.helper import folder_name_to_datetime
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_02-01-23"
+TARGET_RUN = "2023-10-14_02-01-23_all"
 NUM_AEIDS = 1000
 
 logs_folder = os.path.join(LOG_DIR_PATH)
 subfolders = [f for f in os.listdir(logs_folder)]
-sorted_subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
-target_run_folder = sorted_subfolders[0] if MOST_RECENT else TARGET_RUN
+# subfolders = sorted(subfolders, key=folder_name_to_datetime, reverse=True)
+target_run_folder = subfolders[0] if MOST_RECENT else TARGET_RUN
 print("Target run:", target_run_folder)
 print("#" * 50)
 
@@ -85,31 +85,32 @@ for target_variable in os.listdir(target_run_folder_path):
                                                         threshold = threshold_report.split("_")[1].split(".")[0]
                                                         report_path = os.path.join(validation_type_path, threshold_report)
                                                         report = pd.read_csv(report_path).reset_index(drop=True).rename(columns={'Unnamed: 0': 'class'})
-
-                                                        accuracy_row = report[report['class'] == 'accuracy']
-                                                        accuracy = accuracy_row.iloc[0, 1]
-
-                                                        macro_avg_row = report[report['class'] == 'macro avg']
-                                                        precision_macro_avg = macro_avg_row['precision'].values[0]
-                                                        recall_macro_avg = macro_avg_row['recall'].values[0]
-                                                        f1_macro_avg = macro_avg_row['f1-score'].values[0]
-                                                        support_macro_avg = macro_avg_row['support'].values[0]
-
-                                                        true_row = report[report['class'] == 'True']
-                                                        support_true = true_row['support'].values[0]
-
-                                                        false_row = report[report['class'] == 'False']
-                                                        support_false = false_row['support'].values[0]
-
-                                                        validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = {
-                                                            'accuracy': [accuracy],
-                                                            'precision': [precision_macro_avg],
-                                                            'recall': [recall_macro_avg],
-                                                            'f1': [f1_macro_avg],
-                                                            'support': [int(support_macro_avg)],
-                                                            'support_true':  [int(support_true)],
-                                                            'support_false': [int(support_false)]
-                                                        }
+                                                        report = report.to_dict(orient="records")
+                                                        validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = report
+                                                        # accuracy_row = report[report['class'] == 'accuracy']
+                                                        # accuracy = accuracy_row.iloc[0, 1]
+                                                        #
+                                                        # macro_avg_row = report[report['class'] == 'macro avg']
+                                                        # precision_macro_avg = macro_avg_row['precision'].values[0]
+                                                        # recall_macro_avg = macro_avg_row['recall'].values[0]
+                                                        # f1_macro_avg = macro_avg_row['f1-score'].values[0]
+                                                        # support_macro_avg = macro_avg_row['support'].values[0]
+                                                        #
+                                                        # true_row = report[report['class'] == 'True']
+                                                        # support_true = true_row['support'].values[0]
+                                                        #
+                                                        # false_row = report[report['class'] == 'False']
+                                                        # support_false = false_row['support'].values[0]
+                                                        #
+                                                        # validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = {
+                                                        #     'accuracy': [accuracy],
+                                                        #     'precision': [precision_macro_avg],
+                                                        #     'recall': [recall_macro_avg],
+                                                        #     'f1': [f1_macro_avg],
+                                                        #     'support': [int(support_macro_avg)],
+                                                        #     'support_true':  [int(support_true)],
+                                                        #     'support_false': [int(support_false)]
+                                                        # }
 
                         print(f"SUCCESS: aeid={aeid}, Results successfully collected")
                         success_counter += 1

@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Demo App",
     page_icon="👋",
-    layout="wide",
+    # layout="wide",
 )
 
 st.write("# Welcome to the result demo of my Master's Thesis")
