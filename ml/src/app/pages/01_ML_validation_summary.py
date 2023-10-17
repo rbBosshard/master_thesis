@@ -2,13 +2,12 @@ import pandas as pd
 import os
 import json
 import numpy as np
-
 from ml.src.pipeline.constants import OUTPUT_DIR_PATH
-from ml.src.utils.helper import render_svg
-
 import streamlit as st
-import plotly.graph_objects as go
 import plotly.express as px
+from streamlit_plotly_events import plotly_events
+import plotly.graph_objects as go  # Import Plotly graph objects
+
 
 
 MOST_RECENT = 0
@@ -34,8 +33,8 @@ rename = {
     'tnr': 'TNR≈0.5',
     'optimal': 'cost(TPR,TNR)',
     'XGBClassifier': 'XGBoost',
-    'RandomForestClassifier': 'RandomForest',
-    'LogisticRegression': 'LogisticRegression',
+    'RandomForestClassifier': 'RF',
+    'LogisticRegression': 'LR',
     'SVC': 'RBF SVM',
     'MLPClassifier': 'MLP',
     'accuracy': 'accuracy',
@@ -76,12 +75,12 @@ marginal_type = st.sidebar.selectbox('Select Marginal Type', ['box', 'histogram'
 selected_marker_size = st.sidebar.selectbox('Select Marker Size based on', ['Total Support', 'Support Positive', 'Support Negative', 'more imbalanced=larger', None])
 
 color_palette_mapping = {
+    'Safe': px.colors.qualitative.Safe,
     'Light24': px.colors.qualitative.Light24,
     'Plotly': px.colors.qualitative.Plotly,
     'Bold': px.colors.qualitative.Bold,
     'D3': px.colors.qualitative.D3,
     'G10': px.colors.qualitative.G10,
-    'Safe': px.colors.qualitative.Safe,
 }
 
 with st.sidebar.expander('Settings', expanded=False):
@@ -135,7 +134,7 @@ df['Support Negative'] = df['Value'].apply(lambda x: x['negative_support'])
 df['Imbalance'] = df['Support Negative'] - df['Support Positive']
 df['Imbalance Score'] = (df['Support Positive'] - df['Support Negative']) / df['Total Support']
 df['Imbalance Score'] = df['Imbalance Score'] / df['Imbalance Score'].abs().max()
-df['Imbalance Score'] = df['Imbalance Score'].apply(lambda x: f'{x:.3f}')
+df['Imbalance Score'] = df['Imbalance Score'].round(3)
 
 df = df.drop(columns=['Value'])
 
@@ -148,10 +147,7 @@ elif selected_marker_size == 'Support Negative':
 elif selected_marker_size == 'more imbalanced=larger':
     df['Marker Size'] = np.abs(np.min(df['Imbalance Score'])) + np.abs(df['Imbalance Score']) * 10
 
-    # Calculate the ratio between x and y for each data point
-    imbalance = df['Support Negative'] - df['Support Positive']
-    sorted_imbalance = sorted(imbalance)
-    st.line_chart(sorted_imbalance)
+   
     # sort df['Support'] with the same sort key
 
     ratio = df['Support Positive'] ** 0.2 / df['Support Negative'] ** 0.2
@@ -173,7 +169,20 @@ elif selected_marker_size == 'more imbalanced=larger':
 else:
     raise ValueError(f"Unknown marker size {selected_marker_size}")
 
+
+
 df['Marker Size'] = df['Marker Size'].round(3)
+
+# 3D scatter plot
+# fig2 = px.scatter_3d(df, x='Recall', y='Precision',  z='Total Support', color='Estimator')
+# fig2.update_layout(scene=dict(xaxis_title='Recall', yaxis_title='Precision', zaxis_title='Total Support'))
+# fig2.update_layout(scene_aspectmode='cube')
+# fig2.update_layout(scene_camera=dict(eye=dict(x=1.5, y=1.5, z=1.5)))    
+# # limit x and y axis to 0-1 range
+# fig2.update_xaxes(range=[0.0, 1.0])
+# fig2.update_yaxes(range=[0.0, 1.0])
+# st.plotly_chart(fig2)
+
       
 # Add one a dummy datapoint for every estimator to make the legend work (otherwise the legend shows very small markers)
 dummy_data = []
@@ -206,7 +215,7 @@ df = pd.concat([df, dummy_df], ignore_index=True)
 
 trendline_args = {'trendline': trendline_type} if trendline_type is not None else {}
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
-args = {'opacity': 1,
+args = {'opacity': 0.7,
         'hover_data': ['aeid', 'F1', 'Accuracy',
                     #    'True Positives', 'True Negatives', 'False Positives', 'False Negatives',
                        'Total Support', 'Support Positive', 'Support Negative', 
@@ -219,6 +228,8 @@ args = {'opacity': 1,
 # Scatter plot
 fig = px.scatter(df, x='Recall', y='Precision', color='Estimator', **args, **trendline_args, **hisogram_args)
 
+
+# Update the marker size based on the customdata
 if trendline_type is None:
     for j, trace in enumerate(fig.data):
         if 'scatter' in trace.type:
@@ -259,13 +270,19 @@ fig.update_yaxes(tickfont=dict(size=axis_font_size-2, color="black"))
 fig.update_layout(legend_title_text='', legend_traceorder="reversed")
 fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
                                 y=1.01, 
-                                x=0.73, 
+                                x=0.72, 
                                 bgcolor='rgba(255, 255, 255, 0.6)',
                                 font=dict(size=14, color='black')))
 
 col1, col2 = st.columns(2)
 with col1:
-    st.plotly_chart(fig)
+    # st.plotly_chart(fig)
+    selected_points = plotly_events(fig, click_event=True, key="plotly_event") #, click_event=True, hover_event=True, key="plotly_event")
+    if selected_points:
+        pass
+
+   
+
     parent_folder = os.path.dirname(os.path.abspath(__file__))
     full_name = f"{selected_target_variable}_" \
                 f"{selected_ml_algorithm}_" \
@@ -285,8 +302,10 @@ with col1:
         dest_path = os.path.join(parent_folder, 'generated_results', file)
         fig.write_image(dest_path, format='png', engine='kaleido', width=550, height=550, scale=4)
 
+
+
 if show_summary:
-    with col1:
+    with col2:
         grouped = df[['Estimator', 'Accuracy', 'Precision', 'Recall', 'F1', 'Total Support']].groupby(['Estimator']).mean().reset_index()
         grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.3f}')
         grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.3f}')
@@ -317,7 +336,38 @@ if show_summary:
 
 
 
+ # Calculate the ratio between x and y for each data point
+single_estimator = df[df['Estimator'] == 'XGBoost'].reset_index(drop=True)
+single_estimator = single_estimator.sort_values(by=['Imbalance'])
+index = [i for i in range(len(single_estimator))]
+# Create a figure with two traces: one for the bar plot and one for the line plot
+fig = go.Figure()
 
+# Add a bar trace for the Imbalance column
+fig.add_trace(go.Scatter(x=index, y=single_estimator['Imbalance'], name='Imbalance'))
+
+# Add a line trace for the Support column
+fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'], name='Total Support', yaxis='y2'))
+
+
+fig.add_trace(go.Bar(x=index, y=single_estimator['Support Positive'], name='Total Support', yaxis='y3'))
+
+fig.add_trace(go.Bar(x=index, y=-single_estimator['Support Negative'], name='Total Support', yaxis='y4'))
+
+# Update the layout to show the y-axes
+fig.update_layout(
+    yaxis=dict(title='Imbalance'),
+    yaxis2=dict(title='Total Support', overlaying='y', side='right'),
+    yaxis3=dict(title='Positive Support', overlaying='y', side='right'),
+    yaxis4=dict(title='Negative Support', overlaying='y', side='right'),
+)
+
+# limit range of y-axis
+fig.update_yaxes(range=[0.0, max(single_estimator['Total Support']) * 1.1])
+
+
+# Display the figure in Streamlit
+st.plotly_chart(fig)
       
 
 
