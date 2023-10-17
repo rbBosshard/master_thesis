@@ -32,7 +32,7 @@ rename = {
     'optimal': 'cost(TPR,TNR)',
     'XGBClassifier': 'XGBoost',
     'RandomForestClassifier': 'RandomForest',
-    'LogisticRegression': 'LogisticRegr',
+    'LogisticRegression': 'LogisticRegression',
     'SVC': 'RBF SVM',
     'MLPClassifier': 'MLP',
     'accuracy': 'accuracy',
@@ -62,7 +62,6 @@ selected_target_variable = st.sidebar.selectbox('Select Target Variable', list(v
 selected_ml_algorithm = st.sidebar.selectbox('Select ML Algorithm', list(validation_results[selected_target_variable].keys()))
 dummy_aeid = str(list(aeid_paths[selected_target_variable][selected_ml_algorithm].keys())[0])
 selected_preprocessing_model = st.sidebar.selectbox('Select Feature Selection Model', list(validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid].keys())[::-1])
-dummy_estimator_model = list(validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model].keys())[0]
 selected_validation_type = st.sidebar.selectbox('Select Validation Set', ['Internal validation', 'MB validation from structure', 'MB validation SIRIUS-predicted'])
 selected_threshold = st.sidebar.selectbox('Select Classification Threshold', ['default=0.5', 'cost(TPR,TNR)', 'TPR≈0.5', 'TNR≈0.5'])
 class_metrics = ['macro avg', 'weighted avg', 'positive', 'negative',  'accuracy']
@@ -114,6 +113,7 @@ df = pd.DataFrame(reports)
 df = df.stack().reset_index()
 df = df.rename(columns={'level_0': 'aeid', 'level_1': 'Estimator', 'level_2': 'Metric', 0: 'Value'})
 
+df['Estimator'] = df['Estimator'].apply(lambda x: rename[x])
 df['Support'] = df['Value'].apply(lambda x: x['macro avg_support'])
 df['Support_Positive'] = df['Value'].apply(lambda x: x['positive_support'])
 df['Support_Negative'] = df['Value'].apply(lambda x: x['negative_support'])
@@ -121,6 +121,7 @@ df['Imbalance'] = df['Support_Negative'] - df['Support_Positive']
 max_imbalance = df['Imbalance'].max()
 df['Imbalance_Score'] = df['Imbalance'] / max_imbalance
 df['Balance_Score'] = 1 - df['Imbalance_Score']
+
 
 df['Accuracy'] = df['Value'].apply(lambda x: x['accuracy'])
 df['Precision'] = df['Value'].apply(lambda x: x['precision'])
@@ -184,9 +185,11 @@ for estimator in df['Estimator'].unique():
         'Recall': -1.0,
         'F1': -1.0,
         'Accuracy': -1.0,
-        'Support': 2000,
-        'Support_Positive': 2000,
-        'Support_Negative': 2000,
+        'Support': -1,
+        'Support_Positive': -1,
+        'Support_Negative': -1,
+        'Imbalance_Score': -1,
+        'Balance_Score': -1,
         'Marker_Size': 2000,
     }
     dummy_data.append(dummy_row)
@@ -196,24 +199,19 @@ df = pd.concat([df, dummy_df], ignore_index=True)
 
 trendline_args = {'trendline': trendline_type, 'trendline_color_override':'black'} if trendline_type is not None else {}
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
-args = {}
-# marker_size = df['Support'] / 100
-opacity = 0.8    
+args = {'opacity': 0.8,
+        'hover_data': ['aeid', 'F1', 'Accuracy', 'Support', 'Support_Positive', 'Support_Negative', 'Imbalance_Score', 'Balance_Score', 'Marker_Size'],
+        'color_discrete_sequence': selected_palette,
+        'custom_data': ['Marker_Size'], # Add customdata to match marker size
+        } 
 
-fig = px.scatter(df,
-    x='Recall', y='Precision', color='Estimator',
-    custom_data=['Marker_Size'],  # Add customdata to match marker size
-    hover_data=['aeid', 'F1', 'Accuracy', 'Support', 'Support_Positive', 'Support_Negative', 'Marker_Size'], opacity=opacity,
-    color_discrete_sequence=selected_palette,
-        **args, **trendline_args, **hisogram_args)
+fig = px.scatter(df, x='Recall', y='Precision', color='Estimator', **args, **trendline_args, **hisogram_args)
 
 for j, trace in enumerate(fig.data):
     if 'scatter' in trace.type:
         # Get the marker size from the customdata
         marker_size = list(fig.data[j].customdata[:, 0])
-        fig.data[j].update(marker=dict(size=marker_size, symbol="circle-dot", line=dict(color='black', width=0.7)))
-# make legend clickable
-fig.update_layout(clickmode='event+select')
+        fig.data[j].update(marker=dict(size=marker_size, symbol='circle-dot',  line=dict(color='black', width=0.7)))
 
 # drop the dummy values again
 df = df[df['aeid'] != '-1']
@@ -234,7 +232,7 @@ else:
     fig.update_layout(yaxis=dict(range=[0.0, 1.0]))
 
 
-title = f"{reverse_rename[selected_validation_type]}, P vs. R with {reverse_rename[selected_threshold]} threshold on {reverse_rename[selected_class_metric]}"
+title = f"{selected_validation_type}, P vs. R with {selected_threshold} threshold on {selected_class_metric}"
 
 margin = None # 0
 axis_font_size = 18
@@ -256,10 +254,19 @@ fig.update_yaxes(tickfont=dict(size=axis_font_size-2, color="black"))
 fig.update_layout(legend_title_text='')
 fig.update_layout(legend_traceorder="reversed")
 fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
-                                y=0.95, 
-                                x=0.74, 
+                                y=1.01, 
+                                x=0.72, 
                                 font=dict(size=13.5, color='black')))
-fig.update_layout(legend=dict(bgcolor='rgba(255, 255, 255, 0.6)'))
+fig.update_layout(legend=dict(bgcolor='rgba(0, 0, 0, 0.05)'))
+
+
+# fig.update_layout(legend_title_text='')
+# fig.update_layout(legend_traceorder="reversed")
+# fig.update_layout(legend=dict(orientation='v', yanchor='top', xanchor='left',
+#                              x=0.72, y=1.01, font=dict(size=13.5, color='black'), itemmode='expand'))
+# fig.update_layout(legend_title=dict(text='', font=dict(size=15, color='blue')))
+# fig.update_layout(legend=dict(bordercolor='black', borderwidth=2, bgcolor='rgba(255, 255, 255, 0.8)'))
+
 
 
 col1, col2 = st.columns(2)
