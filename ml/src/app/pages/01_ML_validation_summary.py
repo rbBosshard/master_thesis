@@ -18,6 +18,9 @@ st.set_page_config(
     layout="wide",
 )
 
+def blank_to_underscore(x):
+    return x.replace(' ', '_')
+
 rename = {
     'True': 'positive',
     'False': 'negative',
@@ -67,10 +70,10 @@ selected_threshold = st.sidebar.selectbox('Select Classification Threshold', ['d
 class_metrics = ['macro avg', 'weighted avg', 'positive', 'negative',  'accuracy']
 support_class_metrics = ['macro avg', 'positive', 'negative']
 selected_class_metric = st.sidebar.selectbox('Select Class Slice', class_metrics)
-selected_marker_size = st.sidebar.selectbox('Select Marker Size based on', ['Support', 'Support_Positive', 'Support_Negative', 'more balanced=larger', 'more imbalanced=larger', None])
 st.sidebar.divider()
 trendline_type = st.sidebar.selectbox('Select Trendline Type', [None, 'ols', 'lowess'])
 marginal_type = st.sidebar.selectbox('Select Marginal Type', ['box', 'histogram', 'violin', 'rug', None])
+selected_marker_size = st.sidebar.selectbox('Select Marker Size based on', ['Total Support', 'Support Positive', 'Support Negative', 'more imbalanced=larger', None])
 
 color_palette_mapping = {
     'Light24': px.colors.qualitative.Light24,
@@ -114,44 +117,44 @@ df = df.stack().reset_index()
 df = df.rename(columns={'level_0': 'aeid', 'level_1': 'Estimator', 'level_2': 'Metric', 0: 'Value'})
 
 df['Estimator'] = df['Estimator'].apply(lambda x: rename[x])
-df['Support'] = df['Value'].apply(lambda x: x['macro avg_support'])
-df['Support_Positive'] = df['Value'].apply(lambda x: x['positive_support'])
-df['Support_Negative'] = df['Value'].apply(lambda x: x['negative_support'])
-df['Imbalance'] = df['Support_Negative'] - df['Support_Positive']
-max_imbalance = df['Imbalance'].max()
-df['Imbalance_Score'] = df['Imbalance'] / max_imbalance
-df['Balance_Score'] = 1 - df['Imbalance_Score']
 
-
-df['Accuracy'] = df['Value'].apply(lambda x: x['accuracy'])
 df['Precision'] = df['Value'].apply(lambda x: x['precision'])
 df['Recall'] = df['Value'].apply(lambda x: x['recall'])
-df['F1'] = df['Value'].apply(lambda x: x['f1-score'])  # You mentioned wanting F1 in the hover data
-df['Support'] = df['Value'].apply(lambda x: x['support'])
+df['F1'] = df['Value'].apply(lambda x: x['f1-score'])  
+df['Accuracy'] = df['Value'].apply(lambda x: x['accuracy'])
 
-if selected_marker_size == 'Support':
-    df['Marker_Size'] = (df['Support'] ** 0.3)
-elif selected_marker_size == 'Support_Positive':
-    df['Marker_Size'] = (df['Support_Positive'] ** 0.3)
-elif selected_marker_size == 'Support_Negative':
-    df['Marker_Size'] = (df['Support_Negative'] ** 0.3)
-elif selected_marker_size == 'more balanced=larger':
-    max_marker_size = 20
-    min_marker_size = 2
-    def scaler(x):
-        return min_marker_size + (max_marker_size - min_marker_size) * x
+df['Total Support'] = df['Value'].apply(lambda x: x['macro avg_support'])
+df['Support Positive'] = df['Value'].apply(lambda x: x['positive_support'])
+df['Support Negative'] = df['Value'].apply(lambda x: x['negative_support'])
 
-    df['Marker_Size'] = scaler(df['Balance_Score'])
+# df['True Positives'] = df['Support Positive'] * df['Recall']
+# df['True Negatives'] = df['Support Negative'] * (1 - df['Recall'])
+# df['False Positives'] = df['Support Negative'] - df['True Negatives']
+# df['False Negatives'] = df['Support Positive'] - df['True Positives']
+
+df['Imbalance'] = df['Support Negative'] - df['Support Positive']
+df['Imbalance Score'] = (df['Support Positive'] - df['Support Negative']) / df['Total Support']
+df['Imbalance Score'] = df['Imbalance Score'] / df['Imbalance Score'].abs().max()
+df['Imbalance Score'] = df['Imbalance Score'].apply(lambda x: f'{x:.3f}')
+
+df = df.drop(columns=['Value'])
+
+if selected_marker_size == 'Total Support':
+    df['Marker Size'] = (df['Total Support'] ** 0.35)
+elif selected_marker_size == 'Support Positive':
+    df['Marker Size'] = (df['Support Positive'] ** 0.5)
+elif selected_marker_size == 'Support Negative':
+    df['Marker Size'] = (df['Support Negative'] ** 0.4)
+elif selected_marker_size == 'more imbalanced=larger':
+    df['Marker Size'] = np.abs(np.min(df['Imbalance Score'])) + np.abs(df['Imbalance Score']) * 10
 
     # Calculate the ratio between x and y for each data point
-    imbalance = df['Support_Negative'] - df['Support_Positive']
+    imbalance = df['Support Negative'] - df['Support Positive']
     sorted_imbalance = sorted(imbalance)
     st.line_chart(sorted_imbalance)
-    # sort df['Support'] with the same sort key 
+    # sort df['Support'] with the same sort key
 
-
-
-    ratio = df['Support_Positive'] ** 0.2 / df['Support_Negative'] ** 0.2
+    ratio = df['Support Positive'] ** 0.2 / df['Support Negative'] ** 0.2
     # Normalize the ratio values to control marker size
     min_ratio = min(ratio)
     max_ratio = max(ratio)
@@ -167,15 +170,12 @@ elif selected_marker_size == 'more balanced=larger':
 
     # Calculate marker sizes based on the normalized ratio
     marker_sizes = min_marker_size + normalized_ratio * (max_marker_size - min_marker_size)
-
-
 else:
     raise ValueError(f"Unknown marker size {selected_marker_size}")
 
-df = df.drop(columns=['Value'])
-
-        
-# Add one more dummy datapoint for every estimator to make the legend work (otherwise the legend shows very small markers)
+df['Marker Size'] = df['Marker Size'].round(3)
+      
+# Add one a dummy datapoint for every estimator to make the legend work (otherwise the legend shows very small markers)
 dummy_data = []
 for estimator in df['Estimator'].unique():
     dummy_row = {
@@ -185,33 +185,51 @@ for estimator in df['Estimator'].unique():
         'Recall': -1.0,
         'F1': -1.0,
         'Accuracy': -1.0,
-        'Support': -1,
-        'Support_Positive': -1,
-        'Support_Negative': -1,
-        'Imbalance_Score': -1,
-        'Balance_Score': -1,
-        'Marker_Size': 2000,
+        # 'True Positives': -1,
+        # 'True Negatives': -1,
+        # 'False Positives': -1,
+        # 'False Negatives': -1,
+        'Total Support': -1,
+        'Support Positive': -1,
+        'Support Negative': -1,
+        'Imbalance': -1,
+        'Imbalance Score': -1,
+        'Balance Score': -1,
+        'Marker Size': 2000,
+
     }
     dummy_data.append(dummy_row)
+
 dummy_df = pd.DataFrame(dummy_data)
 df = pd.concat([df, dummy_df], ignore_index=True)
 
 
-trendline_args = {'trendline': trendline_type, 'trendline_color_override':'black'} if trendline_type is not None else {}
+trendline_args = {'trendline': trendline_type} if trendline_type is not None else {}
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
-args = {'opacity': 0.8,
-        'hover_data': ['aeid', 'F1', 'Accuracy', 'Support', 'Support_Positive', 'Support_Negative', 'Imbalance_Score', 'Balance_Score', 'Marker_Size'],
+args = {'opacity': 1,
+        'hover_data': ['aeid', 'F1', 'Accuracy',
+                    #    'True Positives', 'True Negatives', 'False Positives', 'False Negatives',
+                       'Total Support', 'Support Positive', 'Support Negative', 
+                       'Imbalance', 'Imbalance Score',
+                       'Marker Size'],
         'color_discrete_sequence': selected_palette,
-        'custom_data': ['Marker_Size'], # Add customdata to match marker size
+        'custom_data': ['Marker Size'], # Add customdata to match marker size
         } 
 
+# Scatter plot
 fig = px.scatter(df, x='Recall', y='Precision', color='Estimator', **args, **trendline_args, **hisogram_args)
 
-for j, trace in enumerate(fig.data):
-    if 'scatter' in trace.type:
-        # Get the marker size from the customdata
-        marker_size = list(fig.data[j].customdata[:, 0])
-        fig.data[j].update(marker=dict(size=marker_size, symbol='circle-dot',  line=dict(color='black', width=0.7)))
+if trendline_type is None:
+    for j, trace in enumerate(fig.data):
+        if 'scatter' in trace.type:
+            # Get the marker size from the customdata
+            marker_size = list(fig.data[j].customdata[:, 0])
+            fig.data[j].update(marker=dict(
+                symbol='circle-dot', #'circle-open-dot', 
+                size=marker_size, 
+                # line=dict(color='black', width=0.7)
+                )
+            )
 
 # drop the dummy values again
 df = df[df['aeid'] != '-1']
@@ -221,9 +239,6 @@ max_x = np.max(df['Recall']) + offset
 min_y = np.min(df['Precision']) - offset
 max_y = np.max(df['Precision']) + offset
 
-# fig.update_layout(xaxis=dict(scaleanchor="y", scaleratio=1))
-# fig.update_layout(yaxis=dict(scaleanchor="x", scaleratio=1)) 
-
 if clip_axis:
     fig.update_layout(xaxis=dict(range=[min_x, max_x]))
     fig.update_layout(yaxis=dict(range=[min_y, max_y]))
@@ -231,66 +246,57 @@ else:
     fig.update_layout(xaxis=dict(range=[0.0, 1.0]))
     fig.update_layout(yaxis=dict(range=[0.0, 1.0]))
 
-
-title = f"{selected_validation_type}, P vs. R with {selected_threshold} threshold on {selected_class_metric}"
-
+title = f"{selected_validation_type}: {selected_threshold} threshold on {selected_class_metric}"
 margin = None # 0
 axis_font_size = 18
-fig.update_layout(width=600, height=600, title=title, title_font=dict(size=14, color='black'), xaxis_title_font=dict(size=axis_font_size, color="black"), yaxis_title_font=dict(size=axis_font_size, color="black"),  margin=dict(t=margin))
+fig.update_layout(width=600, height=600, title=title, title_font=dict(size=18, color='black'), xaxis_title_font=dict(size=axis_font_size, color="black"), yaxis_title_font=dict(size=axis_font_size, color="black"),  margin=dict(t=margin))
 fig.update_layout(yaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'), xaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'))
-# axis tick font size   
 fig.update_xaxes(tickfont=dict(size=axis_font_size-2, color="black"))
 fig.update_yaxes(tickfont=dict(size=axis_font_size-2, color="black"))
 
-# uniform grid 
-# fig.update_layout(xaxis=dict(scaleanchor="y", scaleratio=1))
-# fig.update_layout(yaxis=dict(scaleanchor="x", scaleratio=1)) 
-# fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
-# fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
-# fig.update_xaxes(showspikes=True, nticks=10, tickfont=dict(size=20, color="black"))  
-# fig.update_yaxes(showspikes=True, nticks=10, tickfont=dict(size=20, color="black")) 
 
-
-fig.update_layout(legend_title_text='')
-fig.update_layout(legend_traceorder="reversed")
+# legend
+fig.update_layout(legend_title_text='', legend_traceorder="reversed")
 fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
                                 y=1.01, 
-                                x=0.72, 
-                                font=dict(size=13.5, color='black')))
-fig.update_layout(legend=dict(bgcolor='rgba(0, 0, 0, 0.05)'))
-
-
-# fig.update_layout(legend_title_text='')
-# fig.update_layout(legend_traceorder="reversed")
-# fig.update_layout(legend=dict(orientation='v', yanchor='top', xanchor='left',
-#                              x=0.72, y=1.01, font=dict(size=13.5, color='black'), itemmode='expand'))
-# fig.update_layout(legend_title=dict(text='', font=dict(size=15, color='blue')))
-# fig.update_layout(legend=dict(bordercolor='black', borderwidth=2, bgcolor='rgba(255, 255, 255, 0.8)'))
-
-
+                                x=0.73, 
+                                bgcolor='rgba(255, 255, 255, 0.6)',
+                                font=dict(size=14, color='black')))
 
 col1, col2 = st.columns(2)
 with col1:
     st.plotly_chart(fig)
-    # save the figure as png
     parent_folder = os.path.dirname(os.path.abspath(__file__))
-    full_name = f"{selected_target_variable}_{selected_ml_algorithm}_{selected_preprocessing_model}_{selected_validation_type}_{selected_threshold}_{selected_class_metric}"
+    full_name = f"{selected_target_variable}_" \
+                f"{selected_ml_algorithm}_" \
+                f"{selected_preprocessing_model}_" \
+                f"{reverse_rename[selected_validation_type]}_" \
+                f"{reverse_rename[selected_threshold]}_" \
+                f"{blank_to_underscore(reverse_rename[selected_class_metric])}"
     if save_figure:
+        fig.update_layout(title_font=dict(size=14, color='black'))
+        fig.update_layout(legend_title_text='', legend_traceorder="reversed")
+        fig.update_layout(legend=dict(
+                                y=1.01, 
+                                x=0.72, 
+                                font=dict(size=12)))
+
         file = f"{full_name}.png"
         dest_path = os.path.join(parent_folder, 'generated_results', file)
-        fig.write_image(dest_path, format='png', engine='kaleido', width=550, height=550, scale=2)
+        fig.write_image(dest_path, format='png', engine='kaleido', width=550, height=550, scale=4)
 
-# summary table of average metrics, precision, recall, f1 grouped by Estimator
 if show_summary:
     with col1:
-        grouped = df[['Estimator', 'Precision', 'Recall', 'F1', 'Support']].groupby(['Estimator']).mean().reset_index()
-        grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.2f}')
-        grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.2f}')
-        grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.2f}')
-        grouped['Support'] = grouped['Support'].apply(lambda x: f'{x:.0f}')
-        summary = grouped[['Estimator', 'Recall', 'Precision', 'F1']]
+        grouped = df[['Estimator', 'Accuracy', 'Precision', 'Recall', 'F1', 'Total Support']].groupby(['Estimator']).mean().reset_index()
+        grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.3f}')
+        grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.3f}')
+        grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.3f}')
+        grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.3f}')
+        grouped['Total Support'] = grouped['Total Support'].apply(lambda x: f'{x:.0f}')
+        summary = grouped[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1', 'Total Support']]
+        summary = summary.rename(columns={'Estimator': 'Estimator', 'Accuracy': 'Accuracy', 'Recall': 'Recall', 'Precision': 'Precision', 'F1': 'F1', 'Total Support': 'Support'})
+
         st.dataframe(summary)
-        
         if save_figure:
             file = f"{full_name}.tex"
             dest_path = os.path.join(parent_folder, 'generated_results', file)
