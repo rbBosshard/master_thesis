@@ -9,30 +9,27 @@ from ml.src.utils.helper import render_svg
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.express as px
-import io
-import kaleido
-import plotly
-print(plotly.__version__, kaleido.__version__)
+
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_16-38-47_all"
+TARGET_RUN = "2023-10-14_16-38-47_all_post_ml_pipeline"
 
 st.set_page_config(
     layout="wide",
 )
 
-rename_dict = {
-    'True': 'Positive',
-    'False': 'Negative',
+rename = {
+    'True': 'positive',
+    'False': 'negative',
     'macro avg': 'macro avg',
     'weighted avg': 'weighted avg',
     'val': 'Internal validation',
     'mb_val_structure': 'MB validation from structure',
     'mb_val_sirius': 'MB validation SIRIUS-predicted',
-    'default': 'Default = 0.5',
-    'tpr': 'TPR ≈ 0.5',
-    'tnr': 'TNR ≈ 0.5',
-    'optimal': 'cost(TPR, TNR)',
+    'default': 'default=0.5',
+    'tpr': 'TPR≈0.5',
+    'tnr': 'TNR≈0.5',
+    'optimal': 'cost(TPR,TNR)',
     'XGBClassifier': 'XGBoost',
     'RandomForestClassifier': 'RandomForest',
     'LogisticRegression': 'LogisticRegr',
@@ -40,6 +37,8 @@ rename_dict = {
     'MLPClassifier': 'MLP',
     'accuracy': 'accuracy',
 }
+
+reverse_rename = {v: k for k, v in rename.items()}
 
 
 logs_folder = os.path.join(OUTPUT_DIR_PATH)
@@ -64,8 +63,12 @@ selected_ml_algorithm = st.sidebar.selectbox('Select ML Algorithm', list(validat
 dummy_aeid = str(list(aeid_paths[selected_target_variable][selected_ml_algorithm].keys())[0])
 selected_preprocessing_model = st.sidebar.selectbox('Select Feature Selection Model', list(validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid].keys())[::-1])
 dummy_estimator_model = list(validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model].keys())[0]
-selected_validation_type = st.sidebar.selectbox('Select Validation Set', list(validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model][dummy_estimator_model].keys())[::-1])
-selected_class_metric = st.sidebar.selectbox('Select Class Slice', ['macro avg', 'True', 'False', 'weighted avg', 'accuracy'])
+selected_validation_type = st.sidebar.selectbox('Select Validation Set', ['Internal validation', 'MB validation from structure', 'MB validation SIRIUS-predicted'])
+selected_threshold = st.sidebar.selectbox('Select Classification Threshold', ['default=0.5', 'cost(TPR,TNR)', 'TPR≈0.5', 'TNR≈0.5'])
+class_metrics = ['macro avg', 'weighted avg', 'positive', 'negative',  'accuracy']
+support_class_metrics = ['macro avg', 'positive', 'negative']
+selected_class_metric = st.sidebar.selectbox('Select Class Slice', class_metrics)
+selected_marker_size = st.sidebar.selectbox('Select Marker Size based on', ['Support', 'Support_Positive', 'Support_Negative', 'more balanced=larger', 'more imbalanced=larger', None])
 st.sidebar.divider()
 trendline_type = st.sidebar.selectbox('Select Trendline Type', [None, 'ols', 'lowess'])
 marginal_type = st.sidebar.selectbox('Select Marginal Type', ['box', 'histogram', 'violin', 'rug', None])
@@ -78,14 +81,15 @@ color_palette_mapping = {
     'G10': px.colors.qualitative.G10,
     'Safe': px.colors.qualitative.Safe,
 }
-selected_palette = st.sidebar.selectbox('Select Color Palette', list(color_palette_mapping.keys()))
-selected_palette = color_palette_mapping.get(selected_palette)
 
-show_summary = st.sidebar.checkbox("Show Summary", value=True)
-show_legend = st.sidebar.checkbox("Show Legend", value=True)
-clip_axis = st.sidebar.checkbox("Clip Axis", value=True)
-save_figure = st.sidebar.checkbox("Save Figure", value=True)
-generate_latex = st.sidebar.checkbox("Generate LaTeX", value=True)
+with st.sidebar.expander('Settings', expanded=False):
+    selected_palette = st.sidebar.selectbox('Select Color Palette', list(color_palette_mapping.keys()))
+    selected_palette = color_palette_mapping.get(selected_palette)
+    show_summary = st.sidebar.checkbox("Show Summary", value=True)
+    clip_axis = st.sidebar.checkbox("Clip Axis", value=True)
+    save_figure = st.sidebar.checkbox("Save Figure", value=True)
+    generate_latex = st.sidebar.checkbox("Generate LaTeX", value=False)
+
 
 reports = {}
 threshold_names = []
@@ -93,82 +97,123 @@ for estimator_model in validation_results[selected_target_variable][selected_ml_
     reports[estimator_model] = {}
     for aeid in validation_results[selected_target_variable][selected_ml_algorithm].keys():
         reports[estimator_model][aeid] = {}
-        for classification_threshold in validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][selected_validation_type].keys():
-            threshold_names.append(classification_threshold)
-            # suffix = os.path.join(selected_preprocessing_model, estimator_model, selected_validation_type)
-            # report_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][aeid], suffix, f'report_{classification_threshold}.csv')
-            report = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][selected_validation_type][classification_threshold]
-            reports[estimator_model][aeid][classification_threshold] = pd.DataFrame(report)
-    
-selected_threshold = st.sidebar.selectbox('Select Classification Threshold', threshold_names)
+        for metric in validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]].keys():
+            value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]][metric]
+            reports[estimator_model][aeid][metric] = value
+        for metric_class in support_class_metrics:
+            new_metric_class = f"{metric_class}_support"
+            value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[metric_class]]['support']
+            reports[estimator_model][aeid][new_metric_class] = value
+        
+        accuracy = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename['accuracy']]['precision'] # for all the same, just take the first one
+        reports[estimator_model][aeid]['accuracy'] = accuracy
 
 
-threshold = selected_threshold
-# st.markdown(f"#### Precision vs. recall using the '{threshold.upper()}' classification threshold and metric: {rename_dict[selected_class_metric]}")
 
-filtered_reports = {}
-for estimator_model, aeid_dict in reports.items():
-    filtered_reports[estimator_model] = {}
-    for aeid, report in aeid_dict.items():
-        if threshold in report:
-            filtered_reports[estimator_model][aeid] = report[threshold]
+df = pd.DataFrame(reports)
+df = df.stack().reset_index()
+df = df.rename(columns={'level_0': 'aeid', 'level_1': 'Estimator', 'level_2': 'Metric', 0: 'Value'})
 
-# lists to store data for plotting
-estimators = []
-aeids = []
-accuracy = []
-precision = []
-recall = []
-f1 = []
-support = []
+df['Support'] = df['Value'].apply(lambda x: x['macro avg_support'])
+df['Support_Positive'] = df['Value'].apply(lambda x: x['positive_support'])
+df['Support_Negative'] = df['Value'].apply(lambda x: x['negative_support'])
+df['Imbalance'] = df['Support_Negative'] - df['Support_Positive']
+max_imbalance = df['Imbalance'].max()
+df['Imbalance_Score'] = df['Imbalance'] / max_imbalance
+df['Balance_Score'] = 1 - df['Imbalance_Score']
 
-for j, (estimator, aeid_data) in enumerate(filtered_reports.items()):
-    for aeid, metrics in aeid_data.items():
-        estimators.append(rename_dict[estimator] + '  ')
-        aeids.append(aeid)
-        metric_accuracy = next(item for item in metrics if item['class'] == 'accuracy')
-        accuracy.append(list(metric_accuracy.values())[1])
-        metric = next(item for item in metrics if item['class'] == selected_class_metric)
-        precision.append(metric['precision'])
-        recall.append(metric['recall'])
-        f1.append(metric['f1-score'])
-        support.append(metric['support'])
+df['Accuracy'] = df['Value'].apply(lambda x: x['accuracy'])
+df['Precision'] = df['Value'].apply(lambda x: x['precision'])
+df['Recall'] = df['Value'].apply(lambda x: x['recall'])
+df['F1'] = df['Value'].apply(lambda x: x['f1-score'])  # You mentioned wanting F1 in the hover data
+df['Support'] = df['Value'].apply(lambda x: x['support'])
 
+if selected_marker_size == 'Support':
+    df['Marker_Size'] = (df['Support'] ** 0.3)
+elif selected_marker_size == 'Support_Positive':
+    df['Marker_Size'] = (df['Support_Positive'] ** 0.3)
+elif selected_marker_size == 'Support_Negative':
+    df['Marker_Size'] = (df['Support_Negative'] ** 0.3)
+elif selected_marker_size == 'more balanced=larger':
+    max_marker_size = 20
+    min_marker_size = 2
+    def scaler(x):
+        return min_marker_size + (max_marker_size - min_marker_size) * x
+
+    df['Marker_Size'] = scaler(df['Balance_Score'])
+
+    # Calculate the ratio between x and y for each data point
+    imbalance = df['Support_Negative'] - df['Support_Positive']
+    sorted_imbalance = sorted(imbalance)
+    st.line_chart(sorted_imbalance)
+    # sort df['Support'] with the same sort key 
+
+
+
+    ratio = df['Support_Positive'] ** 0.2 / df['Support_Negative'] ** 0.2
+    # Normalize the ratio values to control marker size
+    min_ratio = min(ratio)
+    max_ratio = max(ratio)
+    normalized_ratio = (ratio - min_ratio) / (max_ratio - min_ratio)
+    # sort 
+    # sorted_normaliezd_ratio = sorted(normalized_ratio)
+    # st.line_chart(sorted_normaliezd_ratio)
+    # Define a marker size range (you can adjust this as needed)
+    min_marker_size = 2
+    max_marker_size = 20
+
+    # make new figure for marker size distribution, simple line plot with px
+
+    # Calculate marker sizes based on the normalized ratio
+    marker_sizes = min_marker_size + normalized_ratio * (max_marker_size - min_marker_size)
+
+
+else:
+    raise ValueError(f"Unknown marker size {selected_marker_size}")
+
+df = df.drop(columns=['Value'])
+
+        
 # Add one more dummy datapoint for every estimator to make the legend work (otherwise the legend shows very small markers)
-for estimator in filtered_reports.keys():
-    estimators.append(rename_dict[estimator] + '  ')
-    aeids.append('-1')
-    accuracy.append(-1)
-    precision.append(-1)
-    recall.append(-1)
-    f1.append(-1)
-    support.append(1000000000)
-    
-df = pd.DataFrame({'Estimator': estimators, 'aeid': aeids, 'Accuracy': accuracy, 'Precision': precision, 'Recall': recall, 'F1': f1, 'Support': support})  
+dummy_data = []
+for estimator in df['Estimator'].unique():
+    dummy_row = {
+        'aeid': '-1',
+        'Estimator': estimator,
+        'Precision': -1.0,
+        'Recall': -1.0,
+        'F1': -1.0,
+        'Accuracy': -1.0,
+        'Support': 2000,
+        'Support_Positive': 2000,
+        'Support_Negative': 2000,
+        'Marker_Size': 2000,
+    }
+    dummy_data.append(dummy_row)
+dummy_df = pd.DataFrame(dummy_data)
+df = pd.concat([df, dummy_df], ignore_index=True)
+
 
 trendline_args = {'trendline': trendline_type, 'trendline_color_override':'black'} if trendline_type is not None else {}
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
 args = {}
-
-# Define the marker size as support-encoded, size depends on the validation type
-scale = 4 if selected_validation_type == 'val' else 2
-# marker_size = df['Support'] / scale
-if selected_class_metric == 'accuracy':
-    marker_size = None
-    opacity = 0.3
-else:
-    marker_size = df['Support'].apply(lambda x: np.sqrt(x) / scale)
-    opacity = 0.8    
+# marker_size = df['Support'] / 100
+opacity = 0.8    
 
 fig = px.scatter(df,
     x='Recall', y='Precision', color='Estimator',
-    hover_data=['aeid', 'Accuracy', 'F1', 'Support'], opacity=opacity,
+    custom_data=['Marker_Size'],  # Add customdata to match marker size
+    hover_data=['aeid', 'F1', 'Accuracy', 'Support', 'Support_Positive', 'Support_Negative', 'Marker_Size'], opacity=opacity,
     color_discrete_sequence=selected_palette,
         **args, **trendline_args, **hisogram_args)
 
 for j, trace in enumerate(fig.data):
     if 'scatter' in trace.type:
+        # Get the marker size from the customdata
+        marker_size = list(fig.data[j].customdata[:, 0])
         fig.data[j].update(marker=dict(size=marker_size, symbol="circle-dot", line=dict(color='black', width=0.7)))
+# make legend clickable
+fig.update_layout(clickmode='event+select')
 
 # drop the dummy values again
 df = df[df['aeid'] != '-1']
@@ -189,11 +234,11 @@ else:
     fig.update_layout(yaxis=dict(range=[0.0, 1.0]))
 
 
-title = f"{rename_dict[selected_validation_type]}, P vs. R with {rename_dict[threshold]} threshold on {rename_dict[selected_class_metric]}"
+title = f"{reverse_rename[selected_validation_type]}, P vs. R with {reverse_rename[selected_threshold]} threshold on {reverse_rename[selected_class_metric]}"
 
 margin = None # 0
 axis_font_size = 18
-fig.update_layout(width=550, height=550, title=title, title_font=dict(size=14, color='black'), xaxis_title_font=dict(size=axis_font_size, color="black"), yaxis_title_font=dict(size=axis_font_size, color="black"),  margin=dict(t=margin))
+fig.update_layout(width=600, height=600, title=title, title_font=dict(size=14, color='black'), xaxis_title_font=dict(size=axis_font_size, color="black"), yaxis_title_font=dict(size=axis_font_size, color="black"),  margin=dict(t=margin))
 fig.update_layout(yaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'), xaxis=dict(showgrid=True, zeroline=True, gridcolor='lightgray'))
 # axis tick font size   
 fig.update_xaxes(tickfont=dict(size=axis_font_size-2, color="black"))
@@ -211,7 +256,7 @@ fig.update_yaxes(tickfont=dict(size=axis_font_size-2, color="black"))
 fig.update_layout(legend_title_text='')
 fig.update_layout(legend_traceorder="reversed")
 fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
-                                y=1.03, 
+                                y=0.95, 
                                 x=0.74, 
                                 font=dict(size=13.5, color='black')))
 fig.update_layout(legend=dict(bgcolor='rgba(255, 255, 255, 0.6)'))
@@ -222,36 +267,39 @@ with col1:
     st.plotly_chart(fig)
     # save the figure as png
     parent_folder = os.path.dirname(os.path.abspath(__file__))
-    full_name = f"{selected_target_variable}_{selected_ml_algorithm}_{selected_preprocessing_model}_{selected_validation_type}_{threshold}_{selected_class_metric}"
+    full_name = f"{selected_target_variable}_{selected_ml_algorithm}_{selected_preprocessing_model}_{selected_validation_type}_{selected_threshold}_{selected_class_metric}"
     if save_figure:
         file = f"{full_name}.png"
         dest_path = os.path.join(parent_folder, 'generated_results', file)
         fig.write_image(dest_path, format='png', engine='kaleido', width=550, height=550, scale=2)
 
-# summary table of average metrics, accuracy, precision, recall, f1 grouped by Estimator
+# summary table of average metrics, precision, recall, f1 grouped by Estimator
 if show_summary:
-    with col2:
-        grouped = df[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1', 'Support']].groupby(['Estimator']).mean().reset_index()
-        grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.2f}')
+    with col1:
+        grouped = df[['Estimator', 'Precision', 'Recall', 'F1', 'Support']].groupby(['Estimator']).mean().reset_index()
         grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.2f}')
         grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.2f}')
         grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.2f}')
         grouped['Support'] = grouped['Support'].apply(lambda x: f'{x:.0f}')
-        summary = grouped[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1']]
+        summary = grouped[['Estimator', 'Recall', 'Precision', 'F1']]
         st.dataframe(summary)
+        
         if save_figure:
             file = f"{full_name}.tex"
             dest_path = os.path.join(parent_folder, 'generated_results', file)
-            def pandas_df_to_latex(df):
-                latex = df.to_latex(index=False, escape=False, column_format='l' + 'c' * len(df.columns))
+            
+            def pandas_df_to_latex(data):
+                latex = data.to_latex(index=False, escape=False, column_format='l' + 'c' * len(df.columns))
                 return latex
-            latex_table = pandas_df_to_latex(df)
+            
+            latex_table = pandas_df_to_latex(summary)
 
-            with open(dest_path) as file:
+            with open(dest_path, 'w') as file:
                 file.write(latex_table)
             
             if generate_latex:
-                st.latex(latex_table)
+                with st.expander('LaTeX table string', expanded=True):
+                    st.latex(latex_table)
 
 
 

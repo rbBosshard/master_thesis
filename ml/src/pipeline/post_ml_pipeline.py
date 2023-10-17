@@ -85,8 +85,19 @@ for target_variable in os.listdir(target_run_folder_path):
                                                         threshold = threshold_report.split("_")[1].split(".")[0]
                                                         report_path = os.path.join(validation_type_path, threshold_report)
                                                         report = pd.read_csv(report_path).reset_index(drop=True).rename(columns={'Unnamed: 0': 'class'})
-                                                        report = report.to_dict(orient="records")
-                                                        validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = report
+                                                        # report = report.to_dict(orient="records")
+                                                        nested_dict = {}
+                                                        for index, row in report.iterrows():
+                                                            metric_class = row['class']
+                                                            metrics = {
+                                                                'precision': row['precision'],
+                                                                'recall': row['recall'],
+                                                                'f1-score': row['f1-score'],
+                                                                'support': row['support']
+                                                            }
+                                                            nested_dict[metric_class] = metrics
+                                                        validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = nested_dict
+
                                                         # accuracy_row = report[report['class'] == 'accuracy']
                                                         # accuracy = accuracy_row.iloc[0, 1]
                                                         #
@@ -126,7 +137,7 @@ for target_variable in os.listdir(target_run_folder_path):
                 failed_counter = 0
 
 # Create folder for target run
-folder_output_path = os.path.join(OUTPUT_DIR_PATH, f"{target_run_folder}")
+folder_output_path = os.path.join(OUTPUT_DIR_PATH, f"{target_run_folder}_post_ml_pipeline")
 os.makedirs(folder_output_path, exist_ok=True)
 
 # Save dictionaries as json files
