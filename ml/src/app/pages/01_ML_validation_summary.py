@@ -39,6 +39,11 @@ rename = {
     'tnr': 'TNR≈0.5',
     'optimal': 'cost(TPR,TNR)',
     'XGBClassifier': 'XGBoost',
+    'XGBoost': 'XGB',
+    'RF': 'RF',
+    'RBF SVM': 'SVM',
+    'MLP': 'MLP',
+    'LR': 'LR',
     'RandomForestClassifier': 'RF',
     'LogisticRegression': 'LR',
     'SVC': 'RBF SVM',
@@ -68,6 +73,7 @@ with open(os.path.join(folder, 'validation_results.json'), 'r') as fp:
 
 with open(os.path.join(folder, 'validation_results_scores.json'), 'r') as fp:
     validation_results_scores = json.load(fp)
+
 
 selected_target_variable = st.sidebar.selectbox('Select Target Variable', list(validation_results.keys()))
 selected_ml_algorithm = st.sidebar.selectbox('Select ML Algorithm', list(validation_results[selected_target_variable].keys()))
@@ -105,39 +111,71 @@ with st.sidebar.expander('Settings', expanded=False):
     selected_palette = st.sidebar.selectbox('Select Color Palette', list(color_palette_mapping.keys()))
     selected_palette = color_palette_mapping.get(selected_palette)
     show_summary = st.sidebar.checkbox("Show Summary", value=True)
+    group_by_estimator = st.sidebar.checkbox("Group By Estimator", value=True)
     clip_axis = st.sidebar.checkbox("Clip Axis", value=True)
     autoscale = st.sidebar.checkbox("Autoscale", value=True)
     save_figure = st.sidebar.checkbox("Save Figure", value=True)
     generate_latex = st.sidebar.checkbox("Generate LaTeX", value=True)
     hover_event = st.sidebar.checkbox("Enable Hover Event", value=False)
+    batch_mode = st.sidebar.checkbox("Batch Mode", value=False)
 
+if batch_mode:
+    reports = {}
+    for estimator_model in validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model].keys():
+        reports[estimator_model] = {}
+        for aeid in validation_results[selected_target_variable][selected_ml_algorithm].keys():
+            reports[estimator_model][aeid] = {}
+            for metric in validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]].keys():
+                value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]][metric]
+                reports[estimator_model][aeid][metric] = value
+            for metric_class in support_class_metrics:
+                new_metric_class = f"{metric_class}_support"
+                value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[metric_class]]['support']
+                reports[estimator_model][aeid][new_metric_class] = value
+            
+            accuracy = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename['accuracy']]['precision'] # for all the same, just take the first one
+            reports[estimator_model][aeid]['accuracy'] = accuracy
 
-reports = {}
-# scores = {}
-threshold_names = []
-for estimator_model in validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model].keys():
-    reports[estimator_model] = {}
-    # scores[estimator_model] = {}
-    for aeid in validation_results[selected_target_variable][selected_ml_algorithm].keys():
-        reports[estimator_model][aeid] = {}
-        # scores[estimator_model][aeid] = {}
-        for metric in validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]].keys():
-            value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]][metric]
-            reports[estimator_model][aeid][metric] = value
-        for metric_class in support_class_metrics:
-            new_metric_class = f"{metric_class}_support"
-            value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[metric_class]]['support']
-            reports[estimator_model][aeid][new_metric_class] = value
-        
-        accuracy = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename['accuracy']]['precision'] # for all the same, just take the first one
-        reports[estimator_model][aeid]['accuracy'] = accuracy
+            roc_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['roc_auc']
+            reports[estimator_model][aeid]['roc_auc'] = roc_auc
+            pr_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['pr_auc']
+            reports[estimator_model][aeid]['pr_auc'] = pr_auc
+            balanced_accuracy = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['balanced_accuracy']
+            reports[estimator_model][aeid]['balanced_accuracy'] = balanced_accuracy
+else:
+    class_metrics = ['macro avg', 'weighted avg', 'positive', 'negative',  'accuracy']
+    support_class_metrics = ['macro avg', 'positive', 'negative']
 
-        roc_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['roc_auc']
-        reports[estimator_model][aeid]['roc_auc'] = roc_auc
-        pr_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['pr_auc']
-        reports[estimator_model][aeid]['pr_auc'] = pr_auc
-        balanced_accuracy = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['balanced_accuracy']
-        reports[estimator_model][aeid]['balanced_accuracy'] = balanced_accuracy
+    reports = {}
+
+    for target_variable in list(validation_results.keys()):
+        for ml_algorithm in list(validation_results[target_variable].keys()):
+            for aeid in list(aeid_paths[target_variable][ml_algorithm].keys()):
+                for preprocessing_model in list(validation_results[target_variable][ml_algorithm][aeid].keys())[::-1]:
+                    for validation_type in ['Internal validation', 'MB validation from structure', 'MB validation SIRIUS-predicted']:
+                        for threshold in ['default=0.5', 'cost(TPR,TNR)', 'TPR≈0.5', 'TNR≈0.5']:
+                            for class_metric in class_metrics:
+                                reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)] = {}
+                                for estimator_model in validation_results[target_variable][ml_algorithm][aeid][preprocessing_model].keys():
+                                    reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model] = {}
+                                    for metric in validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]][reverse_rename[threshold]][reverse_rename[class_metric]].keys():
+                                        value = validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]][reverse_rename[threshold]][reverse_rename[class_metric]][metric]
+                                        reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model][metric] = value
+                                    for metric_class in support_class_metrics:
+                                        new_metric_class = f"{metric_class}_support"
+                                        value = validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]][reverse_rename[threshold]][reverse_rename[metric_class]]['support']
+                                        reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model][new_metric_class] = value
+
+                                    accuracy = validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]][reverse_rename[threshold]][reverse_rename['accuracy']]['precision']
+                                    reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model]['accuracy'] = accuracy
+
+                                    roc_auc = validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]]['roc_auc']
+                                    reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model]['roc_auc'] = roc_auc
+                                    pr_auc = validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]]['pr_auc']
+                                    reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model]['pr_auc'] = pr_auc
+                                    balanced_accuracy = validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model][reverse_rename[validation_type]]['balanced_accuracy']
+                                    reports[(target_variable, ml_algorithm, aeid, preprocessing_model, validation_type, threshold, class_metric)][estimator_model]['balanced_accuracy'] = balanced_accuracy
+
 
 
 df = pd.DataFrame(reports)
@@ -332,7 +370,11 @@ if save_figure:
 
 
 if show_summary:    
-    grouped = df[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set']).median().reset_index()
+    if group_by_estimator:
+        grouped = df[['Estimator', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Estimator']).median().reset_index()
+    else:
+        grouped = df[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set']).median().reset_index()
+
     grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.3f}')
     grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.3f}')
     grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.3f}')
@@ -342,36 +384,46 @@ if show_summary:
     grouped['PR AUC'] = grouped['PR AUC'].apply(lambda x: f'{x:.3f}')
     grouped['Balanced Accuracy'] = grouped['Balanced Accuracy'].apply(lambda x: f'{x:.3f}')
 
-    summary = grouped[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']]
-    summary = summary.rename(columns={'Target Variable': 'y', 'aeid': 'aeid', 'Feature Selection': 'F. S.', 'Estimator': 'Estimator',  'Validation Set': 'Val. set', 'Precision': 'Prec.', 'Recall': 'Recall', 'F1': 'F1', 'Accuracy': 'Acc',  'Balanced Accuracy': 'Bal. Acc.', 'ROC AUC': 'ROC AUC', 'PR AUC': 'PR AUC'})
+    if group_by_estimator:
+        summary = grouped[['Estimator', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']]
+        summary = summary.rename(columns={'Estimator': 'Estimator', 'Precision': 'Precision', 'Recall': 'Recall', 'F1': 'F1', 'Accuracy': 'Acc.', 'Balanced Accuracy': 'Bal. Acc.', 'ROC AUC': 'ROC-AUC', 'PR AUC': 'PR-AUC'})
+    else:
+        summary = grouped[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']]
+        summary = summary.rename(columns={'Target Variable': 'y', 'aeid': 'aeid', 'Feature Selection': 'f. s.', 'Estimator': 'model',  'Validation Set': 'val. set', 'Precision': 'prec.', 'rec.': 'Recall', 'F1': 'f1', 'Accuracy': 'acc',  'Balanced Accuracy': 'bacc', 'ROC AUC': 'roc-auc', 'PR AUC': 'pr-auc'})
 
     st.dataframe(summary, use_container_width=True)
     if save_figure:
         file = f"{full_name}.tex"
         dest_path = os.path.join(parent_folder, 'generated_results', file)
         
-        def pandas_df_to_latex(data):
+        def pandas_df_to_latex(data, caption='', label=''):
             # Initialize the LaTeX table with the longtable environment
-            latex_table = '\\begin{longtable}{' + 'l' * len(df.columns) + '}\n\\toprule\n\\midrule\n'
-            
+            latex_table = f'\\begin{{longtable}}{{{"l" * len(data.columns)}}}\n'
+            latex_table += '\\caption{' + caption + '}\\label{tab:' + label.lower().replace(' ', '_') + '}\\\\\n'
+            latex_table += '\\toprule\n\\midrule\n'
+
             # Extract the header and remove it from the DataFrame
             header = data.columns
             data = data.values
 
             # Add the header row with \small to the LaTeX table
             latex_table += ' & '.join(['\\small ' + col for col in header]) + '\\\\\n\\hline\n'
-            
+
             # Iterate through the data rows and add them to the table
             for row in data:
                 latex_table += ' & '.join(map(str, row)) + '\\\\\n'
-            
+
             # Add table footer and replace \endtabular with \endlongtable
             latex_table += '\\bottomrule\n\\end{longtable}'
             latex_table = latex_table.replace('\\endtabular', '\\endlongtable')
-            
+
             return latex_table
         
-        latex_table = pandas_df_to_latex(summary)
+        
+        # latex_table = pandas_df_to_latex(summary, caption="Performance Metrics. See Figure~\ref{" + full_name ".png}.", label=f"table:{full_name}")
+        caption = f"Performance Metrics. See~\\ref" + "{fig:" + full_name + "}."
+        latex_table = pandas_df_to_latex(summary, caption=caption, label=f"table:{full_name}")
+
 
         with open(dest_path, 'w') as file:
             file.write(latex_table)
