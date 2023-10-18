@@ -7,6 +7,7 @@ import streamlit as st
 import plotly.express as px
 from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go  # Import Plotly graph objects
+from ml.src.utils.helper import render_svg
 
 
 
@@ -185,37 +186,37 @@ df['Marker Size'] = df['Marker Size'].round(3)
 
       
 # Add one a dummy datapoint for every estimator to make the legend work (otherwise the legend shows very small markers)
-dummy_data = []
-for estimator in df['Estimator'].unique():
-    dummy_row = {
-        'aeid': '-1',
-        'Estimator': estimator,
-        'Precision': -1.0,
-        'Recall': -1.0,
-        'F1': -1.0,
-        'Accuracy': -1.0,
-        # 'True Positives': -1,
-        # 'True Negatives': -1,
-        # 'False Positives': -1,
-        # 'False Negatives': -1,
-        'Total Support': -1,
-        'Support Positive': -1,
-        'Support Negative': -1,
-        'Imbalance': -1,
-        'Imbalance Score': -1,
-        'Balance Score': -1,
-        'Marker Size': 2000,
+# dummy_data = []
+# for estimator in df['Estimator'].unique():
+#     dummy_row = {
+#         'aeid': '-1',
+#         'Estimator': estimator,
+#         'Precision': -1.0,
+#         'Recall': -1.0,
+#         'F1': -1.0,
+#         'Accuracy': -1.0,
+#         # 'True Positives': -1,
+#         # 'True Negatives': -1,
+#         # 'False Positives': -1,
+#         # 'False Negatives': -1,
+#         'Total Support': -1,
+#         'Support Positive': -1,
+#         'Support Negative': -1,
+#         'Imbalance': -1,
+#         'Imbalance Score': -1,
+#         'Balance Score': -1,
+#         'Marker Size': 2000,
 
-    }
-    dummy_data.append(dummy_row)
+#     }
+#     dummy_data.append(dummy_row)
 
-dummy_df = pd.DataFrame(dummy_data)
-df = pd.concat([df, dummy_df], ignore_index=True)
+# dummy_df = pd.DataFrame(dummy_data)
+# df = pd.concat([df, dummy_df], ignore_index=True)
 
 
 trendline_args = {'trendline': trendline_type} if trendline_type is not None else {}
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
-args = {'opacity': 0.7,
+args = {'opacity': 0.8,
         'hover_data': ['aeid', 'F1', 'Accuracy',
                     #    'True Positives', 'True Negatives', 'False Positives', 'False Negatives',
                        'Total Support', 'Support Positive', 'Support Negative', 
@@ -275,11 +276,26 @@ fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
                                 font=dict(size=14, color='black')))
 
 col1, col2 = st.columns(2)
+
+cm_container = st.empty()
 with col1:
     # st.plotly_chart(fig)
     selected_points = plotly_events(fig, click_event=True, key="plotly_event") #, click_event=True, hover_event=True, key="plotly_event")
     if selected_points:
-        pass
+        info = selected_points[0]
+        curve_number = info['curveNumber']
+        point_index = info['pointIndex']
+        estimator_clicked = fig.data[curve_number].legendgroup
+        aeid_clicked = fig.data[curve_number].customdata[point_index, 1]
+        
+        # Load custom data
+        aeid_path = aeid_paths[selected_target_variable][selected_ml_algorithm][aeid_clicked]
+        cm_path = os.path.join(aeid_path, selected_preprocessing_model, reverse_rename[estimator_clicked], reverse_rename[selected_validation_type], f'cm_{reverse_rename[selected_threshold]}.svg')
+        with col2:
+            render_svg(open(cm_path).read())
+
+
+
 
    
 
@@ -305,7 +321,7 @@ with col1:
 
 
 if show_summary:
-    with col2:
+    with col1:
         grouped = df[['Estimator', 'Accuracy', 'Precision', 'Recall', 'F1', 'Total Support']].groupby(['Estimator']).mean().reset_index()
         grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.3f}')
         grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.3f}')
@@ -335,39 +351,31 @@ if show_summary:
 
 
 
+with col1:
+    # Calculate the ratio between x and y for each data point
+    single_estimator = df[df['Estimator'] == 'XGBoost'].reset_index(drop=True)
+    single_estimator = single_estimator.sort_values(by=['Imbalance'])
+    index = [i for i in range(len(single_estimator))]
 
- # Calculate the ratio between x and y for each data point
-single_estimator = df[df['Estimator'] == 'XGBoost'].reset_index(drop=True)
-single_estimator = single_estimator.sort_values(by=['Imbalance'])
-index = [i for i in range(len(single_estimator))]
-# Create a figure with two traces: one for the bar plot and one for the line plot
-fig = go.Figure()
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=index, y=single_estimator['Imbalance'], name='Imbalance'))
+    fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'], name='Total Support', yaxis='y2'))
+    fig.add_trace(go.Bar(x=index, y=-single_estimator['Support Positive'], name='Total Support', yaxis='y3'))
+    fig.add_trace(go.Bar(x=index, y=single_estimator['Support Negative'], name='Total Support', yaxis='y4'))
 
-# Add a bar trace for the Imbalance column
-fig.add_trace(go.Scatter(x=index, y=single_estimator['Imbalance'], name='Imbalance'))
+    fig.update_layout(
+        yaxis=dict(title='Imbalance'),
+        yaxis2=dict(title='Total Support',side='right'),
+        yaxis3=dict(title='Positive Support', side='right'),
+        yaxis4=dict(title='Negative Support', side='right'),
+    )
 
-# Add a line trace for the Support column
-fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'], name='Total Support', yaxis='y2'))
-
-
-fig.add_trace(go.Bar(x=index, y=single_estimator['Support Positive'], name='Total Support', yaxis='y3'))
-
-fig.add_trace(go.Bar(x=index, y=-single_estimator['Support Negative'], name='Total Support', yaxis='y4'))
-
-# Update the layout to show the y-axes
-fig.update_layout(
-    yaxis=dict(title='Imbalance'),
-    yaxis2=dict(title='Total Support', overlaying='y', side='right'),
-    yaxis3=dict(title='Positive Support', overlaying='y', side='right'),
-    yaxis4=dict(title='Negative Support', overlaying='y', side='right'),
-)
-
-# limit range of y-axis
-fig.update_yaxes(range=[0.0, max(single_estimator['Total Support']) * 1.1])
+    # limit range of y-axis
+    # fig.update_yaxes(range=[0.0, max(single_estimator['Total Support']) * 1.1])
 
 
-# Display the figure in Streamlit
-st.plotly_chart(fig)
+    # Display the figure in Streamlit
+    st.plotly_chart(fig)
       
 
 
