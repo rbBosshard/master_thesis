@@ -6,7 +6,7 @@ from ml.src.pipeline.constants import LOG_DIR_PATH, OUTPUT_DIR_PATH
 from ml.src.utils.helper import folder_name_to_datetime
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_02-01-23_all"
+TARGET_RUN = "2023-10-18_17-31-46"
 NUM_AEIDS = 1000
 
 logs_folder = os.path.join(LOG_DIR_PATH)
@@ -18,6 +18,7 @@ print("#" * 50)
 
 model_paths = {}
 validation_results = {}
+validation_results_scores = {}
 feature_importances_paths = {}
 aeid_paths = {}
 success_counter = 0
@@ -29,6 +30,7 @@ for target_variable in os.listdir(target_run_folder_path):
     if ".log" not in target_variable:
         target_variable_path = os.path.join(target_run_folder_path, target_variable)
         validation_results[target_variable] = {}
+        validation_results_scores[target_variable] = {}
         model_paths[target_variable] = {}
         feature_importances_paths[target_variable] = {}
         aeid_paths[target_variable] = {}
@@ -38,6 +40,7 @@ for target_variable in os.listdir(target_run_folder_path):
             if ml_algorithm == 'classification':
                 ml_algorithm_path = os.path.join(target_variable_path, ml_algorithm)
                 validation_results[target_variable][ml_algorithm] = {}
+                validation_results_scores[target_variable][ml_algorithm] = {}
                 model_paths[target_variable][ml_algorithm] = {}
                 feature_importances_paths[target_variable][ml_algorithm] = {}
                 aeid_paths[target_variable][ml_algorithm] = {}
@@ -50,6 +53,7 @@ for target_variable in os.listdir(target_run_folder_path):
                     # Exclude aeids that did not finish successfully
                     if not os.path.isfile(os.path.join(aeid_path, 'failed.txt')):
                         validation_results[target_variable][ml_algorithm][aeid] = {}
+                        validation_results_scores[target_variable][ml_algorithm][aeid] = {}
                         model_paths[target_variable][ml_algorithm][aeid] = {}
                         feature_importances_paths[target_variable][ml_algorithm][aeid] = {}
                         aeid_paths[target_variable][ml_algorithm][aeid] = aeid_path
@@ -59,6 +63,7 @@ for target_variable in os.listdir(target_run_folder_path):
                             preprocessing_model_path = os.path.join(aeid_path, preprocessing_model)
                             if os.path.isdir(preprocessing_model_path):
                                 validation_results[target_variable][ml_algorithm][aeid][preprocessing_model] = {}
+                                validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model] = {}
                                 model_paths[target_variable][ml_algorithm][aeid][preprocessing_model] = {}
                                 feature_importances_paths[target_variable][ml_algorithm][aeid][preprocessing_model] = {}
 
@@ -68,7 +73,7 @@ for target_variable in os.listdir(target_run_folder_path):
                                     if os.path.isdir(model_path):
                                         model_paths[target_variable][ml_algorithm][aeid][preprocessing_model][model] = os.path.join(model_path, 'best_estimator_all.joblib')
                                         validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model] = {}
-
+                                        validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][model] = {}
                                         sorted_feature_importance_path = os.path.join(model_path, 'sorted_feature_importances.csv')
                                         if os.path.exists(sorted_feature_importance_path):
                                             feature_importances_paths[target_variable][ml_algorithm][aeid][preprocessing_model][model] = sorted_feature_importance_path
@@ -78,7 +83,7 @@ for target_variable in os.listdir(target_run_folder_path):
                                             validation_type_path = os.path.join(model_path, validation_type)
                                             if os.path.isdir(validation_type_path):
                                                 validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type] = {}
-
+                                                validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type] = {}
                                                 # Iterate over the chosen classification thresholds and get respective validation report metrics
                                                 for threshold_report in os.listdir(validation_type_path):
                                                     if 'report' in threshold_report:
@@ -98,30 +103,15 @@ for target_variable in os.listdir(target_run_folder_path):
                                                             nested_dict[metric_class] = metrics
                                                         validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = nested_dict
 
-                                                        # accuracy_row = report[report['class'] == 'accuracy']
-                                                        # accuracy = accuracy_row.iloc[0, 1]
-                                                        #
-                                                        # macro_avg_row = report[report['class'] == 'macro avg']
-                                                        # precision_macro_avg = macro_avg_row['precision'].values[0]
-                                                        # recall_macro_avg = macro_avg_row['recall'].values[0]
-                                                        # f1_macro_avg = macro_avg_row['f1-score'].values[0]
-                                                        # support_macro_avg = macro_avg_row['support'].values[0]
-                                                        #
-                                                        # true_row = report[report['class'] == 'True']
-                                                        # support_true = true_row['support'].values[0]
-                                                        #
-                                                        # false_row = report[report['class'] == 'False']
-                                                        # support_false = false_row['support'].values[0]
-                                                        #
-                                                        # validation_results[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type][threshold] = {
-                                                        #     'accuracy': [accuracy],
-                                                        #     'precision': [precision_macro_avg],
-                                                        #     'recall': [recall_macro_avg],
-                                                        #     'f1': [f1_macro_avg],
-                                                        #     'support': [int(support_macro_avg)],
-                                                        #     'support_true':  [int(support_true)],
-                                                        #     'support_false': [int(support_false)]
-                                                        # }
+                                                    # Get estimator results (actual vs predicted probs)
+                                                    scores_metrics_path = os.path.join(validation_type_path, "metrics.csv")
+                                                    scores_metrics = pd.read_csv(scores_metrics_path)
+                                                    scores = {
+                                                        'balanced_accuracy': scores_metrics['balanced_accuracy'].iloc[0],
+                                                        'roc_auc': scores_metrics['roc_auc'].iloc[0],
+                                                        'pr_auc': scores_metrics['pr_auc'].iloc[0]
+                                                    }
+                                                    validation_results_scores[target_variable][ml_algorithm][aeid][preprocessing_model][model][validation_type] = scores
 
                         print(f"SUCCESS: aeid={aeid}, Results successfully collected")
                         success_counter += 1
@@ -152,6 +142,10 @@ with open(path, 'w') as fp:
 path = os.path.join(folder_output_path, f"validation_results.json")
 with open(path, 'w') as fp:
     json.dump(validation_results, fp)
+
+path = os.path.join(folder_output_path, f"validation_results_scores.json")
+with open(path, 'w') as fp:
+    json.dump(validation_results_scores, fp)
 
 path = os.path.join(folder_output_path, f"feature_importances_paths.json")
 with open(path, 'w') as fp:

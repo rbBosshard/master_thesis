@@ -6,7 +6,7 @@ import numpy as np
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 sys.path.append(parent_dir)
 
-from ml.src.pipeline.ml_helper import assess_similarity, init_aeid, load_config, get_assay_df, get_fingerprint_df, \
+from ml.src.pipeline.ml_helper import assess_similarity, get_trained_model, init_aeid, load_config, get_assay_df, get_fingerprint_df, \
     merge_assay_and_fingerprint_df, split_data, partition_data, handle_oversampling, grid_search_cv, build_pipeline, get_label_counts, report_exception, save_model, \
     build_preprocessing_pipeline, preprocess_all_sets, load_model, init_estimator_pipeline, \
     get_feature_importance_if_applicable, init_preprocessing_pipeline, init_target_variable, init_validation_set, \
@@ -101,9 +101,15 @@ if __name__ == '__main__':
                                 # Save best estimator (estimator with best performing parameters from grid search)
                                 best_estimator = grid_search.best_estimator_
                             else:
-                                estimator_log_folder = os.path.join(TARGET_RUN_FOLDER, f"{aeid}", estimator['name'])
-                                best_estimator_path = os.path.join(estimator_log_folder, f"best_estimator_train.joblib")
+                                best_estimator_path = get_trained_model("train")
                                 best_estimator = load_model(best_estimator_path, "train")
+
+                                best_estimator_train_test_path = get_trained_model("train_test")
+                                best_estimator_train_test = load_model(best_estimator_train_test_path, "train_test")
+
+                                best_estimator_full_data_path = get_trained_model("full_data")
+                                best_estimator_full_data = load_model(best_estimator_full_data_path, "full_data")
+
 
                             save_model(best_estimator, "train")
 
@@ -115,12 +121,17 @@ if __name__ == '__main__':
                             LOGGER.info("Internal Validation Done.\n")
 
                             # Retrain the best estimator from GridSearchCV with train+test set for Massbank validation (unseen)
-                            LOGGER.info(f"Retrain on train+test set..\n")
-                            X_combined = np.vstack((X_train, X_test))
-                            y_combined = np.concatenate((y_train, y_test))
-                            best_estimator.fit(X_combined, y_combined)
-                            init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
-                            save_model(best_estimator, "train_test")
+                            if not CONFIG['apply']['only_predict']:
+                                LOGGER.info(f"Retrain on train+test set..\n")
+                                X_combined = np.vstack((X_train, X_test))
+                                y_combined = np.concatenate((y_train, y_test))
+                                best_estimator.fit(X_combined, y_combined)
+                                init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
+                                save_model(best_estimator, "train_test")
+                            else:
+                                best_estimator = best_estimator_train_test
+
+                            save_model(best_estimator, "train")                             
 
                             # Predict on the 1. "true Massbank" and 2. "SIRIUS predicted" validation set
                             LOGGER.info("Start MassBank Validation")
@@ -133,11 +144,15 @@ if __name__ == '__main__':
                             LOGGER.info("MassBank Validation Done.\n")
 
                             # Retrain the estimator on full data for future predictions
-                            LOGGER.info(f"Retrain on full data..\n")
-                            X_all = np.vstack((X_combined, X_massbank_val_from_structure))
-                            y_all = np.concatenate((y_combined, y_massbank_val))
-                            best_estimator.fit(X_all, y_all)
-                            init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
+                            if not CONFIG['apply']['only_predict']:
+                                LOGGER.info(f"Retrain on full data..\n")
+                                X_all = np.vstack((X_combined, X_massbank_val_from_structure))
+                                y_all = np.concatenate((y_combined, y_massbank_val))
+                                best_estimator.fit(X_all, y_all)
+                                init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
+                            else:
+                                best_estimator = best_estimator_full_data
+                                
                             save_model(best_estimator, "full_data")
 
                             # Get feature importances (only implemented for XGB and RandomForest)

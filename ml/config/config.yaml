@@ -5,7 +5,7 @@ file_format: .parquet.gzip
 remote_data_dir: ../../../pytcpl/data/output/
 ignore_warnings: False
 
-target_variables: [hitcall_c]  # [hitcall, hitcall_c]
+target_variables: [hitcall, hitcall_c]  # [hitcall, hitcall_c]
 
 ml_algorithms: [classification] # [classification, regression]
 
@@ -16,12 +16,12 @@ random_state: 0 # For reproducibility
 train_test_split_ratio: 0.2
 
 load_from_model:  # if apply: only_predict: 1
-  use_last_run: 1 # load from last run
+  use_last_run: 0 # load from last run
   rank: 1
-  target_run: 2023-09-28_00-26-22 # load from specific run (if use_last_run: 0)
+  target_run: 2023-10-14_02-01-23 # load from specific run (if use_last_run: 0)
 
 apply:
-  only_predict: 0  # if 1, do not train, load model from old run
+  only_predict: 1  # if 1, do not train, load model from old run
   smote: 0  # oversampling
   feature_selection: 1
   variance_threshold: 0  # only if feature_selection on
@@ -38,7 +38,7 @@ threshold_moving:
   target_tnr: 0.5 # For fixed threshold evaluation at some target False Positive Rate
 
 feature_selection:
-  variance_threshold: 0.01
+  variance_threshold: 0.01 # not used if non_negative_matrix_factorization: 0
 
 grid_search_cv:
   n_splits: 5 # Number of folds

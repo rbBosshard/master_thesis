@@ -317,7 +317,7 @@ For every machine learning model, the selection process is based on a grid searc
 To assess the performance of our trained models, we used two separate validation sets that were not part of the training data:
 
 \begin{enumerate}
-    \item The first straightforward validation set, referred to as {internal validation} set, was used to evaluate how well the best estimator found by the grid search 5-fold cross-validation generalizes for unseen compounds. This set was randomly drawn from the tested compounds in the particular assay endpoints, ensuring that the number of active and inactive compounds was balanced. Figure~\ref{fig:imbalance_hitcall_val} depicts the hitcall counts (support) across the respective assay endpoints, emphasizing the prevalent imbalance.
+    \item The first validation set, referred to as \emph{internal validation set}, was used to evaluate how well the best estimator found by the grid search 5-fold cross-validation generalizes for unseen compounds. This set was randomly drawn from the tested compounds in the particular assay endpoints, ensuring that the number of active and inactive compounds was balanced. Figure~\ref{fig:imbalance_hitcall_val} depicts the hitcall counts (support) across the respective assay endpoints, emphasizing the prevalent imbalance.
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.8\textwidth]{figures/imbalance_hitcall_val.png}
@@ -325,7 +325,7 @@ To assess the performance of our trained models, we used two separate validation
     ~\label{fig:imbalance_hitcall_val}
     \end{figure}
 
-    \item The \emph{MassBank validation set}, as the second validation set, was used to evaluate the model's generalization capabilities, focusing on the domain gap between chemical structure space and fragmentation spectra. This validation set comprises compounds with both actual (from known structure) and SIRIUS-predicted fingerprints originating from MassBank spectra data. This dual fingerprint dataset enables the evaluation of the model's performance on both the actual and predicted fingerprints. In this context, the accuracy of SIRIUS framework's fingerprint predictions plays a critical role in assessing how well the model performs when applied to environmental samples. Figure~\ref{fig:massbank_fingerprint_difference} illustrates the respective fingerprint dissimilarities for compounds in the Massbank validation set.
+    \item The \emph{MassBank validation set}, as the second validation set, was used to evaluate the model's generalization capabilities, focusing on the domain gap between chemical structure space and fragmentation spectra. The MassBank validation set comprises compounds with both actual (from known structure) and SIRIUS-predicted fingerprints originating from MassBank spectra data. Having such a paired fingerprint dataset allows for a comparative assessment of model performance concerning actual and predicted fingerprints. However, the accuracy of SIRIUS framework's fingerprint predictions plays a critical role in assessing how well the model performs when applied to environmental samples. Figure~\ref{fig:massbank_fingerprint_difference} illustrates the respective fingerprint dissimilarities for compounds in the Massbank validation set.
     \begin{figure}[h]
         \centering
         \includegraphics[width=1\textwidth]{figures/massbank_fingerprint_difference.png}
@@ -333,9 +333,9 @@ To assess the performance of our trained models, we used two separate validation
     ~\label{fig:massbank_fingerprint_difference}
     \end{figure}
 
-    It is important to highlight that compounds susceptible to data leakage (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), which were previously used in training the SIRIUS+CSI:FingerID prediction model, have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless.
+    It is important to highlight that compounds susceptible to data leakage (listed here\footnote{\url{https://bio.informatik.uni-jena.de/software/sirius/}}), which were previously used in training the SIRIUS+CSI:FingerID prediction model, have been excluded. If not excluded, the model's predictive capability for a compound's fingerprint would likely be very high because the model has already seen and learned from these data points during training. In the worst-case scenario, it could have essentially memorized the training data and the evaluation would become meaningless. 
 
-    After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation, as shown in Figure~\ref{fig:imbalance_hitcall_mb_val}. Note that the size of the MassBank validation set varies across different assay endpoints due to variations in the overlap between the compounds available in MassBank and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:MassBank_overlap}. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation compared to the \emph{validation} set.
+    After excluding these compounds, we are left with a potential upper limit of 429 compounds that can be safely used for MassBank validation, as shown in Figure~\ref{fig:imbalance_hitcall_mb_val}. Note that the size of the MassBank validation set varies across different assay endpoints due to variations in the overlap between the compounds available in MassBank and those assessed in the assay endpoints, as depicted in Figure~\ref{fig:MassBank_overlap}. Note that the models have been retrained for the MassBank validation set in order to include the distinct compounds from the internal validation set. Furthermore, Figure~\ref{fig:activity_ratio_comparison} provides an illustration of the distribution of hitcall representation compared to the \emph{validation} set.
 
     \begin{figure}[h]
         \centering
@@ -345,7 +345,6 @@ To assess the performance of our trained models, we used two separate validation
     \end{figure}
 
 
-    
     \begin{figure}[h]
         \centering
         \begin{subfigure}[b]{0.48\textwidth}
@@ -366,6 +365,9 @@ To assess the performance of our trained models, we used two separate validation
     \end{figure}
 \end{enumerate}
 
+Fur subsequent predictions, we retrained the models on the full dataset. 
+
+% The model performance is evaluated based on the $\text{F}_{\beta}$ score, the area under the receiver operating characteristic curve (AUC-ROC) and the area under the precision-recall curve (AUC-PR). The $\text{F}_{\beta}$ score is the harmonic mean of the precision and recall and the more generic $\text{F}_{\beta}$ score applies additional weights, valuing one of precision or recall more than the other. We set $\beta=2$ to value recall higher than precision. The AUC-ROC is a metric that measures the performance of a binary classification model at various thresholds settings. The AUC-PR is a metric that summarizes the precision-recall curve, which is a plot of the precision (y-axis) and the recall (x-axis) for different thresholds. The AUC-PR is useful for imbalanced datasets, as it focuses on the positive class.
 
 \subsection{Application}
 The presence of distinct prediction models for each assay endpoint enables the grouping of these endpoints based on their annotations, such as the biological process or the mechanistic target annotation. This ultimately results in toxicity predictions averaged within these groups. These collective toxicity predictions are referred to as \emph{toxicity fingerprint} which serve the purpose of identifying the most toxic compounds for each specific assay endpoint.

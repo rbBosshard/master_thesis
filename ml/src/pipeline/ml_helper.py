@@ -12,8 +12,10 @@ from imblearn.over_sampling import SMOTE
 from matplotlib import pyplot as plt
 from matplotlib.colors import LogNorm
 from sklearn import metrics
-from sklearn.metrics import fbeta_score, roc_curve, classification_report, confusion_matrix, make_scorer, mean_squared_error, r2_score
+from sklearn.metrics import fbeta_score, classification_report, confusion_matrix, make_scorer, mean_squared_error, r2_score
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import roc_auc_score, roc_curve, balanced_accuracy_score
+from sklearn.metrics import average_precision_score, precision_recall_curve
 from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import SelectFromModel
@@ -81,6 +83,7 @@ def load_config():
         yaml.dump(CONFIG, file)
         LOGGER.info(f"Config file dumped to '{os.path.join(LOG_PATH, '.log')}'")
 
+    TARGET_RUN_FOLDER = CONFIG['load_from_model']['target_run']
     return CONFIG, START_TIME, LOGGER, TARGET_RUN_FOLDER
 
 
@@ -368,7 +371,7 @@ def grid_search_cv(X_train, y_train, estimator, pipeline):
     return grid_search_cv_fitted
 
 
-def find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr, target_tnr, default_threshold):
+def find_optimal_threshold(y, y_pred_proba, target_tpr, target_tnr, default_threshold):
     # Tune the classification threshold for the classifier, used to map probabilities to class labels
     fpr, tpr, thresholds = roc_curve(y, y_pred_proba)
     tnr = 1 - fpr
@@ -463,9 +466,23 @@ def predict_and_report_classification(X, y, best_estimator):
 
     default_threshold = CONFIG['threshold_moving']['default_threshold']
     LOGGER.info(f"Default threshold: {default_threshold}")
-
     y_pred_default_threshold = np.where(y_pred_proba >= default_threshold, 1, 0)
+
+    # Get common metrics
+    balanced_accuracy = balanced_accuracy_score(y, y_pred_default_threshold)
+    pr_auc = average_precision_score(y, y_pred_proba)
+    roc_auc = roc_auc_score(y, y_pred_proba)
+
+    # Save the metrics
+    metrics_df = pd.DataFrame({'balanced_accuracy': [balanced_accuracy],
+                               'pr_auc': [pr_auc],
+                               'roc_auc': [roc_auc]
+                               })
+    
+    metrics_df.to_csv(os.path.join(DUMP_FOLDER, f"metrics.csv"), index=False)
+
     data = {'Actual': y,
+            'Prediction Probability': y_pred_proba,
             'Prediction Default': y_pred_default_threshold}
 
     y_preds = [y_pred_default_threshold]
@@ -478,7 +495,7 @@ def predict_and_report_classification(X, y, best_estimator):
         target_tnr = CONFIG['threshold_moving']['target_tnr']
 
         optimal_threshold, fixed_threshold_tpr, fixed_threshold_tnr = \
-            find_optimal_threshold(y, y_pred_proba, VALIDATION_SET, target_tpr=target_tpr, target_tnr=target_tnr,
+            find_optimal_threshold(y, y_pred_proba, target_tpr=target_tpr, target_tnr=target_tnr,
                                    default_threshold=default_threshold)
 
         LOGGER.info(f"Optimal threshold: {optimal_threshold}")
@@ -659,8 +676,9 @@ def preprocess_all_sets(preprocessing_pipeline, feature_names, X_train, y_train,
     selected_feature_names = feature_names.copy()
     # Feature selection fitted on train set. Transform all sets with the same feature selection
     if CONFIG['apply']['only_predict']:
-        folder = os.path.join(TARGET_RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
+        folder = os.path.join(LOG_DIR_PATH, TARGET_RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE)
         preprocessing_model_path = os.path.join(folder, f"preprocessing_model.joblib")
+        preprocessing_model_path = os.path.normpath(preprocessing_model_path)
         preprocessing_pipeline = load_model(preprocessing_model_path, "preprocessing")
 
     if preprocessing_pipeline.steps:
@@ -724,6 +742,20 @@ def get_feature_importance_if_applicable(best_estimator, feature_names):
         feature_importances = None
         LOGGER.error(f"Feature Importance not implemented for {ESTIMATOR_PIPELINE}")
     return feature_importances
+
+
+def get_trained_model(data_set, path=None):
+    if path:
+        return os.path.join(path, f"best_estimator_full_data.joblib")
+    else:
+        folder = os.path.join(LOG_DIR_PATH, TARGET_RUN_FOLDER, TARGET_VARIABLE, ML_ALGORITHM, AEID, PREPROCESSING_PIPELINE, ESTIMATOR_PIPELINE)
+        if 'train' == data_set:
+            return os.path.join(folder, f"best_estimator_train.joblib")
+        elif 'train_test' == data_set:
+            return os.path.join(folder, f"best_estimator_train_test.joblib")
+        else:
+            return os.path.join(folder, f"best_estimator_full_data.joblib")
+
 
 
 def init_logger():

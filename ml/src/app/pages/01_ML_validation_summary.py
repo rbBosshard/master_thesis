@@ -12,7 +12,7 @@ from ml.src.utils.helper import render_svg
 
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_16-38-47_all_post_ml_pipeline"
+TARGET_RUN = "2023-10-18_17-31-46" #"2023-10-14_16-38-47_all_post_ml_pipeline"
 
 st.set_page_config(
     layout="wide",
@@ -31,6 +31,9 @@ rename = {
     'val': 'Internal validation',
     'mb_val_structure': 'MB validation from structure',
     'mb_val_sirius': 'MB validation SIRIUS-predicted',
+    'Internal validation': 'Internal',
+    'MB validation from structure': 'MB structure',
+    'MB validation SIRIUS-predicted': 'MB SIRIUS',
     'default': 'default=0.5',
     'tpr': 'TPR≈0.5',
     'tnr': 'TNR≈0.5',
@@ -62,6 +65,9 @@ with open(os.path.join(folder, 'feature_importances_paths.json'), 'r') as fp:
 
 with open(os.path.join(folder, 'validation_results.json'), 'r') as fp:
     validation_results = json.load(fp)
+
+with open(os.path.join(folder, 'validation_results_scores.json'), 'r') as fp:
+    validation_results_scores = json.load(fp)
 
 selected_target_variable = st.sidebar.selectbox('Select Target Variable', list(validation_results.keys()))
 selected_ml_algorithm = st.sidebar.selectbox('Select ML Algorithm', list(validation_results[selected_target_variable].keys()))
@@ -102,16 +108,19 @@ with st.sidebar.expander('Settings', expanded=False):
     clip_axis = st.sidebar.checkbox("Clip Axis", value=True)
     autoscale = st.sidebar.checkbox("Autoscale", value=True)
     save_figure = st.sidebar.checkbox("Save Figure", value=True)
-    generate_latex = st.sidebar.checkbox("Generate LaTeX", value=False)
+    generate_latex = st.sidebar.checkbox("Generate LaTeX", value=True)
     hover_event = st.sidebar.checkbox("Enable Hover Event", value=False)
 
 
 reports = {}
+# scores = {}
 threshold_names = []
 for estimator_model in validation_results[selected_target_variable][selected_ml_algorithm][dummy_aeid][selected_preprocessing_model].keys():
     reports[estimator_model] = {}
+    # scores[estimator_model] = {}
     for aeid in validation_results[selected_target_variable][selected_ml_algorithm].keys():
         reports[estimator_model][aeid] = {}
+        # scores[estimator_model][aeid] = {}
         for metric in validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]].keys():
             value = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename[selected_class_metric]][metric]
             reports[estimator_model][aeid][metric] = value
@@ -123,10 +132,22 @@ for estimator_model in validation_results[selected_target_variable][selected_ml_
         accuracy = validation_results[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]][reverse_rename[selected_threshold]][reverse_rename['accuracy']]['precision'] # for all the same, just take the first one
         reports[estimator_model][aeid]['accuracy'] = accuracy
 
+        roc_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['roc_auc']
+        reports[estimator_model][aeid]['roc_auc'] = roc_auc
+        pr_auc = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['pr_auc']
+        reports[estimator_model][aeid]['pr_auc'] = pr_auc
+        balanced_accuracy = validation_results_scores[selected_target_variable][selected_ml_algorithm][aeid][selected_preprocessing_model][estimator_model][reverse_rename[selected_validation_type]]['balanced_accuracy']
+        reports[estimator_model][aeid]['balanced_accuracy'] = balanced_accuracy
+
 
 df = pd.DataFrame(reports)
 df = df.stack().reset_index()
 df = df.rename(columns={'level_0': 'aeid', 'level_1': 'Estimator', 'level_2': 'Metric', 0: 'Value'})
+
+
+df['Target Variable'] = rename[selected_target_variable]
+df['Feature Selection'] = rename[selected_preprocessing_model.split('_')[2]]
+df['Validation Set'] = rename[selected_validation_type]
 
 df['Estimator'] = df['Estimator'].apply(lambda x: rename[x])
 
@@ -134,6 +155,10 @@ df['Precision'] = df['Value'].apply(lambda x: x['precision'])
 df['Recall'] = df['Value'].apply(lambda x: x['recall'])
 df['F1'] = df['Value'].apply(lambda x: x['f1-score'])  
 df['Accuracy'] = df['Value'].apply(lambda x: x['accuracy'])
+
+df['ROC AUC'] = df['Value'].apply(lambda x: x['roc_auc'])
+df['PR AUC'] = df['Value'].apply(lambda x: x['pr_auc'])
+df['Balanced Accuracy'] = df['Value'].apply(lambda x: x['balanced_accuracy'])
 
 df['Total Support'] = df['Value'].apply(lambda x: x['macro avg_support'])
 df['Support Positive'] = df['Value'].apply(lambda x: x['positive_support'])
@@ -186,11 +211,9 @@ trendline_args = {'trendline': trendline_type} if trendline_type is not None els
 hisogram_args = {'marginal_x': marginal_type, 'marginal_y': marginal_type} if marginal_type is not None else {}
 
 args = {'opacity': opacity,
-        'hover_data': ['aeid', 'F1', 'Accuracy',
-                    #    'True Positives', 'True Negatives', 'False Positives', 'False Negatives',
+        'hover_data': ['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall', 'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC',
                        'Total Support', 'Support Positive', 'Support Negative', 
-                       'Imbalance', 'Imbalance Score',
-                       'Marker Size'],
+                       'Imbalance', 'Imbalance Score', 'Marker Size'],
         'color_discrete_sequence': selected_palette,
         'custom_data': ['Marker Size'], # Add customdata to match marker size
         } 
@@ -308,16 +331,19 @@ if save_figure:
 
 
 
-if show_summary:
-    
-    grouped = df[['Estimator', 'Accuracy', 'Precision', 'Recall', 'F1', 'Total Support']].groupby(['Estimator']).median().reset_index()
+if show_summary:    
+    grouped = df[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set']).median().reset_index()
     grouped['Accuracy'] = grouped['Accuracy'].apply(lambda x: f'{x:.3f}')
     grouped['Precision'] = grouped['Precision'].apply(lambda x: f'{x:.3f}')
     grouped['Recall'] = grouped['Recall'].apply(lambda x: f'{x:.3f}')
     grouped['F1'] = grouped['F1'].apply(lambda x: f'{x:.3f}')
-    grouped['Total Support'] = grouped['Total Support'].apply(lambda x: f'{x:.0f}')
-    summary = grouped[['Estimator', 'Accuracy', 'Recall', 'Precision', 'F1', 'Total Support']]
-    summary = summary.rename(columns={'Estimator': 'Estimator', 'Accuracy': 'Accuracy', 'Recall': 'Recall', 'Precision': 'Precision', 'F1': 'F1', 'Total Support': 'Support'})
+
+    grouped['ROC AUC'] = grouped['ROC AUC'].apply(lambda x: f'{x:.3f}')
+    grouped['PR AUC'] = grouped['PR AUC'].apply(lambda x: f'{x:.3f}')
+    grouped['Balanced Accuracy'] = grouped['Balanced Accuracy'].apply(lambda x: f'{x:.3f}')
+
+    summary = grouped[['Target Variable', 'aeid', 'Feature Selection', 'Estimator', 'Validation Set', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']]
+    summary = summary.rename(columns={'Target Variable': 'y', 'aeid': 'aeid', 'Feature Selection': 'F. S.', 'Estimator': 'Estimator',  'Validation Set': 'Val. set', 'Precision': 'Prec.', 'Recall': 'Recall', 'F1': 'F1', 'Accuracy': 'Acc',  'Balanced Accuracy': 'Bal. Acc.', 'ROC AUC': 'ROC AUC', 'PR AUC': 'PR AUC'})
 
     st.dataframe(summary, use_container_width=True)
     if save_figure:
@@ -325,8 +351,25 @@ if show_summary:
         dest_path = os.path.join(parent_folder, 'generated_results', file)
         
         def pandas_df_to_latex(data):
-            latex = data.to_latex(index=False, escape=False, column_format='l' + 'c' * len(df.columns))
-            return latex
+            # Initialize the LaTeX table with the longtable environment
+            latex_table = '\\begin{longtable}{' + 'l' * len(df.columns) + '}\n\\toprule\n\\midrule\n'
+            
+            # Extract the header and remove it from the DataFrame
+            header = data.columns
+            data = data.values
+
+            # Add the header row with \small to the LaTeX table
+            latex_table += ' & '.join(['\\small ' + col for col in header]) + '\\\\\n\\hline\n'
+            
+            # Iterate through the data rows and add them to the table
+            for row in data:
+                latex_table += ' & '.join(map(str, row)) + '\\\\\n'
+            
+            # Add table footer and replace \endtabular with \endlongtable
+            latex_table += '\\bottomrule\n\\end{longtable}'
+            latex_table = latex_table.replace('\\endtabular', '\\endlongtable')
+            
+            return latex_table
         
         latex_table = pandas_df_to_latex(summary)
 
@@ -344,8 +387,7 @@ single_estimator = single_estimator.sort_values(by=['Imbalance'])
 index = [i for i in range(len(single_estimator))]
 
 
-
-# plot IMbalance and support
+# plot Imbalance and support
 fig = go.Figure()
 
 # Add the bar plots
@@ -378,13 +420,6 @@ fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
 st.plotly_chart(fig, use_container_width=True)
 
 
-# # limit range of y-axis
-# # fig.update_yaxes(range=[0.0, max(single_estimator['Total Support']) * 1.1])
-
-
-# # Display the figure in Streamlit
-# st.plotly_chart(fig)
-      
 
 
 
