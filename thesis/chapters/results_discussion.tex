@@ -1,10 +1,12 @@
 \chapter{Results and Discussion}\label{chap:results_discussion}
 
-Within the scope of this thesis, our primary emphasis was on binary classification models. Although we did investigate regression models, the primary insights we obtained were predominantly derived from the analysis and evaluation of classification models. We have chosen not to include the results of the regression evaluation in this chapter because we recognized that the pivotal contributions are already achieved in the realm of classification.
+In this thesis, our main focus was on binary classification models. While we did explore regression models, the primary findings we gained stemmed from the analysis and evaluation of classification models. We have omitted the results of the regression evaluation in this chapter as the central contributions lie within the domain of classification.
 
 \section{Binary Classification}
+The objective is to maximize the probability of detecting toxic compounds (true positive rate) while minimizing the the number of false alarms, which are non-hazardous compounds misclassified as toxic (false positive rate). We first present which metrics we used to evaluate the performance of the models. Then, we present the performance results for the binary classification models.
+
 \subsection{Evaluation Metrics}
-When assessing the performance of a binary prediction model using a validation dataset containing known target values, four key metrics come into play:
+When assessing the performance of a binary prediction model using a validation dataset containing known target values, four key quantities come into play:
 
 \begin{itemize}
   \item True Positives (TP): The number of correctly predicted active cases.
@@ -43,23 +45,34 @@ In binary classification, the classification threshold is a crucial parameter di
 Various metrics assess predictive model performance, such as:
 
 \begin{itemize}
-  \item \textbf{Accuracy}: The ratio of correctly classified instances (TP) and (TN) to the total number of instances. It provides a general measure of the model's correctness.
+  \item \textbf{Accuracy} is the ratio of correctly classified instances (TP) and (TN) to the total number of instances. It provides a general measure of the model's correctness.
   \[ \text{Accuracy}  A = \frac{TP + TN}{TP + TN + FP + FN} \]
 
-  \item \textbf{Precision (P)}: The proportion of correctly predicted active cases (TP) to all instances predicted as active (TP + FP). 
+  \item \textbf{Precision (P)} is the proportion of correctly predicted active cases (TP) to all instances predicted as active (TP + FP). 
   \[ \text{Precision } P = \frac{TP}{TP + FP} \]
 
-  \item \textbf{Recall (R) or Sensitivity or True Positive Rate (TPR)}: The proportion of correctly predicted active cases (TP) to all actual active cases (TP + FN).
+  \item \textbf{Recall (R) or Sensitivity or True Positive Rate (TPR)} is the proportion of correctly predicted active cases (TP) to all actual active cases (TP + FN).
   \[ \text{Recall } R = \frac{TP}{TP + FN} \]
 
-  \item \textbf{F1 Score}: The harmonic mean of precision and recall, which balances the trade-off between false positives and false negatives.
+  \item \textbf{F1 Score} is the harmonic mean of precision and recall, which balances the trade-off between false positives and false negatives.
   \[ F1 = \frac{2 \cdot P \cdot R}{P + R} \]
 
-  \item \textbf{True Negative Rate (TNR) Specificity}: The proportion of correctly predicted inactive cases (TN) to all actual inactive cases (TN + FP).
+  \item \textbf{True Negative Rate (TNR) or Specificity} is the proportion of correctly predicted inactive cases (TN) to all actual inactive cases (TN + FP).
   \[ TNR = \frac{TN}{TN + FP} \]
 
-  \item \textbf{Receiver Operating Characteristic (ROC) Curve}: A graphical representation of the model's performance across different classification thresholds. It plots the true positive rate (TNR) against the false positive rate (FPR), as exmplified for assay endpoint with aeid: 1120 in Figure~\ref{fig:roc1120}.
 \end{itemize}
+
+Other metrics that are not directly dependent on the classification threshold, and thus are well-suited for comparing models with imbalanced datasets, include:
+
+  \item \textbf{Balanced Accuracy (BAC)} accounts for class imbalance by averaging the true positive rate (sensitivity) and true negative rate (specificity).
+  \[ \text{Balanced Accuracy (BAC)} = \frac{1}{2} \left(\frac{TP}{TP + FN} + \frac{TN}{TN + FP}\right) \]
+
+  \item \textbf{PR-AUC (Precision-Recall Area Under the Curve)} measures the area under the precision-recall curve. It is particularly useful related to class imbalance because it puts values the performance of the positive class.
+  
+  \item \textbf{Receiver Operating Characteristic (ROC) Curve} is a graphical representation of the model's performance across different classification thresholds and plots the true positive rate (TNR) against the false positive rate (FPR), as exmplified for assay endpoint with aeid: 1120 in Figure~\ref{fig:roc1120}. The Area Under the ROC Curve (AUC) is another indicator of the model's performance taking into acount all possible classification thresholds. A score of 1 represents a perfect model and 0.5 signifies a random no-skill model. 
+
+\end{itemize}
+
 
 \begin{figure}[h]
   \centering
@@ -77,7 +90,7 @@ Various metrics assess predictive model performance, such as:
 
 \subsubsection{Imbalanced Data}
 A substantial proportion of the studied assay endpoints have an unequal distribution of active (positive) and inactive (negative) compounds. Typically, the negative class significantly outweights the positive class, as depicted by an example in Figure~\ref{fig:cm1120}. Such imbalanced datasets can result in skewed performance metrics, where the model may exhibit strong performance on the majority class while performing poorly on the minority class. To address imbalanced datasets, additional metrics such as macro averaged and weighted averaged metrics can be taken into account.
-In macro averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. As an example, macro averaged precision calculates the unweighted average of precision across all classes, whereas the weighted average of precision considers the impact of class prevalence.
+In macro averaging, the metric is computed separately for each class, and then an unweighted average is taken. This approach assigns equal importance to each class, regardless of their representation within the dataset. For instance, macro averaged precision calculates the unweighted average of precision across all classes, whereas the weighted average of precision considers the impact of class prevalence.
 \[ \text{Macro Precision } = \frac{1}{N} \sum_{i=1}^{N} P_i \] 
 \[ \text{Weighted Precision } = \frac{1}{N} \sum_{i=1}^{N} \left(\frac{TP_i}{TP_i + FP_i}\right) \cdot \frac{N_i}{N} \]
 
@@ -133,19 +146,20 @@ Performance results were generated for every combination of:
 
 Below, we provide figures illustrating the performance of binary classification models under the following configurations:
 \begin{itemize}
-  \item binarized hitcall without cytotoxicity correction
+  \item target varaible as the binarized hitcall without cytotoxicity correction
   \item XGBoost as the feature selection model
-  \item the default classification threshold
+  \item macro averaged metrics
+  \item using $TPR \simeq 0.5 $ as classification threshold, i.e., the threshold is chosen such thath the models detect approximately 50\% of the toxic compounds. This choice provides an estimate on the price to pay in terms of false positives, facilitating performance comparisons with other models.
 \end{itemize}
 
-With these fixed settings, we assessed the performance across all assay endpoints, estimator models, validation sets, and metrics. The figures are presented in the subsequent order:
+With these fixed settings, we evaluated the performance across all assay endpoints and estimator models, considering the dual MassBank validation set (results for the internal validation set are provided in the Appendix). The figures are presented in the subsequent order:
 
 \begin{table}[h]
   \centering
   \caption{Figure References and Descriptions}
   \begin{tabular}{lll}
     \toprule
-    \textbf{Validation set} & \textbf{Metric} & \textbf{Figure} \\
+    \textbf{Validation set} & \textbf{Threshold} & \textbf{Figure} \\
     \midrule
     Internal & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg} \\
     MassBank (from structure) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg} \\
@@ -255,10 +269,16 @@ With these fixed settings, we assessed the performance across all assay endpoint
 % \subsection{Feature Importance}
 
 \section{Discussion}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png}
+  \caption{}
+~\label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg}
+\end{figure}
 
-% \input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex}
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex}
 
-\begin{longtable}{llllllll} \toprule \midrule \small Estimator & \small Precision & \small Recall & \small Acc. & \small Bal. Acc. & \small F1 & \small ROC-AUC & \small PR-AUC\\ \hline \endhead LR & 0.652 & 0.601 & 0.833 & 0.601 & 0.615 & 0.708 & 0.361\\ MLP & 0.652 & 0.545 & 0.847 & 0.545 & 0.539 & 0.674 & 0.330\\ RBF SVM & 0.704 & 0.573 & 0.849 & 0.573 & 0.584 & 0.739 & 0.420\\ RF & 0.666 & 0.509 & 0.848 & 0.509 & 0.489 & 0.730 & 0.397\\ XGBoost & 0.684 & 0.612 & 0.843 & 0.612 & 0.629 & 0.731 & 0.415\\ \bottomrule \label{table:hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg} \end{longtable}
+
 
 
 
