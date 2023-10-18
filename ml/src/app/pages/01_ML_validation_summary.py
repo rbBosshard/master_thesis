@@ -356,15 +356,24 @@ fig.add_trace(go.Bar(x=index, y=-single_estimator['Support Negative'], name='Neg
 fig.add_trace(go.Scatter(x=index, y=single_estimator['Imbalance'], mode='lines', name='Imbalance', line=dict(color='black', width=2, dash='dash')))
 fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'], mode='lines', name='Total Support', line=dict(color='green', width=2)))
 
-fig.update_layout(title=f'Sorted Imbalance and Support Across Target Assay Endpoints: {selected_validation_type}, y={selected_target_variable}', barmode='group')  # Set barmode to 'group' for grouped bar charts
-# update layout title size, axis label size and color to black
-# set x axis title
+fig.update_layout(
+    title=f'Sorted Imbalance and Support Across Target Assay Endpoints: {" ".join(selected_validation_type.split(" ")[:2])}, y={rename[selected_target_variable]}',
+    barmode='group',
+    yaxis_title='Support',
+    xaxis_title='Assay Endpoint Index',
+    title_font=dict(size=17, color='black'),
+    xaxis_title_font=dict(size=18, color='black'),
+    yaxis_title_font=dict(size=18, color='black'),
+)
+fig.update_xaxes(tickfont=dict(size=16, color="black"))
+fig.update_yaxes(tickfont=dict(size=16, color="black"))
 
-fig.update_layout(title_font=dict(size=21, color='black'))
-fig.update_layout(xaxis_title_font=dict(size=axis_font_size, color="black"))
-fig.update_layout(yaxis_title_font=dict(size=axis_font_size, color="black"))
-fig.update_layout(legend_title_text='', legend_traceorder="reversed")
-
+# legend
+fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
+                                # y=1.01, 
+                                # x=0.743, 
+                                # bgcolor='rgba(255, 255, 255, 0.6)',
+                                font=dict(size=16, color='black')))
 
 st.plotly_chart(fig, use_container_width=True)
 
