@@ -13,7 +13,7 @@ from sklearn.metrics import jaccard_score
 
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-18_17-31-46" #"2023-10-14_16-38-47_all_post_ml_pipeline"
+TARGET_RUN = "2023-10-14_02-01-23"
 
 # st.set_page_config(
 #     layout="wide",
