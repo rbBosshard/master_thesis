@@ -8,60 +8,6 @@
 ~\label{fig:concentration_metric_distributions} 
 \end{figure}
 
-\section{Results for Internal Validation Set}\label{sec:internal_validation_set}
-
-In the following section, we provide the results using the identical configuration described in Section~\ref{sec:performance}, but this time only for the internal validation set, presented in a similar fashion.
-\newpage
-
-\begin{figure}[h]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png}
-        \caption{}
-    \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png}
-        \caption{}
-        \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg}
-    \end{subfigure}
-    \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints for the \emph{internal validation set} (a)  $default = 0.5$  (b) $\text{cost}(TPR, TNR) = 2 * (1 - TPR) + FPR$ classifiaction threshold. Larger marker size indicate the larger relative imbalance between the support for negative and positive compounds, normalized across all assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models (median, first quartile (Q1), third quartile (Q3), whiskers (range) and outlieres). The tables below provide the average metrics for the estimators across all target assay endpoint models.}
-    \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_default_optimal_macro_avg}
-  \end{figure}
-
-
-\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex}
-
-\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.tex}
-
-\newpage
-
-\begin{figure}
-\centering
-\begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png}
-    \caption{}
-\label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png}
-    \caption{}
-    \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg}
-\end{subfigure}
-\caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints for the \emph{internal validation set} (a) $TPR \simeq 0.5$ (b) $TNR \simeq 0.5$ classifiaction threshold.}
-\label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_default_optimal_macro_avg}
-\end{figure}
-
-\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.tex}
-
-\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.tex}
-
 
 
 \section{ToxCast Assay Sources}\label{sec:assay_source_names}
@@ -104,7 +50,5 @@ In the following section, we provide the results using the identical configurati
     \end{tabular}
     \label{tab:laboratories}
 \end{table}
-
-
 
 \clearpage

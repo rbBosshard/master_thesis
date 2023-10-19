@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 14:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1733,144 +1733,139 @@ Package pdftex.def Info: figures/activity_ratio_comparison.png  used on input li
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./chapters/results_discussion.tex [30 <./figures/imbalance_hitcall_mb_val.png>] [31 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+) (./chapters/results.tex [30 <./figures/imbalance_hitcall_mb_val.png>] [31 <./figures/massbank_overlap.png> <./figures/activity_ratio_comparison.png>]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 18.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 18.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 18.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 18.
 <figures/classification_threshold.png, id=636, 779.91376pt x 549.85425pt>
 File: figures/classification_threshold.png Graphic file (type png)
 <use figures/classification_threshold.png>
-Package pdftex.def Info: figures/classification_threshold.png  used on input line 40.
+Package pdftex.def Info: figures/classification_threshold.png  used on input line 39.
 (pdftex.def)             Requested size: 210.5pt x 148.40388pt.
-[32
+ [32
 
 ] [33 <./figures/classification_threshold.png>]
 <figures/roc1120.png, id=655, 471.7625pt x 470.75874pt>
 File: figures/roc1120.png Graphic file (type png)
 <use figures/roc1120.png>
-Package pdftex.def Info: figures/roc1120.png  used on input line 81.
-(pdftex.def)             Requested size: 294.69872pt x 294.07265pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+Package pdftex.def Info: figures/roc1120.png  used on input line 69.
+(pdftex.def)             Requested size: 252.60257pt x 252.06534pt.
 <figures/cm1120.png, id=658, 752.8125pt x 699.8145pt>
 File: figures/cm1120.png Graphic file (type png)
 <use figures/cm1120.png>
-Package pdftex.def Info: figures/cm1120.png  used on input line 88.
+Package pdftex.def Info: figures/cm1120.png  used on input line 76.
 (pdftex.def)             Requested size: 421.0pt x 391.37021pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[34] [35 <./figures/roc1120.png>] [36 <./figures/cm1120.png>] [37]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png, id=699, 1003.75pt x 1003.75pt>
+[34 <./figures/roc1120.png>] [35 <./figures/cm1120.png>] [36] [37]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png, id=715, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png  used on input line 183.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png, id=716, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png  used on input line 190.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.tex) [38 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png>]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png, id=731, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png  used on input line 207.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png, id=732, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png  used on input line 214.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.tex) [39 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png>]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png, id=746, 752.8125pt x 752.8125pt>
 File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png Graphic file (type png)
 <use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png  used on input line 187.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png, id=700, 1003.75pt x 1003.75pt>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png  used on input line 231.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png, id=747, 752.8125pt x 752.8125pt>
 File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png Graphic file (type png)
 <use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png  used on input line 194.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.tex) [38 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png>]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png, id=715, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png  used on input line 212.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png, id=716, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png  used on input line 219.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.tex) [39 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png>]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png, id=730, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png  used on input line 237.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png, id=731, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png  used on input line 244.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex) [40 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png, id=746, 1003.75pt x 1003.75pt>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png  used on input line 238.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.tex) [40 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png>]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png, id=761, 752.8125pt x 752.8125pt>
 File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png Graphic file (type png)
 <use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png  used on input line 262.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png, id=747, 1003.75pt x 1003.75pt>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png  used on input line 254.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png, id=762, 752.8125pt x 752.8125pt>
 File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png Graphic file (type png)
 <use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png  used on input line 269.
-(pdftex.def)             Requested size: 208.39294pt x 208.38911pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.tex)) (./chapters/conclusion.tex [41 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png>]) [42
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png  used on input line 261.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.tex) [41 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png>]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png, id=775, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png  used on input line 277.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png, id=776, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png  used on input line 284.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.tex) [42 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png>]
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png, id=789, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png  used on input line 300.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png, id=790, 752.8125pt x 752.8125pt>
+File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png Graphic file (type png)
+<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>
+Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png  used on input line 307.
+(pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex) [43 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>]) (./chapters/discussion.tex [44]) (./chapters/conclusion.tex [45
+
+] [46]) [47
 
 ]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [43
+ [48
 
-] [44] [45] (./chapters/appendix.tex [46]
-<figures/concentration_metric_distributions.png, id=883, 1512.852pt x 301.125pt>
+] [49] [50] (./chapters/appendix.tex [51]
+<figures/concentration_metric_distributions.png, id=938, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 5.
 (pdftex.def)             Requested size: 421.0pt x 83.7952pt.
- [47
-
- <./figures/concentration_metric_distributions.png>]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png, id=890, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png  used on input line 20.
-(pdftex.def)             Requested size: 202.0782pt x 202.07893pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png, id=891, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png  used on input line 27.
-(pdftex.def)             Requested size: 202.0782pt x 202.07893pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.tex) [48 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_optimal_macro_avg.png>]
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png, id=905, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png  used on input line 46.
-(pdftex.def)             Requested size: 202.0782pt x 202.07893pt.
-<generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png, id=906, 1003.75pt x 1003.75pt>
-File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png Graphic file (type png)
-<use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png>
-Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png  used on input line 53.
-(pdftex.def)             Requested size: 202.0782pt x 202.07893pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.tex)
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 73.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 73.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 73.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 73.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[49 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.png>] [50])
+[52
+
+ <./figures/concentration_metric_distributions.png>] [53])
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=925, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=949, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 161.
 (pdftex.def)             Requested size: 597.79189pt x 845.19557pt.
 
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 161.
 (pdftex.def)             Requested size: 597.79189pt x 845.19557pt.
 
 
@@ -1878,35 +1873,35 @@ pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled
 
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=928, page=1, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=952, page=1, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.79189pt x 845.19557pt.
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
-Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 159.
+Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
-[51
+[54
 
  <./eth-template/declaration-originality-filled.pdf>]
 
 Class memoir Warning: The material used in the headers is too large
 (27.2pt) for the given head height (13.6pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 161.
+(in both cases you will find help in the memoir manual). on input line 163.
 
 \tf@thm=\write7
 \openout7 = `thesis.thm'.
@@ -1924,24 +1919,24 @@ L3 programming layer <2023-08-03>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: C1995C4E3C0E17643F1362AB370E0E7A;7973.
+(rerunfilecheck)             Checksum: 89B7BC3BF810C7B77D8BE3E2D5A37B56;7793.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 40464 strings out of 475188
- 780690 string characters out of 5767805
- 1945248 words of memory out of 5000000
- 60116 multiletter control sequences out of 15000+600000
- 643617 words of font info for 669 fonts, out of 8000000 for 9000
+ 40479 strings out of 475188
+ 780940 string characters out of 5767805
+ 1941248 words of memory out of 5000000
+ 60125 multiletter control sequences out of 15000+600000
+ 644466 words of font info for 671 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,17n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (56 pages, 12909935 bytes).
+Output written on thesis.pdf (59 pages, 12804903 bytes).
 PDF statistics:
- 1093 PDF objects out of 1200 (max. 8388607)
- 883 compressed objects within 9 object streams
- 238 named destinations out of 1000 (max. 500000)
+ 1117 PDF objects out of 1200 (max. 8388607)
+ 903 compressed objects within 10 object streams
+ 240 named destinations out of 1000 (max. 500000)
  134204 words of extra memory for PDF output out of 154059 (max. 10000000)
 
