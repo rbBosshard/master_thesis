@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 22:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  20 OCT 2023 00:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1839,17 +1839,17 @@ File: figures/feature_importance.png Graphic file (type png)
 <use figures/feature_importance.png>
 Package pdftex.def Info: figures/feature_importance.png  used on input line 325.
 (pdftex.def)             Requested size: 421.0pt x 420.99779pt.
-) (./chapters/discussion.tex [45] [46 <./figures/feature_importance.png>]) (./chapters/conclusion.tex [47
+) (./chapters/discussion.tex [45 <./figures/feature_importance.png>] [46
 
-] [48]) [49
+]) (./chapters/conclusion.tex [47]) [48
 
 ]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [50
+ [49
 
-] [51] [52] (./chapters/appendix.tex [53]
+] [50] [51] (./chapters/appendix.tex [52]
 <figures/concentration_metric_distributions.png, id=956, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
@@ -1859,9 +1859,9 @@ Package pdftex.def Info: figures/concentration_metric_distributions.png  used on
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[54
+[53
 
- <./figures/concentration_metric_distributions.png>] [55])
+ <./figures/concentration_metric_distributions.png>] [54])
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <eth-template/declaration-originality-filled.pdf, id=966, 597.79335pt x 845.19763pt>
@@ -1903,7 +1903,7 @@ File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
-[56
+[55
 
  <./eth-template/declaration-originality-filled.pdf>]
 
@@ -1934,18 +1934,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 40495 strings out of 475188
- 781149 string characters out of 5767805
+ 40502 strings out of 475188
+ 781195 string characters out of 5767805
  1941248 words of memory out of 5000000
  60124 multiletter control sequences out of 15000+600000
- 645029 words of font info for 679 fonts, out of 8000000 for 9000
+ 645371 words of font info for 684 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,17n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (61 pages, 13179910 bytes).
+Output written on thesis.pdf (60 pages, 13180903 bytes).
 PDF statistics:
- 1136 PDF objects out of 1200 (max. 8388607)
+ 1135 PDF objects out of 1200 (max. 8388607)
  917 compressed objects within 10 object streams
- 245 named destinations out of 1000 (max. 500000)
+ 244 named destinations out of 1000 (max. 500000)
  134209 words of extra memory for PDF output out of 154059 (max. 10000000)
 
