@@ -60,17 +60,19 @@ Various metrics assess predictive model performance, such as:
   \item \textbf{True Negative Rate (TNR) or Specificity} is the proportion of correctly predicted inactive cases (TN) to all actual inactive cases (TN + FP).
   \[ TNR = \frac{TN}{TN + FP} \]
 
+  \item \textbf{Receiver Operating Characteristic (ROC) Curve} is a graphical representation of the model's performance across different classification thresholds and plots the true positive rate (TNR) against the false positive rate (FPR), as exemplified for assay endpoint with aeid: 1120 in Figure~\ref{fig:roc1120}. The Area Under the ROC Curve (AUC) is an indicator of the model's performance taking into acount all possible classification thresholds, where a score of 1 represents a perfect model and 0.5 signifies a random no-skill model. 
+
+
 \end{itemize}
 
-Other metrics that are not directly dependent on the classification threshold, and thus are well-suited for comparing models with imbalanced datasets, include:
+The following two metrics are not directly dependent on the classification threshold, and thus are well-suited for comparing models with imbalanced datasets:
 
+\begin{itemize}
   \item \textbf{Balanced Accuracy (BAC)} accounts for class imbalance by averaging the true positive rate (sensitivity) and true negative rate (specificity).
   \[ \text{Balanced Accuracy (BAC)} = \frac{1}{2} \left(\frac{TP}{TP + FN} + \frac{TN}{TN + FP}\right) \]
 
-  \item \textbf{PR-AUC (Precision-Recall Area Under the Curve)} measures the area under the precision-recall curve. It is particularly useful related to class imbalance because it puts values the performance of the positive class.
+  \item \textbf{PR-AUC (Precision-Recall Area Under the Curve)} quantifies the performance of the positive class by assessing the area under the precision-recall curve.
   
-  \item \textbf{Receiver Operating Characteristic (ROC) Curve} is a graphical representation of the model's performance across different classification thresholds and plots the true positive rate (TNR) against the false positive rate (FPR), as exmplified for assay endpoint with aeid: 1120 in Figure~\ref{fig:roc1120}. The Area Under the ROC Curve (AUC) is another indicator of the model's performance taking into acount all possible classification thresholds. A score of 1 represents a perfect model and 0.5 signifies a random no-skill model. 
-
 \end{itemize}
 
 
@@ -154,132 +156,131 @@ Below, we provide figures illustrating the performance of binary classification 
 
 With these fixed settings, we evaluated the performance across all assay endpoints and estimator models, considering the dual MassBank validation set (results for the internal validation set are provided in the Appendix). The figures are presented in the subsequent order:
 
-\begin{table}[h]
-  \centering
-  \caption{Figure References and Descriptions}
-  \begin{tabular}{lll}
-    \toprule
-    \textbf{Validation set} & \textbf{Threshold} & \textbf{Figure} \\
-    \midrule
-    Internal & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg} \\
-    MassBank (from structure) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg} \\
-    MassBank (SIRIUS-predicted) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_macro_avg} \\
-    Internal & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg} \\
-    MassBank (from structure) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_weighted_avg} \\
-    MassBank (SIRIUS-predicted) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_weighted_avg} \\
-    Internal  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_val_default_true} \\
-    MassBank (from structure)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_true} \\
-    MassBank (SIRIUS-predicted)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_true} \\
-    Internal  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_val_default_false} \\
-    MassBank (from structure)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_false} \\
-    MassBank (SIRIUS-predicted)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_false} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_macro_avg.png}
-  \caption{Internal validation set, macro averaged metrics. The marker size reflects the varying number of compounds in the validation set across the assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models. The adjacent table provides the average metrics for the estimators across all target assay endpoint models.}
-~\label{fig:hitcall_classification_xgb_val_default_macro_avg}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_macro_avg.png}
-  \caption{MassBank validation set with fingerprints from chemical structure, macro averaged metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_macro_avg.png}
-  \caption{MassBank validation set with SIRIUS-predicted fingerprints, macro averaged metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_macro_avg}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_weighted_avg.png}
-  \caption{Internal validation set, weighted averaged metrics.}
-~\label{fig:hitcall_classification_xgb_val_default_weighted_avg}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_weighted_avg.png}
-  \caption{MassBank validation set with fingerprints from chemical structure, weighted averaged metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_structure_default_weighted_avg}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_weighted_avg.png}
-  \caption{MassBank validation set with SIRIUS-predicted fingerprints, weighted averaged metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_weighted_avg}
-\end{figure}
-
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_true.png}
-  \caption{Internal validation set, positive class metrics.}
-~\label{fig:hitcall_classification_xgb_val_default_true}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_true.png}
-  \caption{MassBank validation set with fingerprints from chemical structure, positive class metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_structure_default_true}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_true.png}
-  \caption{MassBank validation set with SIRIUS-predicted fingerprints, positive class metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_true}
-\end{figure}
-
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_val_default_false.png}
-  \caption{Internal validation set, negative class metrics.}
-~\label{fig:hitcall_classification_xgb_val_default_false}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_structure_default_false.png}
-  \caption{MassBank validation set with fingerprints from chemical structure, negative class metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_structure_default_false}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{figures/hitcall_classification_xgb_mb_val_sirius_default_false.png}
-  \caption{MassBank validation set with SIRIUS-predicted fingerprints, negative class metrics.}
-~\label{fig:hitcall_classification_xgb_mb_val_sirius_default_false}
-\end{figure}
-
-
+% \begin{table}[h]
+%   \centering
+%   \caption{Figure References and Descriptions}
+%   \begin{tabular}{lll}
+%     \toprule
+%     \textbf{Validation set} & \textbf{Threshold} & \textbf{Figure} \\
+%     \midrule
+%     Internal & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_macro_avg} \\
+%     MassBank (from structure) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_macro_avg} \\
+%     MassBank (SIRIUS-predicted) & Macro averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_macro_avg} \\
+%     Internal & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_val_default_weighted_avg} \\
+%     MassBank (from structure) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_weighted_avg} \\
+%     MassBank (SIRIUS-predicted) & Weighted averaged & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_weighted_avg} \\
+%     Internal  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_val_default_true} \\
+%     MassBank (from structure)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_true} \\
+%     MassBank (SIRIUS-predicted)  & Positve class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_true} \\
+%     Internal  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_val_default_false} \\
+%     MassBank (from structure)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_structure_default_false} \\
+%     MassBank (SIRIUS-predicted)  & Negative class & Figure~\ref{fig:hitcall_classification_xgb_mb_val_sirius_default_false} \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 
 \newpage
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.png}
+      \caption{}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png}
+      \caption{}
+      \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg}
+  \end{subfigure}
+  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $default$ threshold, macro averaged metrics. Larger marker size indicate the larger relative imbalance between the support for negative and positive compounds, normalized across all assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models (median, first quartile (Q1), third quartile (Q3), whiskers (range) and outlieres). The tables below provide the average metrics for the estimators across all target assay endpoint models.}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_default_macro_avg}
+\end{figure}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_default_macro_avg.tex}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.tex}
+
+\newpage
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.png}
+      \caption{}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.png}
+      \caption{}
+      \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg}
+  \end{subfigure}
+  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $TPR \simeq 0.5$ threshold, macro averaged metrics.}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_tpr_macro_avg}
+\end{figure}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tpr_macro_avg.tex}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tpr_macro_avg.tex}
+
+\newpage
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png}
+      \caption{}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png}
+      \caption{}
+      \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg}
+  \end{subfigure}
+  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $TNR \simeq 0.5$ threshold, macro averaged metrics.}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_tnr_macro_avg}
+\end{figure}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex}
+\newpage
+
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.png}
+      \caption{}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.495\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png}
+      \caption{}
+      \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg}
+  \end{subfigure}
+  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $\text{cost}(TPR, TNR) = 2 * (1 - TPR) + FPR$ threshold, macro averaged metrics.}
+  \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_optimal_macro_avg}
+\end{figure}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_optimal_macro_avg.tex}
+
+\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.tex}
 % \subsection{Feature Importance}
 
 \section{Discussion}
-\begin{figure}
-  \centering
-  \includegraphics[width=0.99\textwidth]{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.png}
-  \caption{}
-~\label{fig:hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg}
-\end{figure}
-
-\input{generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_default_macro_avg.tex}
-
-
-
 
 
 

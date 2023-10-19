@@ -325,7 +325,7 @@ if save_figure:
     file = f"{full_name}.png"
     dest_path = os.path.join(parent_folder, 'generated_results', file)
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
-    fig.write_image(dest_path, format='png', engine='kaleido', scale=2)
+    fig.write_image(dest_path, format='png', engine='kaleido', scale=1)
 
 
 
@@ -382,7 +382,7 @@ if show_summary:
         
         
         # latex_table = pandas_df_to_latex(summary, caption="Performance Metrics. See Figure~\ref{" + full_name ".png}.", label=f"table:{full_name}")
-        caption = f"Median Performance Metrics. See~\\ref" + "{fig:" + full_name + "}."
+        caption = f"Median Performance Metrics belonging to~\\ref" + "{fig:" + full_name + "}."
         latex_table = pandas_df_to_latex(summary, caption=caption, label=f"table:{full_name}")
 
 

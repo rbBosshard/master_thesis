@@ -6,7 +6,7 @@ from ml.src.pipeline.constants import LOG_DIR_PATH, OUTPUT_DIR_PATH
 from ml.src.utils.helper import folder_name_to_datetime
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-18_17-31-46"
+TARGET_RUN = "2023-10-18_22-36-10"
 NUM_AEIDS = 1000
 
 logs_folder = os.path.join(LOG_DIR_PATH)
