@@ -99,7 +99,7 @@ In macro averaging, the metric is computed separately for each class, and then a
 In both cases, $N$ is the total number of classes (e.g. $N=2$ for the binary case), and $N_i$ represents the number of samples in class $i$. Similarly the macro-averaged and weighted-averaged recall and F1 score can be calculated.
 
 
-\subsection{Performance}
+\subsection{Performance}\label{sec:performance}
 
 Performance results were generated for every combination of:
 
@@ -131,10 +131,10 @@ Performance results were generated for every combination of:
     \end{enumerate}
   \item Classification thresholds:
     \begin{enumerate}
-      \item $default$  (classification threshold of 0.5)
-      \item $optimal$ (cost function weighting TPR twice as FPR)
-      \item $TPR \simeq 0.5$ (TPR approximately equal to 0.5)
-      \item $TNR \simeq 0.5$ (TNR approximately equal to 0.5)
+      \item $default$: classification threshold of 0.5
+      \item $TPR \simeq 0.5$: TPR approximately equal to 0.5. In other words, the threshold is chosen such that the models detect approximately $50\%$ of the toxic compounds. This choice provides an estimate on the price to pay in terms of false positives, facilitating performance comparisons with other models.
+      \item $TNR \simeq 0.5$: TNR approximately equal to 0.5. In other words, the threshold is chosen such that the models roughly half of the actual negative cases are correctly identified as negative.
+      \item $\text{cost}(TPR, TNR)$: cost function weighting TPR twice as FPR: the threshold is chosen such that $\text{cost}(TPR, TNR) = 2 * (1 - TPR) + FPR$ is minimized, valueing recall twice as precision.
     \end{enumerate}
   \item Metrics on:
     \begin{enumerate}
@@ -148,13 +148,12 @@ Performance results were generated for every combination of:
 
 Below, we provide figures illustrating the performance of binary classification models under the following configurations:
 \begin{itemize}
-  \item target varaible as the binarized hitcall without cytotoxicity correction
+  \item target variable as the binarized hitcall without cytotoxicity correction
   \item XGBoost as the feature selection model
   \item macro averaged metrics
-  \item using $TPR \simeq 0.5 $ as classification threshold, i.e., the threshold is chosen such thath the models detect approximately 50\% of the toxic compounds. This choice provides an estimate on the price to pay in terms of false positives, facilitating performance comparisons with other models.
 \end{itemize}
 
-With these fixed settings, we evaluated the performance across all assay endpoints and estimator models, considering the dual MassBank validation set (results for the internal validation set are provided in the Appendix). The figures are presented in the subsequent order:
+With these fixed settings, we evaluated the performance across all assay endpoints and estimator models, considering the dual MassBank validation set (results for the internal validation set are provided in the Appendix). Note that the balanced accuracy, ROC-AUC, and PR-AUC metrics remain consistent across subsequent summaries, unaffected by the choice of classification threshold. The figures are presented in the subsequent order:
 
 % \begin{table}[h]
 %   \centering
@@ -196,7 +195,7 @@ With these fixed settings, we evaluated the performance across all assay endpoin
       \caption{}
       \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg}
   \end{subfigure}
-  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $default$ threshold, macro averaged metrics. Larger marker size indicate the larger relative imbalance between the support for negative and positive compounds, normalized across all assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models (median, first quartile (Q1), third quartile (Q3), whiskers (range) and outlieres). The tables below provide the average metrics for the estimators across all target assay endpoint models.}
+  \caption{Comparison of Precision and Recall for five different estimators across all evaluated assay endpoints. MassBank Validation Set with fingerprints from chemical structure (a) and SIRIUS-predicted fingerprints (b), $default = 0.5$ threshold, macro averaged metrics. Larger marker size indicate the larger relative imbalance between the support for negative and positive compounds, normalized across all assay endpoints. The marginal boxplots illustrate the distribution of the performance metrics across the target assay endpoint models (median, first quartile (Q1), third quartile (Q3), whiskers (range) and outlieres). The tables below provide the average metrics for the estimators across all target assay endpoint models.}
   \label{fig:hitcall_classification_Feature_Selection_XGBClassifier_mb_val_default_macro_avg}
 \end{figure}
 
