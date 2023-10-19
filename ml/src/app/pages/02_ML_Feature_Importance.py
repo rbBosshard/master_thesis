@@ -67,7 +67,7 @@ fig = px.density_heatmap(all_features,
                         marginal_y="histogram",
                         z="importances",
                         color_continuous_scale=[[0.0, "white"], [1.0, "black"]]
-                         )
+                        )
 
 fig.update_layout(
     autosize=False,

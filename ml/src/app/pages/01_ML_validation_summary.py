@@ -297,7 +297,6 @@ if selected_points:
 
         fig_feature_importances.update_layout(title=f"Feature Importances on selected_preprocessing_model (independent of validation set, threshold and metric)", title_font=dict(size=14, color='black'))
 
-
             
     with st.expander(f'Infos for {estimator_clicked} with {aeid_clicked}', expanded=True):
         st.divider()
