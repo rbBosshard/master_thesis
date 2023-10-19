@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 15:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 18:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1830,18 +1830,24 @@ File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_m
 <use generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>
 Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png  used on input line 307.
 (pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
- (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex) [43 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>]) (./chapters/discussion.tex [44]) (./chapters/conclusion.tex [45
+ (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex) [43 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>]
+<figures/feature_importance.png, id=804, 2007.5pt x 2007.5pt>
+File: figures/feature_importance.png Graphic file (type png)
+<use figures/feature_importance.png>
+Package pdftex.def Info: figures/feature_importance.png  used on input line 325.
+(pdftex.def)             Requested size: 421.0pt x 421.00543pt.
+) (./chapters/discussion.tex [44] [45 <./figures/feature_importance.png>]) (./chapters/conclusion.tex [46
 
-] [46]) [47
+] [47]) [48
 
 ]
 Package microtype Info: Character `013' is missing
 (microtype)             in font `OT1/pplx/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- [48
+ [49
 
-] [49] [50] (./chapters/appendix.tex [51]
-<figures/concentration_metric_distributions.png, id=940, 1512.852pt x 301.125pt>
+] [50] [51] (./chapters/appendix.tex [52]
+<figures/concentration_metric_distributions.png, id=948, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 5.
@@ -1850,12 +1856,12 @@ Package pdftex.def Info: figures/concentration_metric_distributions.png  used on
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[52
+[53
 
- <./figures/concentration_metric_distributions.png>] [53])
+ <./figures/concentration_metric_distributions.png>] [54])
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=950, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=958, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 161.
@@ -1873,7 +1879,7 @@ pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled
 
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=953, page=1, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=961, page=1, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
@@ -1894,7 +1900,7 @@ File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
 (pdftex.def)             Requested size: 597.81924pt x 845.23425pt.
-[54
+[55
 
  <./eth-template/declaration-originality-filled.pdf>]
 
@@ -1919,24 +1925,24 @@ L3 programming layer <2023-08-03>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 89B7BC3BF810C7B77D8BE3E2D5A37B56;7793.
+(rerunfilecheck)             Checksum: E33AA8A85A546728484C69D51AE4A4DA;7793.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 40479 strings out of 475188
- 780940 string characters out of 5767805
+ 40490 strings out of 475188
+ 781275 string characters out of 5767805
  1941248 words of memory out of 5000000
- 60125 multiletter control sequences out of 15000+600000
+ 60134 multiletter control sequences out of 15000+600000
  644466 words of font info for 671 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,17n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (59 pages, 12805229 bytes).
+Output written on thesis.pdf (60 pages, 12878667 bytes).
 PDF statistics:
- 1118 PDF objects out of 1200 (max. 8388607)
- 904 compressed objects within 10 object streams
- 240 named destinations out of 1000 (max. 500000)
- 134204 words of extra memory for PDF output out of 154059 (max. 10000000)
+ 1127 PDF objects out of 1200 (max. 8388607)
+ 910 compressed objects within 10 object streams
+ 242 named destinations out of 1000 (max. 500000)
+ 134209 words of extra memory for PDF output out of 154059 (max. 10000000)
 

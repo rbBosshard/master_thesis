@@ -1,75 +1,27 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
 import os
 import json
 from ml.src.pipeline.constants import OUTPUT_DIR_PATH
 from sklearn.metrics import jaccard_score
 import plotly.express as px
 
+import matplotlib.pyplot as plt
 
-MOST_RECENT = 0
+
 TARGET_RUN = "2023-10-18_22-36-10"
-
-# st.set_page_config(
-#     layout="wide",
-# )
-
-
-def blank_to_underscore(x):
-    return x.replace(' ', '_')
-
-
-rename = {
-    'hitcall': 'hitcall',
-    'hitcall_c': 'hitcall (c)',
-    'True': 'positive',
-    'False': 'negative',
-    'macro avg': 'macro avg',
-    'weighted avg': 'weighted avg',
-    'val': 'Internal validation',
-    'mb_val_structure': 'MB validation from structure',
-    'mb_val_sirius': 'MB validation SIRIUS-predicted',
-    'Internal validation': 'Internal',
-    'MB validation from structure': 'MB structure',
-    'MB validation SIRIUS-predicted': 'MB SIRIUS',
-    'default': 'default=0.5',
-    'tpr': 'TPR≈0.5',
-    'tnr': 'TNR≈0.5',
-    'optimal': 'cost(TPR,TNR)',
-    'XGBClassifier': 'XGBoost',
-    'XGBoost': 'XGB',
-    'RF': 'RF',
-    'RBF SVM': 'SVM',
-    'MLP': 'MLP',
-    'LR': 'LR',
-    'RandomForestClassifier': 'RF',
-    'LogisticRegression': 'LR',
-    'SVC': 'RBF SVM',
-    'MLPClassifier': 'MLP',
-    'accuracy': 'accuracy',
-}
-
-reverse_rename = {v: k for k, v in rename.items()}
 
 
 logs_folder = os.path.join(OUTPUT_DIR_PATH)
 folder = os.path.join(logs_folder, TARGET_RUN)
 
-# Load the JSON data from the output files
 with open(os.path.join(folder, 'aeid_paths.json'), 'r') as fp:
     aeid_paths = json.load(fp)
 
-with open(os.path.join(folder, 'model_paths.json'), 'r') as fp:
-    model_paths = json.load(fp)
 
-with open(os.path.join(folder, 'feature_importances_paths.json'), 'r') as fp:
-    feature_importances_paths = json.load(fp)
-
-with open(os.path.join(folder, 'validation_results.json'), 'r') as fp:
-    validation_results = json.load(fp)
-
-with open(os.path.join(folder, 'validation_results_scores.json'), 'r') as fp:
-    validation_results_scores = json.load(fp)
+heatmap = 1
+top_n = 10
 
 
 all_features = pd.DataFrame()
@@ -80,10 +32,10 @@ ml_algorithm = 'classification'
 preprocessing_model = 'Feature_Selection_XGBClassifier'
 estimator_model = 'XGBClassifier'
 
-for aeid in validation_results[target_variable][ml_algorithm].keys():
+for aeid in aeid_paths[target_variable][ml_algorithm].keys():
     aeid_path = aeid_paths[target_variable][ml_algorithm][aeid]
     sorted_feature_importances_path = os.path.join(aeid_path, preprocessing_model, estimator_model, 'mb_val_sirius', 'sorted_feature_importances.csv')
-    sorted_feature_importances = pd.read_csv(sorted_feature_importances_path).reset_index(drop=True).head(10)
+    sorted_feature_importances = pd.read_csv(sorted_feature_importances_path).reset_index(drop=True).head(top_n)
     
     # Collect unique feature indexes
     unique_features.update(sorted_feature_importances['feature'])
@@ -99,20 +51,49 @@ feature_index_mapping = {feature_index: linear_index for linear_index, feature_i
 all_features['linearized_feature_index'] = all_features['feature'].map(feature_index_mapping)
 
 # log transorm importances
-all_features['importances'] = all_features['importances'] ** 0.2
+all_features['importances'] = all_features['importances'] ** 0.001
+
 
 nbinsx = all_features['aeid'].unique().shape[0]
-nbinsy = all_features['linearized_feature_index'].unique().shape[0]
+nbinsy = all_features['feature'].unique().shape[0]
 
 
-# generate heatmap
 fig = px.density_heatmap(all_features,
-                         x='aeid',
-                         y="linearized_feature_index",
-                         nbinsx=nbinsx,
-                         nbinsy=nbinsy,
-                         z="importances",
-                        #  color_continuous_scale="gray_r",
-                         title="Feature importance")
+                        x='aeid',
+                        y="linearized_feature_index",
+                        hover_data=["feature", "importances"],
+                        nbinsx=nbinsx,
+                        nbinsy=nbinsy,
+                        marginal_y="histogram",
+                        z="importances",
+                        color_continuous_scale=[[0.0, "white"], [1.0, "black"]]
+                         )
 
-fig.show()
+fig.update_layout(
+    autosize=False,
+    width=1000,
+    height=1000,
+    margin=dict(
+        l=50,
+        r=50,
+        b=50,
+        t=50,
+        pad=4
+    ),
+    xaxis_title="Assay Index",
+    yaxis_title="Feature index",
+    font=dict(
+        size=18,
+    )
+)
+
+# dont sho x lables
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
+
+# hide color bar
+fig.update_layout(coloraxis_showscale=False)
+
+dest_path = os.path.join('feature_importance.png')
+fig.write_image(dest_path, format='png', engine='kaleido', scale=2)
+

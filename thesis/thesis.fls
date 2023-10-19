@@ -899,6 +899,11 @@ INPUT generated_results/hitcall_classification_Feature_Selection_XGBClassifier_m
 INPUT ./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex
 INPUT ./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex
 INPUT generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex
+INPUT ./figures/feature_importance.png
+INPUT ./figures/feature_importance.png
+INPUT ./figures/feature_importance.png
+INPUT ./figures/feature_importance.png
+INPUT ./figures/feature_importance.png
 INPUT ./chapters/discussion.tex
 INPUT ./chapters/discussion.tex
 INPUT ./chapters/discussion.tex
