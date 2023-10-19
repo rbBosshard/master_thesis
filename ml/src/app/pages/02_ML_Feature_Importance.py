@@ -1,26 +1,23 @@
 import pandas as pd
+import numpy as np
 import os
 import json
-import numpy as np
 from ml.src.pipeline.constants import OUTPUT_DIR_PATH
-import streamlit as st
-import plotly.express as px
-from streamlit_plotly_events import plotly_events
-import plotly.graph_objects as go  # Import Plotly graph objects
-from ml.src.utils.helper import render_svg
 from sklearn.metrics import jaccard_score
-
+import plotly.express as px
 
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_02-01-23"
+TARGET_RUN = "2023-10-18_22-36-10"
 
 # st.set_page_config(
 #     layout="wide",
 # )
 
+
 def blank_to_underscore(x):
     return x.replace(' ', '_')
+
 
 rename = {
     'hitcall': 'hitcall',
@@ -56,8 +53,7 @@ reverse_rename = {v: k for k, v in rename.items()}
 
 
 logs_folder = os.path.join(OUTPUT_DIR_PATH)
-run_folder = st.sidebar.selectbox('Select Run', [run_folder for run_folder in os.listdir(logs_folder)][::-1])
-folder = os.path.join(logs_folder, run_folder)
+folder = os.path.join(logs_folder, TARGET_RUN)
 
 # Load the JSON data from the output files
 with open(os.path.join(folder, 'aeid_paths.json'), 'r') as fp:
@@ -76,34 +72,47 @@ with open(os.path.join(folder, 'validation_results_scores.json'), 'r') as fp:
     validation_results_scores = json.load(fp)
 
 
+all_features = pd.DataFrame()
+unique_features = set()
 
-reports = {}
+target_variable = 'hitcall'
+ml_algorithm = 'classification'
+preprocessing_model = 'Feature_Selection_XGBClassifier'
+estimator_model = 'XGBClassifier'
 
-for target_variable in ['hitcall']:
-    reports[target_variable] = {}
-    for ml_algorithm in ['classification']:
-        reports[target_variable][ml_algorithm] = {}
-        for aeid in validation_results[target_variable][ml_algorithm].keys():
-            reports[target_variable][ml_algorithm][aeid] = {}
-            similarity_matrix = []
-            dfs = {}
-            for preprocessing_model in ['Feature_Selection_XGBClassifier', 'Feature_Selection_RandomForestClassifier']:
-                reports[target_variable][ml_algorithm][aeid][preprocessing_model] = {}
+for aeid in validation_results[target_variable][ml_algorithm].keys():
+    aeid_path = aeid_paths[target_variable][ml_algorithm][aeid]
+    sorted_feature_importances_path = os.path.join(aeid_path, preprocessing_model, estimator_model, 'mb_val_sirius', 'sorted_feature_importances.csv')
+    sorted_feature_importances = pd.read_csv(sorted_feature_importances_path).reset_index(drop=True).head(10)
+    
+    # Collect unique feature indexes
+    unique_features.update(sorted_feature_importances['feature'])
+        
 
-                for estimator_model in ['XGBClassifier', 'RandomForestClassifier']:
-                    sorted_feature_importances_path = feature_importances_paths[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model]
-                    sorted_feature_importances = pd.read_csv(sorted_feature_importances_path)
+    sorted_feature_importances['aeid'] = aeid
+    all_features = pd.concat([all_features, sorted_feature_importances], ignore_index=True)
 
-                    reports[target_variable][ml_algorithm][aeid][preprocessing_model][estimator_model] = sorted_feature_importances
-                    dfs[preprocessing_model + '__Estimator_' + estimator_model] = sorted_feature_importances['features'].values[:100]
+# Create a mapping of old feature indexes to new linear indexes
+feature_index_mapping = {feature_index: linear_index for linear_index, feature_index in enumerate(unique_features)}
 
-                
-                # Calculate Jaccard Similarity between the top 100 features of each pair of dataframes
-                similarity_matrix = []
+# Replace the original feature indexes with the new linear indexes
+all_features['linearized_feature_index'] = all_features['feature'].map(feature_index_mapping)
 
-                for features1 in [top_features_df1, top_features_df2, top_features_df3, top_features_df4]:
-                    similarity_row = []
-                    for features2 in [top_features_df1, top_features_df2, top_features_df3, top_features_df4]:
-                        jaccard_similarity = jaccard_score(features1, features2)
-                        similarity_row.append(jaccard_similarity)
-                    similarity_matrix.append(similarity_row)
+# log transorm importances
+all_features['importances'] = all_features['importances'] ** 0.2
+
+nbinsx = all_features['aeid'].unique().shape[0]
+nbinsy = all_features['linearized_feature_index'].unique().shape[0]
+
+
+# generate heatmap
+fig = px.density_heatmap(all_features,
+                         x='aeid',
+                         y="linearized_feature_index",
+                         nbinsx=nbinsx,
+                         nbinsy=nbinsy,
+                         z="importances",
+                        #  color_continuous_scale="gray_r",
+                         title="Feature importance")
+
+fig.show()

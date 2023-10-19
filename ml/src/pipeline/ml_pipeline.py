@@ -121,17 +121,17 @@ if __name__ == '__main__':
                             LOGGER.info("Internal Validation Done.\n")
 
                             # Retrain the best estimator from GridSearchCV with train+test set for Massbank validation (unseen)
+                            init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
                             if not CONFIG['apply']['only_predict']:
                                 LOGGER.info(f"Retrain on train+test set..\n")
                                 X_combined = np.vstack((X_train, X_test))
                                 y_combined = np.concatenate((y_train, y_test))
                                 best_estimator.fit(X_combined, y_combined)
-                                init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
                                 save_model(best_estimator, "train_test")
                             else:
                                 best_estimator = best_estimator_train_test
 
-                            save_model(best_estimator, "train")                             
+                            save_model(best_estimator, "train_test")                           
 
                             # Predict on the 1. "true Massbank" and 2. "SIRIUS predicted" validation set
                             LOGGER.info("Start MassBank Validation")
@@ -144,12 +144,12 @@ if __name__ == '__main__':
                             LOGGER.info("MassBank Validation Done.\n")
 
                             # Retrain the estimator on full data for future predictions
+                            init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
                             if not CONFIG['apply']['only_predict']:
                                 LOGGER.info(f"Retrain on full data..\n")
                                 X_all = np.vstack((X_combined, X_massbank_val_from_structure))
                                 y_all = np.concatenate((y_combined, y_massbank_val))
                                 best_estimator.fit(X_all, y_all)
-                                init_estimator_pipeline(estimator_name)  # re-init estimator's DUMP_FOLDER
                             else:
                                 best_estimator = best_estimator_full_data
                                 

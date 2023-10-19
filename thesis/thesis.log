@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 14:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  19 OCT 2023 15:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1841,7 +1841,7 @@ Package microtype Info: Character `013' is missing
  [48
 
 ] [49] [50] (./chapters/appendix.tex [51]
-<figures/concentration_metric_distributions.png, id=938, 1512.852pt x 301.125pt>
+<figures/concentration_metric_distributions.png, id=940, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 5.
@@ -1855,7 +1855,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
  <./figures/concentration_metric_distributions.png>] [53])
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=949, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=950, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 161.
@@ -1873,7 +1873,7 @@ pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled
 
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=952, page=1, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=953, page=1, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
@@ -1933,10 +1933,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  94i,17n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (59 pages, 12804903 bytes).
+Output written on thesis.pdf (59 pages, 12805229 bytes).
 PDF statistics:
- 1117 PDF objects out of 1200 (max. 8388607)
- 903 compressed objects within 10 object streams
+ 1118 PDF objects out of 1200 (max. 8388607)
+ 904 compressed objects within 10 object streams
  240 named destinations out of 1000 (max. 500000)
  134204 words of extra memory for PDF output out of 154059 (max. 10000000)
 

@@ -12,7 +12,7 @@ from ml.src.utils.helper import render_svg
 
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-18_17-31-46" #"2023-10-14_16-38-47_all_post_ml_pipeline"
+TARGET_RUN = "2023-10-18_22-36-10" #"2023-10-14_16-38-47_all_post_ml_pipeline"
 
 st.set_page_config(
     layout="wide",
@@ -273,15 +273,13 @@ fig.update_layout(legend=dict(orientation='v', yanchor='top',  xanchor='left',
                                 font=dict(size=31, color='black')))
 
 
-# st.plotly_chart(fig)
-
 selected_points = plotly_events(fig, click_event=True, hover_event=hover_event, key="plotly_event") # click_event=True, hover_event=True
 if selected_points:
     info = selected_points[0]
     curve_number = info['curveNumber']
     point_index = info['pointIndex']
     estimator_clicked = fig.data[curve_number].legendgroup
-    aeid_clicked = fig.data[curve_number].customdata[point_index, 1]
+    aeid_clicked = fig.data[curve_number].customdata[point_index, 2]
     
     # Load custom data
     aeid_path = aeid_paths[selected_target_variable][selected_ml_algorithm][aeid_clicked]
@@ -290,7 +288,8 @@ if selected_points:
     
     # Load feature importances:
     if estimator_clicked in ['XGBoost', 'RF']:
-        feature_importances_path = feature_importances_paths[selected_target_variable][selected_ml_algorithm][aeid_clicked][selected_preprocessing_model][reverse_rename[estimator_clicked]]
+        # tod change path when feature importances are available in correct folder, currently in sirius folder
+        feature_importances_path = os.path.join(aeid_path, selected_preprocessing_model, reverse_rename[estimator_clicked], 'mb_val_sirius', f'sorted_feature_importances.csv')        
         feature_importances = pd.read_csv(feature_importances_path)
         feature_importances = feature_importances.sort_values(by=['feature'], ascending=True).reset_index(drop=True)
         feature_importances = feature_importances.rename(columns={'feature': 'Abs. Feature Index', 'importances': 'Feature Importance'}).reset_index().rename(columns={'index': 'Rel. Feature Index'})
@@ -298,18 +297,14 @@ if selected_points:
 
         fig_feature_importances.update_layout(title=f"Feature Importances on selected_preprocessing_model (independent of validation set, threshold and metric)", title_font=dict(size=14, color='black'))
 
-        # More fancy plot of the same:
-        fig_feature_importances2 = px.bar_polar(feature_importances, r='Feature Importance', theta='Rel. Feature Index', color='Feature Importance', hover_data=['Abs. Feature Index'])
-        
-    
+
+            
     with st.expander(f'Infos for {estimator_clicked} with {aeid_clicked}', expanded=True):
         st.divider()
         render_svg(open(cm_path).read())
         st.divider()
         if estimator_clicked in ['XGBoost', 'RF']:
             st.plotly_chart(fig_feature_importances)
-            st.divider()
-            st.plotly_chart(fig_feature_importances2)
         else:
             st.write(f"Feature importances not available for {estimator_clicked}, only for XGBoost and RF")
 
@@ -330,7 +325,7 @@ if save_figure:
 
 
 if show_summary:    
-    st.subheader('Median Performance Metrics)')
+    st.subheader('Median Performance Metrics')
     if group_by_estimator:
         grouped = df[['Estimator', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Estimator']).median().reset_index()
     else:
@@ -382,7 +377,7 @@ if show_summary:
         
         
         # latex_table = pandas_df_to_latex(summary, caption="Performance Metrics. See Figure~\ref{" + full_name ".png}.", label=f"table:{full_name}")
-        caption = f"Median Performance Metrics belonging to~\\ref" + "{fig:" + full_name + "}."
+        caption = f"Median Performance Metrics belonging to Figure~\\ref" + "{fig:" + full_name + "}."
         latex_table = pandas_df_to_latex(summary, caption=caption, label=f"table:{full_name}")
 
 
