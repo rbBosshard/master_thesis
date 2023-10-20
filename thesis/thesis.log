@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  20 OCT 2023 15:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.5)  20 OCT 2023 16:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1834,33 +1834,33 @@ File: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_m
 Package pdftex.def Info: generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png  used on input line 306.
 (pdftex.def)             Requested size: 208.39294pt x 208.38528pt.
  (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.tex) (./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.tex) [44 <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_structure_tnr_macro_avg.png> <./generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_tnr_macro_avg.png>]
-<figures/feature_importance.png, id=817, 1505.625pt x 1505.625pt>
+<figures/feature_importance.png, id=820, 1505.625pt x 1505.625pt>
 File: figures/feature_importance.png Graphic file (type png)
 <use figures/feature_importance.png>
-Package pdftex.def Info: figures/feature_importance.png  used on input line 324.
+Package pdftex.def Info: figures/feature_importance.png  used on input line 326.
 (pdftex.def)             Requested size: 286.27692pt x 286.27849pt.
-<figures/Feature_Selection_XGBClassifier__Feature_Selection_XGBClassifier_feature_importance.png, id=821, 10388.8125pt x 3583.3875pt>
+<figures/Feature_Selection_XGBClassifier__Feature_Selection_XGBClassifier_feature_importance.png, id=821, 7791.60938pt x 2687.54062pt>
 File: figures/Feature_Selection_XGBClassifier__Feature_Selection_XGBClassifier_feature_importance.png Graphic file (type png)
 <use figures/Feature_Selection_XGBClassifier__Feature_Selection_XGBClassifier_feature_importance.png>
 Package pdftex.def Info: figures/Feature_Selection_XGBClassifier__Feature_Selection_XGBClassifier_feature_importance.png  used on input line 334.
-(pdftex.def)             Requested size: 421.0pt x 145.17014pt.
+(pdftex.def)             Requested size: 421.0pt x 145.21115pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Feature_Selection_RandomForestClassifier__Feature_Selection_RandomForestClassifier_feature_importance.png, id=822, 10388.8125pt x 3583.3875pt>
+<figures/Feature_Selection_RandomForestClassifier__Feature_Selection_RandomForestClassifier_feature_importance.png, id=822, 7791.60938pt x 2687.54062pt>
 File: figures/Feature_Selection_RandomForestClassifier__Feature_Selection_RandomForestClassifier_feature_importance.png Graphic file (type png)
 <use figures/Feature_Selection_RandomForestClassifier__Feature_Selection_RandomForestClassifier_feature_importance.png>
 Package pdftex.def Info: figures/Feature_Selection_RandomForestClassifier__Feature_Selection_RandomForestClassifier_feature_importance.png  used on input line 341.
-(pdftex.def)             Requested size: 421.0pt x 145.17014pt.
+(pdftex.def)             Requested size: 421.0pt x 145.21115pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/matching_features.png, id=823, 669.4611pt x 239.81595pt>
+<figures/matching_features.png, id=823, 669.4611pt x 250.0542pt>
 File: figures/matching_features.png Graphic file (type png)
 <use figures/matching_features.png>
 Package pdftex.def Info: figures/matching_features.png  used on input line 348.
-(pdftex.def)             Requested size: 408.37051pt x 146.29117pt.
+(pdftex.def)             Requested size: 408.37051pt x 152.53664pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1875,7 +1875,7 @@ Package microtype Info: Character `013' is missing
  [51
 
 ] [52] [53] (./chapters/appendix.tex [54]
-<figures/concentration_metric_distributions.png, id=979, 1512.852pt x 301.125pt>
+<figures/concentration_metric_distributions.png, id=980, 1512.852pt x 301.125pt>
 File: figures/concentration_metric_distributions.png Graphic file (type png)
 <use figures/concentration_metric_distributions.png>
 Package pdftex.def Info: figures/concentration_metric_distributions.png  used on input line 5.
@@ -1885,7 +1885,7 @@ Package pdftex.def Info: figures/concentration_metric_distributions.png  used on
  <./figures/concentration_metric_distributions.png>] [56])
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=990, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=991, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf  used on input line 161.
@@ -1903,7 +1903,7 @@ pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled
 
 
 pdfTeX warning: pdflatex.exe (file ./eth-template/declaration-originality-filled.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<eth-template/declaration-originality-filled.pdf, id=993, page=1, 597.79335pt x 845.19763pt>
+<eth-template/declaration-originality-filled.pdf, id=994, page=1, 597.79335pt x 845.19763pt>
 File: eth-template/declaration-originality-filled.pdf Graphic file (type pdf)
 <use eth-template/declaration-originality-filled.pdf, page 1>
 Package pdftex.def Info: eth-template/declaration-originality-filled.pdf , page1 used on input line 161.
@@ -1955,18 +1955,18 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 40540 strings out of 475188
- 783578 string characters out of 5767805
+ 40538 strings out of 475188
+ 783597 string characters out of 5767805
  1941248 words of memory out of 5000000
- 60152 multiletter control sequences out of 15000+600000
- 645495 words of font info for 686 fonts, out of 8000000 for 9000
+ 60154 multiletter control sequences out of 15000+600000
+ 645371 words of font info for 684 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,17n,125p,2301b,2794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (62 pages, 14166907 bytes).
+Output written on thesis.pdf (62 pages, 14175774 bytes).
 PDF statistics:
- 1160 PDF objects out of 1200 (max. 8388607)
- 934 compressed objects within 10 object streams
+ 1161 PDF objects out of 1200 (max. 8388607)
+ 935 compressed objects within 10 object streams
  250 named destinations out of 1000 (max. 500000)
  134232 words of extra memory for PDF output out of 154059 (max. 10000000)
 

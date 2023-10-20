@@ -159,7 +159,7 @@ if __name__ == '__main__':
     unique_features = merged_features['feature'].unique()
     unique_features = merged_features.groupby('feature').filter(lambda x: x['importances'].sum() > top_n)['feature'].unique()
     # suffle the features
-    np.random.shuffle(unique_features)
+    np.random.shuffle(unique_features, )
 
     all_features1 = all_features1[all_features1['feature'].isin(unique_features)]
     all_features2 = all_features2[all_features2['feature'].isin(unique_features)]
@@ -255,7 +255,7 @@ def plot_heatmap(matrix1, matrix2):
     # Create a binary matrix indicating matches
     match_matrix = np.multiply(matrix1, matrix2)
 
-    # match_matrix = np.flip(match_matrix, axis=1)
+    match_matrix = np.flip(match_matrix, axis=0)
 
     # Create a heatmap of the match_matrix
     ax.imshow(match_matrix, cmap="YlGnBu", aspect="auto")
