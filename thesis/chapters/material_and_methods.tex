@@ -171,7 +171,7 @@ Moreover, we exclusively considered assay endpoints that have been tested with a
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/presence_matrix_subset.png}
-    \caption{$P_{subset}$ covers a specific subset of relevant assay endpoints and compounds considered for this thesis, totaling $m =$ 345 assay endpoints and $n =$ 8'804 compounds. Assay endpoints with less than 1'000 compounds tested were omitted. There are 1'043'222 concentration-response series available.}
+    \caption{$P_{subset}$ covers a specific subset of relevant assay endpoints and compounds considered for this thesis, totaling $m =$ 345 target assay endpoints and $n =$ 8'804 compounds. Assay endpoints with less than 1'000 compounds tested were omitted. There are 1'043'222 concentration-response series available.}
 ~\label{fig:presence_matrix_subset}
 \end{figure}
 
@@ -265,7 +265,7 @@ The binary input features for the model are molecular fingerprints with $2362$ b
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/ml_dataset.png}
-    \caption{Schematic example of a machine learning dataset related to a single assay endpoint. The dataset is structured into a feature matrix with $n=2362$ and a target vector. The feature matrix consists of molecular fingerprints, and the target vector is the hitcall value. For binary classification, the hitcall value is binarized based on a specific activity threshold (=0.5)}
+    \caption{Schematic example of a machine learning dataset related to a single assay endpoint. The dataset is structured into a feature matrix with $n=2362$ and a target vector. The feature matrix consists of molecular fingerprints, and the target vector is the hitcall value. For binary classification, the hitcall value is binarized based on a specific activity threshold, set to 0.5.}
 ~\label{fig:ml_dataset}
 \end{figure}
 
