@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber thesis"] 1697812506 "thesis.bcf" "thesis.bbl" "thesis" 1697814135 0
+["biber thesis"] 1697818160 "thesis.bcf" "thesis.bbl" "thesis" 1697818189 0
   "./refs.bib" 1697475312 19347 3c5ecdb6fa48ebf98be7560bd52a232a ""
-  "thesis.bcf" 1697814134 110042 4cf4ced07e04b1383928690dfe5d7cd0 "pdflatex"
+  "thesis.bcf" 1697818188 110042 4cf4ced07e04b1383928690dfe5d7cd0 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1697814122 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697814135 0
+["pdflatex"] 1697818176 "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" "thesis.pdf" "thesis" 1697818189 0
   "c:/Users/bossh/Documents/GitHub/master_thesis/thesis/thesis.tex" 1697718287 4979 508870ebbaab925d3eb05757b6225989 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1691264896 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1691265341 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -265,7 +265,7 @@
   "chapters/conclusion.tex" 1697809457 3653 67b56b081f2bc73a49bff80c6a67af4b ""
   "chapters/discussion.tex" 1697814123 5843 43fa4227e0480e41f9fee9c7f7dd126b ""
   "chapters/introduction.tex" 1697814128 16668 b189f6d0393383ceea7d87989ea36a20 ""
-  "chapters/material_and_methods.tex" 1697759987 39603 28d2970c5bba94271fb60e54b9525392 ""
+  "chapters/material_and_methods.tex" 1697818142 40256 c5a22954c38b1fba50b61b70b156ffd1 ""
   "chapters/related_work.tex" 1697737425 4390 db6d513f8825911dc2e858e1db180964 ""
   "chapters/results.tex" 1697812458 25825 e3534738ac6307211be77060cadd2fe3 ""
   "eth-template/ETHlogo.pdf" 1691253600 12666 b4023007c09129f6f4698ef1ed405aa9 ""
@@ -305,6 +305,7 @@
   "figures/presence_matrix_all.png" 1697317899 307816 a59a382de9d4762daf1ea2a93a119414 ""
   "figures/presence_matrix_subset.png" 1697317862 64672 7c045b26b956e5548ee375f4e4d6874a ""
   "figures/roc1120.png" 1697710872 109919 552a0c70c15e103f085521d23cd81112 ""
+  "figures/toxicity_fingerprint.png" 1697818040 221820 d03c5a4f275977edacd04f2ac6001646 ""
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.png" 1697710396 207817 72d8d3ab5ab21d60074b24d0643711ef ""
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_default_macro_avg.tex" 1697702386 794 872733da3b045796c1c9ca33afb40f51 ""
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_mb_val_sirius_optimal_macro_avg.png" 1697710417 185998 0d673bf83b07a6b3de897f2fcc12dae4 ""
@@ -329,12 +330,12 @@
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tnr_macro_avg.tex" 1697702469 766 ccdbf093390c86bd18f19cef16dce996 ""
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.png" 1697710613 180585 ccf71ed6c6ea778116e5fc16977cdfa9 ""
   "generated_results/hitcall_classification_Feature_Selection_XGBClassifier_val_tpr_macro_avg.tex" 1697702444 766 a5556d40a7b233eedaa0a837e4d20950 ""
-  "thesis.aux" 1697814134 92901 4abb3f910a34ca39c4877becbe2d43be "pdflatex"
-  "thesis.bbl" 1697812508 78801 e41c29f852da52d3f576e580680b4a6b "biber thesis"
-  "thesis.out" 1697814134 7906 ac50f3d7b03249afb73787411dd60450 "pdflatex"
-  "thesis.run.xml" 1697814134 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
+  "thesis.aux" 1697818188 94165 078305a670aefcae3d8b37ed47cdd9ff "pdflatex"
+  "thesis.bbl" 1697818163 78801 e41c29f852da52d3f576e580680b4a6b "biber thesis"
+  "thesis.out" 1697818188 7906 591c271a65cdb81cfe37040761f853d4 "pdflatex"
+  "thesis.run.xml" 1697818188 2377 22c6348194b79d1a54fa23464bb6a14a "pdflatex"
   "thesis.tex" 1697718287 4979 508870ebbaab925d3eb05757b6225989 ""
-  "thesis.toc" 1697814134 4623 f8ba35b1062c194bce2b46d09b15d48d "pdflatex"
+  "thesis.toc" 1697818188 4623 54bf04d3d3531f7eff4cf558464fa012 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

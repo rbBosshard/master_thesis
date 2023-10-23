@@ -777,6 +777,11 @@ INPUT ./figures/activity_ratio_comparison.png
 INPUT ./figures/activity_ratio_comparison.png
 INPUT ./figures/activity_ratio_comparison.png
 INPUT ./figures/activity_ratio_comparison.png
+INPUT ./figures/toxicity_fingerprint.png
+INPUT ./figures/toxicity_fingerprint.png
+INPUT ./figures/toxicity_fingerprint.png
+INPUT ./figures/toxicity_fingerprint.png
+INPUT ./figures/toxicity_fingerprint.png
 INPUT ./chapters/results.tex
 INPUT ./chapters/results.tex
 INPUT ./chapters/results.tex

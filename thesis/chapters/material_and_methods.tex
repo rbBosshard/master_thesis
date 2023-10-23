@@ -362,6 +362,13 @@ Fur subsequent predictions, we retrained the models on the full dataset.
 % The model performance is evaluated based on the $\text{F}_{\beta}$ score, the area under the receiver operating characteristic curve (AUC-ROC) and the area under the precision-recall curve (AUC-PR). The $\text{F}_{\beta}$ score is the harmonic mean of the precision and recall and the more generic $\text{F}_{\beta}$ score applies additional weights, valuing one of precision or recall more than the other. We set $\beta=2$ to value recall higher than precision. The AUC-ROC is a metric that measures the performance of a binary classification model at various thresholds settings. The AUC-PR is a metric that summarizes the precision-recall curve, which is a plot of the precision (y-axis) and the recall (x-axis) for different thresholds. The AUC-PR is useful for imbalanced datasets, as it focuses on the positive class.
 
 \subsection{Application}
-The presence of distinct prediction models for each assay endpoint enables the grouping of these endpoints based on their annotations, such as the biological process or the mechanistic target annotation. This ultimately results in toxicity predictions averaged within these groups. These collective toxicity predictions are referred to as \emph{toxicity fingerprint} which serve the purpose of identifying the most toxic compounds for each specific assay endpoint.
+The presence of distinct prediction models for each assay endpoint enables the grouping of these endpoints based on their annotations, such as the biological process or the mechanistic target annotation. This ultimately results in toxicity predictions averaged within these groups. These collective toxicity predictions are referred to as \emph{toxicity fingerprint} which serve the purpose of identifying the most toxic compounds for each specific assay endpoint. Refer to Figure~\ref{fig:toxicity_fingerprint} for a visual representation of the underlying aggregated predictions for the final toxicity fingerprint.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/toxicity_fingerprint.png}
+    \caption{The underlying aggregated predictions for the final toxixity fingerprint of some compound. Here, the assay endpoints were aggregated over the annotation: \emph{mechanistic target}: The groups as a collective deliver an averaged toxicity prediction representing one final bit of the ultimate binarized toxicity fingerprint.}
+~\label{fig:toxicity_fingerprint}
+\end{figure}
 
 

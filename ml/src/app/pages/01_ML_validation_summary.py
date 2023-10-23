@@ -298,7 +298,7 @@ if selected_points:
         fig_feature_importances.update_layout(title=f"Feature Importances on selected_preprocessing_model (independent of validation set, threshold and metric)", title_font=dict(size=14, color='black'))
 
             
-    with st.expander(f'Infos for {estimator_clicked} with {aeid_clicked}', expanded=True):
+    with st.expander(f'Infos for {estimator_clicked} on assay endpoint with aeid={aeid_clicked}', expanded=True):
         st.divider()
         render_svg(open(cm_path).read())
         st.divider()
@@ -324,7 +324,7 @@ if save_figure:
 
 
 if show_summary:    
-    st.subheader('Median Performance Metrics')
+    st.subheader('Median performance metrics across 345 target assay endpoints')
     if group_by_estimator:
         grouped = df[['Estimator', 'Precision', 'Recall',  'Accuracy', 'Balanced Accuracy', 'F1', 'ROC AUC', 'PR AUC']].groupby(['Estimator']).median().reset_index()
     else:
@@ -403,7 +403,7 @@ fig.add_trace(go.Bar(x=index, y=-single_estimator['Support Negative'], name='Neg
 
 # Add the line plots
 fig.add_trace(go.Scatter(x=index, y=single_estimator['Imbalance'], mode='lines', name='Imbalance', line=dict(color='black', width=2, dash='dash')))
-fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'], mode='lines', name='Total Support', line=dict(color='green', width=2)))
+fig.add_trace(go.Scatter(x=index, y=single_estimator['Total Support'],  mode='lines', name='Total Support', line=dict(color='green', width=2)))
 
 fig.update_layout(
     title=f'Sorted Imbalance and Support Across Target Assay Endpoints: {" ".join(selected_validation_type.split(" ")[:2])}, y={rename[selected_target_variable]}',

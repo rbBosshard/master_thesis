@@ -12,13 +12,13 @@ st.set_page_config(
 )
 
 MOST_RECENT = 0
-TARGET_RUN = "2023-10-14_16-38-47_all"
+TARGET_RUN = "2023-10-18_22-36-10"
 
 # Add a checkbox to the sidebar: Enable Reports
-report_is_enabled = st.sidebar.checkbox("Enable Reports")
+report_is_enabled = st.sidebar.checkbox("Enable Reports", value=True)
 
 logs_folder = os.path.join(OUTPUT_DIR_PATH)
-run_folder = st.sidebar.selectbox('Select Run', [run_folder for run_folder in os.listdir(logs_folder)])
+run_folder = st.sidebar.selectbox('Select Run', [run_folder for run_folder in os.listdir(logs_folder)][::-1])
 
 folder = os.path.join(logs_folder, run_folder)
 
@@ -51,7 +51,7 @@ selected_preprocessing_model = st.sidebar.selectbox('Select Preprocessing Model'
 selected_estimator_model = st.sidebar.selectbox('Select Estimator Model', list(model_paths[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model].keys()))
 
 # Add a dropdown to the sidebar: Select single validation type
-selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(validation_results[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model][selected_estimator_model].keys()))
+selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(validation_results[selected_target_variable][selected_ml_algorithm][selected_aeid][selected_preprocessing_model][selected_estimator_model].keys())[::-1])
 
 # # Add a dropdown to the sidebar: Select single classification threshold
 # selected_classification_threshold = st.sidebar.selectbox('Select Classification Threshold', list(validation_results[selected_aeid][selected_preprocessing_model][selected_estimator_model][selected_validation_type].keys()))
@@ -84,6 +84,7 @@ validation_results_df = pd.DataFrame(validation_result)
 st.subheader('Confusion Matrices for 4 classification thresholds')
 
 confusion_matrices_paths = {}
+roc_curve_paths = {}
 reports = {}
 threshold_names = []
 threshold_values = []
@@ -91,9 +92,12 @@ for classification_threshold in validation_results[selected_target_variable][sel
     path_suffix = os.path.join(selected_preprocessing_model, selected_estimator_model, selected_validation_type)
     cm_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][selected_aeid], path_suffix, f'cm_{classification_threshold}.svg')
     confusion_matrices_paths[classification_threshold] = cm_path
+
     report_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][selected_aeid], path_suffix, f'report_{classification_threshold}.csv')   
     reports[classification_threshold] = pd.read_csv(report_path).reset_index(drop=True).rename(columns={'Unnamed: 0': 'class'})
     threshold_names.append(classification_threshold)
+
+roc_path = os.path.join(aeid_paths[selected_target_variable][selected_ml_algorithm][selected_aeid], path_suffix, f'roc_curve.svg')
 
 # Create a 2x2 grid using columns
 i = 0
@@ -101,6 +105,7 @@ with st.container():
     col1, col2 = st.columns(2)
     with col1:
         i = 0
+        st.subheader(f'Classification Threshold: Default=0.5')
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
@@ -109,6 +114,7 @@ with st.container():
                 st.dataframe(reports[threshold])
     with col2:
         i = 1
+        st.subheader(f'Classification Threshold: cost(TPR, TNR) = 2 *')
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
@@ -137,4 +143,6 @@ with st.container():
             with st.expander("Show Report"):
                 st.dataframe(reports[threshold])
 
+st.divider()
 
+render_svg(open(roc_path).read())

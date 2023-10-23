@@ -70,7 +70,7 @@ with st.spinner(f"Loading.."):
                                         showscale=showscale,
                                        colorbar=dict(tickvals=[0, 1], ticktext=["Absent   ", "Present   "])))
 
-            font_size = 120  # Good for 33% zoom in browser (laptop resolution)
+            font_size = 30  # Good for 33% zoom in browser (laptop resolution)
             if not EXPORT:
                 fig.update_layout(
                     title=f"Presence matrix",
