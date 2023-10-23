@@ -188,12 +188,16 @@ with col2:
 
         selected_group_names = []
         grouped_new = {}
-
+        length_meta = len(subset_assay_info_columns) + 1
         for group_name, group_data in grouped_df:
+            # divide group_data into to parts of columns
+            group_data_meta = group_data.iloc[:, :length_meta].reset_index(drop=True)
+            group_data_preds = group_data.iloc[:, length_meta:-1].reset_index(drop=True)
+
             st.write(f"#### {group_name} Group:")
 
             checkbox_config = st.data_editor(
-                group_data,
+                group_data_meta,
                 column_config={
                     "Select": st.column_config.CheckboxColumn(
                         "Select?",
@@ -206,7 +210,7 @@ with col2:
                 use_container_width=True,
             )
             df_group = pd.DataFrame(checkbox_config)
-            grouped_new[group_name] = df_group
+            grouped_new[group_name] = pd.concat([df_group, group_data_preds], axis=1)
 
         grouped_selected = {}
         for group_name, group_data in grouped_new.items():
@@ -225,8 +229,8 @@ with col2:
 
         fig = px.bar(agg_hitcall_df_sorted, x='Group', y='Aggregated Hitcall (avg.)', color='Group', text='Count', hover_data=['Count'],
                      title=f'{st.session_state.selected_compound}: Aggregated Hitcall per Group')
-        # Add a line plot trace at y=0.5
-        fig.add_shape(type="line", x0=agg_hitcall_df_sorted['Group'].iloc[0], x1=agg_hitcall_df_sorted['Group'].iloc[-1], y0=0.5, y1=0.5, line=dict(color="red"))
+        # Add a line plot trace at y=0.5, make dashed
+        fig.add_shape(type="line", x0=agg_hitcall_df_sorted['Group'].iloc[0], x1=agg_hitcall_df_sorted['Group'].iloc[-1], y0=0.5, y1=0.5, line=dict(color="red", dash="dash"))
         # Add an annotation text
         fig.add_annotation(
             text="Toxicity Fingerprint Bit Cutoff = 0.5",
@@ -271,11 +275,14 @@ with col2:
         )
         
         fig.update_traces(showlegend=False)
-
+        # Set the x-axis as categorical
+        fig.update_xaxes(type='category')
 
         # Create a radar chart using Plotly Express
-        radar = px.line_polar(agg_hitcall_df_sorted.sort_values(by='Group'), r='Aggregated Hitcall (avg.)', theta='Group', line_close=True)
+        radar = px.line_polar(agg_hitcall_df_sorted, r='Aggregated Hitcall (avg.)', theta='Group', line_close=True)
         radar.update_traces(fill='toself')
+        # Set the x-axis as categorical
+        radar.update_xaxes(type='category')
 
         # Set the title
         radar.update_layout(
