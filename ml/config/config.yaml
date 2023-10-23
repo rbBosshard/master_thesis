@@ -7,7 +7,7 @@ ignore_warnings: False
 
 target_variables: [hitcall, hitcall_c]  # [hitcall, hitcall_c]
 
-ml_algorithms: [classification] # [classification, regression]
+ml_algorithms: [classification, regression] # [classification, regression]
 
 activity_threshold: 0.5  # Activity threshold on continuous hitcall for binary classification
 
@@ -21,7 +21,7 @@ load_from_model:  # if apply: only_predict: 1
   target_run: 2023-10-14_02-01-23 # load from specific run (if use_last_run: 0)
 
 apply:
-  only_predict: 1  # if 1, do not train, load model from old run
+  only_predict: 0  # if 1, do not train, load model from old run
   smote: 0  # oversampling
   feature_selection: 1
   variance_threshold: 0  # only if feature_selection on
