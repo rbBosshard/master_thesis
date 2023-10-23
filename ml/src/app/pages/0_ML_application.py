@@ -6,6 +6,7 @@ from joblib import Parallel, delayed
 import joblib
 import json
 import plotly.express as px
+import plotly.graph_objects as go
 from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, OUTPUT_DIR_PATH
 
 
@@ -52,9 +53,9 @@ rename = {
     'accuracy': 'accuracy',
 }
 
-subset_assay_info_columns = ["MechanisticTarget",
+subset_assay_info_columns = ["biological_process_target",
+                            "MechanisticTarget",
                              "ToxicityEndpoint",
-                             "biological_process_target",
                              "intended_target_family",
                              "intended_target_family_sub",
                              "intended_target_type",
@@ -169,7 +170,10 @@ with col1:
                                                               st.session_state.compounds)
             if st.session_state.selected_compound is not None:
                 with st.expander("Prediction for selected compound"):
-                    st.dataframe(st.session_state.predictions_df[st.session_state.selected_compound], hide_index=True)
+                    predictions_df = st.session_state.predictions_df[st.session_state.selected_compound]
+                    horizontal_df = predictions_df.T
+                    st.dataframe(horizontal_df)
+                    # st.dataframe(st.session_state.predictions_df[st.session_state.selected_compound], hide_index=True)
 
 with col2:
     if st.session_state.predictions_df is not None:
@@ -212,19 +216,81 @@ with col2:
         total_count = sum(count for _, count in counts)
         st.sidebar.write(f"Total assay endpoints selected: {total_count}")
 
-        # aggregate example
-        agg_hitcall = [(group_name, np.mean(group_data[st.session_state.selected_compound])) for group_name, group_data
-                       in grouped_selected.items()]
+        agg_hitcall = [(group_name, np.mean(group_data[st.session_state.selected_compound]), len(group_data)) for group_name, group_data in grouped_selected.items()]
+        agg_hitcall_df = pd.DataFrame(agg_hitcall, columns=['Group', 'Aggregated Hitcall (avg.)', 'Count'])
+        agg_hitcall_df_sorted = agg_hitcall_df.sort_values(by='Aggregated Hitcall (avg.)', ascending=False)
 
-        agg_hitcall_df = pd.DataFrame(agg_hitcall, columns=['Group', 'Aggregated Hitcall'])
-        agg_hitcall_df_sorted = agg_hitcall_df.sort_values(by='Aggregated Hitcall', ascending=False)
+        # Add toxicity fingerprint column, round to 0 or 1
+        agg_hitcall_df_sorted['Toxicitiy Fingerprint Bit'] = agg_hitcall_df_sorted['Aggregated Hitcall (avg.)'].apply(lambda x: 1 if x >= 0.5 else 0)
 
-        fig = px.bar(agg_hitcall_df_sorted, x='Group', y='Aggregated Hitcall', color='Group',
+        fig = px.bar(agg_hitcall_df_sorted, x='Group', y='Aggregated Hitcall (avg.)', color='Group', text='Count', hover_data=['Count'],
                      title=f'{st.session_state.selected_compound}: Aggregated Hitcall per Group')
+        # Add a line plot trace at y=0.5
+        fig.add_shape(type="line", x0=agg_hitcall_df_sorted['Group'].iloc[0], x1=agg_hitcall_df_sorted['Group'].iloc[-1], y0=0.5, y1=0.5, line=dict(color="red"))
+        # Add an annotation text
+        fig.add_annotation(
+            text="Toxicity Fingerprint Bit Cutoff = 0.5",
+            xref="paper",
+            x=0.92,  # Adjust the x-coordinate as needed
+            y=0.55,
+            showarrow=False,
+            font=dict(size=14, color="red")
+        )
+
+
+        #increse lable font size
+        fig.update_layout(
+            xaxis=dict(
+                title=dict(
+                    font=dict(
+                        size=15,
+                    )
+                ),
+                tickfont=dict(
+                    size=15,
+                )
+            ),
+            yaxis=dict(
+                title=dict(
+                    font=dict(
+                        size=15,
+                    )
+                ),
+                tickfont=dict(
+                    size=15,
+                )
+            )
+        )
+        # increase title font size
+        fig.update_layout(
+            title=dict(
+                font=dict(
+                    size=16,
+                )
+            )
+        )
+        
         fig.update_traces(showlegend=False)
 
+
+        # Create a radar chart using Plotly Express
+        radar = px.line_polar(agg_hitcall_df_sorted.sort_values(by='Group'), r='Aggregated Hitcall (avg.)', theta='Group', line_close=True)
+        radar.update_traces(fill='toself')
+
+        # Set the title
+        radar.update_layout(
+            title=f'{st.session_state.selected_compound}: Aggregated Hitcall per Group',
+            polar=dict(
+                radialaxis=dict(
+                    visible=True,
+                    range=[0, max(agg_hitcall_df_sorted['Aggregated Hitcall (avg.)']) + 0.2]  # Adjust the range as needed
+                )
+            )
+        )
+
+
         with col1:
-            with st.expander("Plot"):
+            with st.expander("Plot", expanded=True):
                 st.plotly_chart(fig, use_container_width=True)
-                # st.title("Counts")
-                st.dataframe(pd.DataFrame(counts, columns=['Group', 'Count']), hide_index=True)
+                st.plotly_chart(radar, use_container_width=True)
+                st.dataframe(pd.DataFrame(agg_hitcall_df_sorted, columns=['Group', 'Toxicitiy Fingerprint Bit', 'Aggregated Hitcall (avg.)', 'Count']), hide_index=True)
