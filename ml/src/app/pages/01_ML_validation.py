@@ -58,7 +58,7 @@ selected_validation_type = st.sidebar.selectbox('Select Validation Type', list(v
 # Load threshold_value from estimator model path    
 # threshold_value_path = os.path.join(model_paths[selected_aeid][selected_preprocessing_model][selected_estimator_model], f'threshold_value.json')
 
-st.title(f'Validation Results')
+st.title(f'Validation Results (using 4 different classification thresholds)')
 info_data = {
     "Target Variable": [selected_target_variable],
     "ML Algorithm": [selected_ml_algorithm],
@@ -81,7 +81,7 @@ validation_results_df = pd.DataFrame(validation_result)
 # st.dataframe(report_df)
 
 # Plot confusion matrices for all 4 classification thresholds
-st.subheader('Confusion Matrices for 4 classification thresholds')
+
 
 confusion_matrices_paths = {}
 roc_curve_paths = {}
@@ -114,7 +114,7 @@ with st.container():
                 st.dataframe(reports[threshold])
     with col2:
         i = 1
-        st.subheader(f'Classification Threshold: cost(TPR, TNR) = 2 *')
+        st.subheader(f'Classification Threshold: cost(TPR, TNR) = 2 * (1 - TPR) + (1- TNR)')
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
@@ -128,6 +128,7 @@ with st.container():
     col1, col2 = st.columns(2)
     with col1:
         i = 3
+        st.subheader(f'Classification Threshold: TPR ≈ 0.5')
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
@@ -136,6 +137,7 @@ with st.container():
                 st.dataframe(reports[threshold])
     with col2:
         i = 2
+        st.subheader(f'Classification Threshold: TNR ≈ 0.5')
         threshold = threshold_names[i]
         cm_path = confusion_matrices_paths[threshold]
         render_svg(open(cm_path).read())
