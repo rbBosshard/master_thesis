@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 
 from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, OUTPUT_DIR_PATH
 
@@ -17,10 +17,6 @@ from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, OUTPUT_DIR_PATH
 st.set_page_config(
     layout="wide",
 )
-
-
-ML_ALGORITHM = "binary_classification"
-TARGET_RUN = "2023-10-18_22-36-10"
 
 
 def blank_to_underscore(x):

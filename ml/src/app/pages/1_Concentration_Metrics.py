@@ -10,8 +10,7 @@ import plotly.figure_factory as ff
 import plotly.subplots as sp
 
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 from ml.src.pipeline.constants import FILE_FORMAT, METADATA_SUBSET_DIR_PATH
 
 dest_folder_path = os.path.join(METADATA_SUBSET_DIR_PATH, 'conc')

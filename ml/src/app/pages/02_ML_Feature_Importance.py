@@ -5,8 +5,7 @@ import os
 import json
 
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../..")))
 from ml.src.pipeline.constants import OUTPUT_DIR_PATH
 from sklearn.metrics import jaccard_score
 import plotly.express as px
