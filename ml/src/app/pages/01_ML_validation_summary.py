@@ -117,7 +117,7 @@ with st.sidebar.expander('Settings', expanded=False):
     group_by_estimator = st.sidebar.checkbox("Group By Estimator", value=True)
     clip_axis = st.sidebar.checkbox("Clip Axis", value=True)
     autoscale = st.sidebar.checkbox("Autoscale", value=True)
-    save_figure = st.sidebar.checkbox("Save Figure", value=True)
+    save_figure = st.sidebar.checkbox("Save Figure", value=False)
     show_latex = st.sidebar.checkbox("Generate LaTeX", value=False)
     hover_event = st.sidebar.checkbox("Enable Hover Event", value=False)
 
