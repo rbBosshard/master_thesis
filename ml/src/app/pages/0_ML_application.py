@@ -7,6 +7,10 @@ import joblib
 import json
 import plotly.express as px
 import plotly.graph_objects as go
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
 from ml.src.pipeline.constants import METADATA_SUBSET_DIR_PATH, OUTPUT_DIR_PATH
 
 
@@ -15,9 +19,8 @@ st.set_page_config(
 )
 
 
-
 ML_ALGORITHM = "binary_classification"
-TARGET_RUN = "2023-10-18_22-36-10" #"2023-10-14_16-38-47_all_post_ml_pipeline"
+TARGET_RUN = "2023-10-18_22-36-10"
 
 
 def blank_to_underscore(x):

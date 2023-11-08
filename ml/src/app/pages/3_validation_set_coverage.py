@@ -4,6 +4,10 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from plotly import graph_objs as go
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
 from ml.src.pipeline.constants import MASSBANK_DIR_PATH, FILE_FORMAT
 
 VALIDATION_COVERAGE_PLOTS_DIR_PATH = os.path.join(MASSBANK_DIR_PATH, 'validation_coverage_plots')

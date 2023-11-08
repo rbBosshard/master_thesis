@@ -2,12 +2,16 @@ import pandas as pd
 import os
 import json
 import numpy as np
-from ml.src.pipeline.constants import OUTPUT_DIR_PATH
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
 import streamlit as st
 import plotly.express as px
 from streamlit_plotly_events import plotly_events
 import plotly.graph_objects as go  # Import Plotly graph objects
 from ml.src.utils.helper import render_svg
+from ml.src.pipeline.constants import OUTPUT_DIR_PATH
 
 
 

@@ -3,6 +3,10 @@ import streamlit as st
 import os
 import plotly.graph_objects as go
 
+
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
 from ml.src.pipeline.constants import FILE_FORMAT, INPUT_ML_DIR_PATH, METADATA_SUBSET_DIR_PATH, METADATA_ALL_DIR_PATH
 
 EXPORT = 0

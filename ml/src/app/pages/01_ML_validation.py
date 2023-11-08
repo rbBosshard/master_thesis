@@ -2,6 +2,9 @@ import pandas as pd
 import os
 import json
 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+
 from ml.src.pipeline.constants import OUTPUT_DIR_PATH
 from ml.src.utils.helper import render_svg
 
